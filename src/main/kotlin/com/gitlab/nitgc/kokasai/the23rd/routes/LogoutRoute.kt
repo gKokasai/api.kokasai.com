@@ -1,6 +1,5 @@
 package com.gitlab.nitgc.kokasai.the23rd.routes
 
-import com.gitlab.nitgc.kokasai.the23rd.constants.AuthName
 import com.gitlab.nitgc.kokasai.the23rd.constants.CommonRoutes
 import com.gitlab.nitgc.kokasai.the23rd.constants.SessionConstants
 import io.ktor.application.call
