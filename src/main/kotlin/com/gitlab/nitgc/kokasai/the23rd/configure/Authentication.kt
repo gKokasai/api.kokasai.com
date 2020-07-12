@@ -5,7 +5,12 @@ import com.gitlab.nitgc.kokasai.the23rd.constants.AuthName
 import com.gitlab.nitgc.kokasai.the23rd.constants.AuthTestLogin
 import com.gitlab.nitgc.kokasai.the23rd.constants.CommonRoutes
 import io.ktor.application.call
-import io.ktor.auth.*
+import io.ktor.auth.Authentication
+import io.ktor.auth.AuthenticationFailedCause
+import io.ktor.auth.UserIdPrincipal
+import io.ktor.auth.authentication
+import io.ktor.auth.form
+import io.ktor.auth.session
 import io.ktor.response.respondRedirect
 
 fun Authentication.Configuration.configureFormAuth() {
