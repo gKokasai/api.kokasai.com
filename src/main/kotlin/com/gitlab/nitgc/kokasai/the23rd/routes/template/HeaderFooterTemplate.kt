@@ -4,8 +4,6 @@ import io.ktor.html.Placeholder
 import io.ktor.html.Template
 import io.ktor.html.insert
 import kotlinx.html.BODY
-import kotlinx.html.FOOTER
-import kotlinx.html.HEADER
 import kotlinx.html.HTML
 import kotlinx.html.body
 import kotlinx.html.footer
@@ -17,24 +15,12 @@ object HeaderFooterTemplate: Template<HTML> {
     override fun HTML.apply() {
         body {
             header {
-                insert(HeaderTemplate) {}
+                +"Header"
             }
             insert(body)
             footer {
-                insert(FooterTemplate) {}
+                +"Footer"
             }
         }
-    }
-}
-
-object HeaderTemplate: Template<HEADER> {
-    override fun HEADER.apply() {
-        +"Header"
-    }
-}
-
-object FooterTemplate: Template<FOOTER> {
-    override fun FOOTER.apply() {
-        +"Footer"
     }
 }
