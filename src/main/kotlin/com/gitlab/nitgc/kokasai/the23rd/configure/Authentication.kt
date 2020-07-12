@@ -24,9 +24,6 @@ fun Authentication.Configuration.configureFormAuth() {
                         AuthenticationFailedCause.InvalidCredentials -> {
                             "${CommonRoutes.LOGIN}?invalid"
                         }
-                        AuthenticationFailedCause.NoCredentials -> {
-                            "${CommonRoutes.LOGIN}?no"
-                        }
                         else -> {
                             CommonRoutes.LOGIN
                         }
@@ -46,7 +43,7 @@ fun Authentication.Configuration.configureFormAuth() {
 fun Authentication.Configuration.configureSessionAuth() {
     session<UserIdPrincipal>(AuthName.SESSION) {
         challenge {
-            call.respondRedirect("${CommonRoutes.LOGIN}?no")
+            call.respondRedirect(CommonRoutes.LOGIN)
         }
         validate { session ->
             session

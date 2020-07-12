@@ -33,8 +33,7 @@ fun Routing.loginRoute() {
                     form(method = FormMethod.post) {
                         val queryParams = call.request.queryParameters
                         val errorMessage = when {
-                            "invalid" in queryParams -> "ユーザー名かパスコードが間違っています"
-                            "no" in queryParams -> "ログインしていません"
+                            "invalid" in queryParams -> "ユーザー名かパスワードが間違っています"
                             else -> null
                         }
                         if(errorMessage != null) {
