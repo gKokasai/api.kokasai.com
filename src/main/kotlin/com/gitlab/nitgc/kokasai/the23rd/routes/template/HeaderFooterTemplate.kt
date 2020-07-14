@@ -12,6 +12,7 @@ import kotlinx.css.margin
 import kotlinx.css.padding
 import kotlinx.css.paddingLeft
 import kotlinx.css.pct
+import kotlinx.css.properties.boxShadow
 import kotlinx.html.BODY
 import kotlinx.html.HTML
 import kotlinx.html.body
@@ -31,6 +32,7 @@ object HeaderFooterTemplate: Template<HTML> {
                 styleCss {
                     backgroundColor = Color.green.withAlpha(0.5)
                     padding = "1em 0"
+                    boxShadow(Color.black.withAlpha(0.4), offsetY = 0.1.em, blurRadius = 0.2.em)
                 }
                 span {
                     styleCss {
@@ -43,7 +45,7 @@ object HeaderFooterTemplate: Template<HTML> {
             insert(body)
             footer {
                 span {
-                    +"Footer"
+                    //+"Footer"
                 }
             }
         }
