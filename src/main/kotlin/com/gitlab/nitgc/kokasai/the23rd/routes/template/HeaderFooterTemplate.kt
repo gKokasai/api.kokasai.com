@@ -5,12 +5,13 @@ import io.ktor.html.Placeholder
 import io.ktor.html.Template
 import io.ktor.html.insert
 import kotlinx.css.Color
-import kotlinx.css.LinearDimension
 import kotlinx.css.backgroundColor
+import kotlinx.css.em
 import kotlinx.css.fontSize
 import kotlinx.css.margin
 import kotlinx.css.padding
 import kotlinx.css.paddingLeft
+import kotlinx.css.pct
 import kotlinx.html.BODY
 import kotlinx.html.HTML
 import kotlinx.html.body
@@ -33,8 +34,8 @@ object HeaderFooterTemplate: Template<HTML> {
                 }
                 span {
                     styleCss {
-                        fontSize = LinearDimension("2em")
-                        paddingLeft = LinearDimension("3%")
+                        fontSize = 2.em
+                        paddingLeft = 3.pct
                     }
                     +"工華祭"
                 }
