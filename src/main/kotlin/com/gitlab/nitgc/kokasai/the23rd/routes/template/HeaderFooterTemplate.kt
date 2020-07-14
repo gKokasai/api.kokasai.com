@@ -6,6 +6,7 @@ import io.ktor.html.Template
 import io.ktor.html.insert
 import kotlinx.css.Color
 import kotlinx.css.backgroundColor
+import kotlinx.css.margin
 import kotlinx.html.BODY
 import kotlinx.html.HTML
 import kotlinx.html.body
@@ -21,6 +22,9 @@ object HeaderFooterTemplate: Template<HTML> {
             backgroundColor = Color.red
         }
         body {
+            styleCss {
+                margin = "0"
+            }
             header {
                 styleCss {
                     backgroundColor = Color.aqua
