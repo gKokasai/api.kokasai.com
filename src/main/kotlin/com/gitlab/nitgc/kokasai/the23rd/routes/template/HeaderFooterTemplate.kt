@@ -51,8 +51,8 @@ import kotlinx.html.ul
 
 object HeaderFooterTemplate: Template<HTML> {
     val body = Placeholder<BODY>()
-    val THEME_COLOR = Color.green.withAlpha(0.6).blend(Color.white.withAlpha(0.4))
-    val SELECTED_THEME_COLOR = Color.green.withAlpha(0.7).blend(Color.white.withAlpha(0.3))
+    val THEME_COLOR = Color.green.withAlpha(0.6).blend(Color.white)
+    val SELECTED_THEME_COLOR = Color.green.withAlpha(0.7).blend(Color.white)
 
     override fun HTML.apply() {
         head {
@@ -86,34 +86,34 @@ object HeaderFooterTemplate: Template<HTML> {
     }
 
     val headerCss: CSSBuilder.() -> Unit = {
-        "body".invoke {
+        "body" {
             margin = "0"
         }
-        "header".invoke {
+        "header" {
             backgroundColor = THEME_COLOR
             padding = "0.5em 0"
             height = 3.em
             boxShadow(Color.black.withAlpha(0.4), offsetY = 0.1.em, blurRadius = 0.2.em)
         }
-        "header h1".invoke {
+        "header h1" {
             color = Color.white
             fontSize = 2.em
             margin = "auto 1em"
             float = Float.left
         }
-        "header ul".invoke {
+        "header ul" {
             width = 100.pct
             margin = "0"
             padding = "0"
             listStyleType = ListStyleType.none
         }
-        "header li".invoke {
+        "header li" {
             margin = "0"
             padding = "0"
             float = Float.right
             position = Position.relative
         }
-        "header li a".invoke {
+        "header li a" {
             padding = "10px 25px"
             display = Display.block
             fontFamily = "Tahoma"
@@ -125,7 +125,7 @@ object HeaderFooterTemplate: Template<HTML> {
             textDecoration = TextDecoration.none
             transition(property = "all", duration = .25.s, timing = Timing.ease)
         }
-        "header li:hover a".invoke {
+        "header li:hover a" {
             backgroundColor = SELECTED_THEME_COLOR
         }
     }
