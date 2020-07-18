@@ -17,13 +17,7 @@ import io.ktor.routing.get
 import io.ktor.routing.post
 import io.ktor.routing.route
 import io.ktor.sessions.sessions
-import kotlinx.html.FormMethod
-import kotlinx.html.div
-import kotlinx.html.form
-import kotlinx.html.passwordInput
-import kotlinx.html.style
-import kotlinx.html.submitInput
-import kotlinx.html.textInput
+import kotlinx.html.*
 
 fun Routing.loginRoute() {
     route(CommonRoutes.LOGIN) {

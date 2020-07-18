@@ -10,8 +10,7 @@ import io.ktor.auth.principal
 import io.ktor.html.respondHtmlTemplate
 import io.ktor.routing.Route
 import io.ktor.routing.get
-import kotlinx.html.a
-import kotlinx.html.div
+import kotlinx.html.*
 
 fun Route.profileRoute() {
     authenticate(AuthName.SESSION) {
