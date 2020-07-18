@@ -46,7 +46,7 @@ object HeaderFooterTemplate: Template<HTML> {
 
     val headerCss: CSSBuilder.() -> Unit = {
         "body" {
-            margin(0.px)
+            margin(0.em)
         }
         "li" {
             listStyleType = ListStyleType.none
@@ -54,8 +54,7 @@ object HeaderFooterTemplate: Template<HTML> {
         "header" {
             display = Display.flex
             backgroundColor = THEME_COLOR
-            padding(0.5.em, 0.px)
-            height = 3.em
+            height = 4.em
             boxShadow(Color.black.withAlpha(0.4), offsetY = 0.1.em, blurRadius = 0.2.em)
         }
         "header h1" {
@@ -73,15 +72,15 @@ object HeaderFooterTemplate: Template<HTML> {
             textAlign = TextAlign.right
             width = 80.pct
             margin(LinearDimension.auto)
-            padding(0.px)
+            padding(0.em)
         }
         "header li" {
             fontSize = 1.4.em
-            padding(0.px, 2.em)
+            padding(0.em, 2.em)
             display = Display.inline
         }
         "header li+ li" {
-            borderLeft(2.px, BorderStyle.solid, Color.white)
+            borderLeft(0.1.em, BorderStyle.solid, Color.white)
         }
         "header li a" {
             fontWeight = FontWeight.w400
@@ -93,11 +92,11 @@ object HeaderFooterTemplate: Template<HTML> {
         }
         "header li a::after" {
             position = Position.absolute
-            bottom = (-2).px
-            left = 0.px
+            bottom = (-0.1).em
+            left = 0.em
             content = "".quoted
             width = 100.pct
-            height = 2.px
+            height = 0.1.em
             backgroundColor = Color.white
             transform {
                 scale(0, 1)
