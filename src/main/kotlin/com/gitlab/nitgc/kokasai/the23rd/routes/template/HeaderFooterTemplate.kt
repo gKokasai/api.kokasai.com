@@ -18,7 +18,9 @@ object HeaderFooterTemplate: Template<HTML> {
         body {
             header {
                 h1 {
-                    +"工華祭"
+                    a(href = "/") {
+                        +"工華祭"
+                    }
                 }
                 ul {
                     li {
@@ -57,11 +59,15 @@ object HeaderFooterTemplate: Template<HTML> {
             boxShadow(Color.black.withAlpha(0.4), offsetY = 0.1.em, blurRadius = 0.2.em)
         }
         "header h1" {
-            textAlign = TextAlign.left
-            color = Color.white
             fontSize = 2.em
             width = 4.em
             margin(LinearDimension.auto, 1.em)
+            paddingTop = 0.1.em
+        }
+        "header h1 a" {
+            color = Color.white
+            textAlign = TextAlign.left
+            textDecoration = TextDecoration.none
         }
         "header ul" {
             textAlign = TextAlign.right
