@@ -60,6 +60,7 @@ object HeaderFooterTemplate: Template<HTML> {
             textAlign = TextAlign.left
             color = Color.white
             fontSize = 2.em
+            width = 4.em
             margin(LinearDimension.auto, 1.em)
         }
         "header ul" {
