@@ -5,7 +5,7 @@ import com.gitlab.nitgc.kokasai.the23rd.constants.AuthName
 import com.gitlab.nitgc.kokasai.the23rd.constants.AuthTestLogin
 import com.gitlab.nitgc.kokasai.the23rd.constants.CommonRoutes
 import com.gitlab.nitgc.kokasai.the23rd.constants.SessionConstants
-import com.gitlab.nitgc.kokasai.the23rd.routes.template.HeaderFooterTemplate
+import com.gitlab.nitgc.kokasai.the23rd.routes.template.WithHeaderTemplate
 import io.ktor.application.call
 import io.ktor.auth.UserIdPrincipal
 import io.ktor.auth.authenticate
@@ -22,7 +22,7 @@ import kotlinx.html.*
 fun Routing.loginRoute() {
     route(CommonRoutes.LOGIN) {
         get {
-            call.respondHtmlTemplate(HeaderFooterTemplate) {
+            call.respondHtmlTemplate(WithHeaderTemplate) {
                 body {
                     form(method = FormMethod.post) {
                         val queryParams = call.request.queryParameters

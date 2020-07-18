@@ -7,7 +7,7 @@ import kotlinx.css.*
 import kotlinx.css.properties.*
 import kotlinx.html.*
 
-object HeaderFooterTemplate: Template<HTML> {
+object WithHeaderTemplate: Template<HTML> {
     val body = Placeholder<BODY>()
     val THEME_COLOR = Color.green.withAlpha(0.6).blend(Color.white)
 
@@ -36,11 +36,6 @@ object HeaderFooterTemplate: Template<HTML> {
                 }
             }
             insert(body)
-            footer {
-                span {
-                    //+"Footer"
-                }
-            }
         }
     }
 
@@ -61,7 +56,7 @@ object HeaderFooterTemplate: Template<HTML> {
             fontSize = 3.2.vh
             width = 9.6.vh
             margin(LinearDimension.auto, 1.6.vh)
-            paddingTop = 0.16.vh
+            paddingTop = 0.32.vh
         }
         "header h1 a" {
             color = Color.white
@@ -72,10 +67,11 @@ object HeaderFooterTemplate: Template<HTML> {
             margin(LinearDimension.auto)
             marginRight = 0.vh
             padding(0.vh)
+            paddingTop = 0.224.vh
         }
         "header li" {
             fontSize = 2.24.vh
-            padding(0.vh, 3.2.vh)
+            padding(0.vh, 2.24.vh)
             display = Display.inline
         }
         "header li+ li" {

@@ -2,7 +2,7 @@ package com.gitlab.nitgc.kokasai.the23rd.routes
 
 import com.gitlab.nitgc.kokasai.the23rd.constants.AuthName
 import com.gitlab.nitgc.kokasai.the23rd.constants.CommonRoutes
-import com.gitlab.nitgc.kokasai.the23rd.routes.template.HeaderFooterTemplate
+import com.gitlab.nitgc.kokasai.the23rd.routes.template.WithHeaderTemplate
 import io.ktor.application.call
 import io.ktor.auth.UserIdPrincipal
 import io.ktor.auth.authenticate
@@ -16,7 +16,7 @@ fun Route.profileRoute() {
     authenticate(AuthName.SESSION) {
         get(CommonRoutes.PROFILE) {
             val principal = call.principal<UserIdPrincipal>()!!
-            call.respondHtmlTemplate(HeaderFooterTemplate) {
+            call.respondHtmlTemplate(WithHeaderTemplate) {
                 body {
                     div {
                         +"Hello, ${principal.name}"
