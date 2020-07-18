@@ -44,7 +44,7 @@ object HeaderFooterTemplate: Template<HTML> {
 
     val headerCss: CSSBuilder.() -> Unit = {
         "body" {
-            margin = "0"
+            margin(0.px)
         }
         "li" {
             listStyleType = ListStyleType.none
@@ -52,7 +52,7 @@ object HeaderFooterTemplate: Template<HTML> {
         "header" {
             display = Display.flex
             backgroundColor = THEME_COLOR
-            padding = "0.5em 0"
+            padding(0.5.em, 0.px)
             height = 3.em
             boxShadow(Color.black.withAlpha(0.4), offsetY = 0.1.em, blurRadius = 0.2.em)
         }
@@ -60,21 +60,21 @@ object HeaderFooterTemplate: Template<HTML> {
             textAlign = TextAlign.left
             color = Color.white
             fontSize = 2.em
-            margin = "auto 1em"
+            margin(LinearDimension.auto, 1.em)
         }
         "header ul" {
             textAlign = TextAlign.right
             width = 80.pct
-            margin = "auto"
-            padding = "0"
+            margin(LinearDimension.auto)
+            padding(0.px)
         }
         "header li" {
             fontSize = 1.4.em
-            padding = "0 2em"
+            padding(0.px, 2.em)
             display = Display.inline
         }
         "header li+ li" {
-            borderLeft = "2px solid #fff"
+            borderLeft(2.px, BorderStyle.solid, Color.white)
         }
         "header li a" {
             fontWeight = FontWeight.w400
