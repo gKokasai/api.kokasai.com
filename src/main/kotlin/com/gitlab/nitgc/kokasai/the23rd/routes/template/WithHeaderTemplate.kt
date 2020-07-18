@@ -9,7 +9,6 @@ import kotlinx.html.*
 
 object WithHeaderTemplate: Template<HTML> {
     val body = Placeholder<BODY>()
-    val THEME_COLOR = Color.green.withAlpha(0.6).blend(Color.white)
 
     override fun HTML.apply() {
         head {
@@ -41,6 +40,7 @@ object WithHeaderTemplate: Template<HTML> {
 
     val headerCss: CSSBuilder.() -> Unit = {
         "body" {
+            backgroundColor = BASE_COLOR
             margin(0.vh)
         }
         "li" {
@@ -50,7 +50,7 @@ object WithHeaderTemplate: Template<HTML> {
             display = Display.flex
             backgroundColor = THEME_COLOR
             height = 6.4.vh
-            boxShadow(Color.black.withAlpha(0.4), offsetY = 0.16.vh, blurRadius = 0.32.vh)
+            boxShadow(SHADOW_COLOR.withAlpha(0.4), offsetY = 0.16.vh, blurRadius = 0.32.vh)
         }
         "header h1" {
             fontSize = 3.2.vh
@@ -59,7 +59,7 @@ object WithHeaderTemplate: Template<HTML> {
             paddingTop = 0.32.vh
         }
         "header h1 a" {
-            color = Color.white
+            color = BASE_COLOR
             textAlign = TextAlign.left
             textDecoration = TextDecoration.none
         }
@@ -75,11 +75,11 @@ object WithHeaderTemplate: Template<HTML> {
             display = Display.inline
         }
         "header li+ li" {
-            borderLeft(0.16.vh, BorderStyle.solid, Color.white)
+            borderLeft(0.16.vh, BorderStyle.solid, BASE_COLOR)
         }
         "header li a" {
             fontWeight = FontWeight.w400
-            color = Color.white
+            color = BASE_COLOR
             textAlign = TextAlign.center
             textDecoration = TextDecoration.none
             position = Position.relative
@@ -92,7 +92,7 @@ object WithHeaderTemplate: Template<HTML> {
             content = "".quoted
             width = 100.pct
             height = 0.16.vh
-            backgroundColor = Color.white
+            backgroundColor = BASE_COLOR
             transform {
                 scale(0, 1)
             }
