@@ -4,14 +4,12 @@ import io.ktor.html.Placeholder
 import io.ktor.html.Template
 import io.ktor.html.insert
 import kotlinx.css.*
-import kotlinx.css.Float
 import kotlinx.css.properties.*
 import kotlinx.html.*
 
 object HeaderFooterTemplate: Template<HTML> {
     val body = Placeholder<BODY>()
     val THEME_COLOR = Color.green.withAlpha(0.6).blend(Color.white)
-    val SELECTED_THEME_COLOR = Color.green.withAlpha(0.7).blend(Color.white)
 
     override fun HTML.apply() {
         head {
@@ -48,44 +46,61 @@ object HeaderFooterTemplate: Template<HTML> {
         "body" {
             margin = "0"
         }
+        "li" {
+            listStyleType = ListStyleType.none
+        }
         "header" {
+            display = Display.flex
             backgroundColor = THEME_COLOR
             padding = "0.5em 0"
             height = 3.em
             boxShadow(Color.black.withAlpha(0.4), offsetY = 0.1.em, blurRadius = 0.2.em)
         }
         "header h1" {
+            textAlign = TextAlign.left
             color = Color.white
             fontSize = 2.em
             margin = "auto 1em"
-            float = Float.left
         }
         "header ul" {
-            width = 100.pct
-            margin = "0"
+            textAlign = TextAlign.right
+            width = 80.pct
+            margin = "auto"
             padding = "0"
-            listStyleType = ListStyleType.none
         }
         "header li" {
-            margin = "0"
-            padding = "0"
-            float = Float.right
-            position = Position.relative
+            fontSize = 1.4.em
+            padding = "0 2em"
+            display = Display.inline
+        }
+        "header li+ li" {
+            borderLeft = "2px solid #fff"
         }
         "header li a" {
-            padding = "10px 25px"
-            display = Display.block
-            fontFamily = "Tahoma"
-            textTransform = TextTransform.uppercase
-            fontSize = 18.px
             fontWeight = FontWeight.w400
             color = Color.white
             textAlign = TextAlign.center
             textDecoration = TextDecoration.none
-            transition(property = "all", duration = .25.s, timing = Timing.ease)
+            position = Position.relative
+            display = Display.inlineBlock
         }
-        "header li:hover a" {
-            backgroundColor = SELECTED_THEME_COLOR
+        "header li a::after" {
+            position = Position.absolute
+            bottom = (-2).px
+            left = 0.px
+            content = "".quoted
+            width = 100.pct
+            height = 2.px
+            backgroundColor = Color.white
+            transform {
+                scale(0, 1)
+            }
+            transition("transform", .2.s)
+        }
+        "header li a:hover::after" {
+            transform {
+                scale(1, 1)
+            }
         }
     }
 }
