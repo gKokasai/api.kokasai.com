@@ -46,7 +46,7 @@ object HeaderFooterTemplate: Template<HTML> {
 
     val headerCss: CSSBuilder.() -> Unit = {
         "body" {
-            margin(0.em)
+            margin(0.vh)
         }
         "li" {
             listStyleType = ListStyleType.none
@@ -54,14 +54,14 @@ object HeaderFooterTemplate: Template<HTML> {
         "header" {
             display = Display.flex
             backgroundColor = THEME_COLOR
-            height = 4.em
-            boxShadow(Color.black.withAlpha(0.4), offsetY = 0.1.em, blurRadius = 0.2.em)
+            height = 6.4.vh
+            boxShadow(Color.black.withAlpha(0.4), offsetY = 0.16.vh, blurRadius = 0.32.vh)
         }
         "header h1" {
-            fontSize = 2.em
-            width = 4.em
-            margin(LinearDimension.auto, 1.em)
-            paddingTop = 0.1.em
+            fontSize = 3.2.vh
+            width = 9.6.vh
+            margin(LinearDimension.auto, 1.6.vh)
+            paddingTop = 0.16.vh
         }
         "header h1 a" {
             color = Color.white
@@ -69,18 +69,17 @@ object HeaderFooterTemplate: Template<HTML> {
             textDecoration = TextDecoration.none
         }
         "header ul" {
-            textAlign = TextAlign.right
-            width = 80.pct
             margin(LinearDimension.auto)
-            padding(0.em)
+            marginRight = 0.vh
+            padding(0.vh)
         }
         "header li" {
-            fontSize = 1.4.em
-            padding(0.em, 2.em)
+            fontSize = 2.24.vh
+            padding(0.vh, 3.2.vh)
             display = Display.inline
         }
         "header li+ li" {
-            borderLeft(0.1.em, BorderStyle.solid, Color.white)
+            borderLeft(0.16.vh, BorderStyle.solid, Color.white)
         }
         "header li a" {
             fontWeight = FontWeight.w400
@@ -92,11 +91,11 @@ object HeaderFooterTemplate: Template<HTML> {
         }
         "header li a::after" {
             position = Position.absolute
-            bottom = (-0.1).em
-            left = 0.em
+            bottom = (-0.16).vh
+            left = 0.vh
             content = "".quoted
             width = 100.pct
-            height = 0.1.em
+            height = 0.16.vh
             backgroundColor = Color.white
             transform {
                 scale(0, 1)
