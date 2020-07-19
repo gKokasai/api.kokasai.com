@@ -55,23 +55,21 @@ object WithHeaderTemplate : Template<HTML> {
         }
         "header h1" {
             fontSize = 3.2.vh
-            width = 9.6.vh
-            margin(LinearDimension.auto, 1.6.vh)
+            margin(vertical = LinearDimension.auto)
             paddingTop = 0.32.vh
+            paddingLeft = 2.24.vh
         }
         "header h1 a" {
             color = BASE_COLOR
-            textAlign = TextAlign.left
             textDecoration = TextDecoration.none
         }
         "header ul" {
+            fontSize = 2.24.vh
             margin(LinearDimension.auto)
             marginRight = 0.vh
-            padding(0.vh)
             paddingTop = 0.224.vh
         }
         "header li" {
-            fontSize = 2.24.vh
             padding(0.vh, 2.24.vh)
             display = Display.inline
         }
@@ -81,10 +79,8 @@ object WithHeaderTemplate : Template<HTML> {
         "header li a" {
             fontWeight = FontWeight.w400
             color = BASE_COLOR
-            textAlign = TextAlign.center
             textDecoration = TextDecoration.none
             position = Position.relative
-            display = Display.inlineBlock
         }
         "header li a::after" {
             position = Position.absolute
