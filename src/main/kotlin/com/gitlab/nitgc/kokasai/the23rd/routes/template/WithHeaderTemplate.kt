@@ -13,6 +13,18 @@ object WithHeaderTemplate : Template<HTML> {
     override fun HTML.apply() {
         head {
             link(rel = "stylesheet", href = "/header.css", type = "text/css")
+            script(src = "https://code.jquery.com/jquery-3.5.1.min.js", type = "text/javascript") {}
+            script {
+                @Suppress("DEPRECATION")
+                +"""
+                    $(function(){
+                        $('#hamburger_menu').on('click', function() {
+                            $(this).toggleClass('active');
+                            return false;
+                        });
+                    });
+                """.trimIndent()
+            }
         }
         body {
             header {
@@ -21,6 +33,14 @@ object WithHeaderTemplate : Template<HTML> {
                         +"工華祭"
                     }
                 }
+                // ハンバーガーメニュー
+                div {
+                    id = "hamburger_menu"
+                    span()
+                    span()
+                    span()
+                }
+                // 横並びメニュー
                 ul {
                     onTouchStart = ""
                     menu("#", "ページ")
@@ -41,6 +61,8 @@ object WithHeaderTemplate : Template<HTML> {
     }
 
     val headerCss: CSSBuilder.() -> Unit = {
+        val useHamburgerAspectRatio = "27/50"
+
         "body" {
             backgroundColor = BASE_COLOR
             margin(0.vh)
@@ -64,41 +86,98 @@ object WithHeaderTemplate : Template<HTML> {
             color = BASE_COLOR
             textDecoration = TextDecoration.none
         }
-        "header ul" {
-            fontSize = max(2.24.vh, 24.px)
-            margin(LinearDimension.auto)
-            marginRight = 0.vh
-            paddingTop = 0.224.vh
-        }
-        "header li" {
-            padding(0.vh, 2.24.vh)
-            display = Display.inline
-        }
-        "header li+ li" {
-            borderLeft(0.16.vh, BorderStyle.solid, BASE_COLOR)
-        }
-        "header li a" {
-            fontWeight = FontWeight.w500
-            color = BASE_COLOR
-            textDecoration = TextDecoration.none
-            position = Position.relative
-        }
-        "header li a::after" {
-            position = Position.absolute
-            bottom = (-0.16).vh
-            left = 0.vh
-            content = "".quoted
-            width = 100.pct
-            height = 0.16.vh
-            backgroundColor = BASE_COLOR
-            transform {
-                scale(0, 1)
+        // ハンバーガーメニューを使用
+        media("(max-aspect-ratio: $useHamburgerAspectRatio)") {
+            "header ul" {
+                display = Display.none
             }
-            transition("transform", .2.s)
+            "#hamburger_menu" {
+                position = Position.relative
+                margin(LinearDimension.auto)
+                marginRight = 2.24.vh
+                width = 50.px
+                height = 44.px
+                cursor = Cursor.pointer
+            }
+            "#hamburger_menu span" {
+                position = Position.absolute
+                left = 0.px
+                width = 100.pct
+                height = 4.px
+                backgroundColor = BASE_COLOR
+                borderRadius = 4.px
+            }
+            "#hamburger_menu, #hamburger_menu span" {
+                display = Display.inlineBlock
+                transition("all", 0.5.s)
+                boxSizing = BoxSizing.borderBox
+            }
+            "#hamburger_menu span:nth-of-type(1)" {
+                top = 0.px
+            }
+            "#hamburger_menu span:nth-of-type(2)" {
+                top = 20.px
+            }
+            "#hamburger_menu span:nth-of-type(3)" {
+                bottom = 0.px
+            }
+            "#hamburger_menu.active span:nth-of-type(1)" {
+                transform {
+                    translateY(20.px)
+                    rotate(45.deg)
+                }
+            }
+            "#hamburger_menu.active span:nth-of-type(2)" {
+                opacity = 0
+            }
+            "#hamburger_menu.active span:nth-of-type(3)" {
+                transform {
+                    translateY((-20).px)
+                    rotate((-45).deg)
+                }
+            }
         }
-        "header li a:hover::after" {
-            transform {
-                scale(1, 1)
+        // 横並びメニューを使用
+        media("(min-aspect-ratio: $useHamburgerAspectRatio)") {
+            "#hamburger_menu" {
+                display = Display.none
+            }
+            "header ul" {
+                fontSize = max(2.24.vh, 24.px)
+                margin(LinearDimension.auto)
+                marginRight = 0.vh
+                paddingTop = 0.224.vh
+            }
+            "header li" {
+                padding(0.vh, 2.24.vh)
+                display = Display.inline
+            }
+            "header li+ li" {
+                borderLeft(0.16.vh, BorderStyle.solid, BASE_COLOR)
+            }
+            "header li a" {
+                fontWeight = FontWeight.w500
+                color = BASE_COLOR
+                textDecoration = TextDecoration.none
+                position = Position.relative
+            }
+            "header li a::after" {
+                position = Position.absolute
+                bottom = (-0.16).vh
+                left = 0.vh
+                content = "".quoted
+                width = 100.pct
+                height = 0.16.vh
+                backgroundColor = BASE_COLOR
+                transform {
+                    scale(0, 1)
+                }
+                transition("transform", .2.s)
+            }
+            "header li a:hover::after" {
+                transform {
+                    scale(1, 1)
+                }
             }
         }
     }
