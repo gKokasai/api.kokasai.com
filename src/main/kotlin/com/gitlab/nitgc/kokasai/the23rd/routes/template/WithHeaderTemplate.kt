@@ -51,11 +51,11 @@ object WithHeaderTemplate : Template<HTML> {
         "header" {
             display = Display.flex
             backgroundColor = THEME_COLOR
-            height = 6.4.vh
+            padding(vertical = max(0.8.vh, 8.px))
             boxShadow(SHADOW_COLOR.withAlpha(0.4), offsetY = 0.16.vh, blurRadius = 0.32.vh)
         }
         "header h1" {
-            fontSize = 3.2.vh
+            fontSize = max(3.2.vh, 32.px)
             margin(vertical = LinearDimension.auto)
             paddingTop = 0.32.vh
             paddingLeft = 2.24.vh
@@ -65,7 +65,7 @@ object WithHeaderTemplate : Template<HTML> {
             textDecoration = TextDecoration.none
         }
         "header ul" {
-            fontSize = 2.24.vh
+            fontSize = max(2.24.vh, 24.px)
             margin(LinearDimension.auto)
             marginRight = 0.vh
             paddingTop = 0.224.vh
@@ -78,7 +78,7 @@ object WithHeaderTemplate : Template<HTML> {
             borderLeft(0.16.vh, BorderStyle.solid, BASE_COLOR)
         }
         "header li a" {
-            fontWeight = FontWeight.w400
+            fontWeight = FontWeight.w500
             color = BASE_COLOR
             textDecoration = TextDecoration.none
             position = Position.relative
