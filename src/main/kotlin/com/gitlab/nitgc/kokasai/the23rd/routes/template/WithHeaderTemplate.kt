@@ -22,6 +22,7 @@ object WithHeaderTemplate : Template<HTML> {
                     }
                 }
                 ul {
+                    onTouchStart = ""
                     menu("#", "ページ")
                     menu("#", "ページ")
                     menu("/account", "学内の方へ")
