@@ -3,8 +3,8 @@ package com.gitlab.nitgc.kokasai.the23rd.routes
 import com.gitlab.nitgc.kokasai.the23rd.constants.AuthName
 import com.gitlab.nitgc.kokasai.the23rd.constants.CommonRoutes
 import com.gitlab.nitgc.kokasai.the23rd.routes.template.WithHeaderTemplate
+import com.gitlab.nitgc.kokasai.the23rd.user.UserPrincipal
 import io.ktor.application.call
-import io.ktor.auth.UserIdPrincipal
 import io.ktor.auth.authenticate
 import io.ktor.auth.principal
 import io.ktor.html.respondHtmlTemplate
@@ -15,7 +15,7 @@ import kotlinx.html.*
 fun Route.accountRoute() {
     authenticate(AuthName.SESSION) {
         get(CommonRoutes.ACCOUNT) {
-            val principal = call.principal<UserIdPrincipal>()!!
+            val principal = call.principal<UserPrincipal>()!!
             call.respondHtmlTemplate(WithHeaderTemplate) {
                 body {
                     div {

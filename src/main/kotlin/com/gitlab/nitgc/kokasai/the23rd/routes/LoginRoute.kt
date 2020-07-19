@@ -6,8 +6,8 @@ import com.gitlab.nitgc.kokasai.the23rd.constants.AuthTestLogin
 import com.gitlab.nitgc.kokasai.the23rd.constants.CommonRoutes
 import com.gitlab.nitgc.kokasai.the23rd.constants.SessionConstants
 import com.gitlab.nitgc.kokasai.the23rd.routes.template.WithHeaderTemplate
+import com.gitlab.nitgc.kokasai.the23rd.user.UserPrincipal
 import io.ktor.application.call
-import io.ktor.auth.UserIdPrincipal
 import io.ktor.auth.authenticate
 import io.ktor.auth.principal
 import io.ktor.html.respondHtmlTemplate
@@ -51,7 +51,7 @@ fun Routing.loginRoute() {
         }
         authenticate(AuthName.FORM) {
             post {
-                val principal = call.principal<UserIdPrincipal>()
+                val principal = call.principal<UserPrincipal>()
                 call.sessions.set(SessionConstants.AUTH, principal)
                 call.respondRedirect(CommonRoutes.ACCOUNT)
             }

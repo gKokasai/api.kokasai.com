@@ -4,10 +4,10 @@ import com.gitlab.nitgc.kokasai.the23rd.constants.AuthFormFields
 import com.gitlab.nitgc.kokasai.the23rd.constants.AuthName
 import com.gitlab.nitgc.kokasai.the23rd.constants.AuthTestLogin
 import com.gitlab.nitgc.kokasai.the23rd.constants.CommonRoutes
+import com.gitlab.nitgc.kokasai.the23rd.user.UserPrincipal
 import io.ktor.application.call
 import io.ktor.auth.Authentication
 import io.ktor.auth.AuthenticationFailedCause
-import io.ktor.auth.UserIdPrincipal
 import io.ktor.auth.authentication
 import io.ktor.auth.form
 import io.ktor.auth.session
@@ -32,7 +32,7 @@ fun Authentication.Configuration.configureFormAuth() {
         }
         validate {
             if (it.name == AuthTestLogin.USERNAME && it.password == AuthTestLogin.PASSWORD) {
-                UserIdPrincipal(it.name)
+                UserPrincipal(it.name)
             } else {
                 null
             }
@@ -41,7 +41,7 @@ fun Authentication.Configuration.configureFormAuth() {
 }
 
 fun Authentication.Configuration.configureSessionAuth() {
-    session<UserIdPrincipal>(AuthName.SESSION) {
+    session<UserPrincipal>(AuthName.SESSION) {
         challenge {
             call.respondRedirect(CommonRoutes.LOGIN)
         }
