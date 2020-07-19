@@ -153,7 +153,7 @@ object WithHeaderTemplate : Template<HTML> {
                 display = Display.inline
             }
             "header li+ li" {
-                borderLeft(0.16.vh, BorderStyle.solid, BASE_COLOR)
+                borderLeft(0.24.vh, BorderStyle.solid, BASE_COLOR)
             }
             "header li a" {
                 fontWeight = FontWeight.w500
@@ -167,8 +167,7 @@ object WithHeaderTemplate : Template<HTML> {
                 left = 0.vh
                 content = "".quoted
                 width = 100.pct
-                height = 0.16.vh
-                backgroundColor = BASE_COLOR
+                border(0.12.vh, BorderStyle.solid, BASE_COLOR, 0.24.vh)
                 transform {
                     scale(0, 1)
                 }
