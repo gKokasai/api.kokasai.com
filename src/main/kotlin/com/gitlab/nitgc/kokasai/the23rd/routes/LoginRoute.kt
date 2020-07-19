@@ -31,10 +31,10 @@ fun Routing.loginRoute() {
                             else -> null
                         }
                         if(errorMessage != null) {
-                           div {
-                               style = "color:red;"
-                               +errorMessage
-                           }
+                            div {
+                                style = "color:red;"
+                                +errorMessage
+                            }
                         }
                         textInput(name = AuthFormFields.USERNAME) {
                             placeholder = "user (${AuthTestLogin.USERNAME})"
