@@ -12,9 +12,9 @@ import io.ktor.routing.Route
 import io.ktor.routing.get
 import kotlinx.html.*
 
-fun Route.profileRoute() {
+fun Route.accountRoute() {
     authenticate(AuthName.SESSION) {
-        get(CommonRoutes.PROFILE) {
+        get(CommonRoutes.ACCOUNT) {
             val principal = call.principal<UserIdPrincipal>()!!
             call.respondHtmlTemplate(WithHeaderTemplate) {
                 body {

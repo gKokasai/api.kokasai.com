@@ -4,5 +4,5 @@ object CommonRoutes {
     const val HOME = "/"
     const val LOGIN = "/login"
     const val LOGOUT = "/logout"
-    const val PROFILE = "/profile"
+    const val ACCOUNT = "/account"
 }

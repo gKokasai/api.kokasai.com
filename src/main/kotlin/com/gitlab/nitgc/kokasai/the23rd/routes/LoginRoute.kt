@@ -53,7 +53,7 @@ fun Routing.loginRoute() {
             post {
                 val principal = call.principal<UserIdPrincipal>()
                 call.sessions.set(SessionConstants.AUTH, principal)
-                call.respondRedirect(CommonRoutes.PROFILE)
+                call.respondRedirect(CommonRoutes.ACCOUNT)
             }
         }
     }

@@ -7,7 +7,7 @@ import kotlinx.css.*
 import kotlinx.css.properties.*
 import kotlinx.html.*
 
-object WithHeaderTemplate: Template<HTML> {
+object WithHeaderTemplate : Template<HTML> {
     val body = Placeholder<BODY>()
 
     override fun HTML.apply() {
@@ -22,19 +22,20 @@ object WithHeaderTemplate: Template<HTML> {
                     }
                 }
                 ul {
-                    li {
-                        a(href = "#") {
-                            +"Page1"
-                        }
-                    }
-                    li {
-                        a(href = "#") {
-                            +"Page2"
-                        }
-                    }
+                    menu("#", "ページ")
+                    menu("#", "ページ")
+                    menu("/account", "学内の方へ")
                 }
             }
             insert(body)
+        }
+    }
+
+    private fun UL.menu(href: String, name: String) {
+        li {
+            a(href = href) {
+                +name
+            }
         }
     }
 
