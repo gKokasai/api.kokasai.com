@@ -12,8 +12,8 @@ object WithHeaderTemplate : Template<HTML> {
 
     override fun HTML.apply() {
         head {
-            link(rel = "stylesheet", href = "/header.css", type = "text/css")
-            script(src = "https://code.jquery.com/jquery-3.5.1.min.js", type = "text/javascript") {}
+            link(rel = LinkRel.stylesheet, href = "/header.css", type = StyleType.textCss)
+            script(src = "https://code.jquery.com/jquery-3.5.1.min.js", type = ScriptType.textJavaScript) {}
             script {
                 @Suppress("DEPRECATION")
                 +"""
