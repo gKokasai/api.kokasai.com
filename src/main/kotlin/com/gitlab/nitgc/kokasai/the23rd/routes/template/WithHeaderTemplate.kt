@@ -119,8 +119,7 @@ object WithHeaderTemplate : Template<HTML> {
         "#header_title" {
             fontSize = max(3.2.vh, 32.px)
             margin(vertical = LinearDimension.auto)
-            paddingTop = 0.32.vh
-            paddingLeft = 2.24.vh
+            padding(top = 0.32.vh, left = 2.24.vh)
         }
         "#header_title a" {
             color = BASE_COLOR
