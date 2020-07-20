@@ -19,7 +19,24 @@ object WithHeaderTemplate : Template<HTML> {
                 +"""
                     $(function(){
                         $('#hamburger_menu_icon').on('click', function() {
+                            if($('#hamburger_menu_content').hasClass('active')){
+                                $('#hamburger_menu_content').slideUp(200);
+                            } else {
+                                $('#hamburger_menu_content').slideDown(500);
+                            }
                             $('.hamburger_menu').toggleClass('active');
+                            return false;
+                        });
+                        $('#hamburger_menu_content .menu_element a').on('click', function(e){
+                            $('.hamburger_menu').removeClass('active');
+                            $('#hamburger_menu_content').slideUp(200);
+                            e.preventDefault();
+                            url = $(this).attr('href');
+                            if(url != ''){
+                                setTimeout(function(){
+                                    window.location = url;
+                                }, 200);
+                            }
                             return false;
                         });
                     });
@@ -84,11 +101,13 @@ object WithHeaderTemplate : Template<HTML> {
         "li" {
             listStyleType = ListStyleType.none
         }
+        "header" {
+            backgroundColor = THEME_COLOR
+            boxShadow(SHADOW_COLOR.withAlpha(0.4), offsetY = 0.16.vh, blurRadius = 0.32.vh)
+        }
         "#inner_header" {
             display = Display.flex
-            backgroundColor = THEME_COLOR
             padding(vertical = max(0.8.vh, 8.px))
-            boxShadow(SHADOW_COLOR.withAlpha(0.4), offsetY = 0.16.vh, blurRadius = 0.32.vh)
         }
         "#header_title" {
             fontSize = max(3.2.vh, 32.px)
@@ -156,6 +175,17 @@ object WithHeaderTemplate : Template<HTML> {
             "#hamburger_menu_content.active" {
                 display = Display.block
                 width = 100.pct
+            }
+            "#hamburger_menu_content" {
+                backgroundColor = THEME_COLOR
+                padding(vertical = max(0.8.vh, 8.px))
+                borderTop(0.24.vh, BorderStyle.dotted, BASE_COLOR)
+            }
+            ".menu_element a" {
+                fontSize = max(2.24.vh, 24.px)
+                fontWeight = FontWeight.w500
+                color = BASE_COLOR
+                textDecoration = TextDecoration.none
             }
         }
         // 横並びメニューを使用
