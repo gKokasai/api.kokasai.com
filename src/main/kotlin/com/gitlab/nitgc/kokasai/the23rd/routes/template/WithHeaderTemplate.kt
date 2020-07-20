@@ -181,10 +181,11 @@ object WithHeaderTemplate : Template<HTML> {
             }
             "#hamburger_menu_content.active" {
                 display = Display.block
-                width = 100.pct
             }
             "#hamburger_menu_content" {
                 backgroundColor = THEME_COLOR
+                width = 100.pct - 1.12.vh
+                marginLeft = 0.56.vh
                 padding(vertical = max(0.8.vh, 8.px))
                 borderTop(0.24.vh, BorderStyle.dotted, BASE_COLOR)
             }
