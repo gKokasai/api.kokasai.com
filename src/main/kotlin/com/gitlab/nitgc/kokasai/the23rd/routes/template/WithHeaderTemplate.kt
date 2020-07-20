@@ -35,7 +35,7 @@ object WithHeaderTemplate : Template<HTML> {
                             if(url != ''){
                                 setTimeout(function(){
                                     window.location = url;
-                                }, 200);
+                                }, 250);
                             }
                             return false;
                         });
@@ -181,7 +181,14 @@ object WithHeaderTemplate : Template<HTML> {
                 padding(vertical = max(0.8.vh, 8.px))
                 borderTop(0.24.vh, BorderStyle.dotted, BASE_COLOR)
             }
+            "#hamburger_menu_content ul" {
+                padding(horizontal = 2.24.vh)
+            }
+            ".menu_element+ .menu_element" {
+                padding(vertical = max(0.4.vh, 4.px))
+            }
             ".menu_element a" {
+                display = Display.block
                 fontSize = max(2.24.vh, 24.px)
                 fontWeight = FontWeight.w500
                 color = BASE_COLOR
