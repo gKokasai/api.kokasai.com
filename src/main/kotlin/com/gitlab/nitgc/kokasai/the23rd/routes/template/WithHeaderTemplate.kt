@@ -3,6 +3,7 @@ package com.gitlab.nitgc.kokasai.the23rd.routes.template
 import io.ktor.html.Placeholder
 import io.ktor.html.Template
 import io.ktor.html.insert
+import io.ktor.utils.io.charsets.Charset
 import kotlinx.css.*
 import kotlinx.css.properties.*
 import kotlinx.html.*
@@ -11,7 +12,13 @@ object WithHeaderTemplate : Template<HTML> {
     val body = Placeholder<BODY>()
 
     override fun HTML.apply() {
+        lang = "ja"
         head {
+            meta {
+                charset = Charset.defaultCharset().toString()
+            }
+            meta("description", "第２３回群馬高専工華祭の公式ウェブサイトです。")
+            title("工華祭")
             link(rel = LinkRel.stylesheet, href = "/header.css", type = StyleType.textCss)
             script(src = "https://code.jquery.com/jquery-3.5.1.min.js", type = ScriptType.textJavaScript) {}
             script {
