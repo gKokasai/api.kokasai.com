@@ -228,11 +228,11 @@ object WithHeaderTemplate : Template<HTML> {
             }
             ".menu_element a::after" {
                 position = Position.absolute
-                bottom = (-0.16).vh
+                bottom = (-1.6).px
                 left = 0.vh
                 content = "".quoted
                 width = 100.pct
-                borderTop(0.24.vh, BorderStyle.solid, BASE_COLOR)
+                borderTop(2.4.px, BorderStyle.solid, BASE_COLOR)
                 transform {
                     scale(0, 1)
                 }
