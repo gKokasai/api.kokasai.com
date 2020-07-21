@@ -9,10 +9,11 @@ import io.ktor.auth.authenticate
 import io.ktor.auth.principal
 import io.ktor.html.respondHtmlTemplate
 import io.ktor.routing.Route
+import io.ktor.routing.Routing
 import io.ktor.routing.get
 import kotlinx.html.*
 
-fun Route.accountRoute() {
+fun Routing.accountRoute() {
     authenticate(AuthName.SESSION) {
         get(CommonRoutes.ACCOUNT) {
             val principal = call.principal<UserPrincipal>()!!
