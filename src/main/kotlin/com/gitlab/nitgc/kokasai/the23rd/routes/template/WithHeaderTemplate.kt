@@ -232,7 +232,7 @@ object WithHeaderTemplate : Template<HTML> {
                 left = 0.vh
                 content = "".quoted
                 width = 100.pct
-                border(0.12.vh, BorderStyle.solid, BASE_COLOR, 0.24.vh)
+                borderTop(0.24.vh, BorderStyle.solid, BASE_COLOR)
                 transform {
                     scale(0, 1)
                 }
