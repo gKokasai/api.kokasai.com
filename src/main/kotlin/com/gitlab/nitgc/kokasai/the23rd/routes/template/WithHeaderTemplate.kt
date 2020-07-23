@@ -26,16 +26,16 @@ object WithHeaderTemplate : Template<HTML> {
                 +"""
                     $(function(){
                         $('#hamburger_menu_icon').on('click', function() {
-                            if($('#hamburger_menu_content').hasClass('active')){
+                            if($('html').hasClass('active_hamburger')){
                                 $('#hamburger_menu_content').slideUp(200);
                             } else {
                                 $('#hamburger_menu_content').slideDown(500);
                             }
-                            $('.hamburger_menu').toggleClass('active');
+                            $('html').toggleClass('active_hamburger');
                             return false;
                         });
                         $('#hamburger_menu_content .menu_element a').on('click', function(e){
-                            $('.hamburger_menu').removeClass('active');
+                            $('html').removeClass('active_hamburger');
                             $('#hamburger_menu_content').slideUp(200);
                             e.preventDefault();
                             url = $(this).attr('href');
@@ -163,22 +163,22 @@ object WithHeaderTemplate : Template<HTML> {
             "#hamburger_menu_content" {
                 display = Display.none
             }
-            "#hamburger_menu_icon.active span:nth-of-type(1)" {
+            "#hamburger_menu_icon.active_hamburger span:nth-of-type(1)" {
                 transform {
                     translateY(20.px)
                     rotate(45.deg)
                 }
             }
-            "#hamburger_menu_icon.active span:nth-of-type(2)" {
+            "#hamburger_menu_icon.active_hamburger span:nth-of-type(2)" {
                 opacity = 0
             }
-            "#hamburger_menu_icon.active span:nth-of-type(3)" {
+            "#hamburger_menu_icon.active_hamburger span:nth-of-type(3)" {
                 transform {
                     translateY((-20).px)
                     rotate((-45).deg)
                 }
             }
-            "#hamburger_menu_content.active" {
+            "#hamburger_menu_content.active_hamburger" {
                 display = Display.block
             }
             "#hamburger_menu_content" {
