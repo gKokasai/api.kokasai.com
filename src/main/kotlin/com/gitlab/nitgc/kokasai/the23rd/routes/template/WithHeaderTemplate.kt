@@ -9,7 +9,7 @@ import kotlinx.css.properties.*
 import kotlinx.html.*
 
 object WithHeaderTemplate : Template<HTML> {
-    val body = Placeholder<BODY>()
+    val body = Placeholder<DIV>()
 
     override fun HTML.apply() {
         lang = "ja"
@@ -94,7 +94,10 @@ object WithHeaderTemplate : Template<HTML> {
                     id = "hamburger_background"
                 }
             }
-            insert(body)
+            div {
+                id = "inner_body"
+                insert(body)
+            }
         }
     }
 
@@ -234,8 +237,14 @@ object WithHeaderTemplate : Template<HTML> {
             textDecoration = TextDecoration.none
         }
 
-        // 横並びメニュー
+        // インナーボディー
+        "#inner_body" {
+            width = 100.pct - 16.px
+            margin(vertical = 8.px, horizontal = LinearDimension.auto)
+        }
+
         media("screen and (min-width: 769px)") {
+            // 横並びメニュー
             "#hamburger_menu_icon" {
                 display = Display.none
             }
@@ -275,6 +284,11 @@ object WithHeaderTemplate : Template<HTML> {
                 transform {
                     scale(1, 1)
                 }
+            }
+
+            // インナーボディー
+            "#inner_body" {
+                width = 1000.px
             }
         }
     }
