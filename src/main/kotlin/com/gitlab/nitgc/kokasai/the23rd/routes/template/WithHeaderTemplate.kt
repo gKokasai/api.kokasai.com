@@ -168,22 +168,22 @@ object WithHeaderTemplate : Template<HTML> {
             "#hamburger_menu_content" {
                 display = Display.none
             }
-            "#hamburger_menu_icon.active_hamburger span:nth-of-type(1)" {
+            ".active_hamburger #hamburger_menu_icon span:nth-of-type(1)" {
                 transform {
                     translateY(20.px)
                     rotate(45.deg)
                 }
             }
-            "#hamburger_menu_icon.active_hamburger span:nth-of-type(2)" {
+            ".active_hamburger #hamburger_menu_icon span:nth-of-type(2)" {
                 opacity = 0
             }
-            "#hamburger_menu_icon.active_hamburger span:nth-of-type(3)" {
+            ".active_hamburger #hamburger_menu_icon span:nth-of-type(3)" {
                 transform {
                     translateY((-20).px)
                     rotate((-45).deg)
                 }
             }
-            "#hamburger_menu_content.active_hamburger" {
+            ".active_hamburger #hamburger_menu_content" {
                 display = Display.block
             }
             "#hamburger_menu_content" {
