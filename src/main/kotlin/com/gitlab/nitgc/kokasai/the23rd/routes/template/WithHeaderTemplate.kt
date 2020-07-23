@@ -104,6 +104,7 @@ object WithHeaderTemplate : Template<HTML> {
         "body" {
             backgroundColor = BASE_COLOR
             margin(0.vh)
+            fontFamily = "sans-serif"
         }
         "li" {
             listStyleType = ListStyleType.none
@@ -131,121 +132,121 @@ object WithHeaderTemplate : Template<HTML> {
         }
 
         // ハンバーガーメニュー
-        media("(max-aspect-ratio: $useHamburgerAspectRatio)") {
-            "#horizontal_menu" {
-                display = Display.none
-            }
-            "#hamburger_menu_icon" {
-                position = Position.relative
-                margin(LinearDimension.auto)
-                marginRight = 2.24.vh
-                width = 50.px
-                height = 44.px
-                cursor = Cursor.pointer
-            }
-            "#hamburger_menu_icon span" {
-                position = Position.absolute
-                left = 0.px
-                width = 100.pct
-                height = 4.px
-                backgroundColor = BASE_COLOR
-                borderRadius = 4.px
-            }
-            "#hamburger_menu_icon, #hamburger_menu_icon span" {
-                display = Display.inlineBlock
-                transition("all", 0.5.s)
-                boxSizing = BoxSizing.borderBox
-            }
-            "#hamburger_menu_icon span:nth-of-type(1)" {
-                top = 0.px
-            }
-            "#hamburger_menu_icon span:nth-of-type(2)" {
-                top = 20.px
-            }
-            "#hamburger_menu_icon span:nth-of-type(3)" {
-                bottom = 0.px
-            }
-            "#hamburger_menu_content" {
-                display = Display.none
-            }
-            ".active_hamburger #hamburger_menu_icon span:nth-of-type(1)" {
-                transform {
-                    translateY(20.px)
-                    rotate(45.deg)
-                }
-            }
-            ".active_hamburger #hamburger_menu_icon span:nth-of-type(2)" {
-                opacity = 0
-            }
-            ".active_hamburger #hamburger_menu_icon span:nth-of-type(3)" {
-                transform {
-                    translateY((-20).px)
-                    rotate((-45).deg)
-                }
-            }
-            ".active_hamburger #hamburger_menu_content" {
-                display = Display.block
-            }
-            "#hamburger_menu_content" {
-                backgroundColor = THEME_COLOR
-                width = 100.pct - 1.12.vh
-                marginLeft = 0.56.vh
-                padding(vertical = max(0.8.vh, 8.px))
-                borderTop(0.24.vh, BorderStyle.dotted, BASE_COLOR)
-            }
-            "#hamburger_menu_content ul" {
-                padding(horizontal = 2.24.vh)
-            }
-            ".menu_element+ .menu_element" {
-                padding(vertical = max(0.4.vh, 4.px))
-            }
-            ".menu_element a" {
-                display = Display.block
-                fontSize = max(2.24.vh, 24.px)
-                fontWeight = FontWeight.w500
-                color = BASE_COLOR
-                textDecoration = TextDecoration.none
-            }
-        }
-
-        // 横並びメニュー
-        ".hamburger_menu" {
+        "#horizontal_menu" {
             display = Display.none
         }
-        "#horizontal_menu" {
-            fontSize = max(2.24.vh, 24.px)
+        "#hamburger_menu_icon" {
+            position = Position.relative
             margin(LinearDimension.auto)
-            marginRight = 0.vh
-            paddingTop = 0.224.vh
+            marginRight = 2.24.vh
+            width = 50.px
+            height = 44.px
+            cursor = Cursor.pointer
         }
-        "#horizontal_menu .menu_element" {
-            padding(0.vh, 2.24.vh)
-            display = Display.inline
+        "#hamburger_menu_icon span" {
+            position = Position.absolute
+            left = 0.px
+            width = 100.pct
+            height = 4.px
+            backgroundColor = BASE_COLOR
+            borderRadius = 4.px
         }
-        "#horizontal_menu .menu_element+ .menu_element" {
-            borderLeft(0.24.vh, BorderStyle.solid, BASE_COLOR)
+        "#hamburger_menu_icon, #hamburger_menu_icon span" {
+            display = Display.inlineBlock
+            transition("all", 0.5.s)
+            boxSizing = BoxSizing.borderBox
         }
-        "#horizontal_menu .menu_element a" {
+        "#hamburger_menu_icon span:nth-of-type(1)" {
+            top = 0.px
+        }
+        "#hamburger_menu_icon span:nth-of-type(2)" {
+            top = 20.px
+        }
+        "#hamburger_menu_icon span:nth-of-type(3)" {
+            bottom = 0.px
+        }
+        "#hamburger_menu_content" {
+            display = Display.none
+        }
+        ".active_hamburger #hamburger_menu_icon span:nth-of-type(1)" {
+            transform {
+                translateY(20.px)
+                rotate(45.deg)
+            }
+        }
+        ".active_hamburger #hamburger_menu_icon span:nth-of-type(2)" {
+            opacity = 0
+        }
+        ".active_hamburger #hamburger_menu_icon span:nth-of-type(3)" {
+            transform {
+                translateY((-20).px)
+                rotate((-45).deg)
+            }
+        }
+        ".active_hamburger #hamburger_menu_content" {
+            display = Display.block
+        }
+        "#hamburger_menu_content" {
+            backgroundColor = THEME_COLOR
+            width = 100.pct - 1.12.vh
+            marginLeft = 0.56.vh
+            padding(vertical = max(0.8.vh, 8.px))
+            borderTop(0.24.vh, BorderStyle.dotted, BASE_COLOR)
+        }
+        "#hamburger_menu_content ul" {
+            padding(horizontal = 2.24.vh)
+        }
+        ".menu_element+ .menu_element" {
+            padding(vertical = max(0.4.vh, 4.px))
+        }
+        ".menu_element a" {
+            display = Display.block
+            fontSize = max(2.24.vh, 24.px)
             fontWeight = FontWeight.w500
             color = BASE_COLOR
             textDecoration = TextDecoration.none
-            position = Position.relative
         }
-        "#horizontal_menu .menu_element a::after" {
-            position = Position.absolute
-            bottom = (-1.6).px
-            left = 0.vh
-            content = "".quoted
-            width = 100.pct
-            borderTop(2.4.px, BorderStyle.solid, BASE_COLOR)
-            transform {
-                scale(0, 1)
+
+        // 横並びメニュー
+        media("(min-aspect-ratio: $useHamburgerAspectRatio)") {
+            ".hamburger_menu" {
+                display = Display.none
             }
-            transition("transform", .2.s)
-        }
-        "#horizontal_menu .menu_element a:hover::after" {
-            transform {
-                scale(1, 1)
+            "#horizontal_menu" {
+                fontSize = max(2.24.vh, 24.px)
+                margin(LinearDimension.auto)
+                marginRight = 0.vh
+                paddingTop = 0.224.vh
+            }
+            "#horizontal_menu .menu_element" {
+                padding(0.vh, 2.24.vh)
+                display = Display.inline
+            }
+            "#horizontal_menu .menu_element+ .menu_element" {
+                borderLeft(0.24.vh, BorderStyle.solid, BASE_COLOR)
+            }
+            "#horizontal_menu .menu_element a" {
+                fontWeight = FontWeight.w500
+                color = BASE_COLOR
+                textDecoration = TextDecoration.none
+                position = Position.relative
+            }
+            "#horizontal_menu .menu_element a::after" {
+                position = Position.absolute
+                bottom = (-1.6).px
+                left = 0.vh
+                content = "".quoted
+                width = 100.pct
+                borderTop(2.4.px, BorderStyle.solid, BASE_COLOR)
+                transform {
+                    scale(0, 1)
+                }
+                transition("transform", .2.s)
+            }
+            "#horizontal_menu .menu_element a:hover::after" {
+                transform {
+                    scale(1, 1)
+                }
             }
         }
     }
