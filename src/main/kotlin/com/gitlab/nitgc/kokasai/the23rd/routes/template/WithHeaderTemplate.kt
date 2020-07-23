@@ -18,6 +18,7 @@ object WithHeaderTemplate : Template<HTML> {
                 charset = Charset.defaultCharset().toString()
             }
             meta("description", "第２３回群馬高専工華祭の公式ウェブサイトです。")
+            meta("viewport", "width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no")
             title("工華祭")
             link(rel = LinkRel.stylesheet, href = "/header.css", type = StyleType.textCss)
             script(src = "https://code.jquery.com/jquery-3.5.1.min.js", type = ScriptType.textJavaScript) {}
@@ -99,11 +100,12 @@ object WithHeaderTemplate : Template<HTML> {
     }
 
     val headerCss: CSSBuilder.() -> Unit = {
-        val useHamburgerAspectRatio = "542/1000"
-
+        "*" {
+            margin(0.px)
+            padding(0.px)
+        }
         "body" {
             backgroundColor = BASE_COLOR
-            margin(0.vh)
             fontFamily = "sans-serif"
         }
         "li" {
@@ -113,18 +115,19 @@ object WithHeaderTemplate : Template<HTML> {
         // ヘッダー
         "header" {
             backgroundColor = THEME_COLOR
-            boxShadow(SHADOW_COLOR.withAlpha(0.4), offsetY = 0.16.vh, blurRadius = 0.32.vh)
+            boxShadow(SHADOW_COLOR.withAlpha(0.4), offsetY = 1.6.px, blurRadius = 3.2.px)
         }
         "#inner_header" {
             display = Display.flex
-            padding(vertical = max(0.8.vh, 8.px))
+            height = 40.px
+            padding(vertical = 8.px)
         }
 
         // ヘッダータイトル
         "#header_title" {
-            fontSize = max(3.2.vh, 32.px)
+            fontSize = 24.px
             margin(vertical = LinearDimension.auto)
-            padding(top = 0.32.vh, left = 2.24.vh)
+            padding(top = 4.px, left = 24.px)
         }
         "#header_title a" {
             color = BASE_COLOR
@@ -138,18 +141,18 @@ object WithHeaderTemplate : Template<HTML> {
         "#hamburger_menu_icon" {
             position = Position.relative
             margin(LinearDimension.auto)
-            marginRight = 2.24.vh
-            width = 50.px
-            height = 44.px
+            marginRight = 24.px
+            width = 25.px
+            height = 22.px
             cursor = Cursor.pointer
         }
         "#hamburger_menu_icon span" {
             position = Position.absolute
             left = 0.px
             width = 100.pct
-            height = 4.px
+            height = 2.px
             backgroundColor = BASE_COLOR
-            borderRadius = 4.px
+            borderRadius = 2.px
         }
         "#hamburger_menu_icon, #hamburger_menu_icon span" {
             display = Display.inlineBlock
@@ -160,7 +163,7 @@ object WithHeaderTemplate : Template<HTML> {
             top = 0.px
         }
         "#hamburger_menu_icon span:nth-of-type(2)" {
-            top = 20.px
+            top = 10.px
         }
         "#hamburger_menu_icon span:nth-of-type(3)" {
             bottom = 0.px
@@ -170,7 +173,7 @@ object WithHeaderTemplate : Template<HTML> {
         }
         ".active_hamburger #hamburger_menu_icon span:nth-of-type(1)" {
             transform {
-                translateY(20.px)
+                translateY(10.px)
                 rotate(45.deg)
             }
         }
@@ -179,7 +182,7 @@ object WithHeaderTemplate : Template<HTML> {
         }
         ".active_hamburger #hamburger_menu_icon span:nth-of-type(3)" {
             transform {
-                translateY((-20).px)
+                translateY((-10).px)
                 rotate((-45).deg)
             }
         }
@@ -188,42 +191,43 @@ object WithHeaderTemplate : Template<HTML> {
         }
         "#hamburger_menu_content" {
             backgroundColor = THEME_COLOR
-            width = 100.pct - 1.12.vh
-            marginLeft = 0.56.vh
-            padding(vertical = max(0.8.vh, 8.px))
-            borderTop(0.24.vh, BorderStyle.dotted, BASE_COLOR)
+            width = 100.pct - 16.px
+            marginLeft = 8.px
+            padding(vertical = 8.px)
+            borderTop(2.4.px, BorderStyle.dotted, BASE_COLOR)
         }
         "#hamburger_menu_content ul" {
-            padding(horizontal = 2.24.vh)
+            padding(8.px, 24.px)
         }
-        ".menu_element+ .menu_element" {
-            padding(vertical = max(0.4.vh, 4.px))
+        "#hamburger_menu_content .menu_element+ .menu_element" {
+            padding(vertical = 4.px)
         }
-        ".menu_element a" {
+        "#hamburger_menu_content .menu_element a" {
             display = Display.block
-            fontSize = max(2.24.vh, 24.px)
+            fontSize = 20.px
             fontWeight = FontWeight.w500
             color = BASE_COLOR
             textDecoration = TextDecoration.none
         }
 
         // 横並びメニュー
-        media("(min-aspect-ratio: $useHamburgerAspectRatio)") {
-            ".hamburger_menu" {
+        media("screen and (min-width: 769px)") {
+            "#hamburger_menu_icon" {
                 display = Display.none
             }
             "#horizontal_menu" {
-                fontSize = max(2.24.vh, 24.px)
+                display = Display.block
+                fontSize = 20.px
                 margin(LinearDimension.auto)
-                marginRight = 0.vh
-                paddingTop = 0.224.vh
+                marginRight = 0.px
+                paddingTop = 2.4.px
             }
             "#horizontal_menu .menu_element" {
-                padding(0.vh, 2.24.vh)
+                padding(horizontal = 24.px)
                 display = Display.inline
             }
             "#horizontal_menu .menu_element+ .menu_element" {
-                borderLeft(0.24.vh, BorderStyle.solid, BASE_COLOR)
+                borderLeft(2.4.px, BorderStyle.solid, BASE_COLOR)
             }
             "#horizontal_menu .menu_element a" {
                 fontWeight = FontWeight.w500
@@ -234,7 +238,7 @@ object WithHeaderTemplate : Template<HTML> {
             "#horizontal_menu .menu_element a::after" {
                 position = Position.absolute
                 bottom = (-1.6).px
-                left = 0.vh
+                left = 0.px
                 content = "".quoted
                 width = 100.pct
                 borderTop(2.4.px, BorderStyle.solid, BASE_COLOR)
