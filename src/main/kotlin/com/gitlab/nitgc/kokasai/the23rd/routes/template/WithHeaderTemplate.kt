@@ -47,6 +47,10 @@ object WithHeaderTemplate : Template<HTML> {
                             }
                             return false;
                         });
+                        $('#hamburger_background').on('click', function(){
+                            $('html').removeClass('active_hamburger');
+                            $('#hamburger_menu_content').slideUp(200);
+                        });
                     });
                 """.trimIndent()
             }
@@ -62,7 +66,7 @@ object WithHeaderTemplate : Template<HTML> {
                         }
                     }
                     // ハンバーガーメニューアイコン
-                    div("hamburger_menu") {
+                    div {
                         id = "hamburger_menu_icon"
                         span()
                         span()
@@ -78,13 +82,16 @@ object WithHeaderTemplate : Template<HTML> {
                     }
                 }
                 // ハンバーガーメニュー
-                div("hamburger_menu") {
+                div {
                     id = "hamburger_menu_content"
                     ul {
                         menu("#", "ページ")
                         menu("#", "ページ")
                         menu("/account", "学内の方へ")
                     }
+                }
+                div {
+                    id = "hamburger_background"
                 }
             }
             insert(body)
@@ -185,6 +192,23 @@ object WithHeaderTemplate : Template<HTML> {
                 translateY((-10).px)
                 rotate((-45).deg)
             }
+        }
+        "#hamburger_background" {
+            position = Position.fixed
+            left = 0.px
+            top = 0.px
+            width = 100.pct
+            height = 100.pct
+            zIndex = -1
+            backgroundColor = Color.black
+            opacity = 0
+            visibility = Visibility.hidden
+            transition("all", .6.s)
+            cursor = Cursor.pointer
+        }
+        ".active_hamburger #hamburger_background" {
+            opacity = 0.6
+            visibility = Visibility.visible
         }
         ".active_hamburger #hamburger_menu_content" {
             display = Display.block
