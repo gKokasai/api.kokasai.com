@@ -99,7 +99,7 @@ object WithHeaderTemplate : Template<HTML> {
     }
 
     val headerCss: CSSBuilder.() -> Unit = {
-        val useHamburgerAspectRatio = "27/50"
+        val useHamburgerAspectRatio = "542/1000"
 
         "body" {
             backgroundColor = BASE_COLOR
@@ -108,6 +108,8 @@ object WithHeaderTemplate : Template<HTML> {
         "li" {
             listStyleType = ListStyleType.none
         }
+
+        // ヘッダー
         "header" {
             backgroundColor = THEME_COLOR
             boxShadow(SHADOW_COLOR.withAlpha(0.4), offsetY = 0.16.vh, blurRadius = 0.32.vh)
@@ -116,6 +118,8 @@ object WithHeaderTemplate : Template<HTML> {
             display = Display.flex
             padding(vertical = max(0.8.vh, 8.px))
         }
+
+        // ヘッダータイトル
         "#header_title" {
             fontSize = max(3.2.vh, 32.px)
             margin(vertical = LinearDimension.auto)
@@ -125,7 +129,8 @@ object WithHeaderTemplate : Template<HTML> {
             color = BASE_COLOR
             textDecoration = TextDecoration.none
         }
-        // ハンバーガーメニューを使用
+
+        // ハンバーガーメニュー
         media("(max-aspect-ratio: $useHamburgerAspectRatio)") {
             "#horizontal_menu" {
                 display = Display.none
@@ -202,46 +207,45 @@ object WithHeaderTemplate : Template<HTML> {
                 textDecoration = TextDecoration.none
             }
         }
-        // 横並びメニューを使用
-        media("(min-aspect-ratio: $useHamburgerAspectRatio)") {
-            ".hamburger_menu" {
-                display = Display.none
+
+        // 横並びメニュー
+        ".hamburger_menu" {
+            display = Display.none
+        }
+        "#horizontal_menu" {
+            fontSize = max(2.24.vh, 24.px)
+            margin(LinearDimension.auto)
+            marginRight = 0.vh
+            paddingTop = 0.224.vh
+        }
+        "#horizontal_menu .menu_element" {
+            padding(0.vh, 2.24.vh)
+            display = Display.inline
+        }
+        "#horizontal_menu .menu_element+ .menu_element" {
+            borderLeft(0.24.vh, BorderStyle.solid, BASE_COLOR)
+        }
+        "#horizontal_menu .menu_element a" {
+            fontWeight = FontWeight.w500
+            color = BASE_COLOR
+            textDecoration = TextDecoration.none
+            position = Position.relative
+        }
+        "#horizontal_menu .menu_element a::after" {
+            position = Position.absolute
+            bottom = (-1.6).px
+            left = 0.vh
+            content = "".quoted
+            width = 100.pct
+            borderTop(2.4.px, BorderStyle.solid, BASE_COLOR)
+            transform {
+                scale(0, 1)
             }
-            "#horizontal_menu" {
-                fontSize = max(2.24.vh, 24.px)
-                margin(LinearDimension.auto)
-                marginRight = 0.vh
-                paddingTop = 0.224.vh
-            }
-            ".menu_element" {
-                padding(0.vh, 2.24.vh)
-                display = Display.inline
-            }
-            ".menu_element+ .menu_element" {
-                borderLeft(0.24.vh, BorderStyle.solid, BASE_COLOR)
-            }
-            ".menu_element a" {
-                fontWeight = FontWeight.w500
-                color = BASE_COLOR
-                textDecoration = TextDecoration.none
-                position = Position.relative
-            }
-            ".menu_element a::after" {
-                position = Position.absolute
-                bottom = (-1.6).px
-                left = 0.vh
-                content = "".quoted
-                width = 100.pct
-                borderTop(2.4.px, BorderStyle.solid, BASE_COLOR)
-                transform {
-                    scale(0, 1)
-                }
-                transition("transform", .2.s)
-            }
-            ".menu_element a:hover::after" {
-                transform {
-                    scale(1, 1)
-                }
+            transition("transform", .2.s)
+        }
+        "#horizontal_menu .menu_element a:hover::after" {
+            transform {
+                scale(1, 1)
             }
         }
     }
