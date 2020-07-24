@@ -6,6 +6,7 @@ import com.gitlab.nitgc.kokasai.the23rd.configure.configureSessionAuth
 import com.gitlab.nitgc.kokasai.the23rd.routes.accountRoute
 import com.gitlab.nitgc.kokasai.the23rd.routes.cssRoutes
 import com.gitlab.nitgc.kokasai.the23rd.routes.homeRoute
+import com.gitlab.nitgc.kokasai.the23rd.routes.jsRoutes
 import com.gitlab.nitgc.kokasai.the23rd.routes.loginRoute
 import com.gitlab.nitgc.kokasai.the23rd.routes.logoutRoute
 import io.ktor.application.Application
@@ -33,5 +34,6 @@ fun Application.launch() {
         logoutRoute()
         accountRoute()
         cssRoutes()
+        jsRoutes()
     }
 }

@@ -8,7 +8,6 @@ import io.ktor.application.call
 import io.ktor.auth.authenticate
 import io.ktor.auth.principal
 import io.ktor.html.respondHtmlTemplate
-import io.ktor.routing.Route
 import io.ktor.routing.Routing
 import io.ktor.routing.get
 import kotlinx.html.*

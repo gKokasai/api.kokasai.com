@@ -22,38 +22,7 @@ object WithHeaderTemplate : Template<HTML> {
             title("工華祭")
             link(rel = LinkRel.stylesheet, href = "/header.css", type = StyleType.textCss)
             script(src = "https://code.jquery.com/jquery-3.5.1.min.js", type = ScriptType.textJavaScript) {}
-            script {
-                @Suppress("DEPRECATION")
-                +"""
-                    $(function(){
-                        $('#hamburger_menu_icon').on('click', function() {
-                            if($('html').hasClass('active_hamburger')){
-                                $('#hamburger_menu_content').slideUp(200);
-                            } else {
-                                $('#hamburger_menu_content').slideDown(500);
-                            }
-                            $('html').toggleClass('active_hamburger');
-                            return false;
-                        });
-                        $('#hamburger_menu_content .menu_element a').on('click', function(e){
-                            $('html').removeClass('active_hamburger');
-                            $('#hamburger_menu_content').slideUp(200);
-                            e.preventDefault();
-                            url = $(this).attr('href');
-                            if(url != ''){
-                                setTimeout(function(){
-                                    window.location = url;
-                                }, 250);
-                            }
-                            return false;
-                        });
-                        $('#hamburger_background').on('click', function(){
-                            $('html').removeClass('active_hamburger');
-                            $('#hamburger_menu_content').slideUp(200);
-                        });
-                    });
-                """.trimIndent()
-            }
+            script(src = "/header.js", type = ScriptType.textJavaScript) {}
         }
         body {
             header {
@@ -108,6 +77,36 @@ object WithHeaderTemplate : Template<HTML> {
             }
         }
     }
+
+    val headerJs = """
+        $(function(){
+            $('#hamburger_menu_icon').on('click', function() {
+                if($('html').hasClass('active_hamburger')){
+                    $('#hamburger_menu_content').slideUp(200);
+                } else {
+                    $('#hamburger_menu_content').slideDown(500);
+                }
+                $('html').toggleClass('active_hamburger');
+                return false;
+            });
+            $('#hamburger_menu_content .menu_element a').on('click', function(e){
+                $('html').removeClass('active_hamburger');
+                $('#hamburger_menu_content').slideUp(200);
+                e.preventDefault();
+                url = $(this).attr('href');
+                if(url != ''){
+                    setTimeout(function(){
+                        window.location = url;
+                    }, 250);
+                }
+                return false;
+            });
+            $('#hamburger_background').on('click', function(){
+                $('html').removeClass('active_hamburger');
+                $('#hamburger_menu_content').slideUp(200);
+            });
+        });
+        """.trimIndent()
 
     val headerCss: CSSBuilder.() -> Unit = {
         "*" {
