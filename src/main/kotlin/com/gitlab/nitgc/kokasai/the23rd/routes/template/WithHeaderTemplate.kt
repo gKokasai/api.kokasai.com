@@ -242,6 +242,11 @@ object WithHeaderTemplate : Template<HTML> {
             width = 100.pct - 16.px
             margin(vertical = 8.px, horizontal = LinearDimension.auto)
         }
+        media("screen and (min-width: 1040px)") {
+            "#inner_body" {
+                width = 1024.px
+            }
+        }
 
         media("screen and (min-width: 769px)") {
             // 横並びメニュー
@@ -284,11 +289,6 @@ object WithHeaderTemplate : Template<HTML> {
                 transform {
                     scale(1, 1)
                 }
-            }
-
-            // インナーボディー
-            "#inner_body" {
-                width = 1000.px
             }
         }
     }
