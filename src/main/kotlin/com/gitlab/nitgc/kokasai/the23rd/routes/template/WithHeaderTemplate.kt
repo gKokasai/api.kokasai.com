@@ -36,7 +36,7 @@ object WithHeaderTemplate : Template<HTML> {
                     }
                     // ハンバーガーメニューアイコン
                     div {
-                        id = "hamburger_menu_icon"
+                        id = "hamburger_icon"
                         span()
                         span()
                         span()
@@ -52,7 +52,7 @@ object WithHeaderTemplate : Template<HTML> {
                 }
                 // ハンバーガーメニュー
                 div {
-                    id = "hamburger_menu_content"
+                    id = "hamburger_menu"
                     ul {
                         menu("#", "ページ")
                         menu("#", "ページ")
@@ -80,18 +80,18 @@ object WithHeaderTemplate : Template<HTML> {
 
     val headerJs = """
         $(function(){
-            $('#hamburger_menu_icon').on('click', function() {
+            $('#hamburger_icon').on('click', function() {
                 if($('html').hasClass('active_hamburger')){
-                    $('#hamburger_menu_content').slideUp(200);
+                    $('#hamburger_menu').slideUp(200);
                 } else {
-                    $('#hamburger_menu_content').slideDown(500);
+                    $('#hamburger_menu').slideDown(500);
                 }
                 $('html').toggleClass('active_hamburger');
                 return false;
             });
-            $('#hamburger_menu_content .menu_element a').on('click', function(e){
+            $('#hamburger_menu .menu_element a').on('click', function(e){
                 $('html').removeClass('active_hamburger');
-                $('#hamburger_menu_content').slideUp(200);
+                $('#hamburger_menu').slideUp(200);
                 e.preventDefault();
                 url = $(this).attr('href');
                 if(url != ''){
@@ -103,7 +103,7 @@ object WithHeaderTemplate : Template<HTML> {
             });
             $('#hamburger_background').on('click', function(){
                 $('html').removeClass('active_hamburger');
-                $('#hamburger_menu_content').slideUp(200);
+                $('#hamburger_menu').slideUp(200);
             });
         });
         """.trimIndent()
@@ -147,7 +147,7 @@ object WithHeaderTemplate : Template<HTML> {
         "#horizontal_menu" {
             display = Display.none
         }
-        "#hamburger_menu_icon" {
+        "#hamburger_icon" {
             position = Position.relative
             margin(LinearDimension.auto)
             marginRight = 24.px
@@ -155,7 +155,7 @@ object WithHeaderTemplate : Template<HTML> {
             height = 22.px
             cursor = Cursor.pointer
         }
-        "#hamburger_menu_icon span" {
+        "#hamburger_icon span" {
             position = Position.absolute
             left = 0.px
             width = 100.pct
@@ -163,33 +163,33 @@ object WithHeaderTemplate : Template<HTML> {
             backgroundColor = BASE_COLOR
             borderRadius = 2.px
         }
-        "#hamburger_menu_icon, #hamburger_menu_icon span" {
+        "#hamburger_icon, #hamburger_icon span" {
             display = Display.inlineBlock
             transition("all", 0.5.s)
             boxSizing = BoxSizing.borderBox
         }
-        "#hamburger_menu_icon span:nth-of-type(1)" {
+        "#hamburger_icon span:nth-of-type(1)" {
             top = 0.px
         }
-        "#hamburger_menu_icon span:nth-of-type(2)" {
+        "#hamburger_icon span:nth-of-type(2)" {
             top = 10.px
         }
-        "#hamburger_menu_icon span:nth-of-type(3)" {
+        "#hamburger_icon span:nth-of-type(3)" {
             bottom = 0.px
         }
-        "#hamburger_menu_content" {
+        "#hamburger_menu" {
             display = Display.none
         }
-        ".active_hamburger #hamburger_menu_icon span:nth-of-type(1)" {
+        ".active_hamburger #hamburger_icon span:nth-of-type(1)" {
             transform {
                 translateY(10.px)
                 rotate(45.deg)
             }
         }
-        ".active_hamburger #hamburger_menu_icon span:nth-of-type(2)" {
+        ".active_hamburger #hamburger_icon span:nth-of-type(2)" {
             opacity = 0
         }
-        ".active_hamburger #hamburger_menu_icon span:nth-of-type(3)" {
+        ".active_hamburger #hamburger_icon span:nth-of-type(3)" {
             transform {
                 translateY((-10).px)
                 rotate((-45).deg)
@@ -212,23 +212,23 @@ object WithHeaderTemplate : Template<HTML> {
             opacity = 0.6
             visibility = Visibility.visible
         }
-        ".active_hamburger #hamburger_menu_content" {
+        ".active_hamburger #hamburger_menu" {
             display = Display.block
         }
-        "#hamburger_menu_content" {
+        "#hamburger_menu" {
             backgroundColor = THEME_COLOR
             width = 100.pct - 16.px
             marginLeft = 8.px
             padding(vertical = 8.px)
             borderTop(2.4.px, BorderStyle.dotted, BASE_COLOR)
         }
-        "#hamburger_menu_content ul" {
+        "#hamburger_menu ul" {
             padding(8.px, 24.px)
         }
-        "#hamburger_menu_content .menu_element+ .menu_element" {
+        "#hamburger_menu .menu_element+ .menu_element" {
             padding(vertical = 4.px)
         }
-        "#hamburger_menu_content .menu_element a" {
+        "#hamburger_menu .menu_element a" {
             display = Display.block
             fontSize = 20.px
             fontWeight = FontWeight.w500
@@ -249,7 +249,7 @@ object WithHeaderTemplate : Template<HTML> {
 
         media("screen and (min-width: 769px)") {
             // 横並びメニュー
-            "#hamburger_menu_icon" {
+            "#hamburger_icon" {
                 display = Display.none
             }
             "#horizontal_menu" {
