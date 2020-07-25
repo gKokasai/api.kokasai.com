@@ -1,5 +1,8 @@
 package com.gitlab.nitgc.kokasai.the23rd.routes.template
 
+import com.gitlab.nitgc.kokasai.the23rd.extension.css
+import com.gitlab.nitgc.kokasai.the23rd.extension.javaScript
+import com.gitlab.nitgc.kokasai.the23rd.extension.meta
 import io.ktor.html.Placeholder
 import io.ktor.html.Template
 import io.ktor.html.insert
@@ -16,13 +19,13 @@ object WithHeaderTemplate : Template<HTML> {
         head {
             meta {
                 charset = Charset.defaultCharset().toString()
+                description = "第２３回群馬高専工華祭の公式ウェブサイトです。"
+                viewport = "width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
             }
-            meta("description", "第２３回群馬高専工華祭の公式ウェブサイトです。")
-            meta("viewport", "width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no")
             title("工華祭")
-            link(rel = LinkRel.stylesheet, href = "/header.css", type = StyleType.textCss)
-            script(src = "https://code.jquery.com/jquery-3.5.1.min.js", type = ScriptType.textJavaScript) {}
-            script(src = "/header.js", type = ScriptType.textJavaScript) {}
+            css("/header.css")
+            javaScript("https://code.jquery.com/jquery-3.5.1.min.js")
+            javaScript("/header.js")
         }
         body {
             header {
