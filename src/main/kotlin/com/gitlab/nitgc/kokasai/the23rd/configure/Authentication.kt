@@ -20,14 +20,14 @@ fun Authentication.Configuration.configureFormAuth() {
         challenge {
             val failures = call.authentication.allFailures
             call.respondRedirect(
-                    when (failures.singleOrNull()) {
-                        AuthenticationFailedCause.InvalidCredentials -> {
-                            "${CommonRoutes.LOGIN}?invalid"
-                        }
-                        else -> {
-                            CommonRoutes.LOGIN
-                        }
+                when (failures.singleOrNull()) {
+                    AuthenticationFailedCause.InvalidCredentials -> {
+                        "${CommonRoutes.LOGIN}?invalid"
                     }
+                    else -> {
+                        CommonRoutes.LOGIN
+                    }
+                }
             )
         }
         validate {

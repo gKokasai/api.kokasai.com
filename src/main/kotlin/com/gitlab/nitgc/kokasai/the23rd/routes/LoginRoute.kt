@@ -30,7 +30,7 @@ fun Routing.loginRoute() {
                             "invalid" in queryParams -> "ユーザー名かパスワードが間違っています"
                             else -> null
                         }
-                        if(errorMessage != null) {
+                        if (errorMessage != null) {
                             div {
                                 style = "color:red;"
                                 +errorMessage
