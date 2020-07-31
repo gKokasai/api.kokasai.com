@@ -16,34 +16,40 @@ import io.ktor.routing.Routing
 import io.ktor.routing.get
 import io.ktor.routing.post
 import io.ktor.routing.route
+import io.ktor.sessions.get
 import io.ktor.sessions.sessions
 import kotlinx.html.*
 
 fun Routing.loginRoute() {
     route(Routes.LOGIN) {
         get {
-            call.respondHtmlTemplate(WithHeaderTemplate) {
-                body {
-                    form(method = FormMethod.post) {
-                        val queryParams = call.request.queryParameters
-                        val errorMessage = when {
-                            "invalid" in queryParams -> "ユーザー名かパスワードが間違っています"
-                            else -> null
-                        }
-                        if (errorMessage != null) {
-                            div {
-                                style = "color:red;"
-                                +errorMessage
+            val principal = call.sessions.get<UserPrincipal>()
+            if (principal != null) {
+                call.respondRedirect(Routes.ACCOUNT)
+            } else {
+                call.respondHtmlTemplate(WithHeaderTemplate) {
+                    body {
+                        form(method = FormMethod.post) {
+                            val queryParams = call.request.queryParameters
+                            val errorMessage = when {
+                                "invalid" in queryParams -> "ユーザー名かパスワードが間違っています"
+                                else -> null
                             }
-                        }
-                        textInput(name = AuthFormFields.USERNAME) {
-                            placeholder = "user (${AuthTestLogin.USERNAME})"
-                        }
-                        passwordInput(name = AuthFormFields.PASSWORD) {
-                            placeholder = "password (${AuthTestLogin.PASSWORD})"
-                        }
-                        submitInput {
-                            value = "Login"
+                            if (errorMessage != null) {
+                                div {
+                                    style = "color:red;"
+                                    +errorMessage
+                                }
+                            }
+                            textInput(name = AuthFormFields.USERNAME) {
+                                placeholder = "user (${AuthTestLogin.USERNAME})"
+                            }
+                            passwordInput(name = AuthFormFields.PASSWORD) {
+                                placeholder = "password (${AuthTestLogin.PASSWORD})"
+                            }
+                            submitInput {
+                                value = "Login"
+                            }
                         }
                     }
                 }
