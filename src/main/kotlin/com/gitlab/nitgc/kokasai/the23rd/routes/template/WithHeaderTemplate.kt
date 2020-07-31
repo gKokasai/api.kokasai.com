@@ -1,5 +1,6 @@
 package com.gitlab.nitgc.kokasai.the23rd.routes.template
 
+import com.gitlab.nitgc.kokasai.the23rd.constants.Routes
 import com.gitlab.nitgc.kokasai.the23rd.extension.css
 import com.gitlab.nitgc.kokasai.the23rd.extension.javaScript
 import com.gitlab.nitgc.kokasai.the23rd.extension.meta
@@ -33,7 +34,7 @@ object WithHeaderTemplate : Template<HTML> {
                     id = "inner_header"
                     h1 {
                         id = "header_title"
-                        a(href = "/") {
+                        a(href = Routes.HOME) {
                             +"工華祭"
                         }
                     }
@@ -50,7 +51,7 @@ object WithHeaderTemplate : Template<HTML> {
                         onTouchStart = ""
                         menu("#", "ページ")
                         menu("#", "ページ")
-                        menu("/account", "学内の方へ")
+                        menu(Routes.ACCOUNT, "学内の方へ")
                     }
                 }
                 // ハンバーガーメニュー
@@ -59,7 +60,7 @@ object WithHeaderTemplate : Template<HTML> {
                     ul {
                         menu("#", "ページ")
                         menu("#", "ページ")
-                        menu("/account", "学内の方へ")
+                        menu(Routes.ACCOUNT, "学内の方へ")
                     }
                 }
                 div {

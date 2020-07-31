@@ -3,7 +3,7 @@ package com.gitlab.nitgc.kokasai.the23rd.routes
 import com.gitlab.nitgc.kokasai.the23rd.constants.AuthFormFields
 import com.gitlab.nitgc.kokasai.the23rd.constants.AuthName
 import com.gitlab.nitgc.kokasai.the23rd.constants.AuthTestLogin
-import com.gitlab.nitgc.kokasai.the23rd.constants.CommonRoutes
+import com.gitlab.nitgc.kokasai.the23rd.constants.Routes
 import com.gitlab.nitgc.kokasai.the23rd.constants.SessionConstants
 import com.gitlab.nitgc.kokasai.the23rd.routes.template.WithHeaderTemplate
 import com.gitlab.nitgc.kokasai.the23rd.user.UserPrincipal
@@ -20,7 +20,7 @@ import io.ktor.sessions.sessions
 import kotlinx.html.*
 
 fun Routing.loginRoute() {
-    route(CommonRoutes.LOGIN) {
+    route(Routes.LOGIN) {
         get {
             call.respondHtmlTemplate(WithHeaderTemplate) {
                 body {
@@ -53,7 +53,7 @@ fun Routing.loginRoute() {
             post {
                 val principal = call.principal<UserPrincipal>()
                 call.sessions.set(SessionConstants.AUTH, principal)
-                call.respondRedirect(CommonRoutes.ACCOUNT)
+                call.respondRedirect(Routes.ACCOUNT)
             }
         }
     }

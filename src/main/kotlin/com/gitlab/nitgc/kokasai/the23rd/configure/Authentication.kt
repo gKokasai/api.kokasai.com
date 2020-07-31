@@ -3,7 +3,7 @@ package com.gitlab.nitgc.kokasai.the23rd.configure
 import com.gitlab.nitgc.kokasai.the23rd.constants.AuthFormFields
 import com.gitlab.nitgc.kokasai.the23rd.constants.AuthName
 import com.gitlab.nitgc.kokasai.the23rd.constants.AuthTestLogin
-import com.gitlab.nitgc.kokasai.the23rd.constants.CommonRoutes
+import com.gitlab.nitgc.kokasai.the23rd.constants.Routes
 import com.gitlab.nitgc.kokasai.the23rd.user.UserPrincipal
 import io.ktor.application.call
 import io.ktor.auth.Authentication
@@ -22,10 +22,10 @@ fun Authentication.Configuration.configureFormAuth() {
             call.respondRedirect(
                 when (failures.singleOrNull()) {
                     AuthenticationFailedCause.InvalidCredentials -> {
-                        "${CommonRoutes.LOGIN}?invalid"
+                        "${Routes.LOGIN}?invalid"
                     }
                     else -> {
-                        CommonRoutes.LOGIN
+                        Routes.LOGIN
                     }
                 }
             )
@@ -43,7 +43,7 @@ fun Authentication.Configuration.configureFormAuth() {
 fun Authentication.Configuration.configureSessionAuth() {
     session<UserPrincipal>(AuthName.SESSION) {
         challenge {
-            call.respondRedirect(CommonRoutes.LOGIN)
+            call.respondRedirect(Routes.LOGIN)
         }
         validate { session ->
             session

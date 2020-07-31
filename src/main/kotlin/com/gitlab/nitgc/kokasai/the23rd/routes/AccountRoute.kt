@@ -1,7 +1,7 @@
 package com.gitlab.nitgc.kokasai.the23rd.routes
 
 import com.gitlab.nitgc.kokasai.the23rd.constants.AuthName
-import com.gitlab.nitgc.kokasai.the23rd.constants.CommonRoutes
+import com.gitlab.nitgc.kokasai.the23rd.constants.Routes
 import com.gitlab.nitgc.kokasai.the23rd.routes.template.WithHeaderTemplate
 import com.gitlab.nitgc.kokasai.the23rd.user.UserPrincipal
 import io.ktor.application.call
@@ -14,7 +14,7 @@ import kotlinx.html.*
 
 fun Routing.accountRoute() {
     authenticate(AuthName.SESSION) {
-        get(CommonRoutes.ACCOUNT) {
+        get(Routes.ACCOUNT) {
             val principal = call.principal<UserPrincipal>()!!
             call.respondHtmlTemplate(WithHeaderTemplate) {
                 body {
@@ -22,7 +22,7 @@ fun Routing.accountRoute() {
                         +"Hello, ${principal.name}"
                     }
                     div {
-                        a(href = CommonRoutes.LOGOUT) {
+                        a(href = Routes.LOGOUT) {
                             +"Logout"
                         }
                     }
