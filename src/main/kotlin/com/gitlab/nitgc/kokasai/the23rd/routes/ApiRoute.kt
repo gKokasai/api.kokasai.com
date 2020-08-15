@@ -14,7 +14,7 @@ fun Routing.apiRoute() {
         route("/bus") {
             get("/challenge") {
                 BusTokenManager.challenge(call) {
-                    call.respond(HttpStatusCode.OK, "Succeed Challenge")
+                    call.respond(HttpStatusCode.OK, it)
                 }
             }
             get("/route") {
@@ -27,20 +27,22 @@ fun Routing.apiRoute() {
 }
 
 object BusTokenManager {
-    suspend inline fun challenge(call: ApplicationCall, onSuccess: () -> Unit) {
-        if(checkValid(call)){
-            onSuccess.invoke()
-        } else {
-            call.respond(HttpStatusCode.Forbidden, "Failed Challenge")
+    private val busList = mapOf(
+        "abcdef" to "abc" // TODO 仮のトークン確認
+    )
+
+    suspend inline fun challenge(call: ApplicationCall, onSuccess: (String) -> Unit) {
+        find(call)?.let(onSuccess) ?: run {
+            call.respond(HttpStatusCode.Forbidden, "null")
         }
     }
 
-    fun checkValid(call: ApplicationCall): Boolean {
-        return checkValid(call.request.header("token"))
+    fun find(call: ApplicationCall): String? {
+        return find(call.request.header("token"))
     }
 
-    private fun checkValid(token: String?): Boolean {
-        return token == "abcdef" // TODO 仮のトークン確認
+    private fun find(token: String?): String? {
+        return busList[token]
     }
 }
 
