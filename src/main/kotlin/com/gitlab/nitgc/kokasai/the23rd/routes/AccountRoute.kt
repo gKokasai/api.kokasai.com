@@ -16,7 +16,7 @@ fun Routing.accountRoute() {
     authenticate(AuthName.SESSION) {
         get(Routes.ACCOUNT) {
             val principal = call.principal<UserPrincipal>()!!
-            call.respondHtmlTemplate(WithHeaderTemplate) {
+            call.respondHtmlTemplate(WithHeaderTemplate.Default) {
                 body {
                     div {
                         +"Hello, ${principal.name}"

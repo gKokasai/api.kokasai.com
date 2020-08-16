@@ -27,7 +27,7 @@ fun Routing.loginRoute() {
             if (principal != null) {
                 call.respondRedirect(Routes.ACCOUNT)
             } else {
-                call.respondHtmlTemplate(WithHeaderTemplate) {
+                call.respondHtmlTemplate(WithHeaderTemplate.Default) {
                     body {
                         form(method = FormMethod.post) {
                             val queryParams = call.request.queryParameters

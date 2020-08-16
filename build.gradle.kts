@@ -17,6 +17,7 @@ dependencies {
     implementation("io.ktor:ktor-auth:1.3.2")
     implementation("io.ktor:ktor-html-builder:1.3.2")
     implementation("io.ktor:ktor-gson:1.3.2")
+    implementation("io.ktor:ktor-websockets:1.3.2")
     implementation("org.jetbrains:kotlin-css-jvm:1.0.0-pre.110-kotlin-1.3.72")
 }
 
