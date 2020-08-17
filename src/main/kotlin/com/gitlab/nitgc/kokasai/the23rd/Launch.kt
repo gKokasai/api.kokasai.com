@@ -12,7 +12,7 @@ import com.gitlab.nitgc.kokasai.the23rd.routes.homeRoute
 import com.gitlab.nitgc.kokasai.the23rd.routes.loginRoute
 import com.gitlab.nitgc.kokasai.the23rd.routes.logoutRoute
 import com.gitlab.nitgc.kokasai.the23rd.routes.staticRoute
-import com.gitlab.nitgc.kokasai.the23rd.routes.template.webSocketRoute
+import com.gitlab.nitgc.kokasai.the23rd.routes.webSocketRoute
 import io.ktor.application.Application
 import io.ktor.application.install
 import io.ktor.auth.Authentication

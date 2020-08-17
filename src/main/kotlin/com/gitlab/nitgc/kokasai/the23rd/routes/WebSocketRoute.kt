@@ -1,4 +1,4 @@
-package com.gitlab.nitgc.kokasai.the23rd.routes.template
+package com.gitlab.nitgc.kokasai.the23rd.routes
 
 import io.ktor.http.cio.websocket.Frame
 import io.ktor.routing.Routing
