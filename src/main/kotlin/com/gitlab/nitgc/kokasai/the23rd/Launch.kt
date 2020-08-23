@@ -21,8 +21,6 @@ import io.ktor.routing.routing
 import io.ktor.sessions.Sessions
 import io.ktor.websocket.WebSockets
 
-fun main(args: Array<String>) = io.ktor.server.netty.EngineMain.main(args)
-
 @Suppress("unused") // Referenced in application.conf
 fun Application.launch() {
     install(Sessions) {
