@@ -1,11 +1,11 @@
 plugins {
-    application
-    kotlin("jvm") version "1.4.0"
-    id("com.github.johnrengelman.shadow") version "6.0.0"
+    id(Libraries.GradlePlugin.application)
+    id(Libraries.GradlePlugin.kotlin_jvm) version Versions.kotlin
+    id(Libraries.GradlePlugin.shadow) version Versions.shadow
 }
 
-group = "com.gitlab.nitgc.kokasai.the23rd"
-version = "1.0"
+group = Packages.group
+version = Packages.version
 
 repositories {
     mavenCentral()
@@ -13,37 +13,35 @@ repositories {
 }
 
 dependencies {
-    val ktorVersion = "1.4.0"
-
-    implementation(kotlin("stdlib-jdk8"))
-    implementation("io.ktor:ktor-server-netty:$ktorVersion")
-    implementation("io.ktor:ktor-server-sessions:$ktorVersion")
-    implementation("io.ktor:ktor-auth:$ktorVersion")
-    implementation("io.ktor:ktor-html-builder:$ktorVersion")
-    implementation("io.ktor:ktor-gson:$ktorVersion")
-    implementation("io.ktor:ktor-websockets:$ktorVersion")
-    implementation("org.jetbrains:kotlin-css-jvm:1.0.0-pre.110-kotlin-1.4.0")
-    implementation("ch.qos.logback:logback-classic:1.2.3")
+    implementation(Libraries.Kotlin.stdlib_jdk8)
+    implementation(Libraries.Ktor.server_netty)
+    implementation(Libraries.Ktor.server_sessions)
+    implementation(Libraries.Ktor.auth)
+    implementation(Libraries.Ktor.html_builder)
+    implementation(Libraries.Ktor.gson)
+    implementation(Libraries.Ktor.websockets)
+    implementation(Libraries.Kotlin.css_jvm)
+    implementation(Libraries.logback)
 }
 
 tasks {
     compileKotlin {
-        kotlinOptions.jvmTarget = "1.8"
+        kotlinOptions.jvmTarget = Packages.jvm_target
     }
     compileTestKotlin {
-        kotlinOptions.jvmTarget = "1.8"
+        kotlinOptions.jvmTarget = Packages.jvm_target
     }
 }
 
 application {
-    mainClassName = "io.ktor.server.netty.EngineMain"
+    mainClassName = Packages.main_class
 }
 
 tasks.withType<Jar> {
     manifest {
         attributes(
             mapOf(
-                "Main-Class" to application.mainClassName
+                "Main-Class" to Packages.main_class
             )
         )
     }
