@@ -33,7 +33,7 @@ class WithHeaderTemplate(private val javaScripts: Iterable<String>?) : Template<
             header {
                 div {
                     id = "inner_header"
-                    h1 {
+                    p {
                         id = "header_title"
                         a(href = Routes.HOME) {
                             +"工華祭"
@@ -115,6 +115,7 @@ class WithHeaderTemplate(private val javaScripts: Iterable<String>?) : Template<
             // ヘッダータイトル
             "#header_title" {
                 fontSize = 24.px
+                fontWeight = FontWeight.w600
                 margin(vertical = LinearDimension.auto)
                 padding(top = 4.px, left = 24.px)
             }
