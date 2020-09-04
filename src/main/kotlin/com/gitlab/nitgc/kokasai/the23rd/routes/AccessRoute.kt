@@ -10,7 +10,7 @@ import io.ktor.routing.route
 fun Routing.accessRoute() {
     route("/access") {
         get("/bus") {
-            call.respondHtmlTemplate(WithHeaderTemplate(listOf("/bus_updater.js"))) {
+            call.respondHtmlTemplate(WithHeaderTemplate("アクセス バス", javaScripts = listOf("/bus_updater.js"))) {
 
             }
         }

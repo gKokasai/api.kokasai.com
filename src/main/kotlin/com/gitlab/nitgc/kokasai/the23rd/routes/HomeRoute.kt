@@ -11,7 +11,7 @@ import io.ktor.routing.route
 fun Routing.homeRoute() {
     route(Routes.HOME) {
         get {
-            call.respondHtmlTemplate(WithHeaderTemplate.Default) {
+            call.respondHtmlTemplate(WithHeaderTemplate(null)) {
                 body {
 
                 }

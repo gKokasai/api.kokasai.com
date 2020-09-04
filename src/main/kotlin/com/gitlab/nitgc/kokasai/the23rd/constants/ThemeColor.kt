@@ -1,4 +1,4 @@
-package com.gitlab.nitgc.kokasai.the23rd.routes.template
+package com.gitlab.nitgc.kokasai.the23rd.constants
 
 import kotlinx.css.*
 

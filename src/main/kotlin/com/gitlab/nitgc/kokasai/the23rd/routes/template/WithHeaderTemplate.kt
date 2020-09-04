@@ -1,6 +1,12 @@
 package com.gitlab.nitgc.kokasai.the23rd.routes.template
 
+import com.gitlab.nitgc.kokasai.the23rd.constants.BASE_COLOR
+import com.gitlab.nitgc.kokasai.the23rd.constants.DESCRIPTION
+import com.gitlab.nitgc.kokasai.the23rd.constants.NavigationMenuElement
 import com.gitlab.nitgc.kokasai.the23rd.constants.Routes
+import com.gitlab.nitgc.kokasai.the23rd.constants.SHADOW_COLOR
+import com.gitlab.nitgc.kokasai.the23rd.constants.THEME_COLOR
+import com.gitlab.nitgc.kokasai.the23rd.constants.TITLE_NAME
 import com.gitlab.nitgc.kokasai.the23rd.extension.css
 import com.gitlab.nitgc.kokasai.the23rd.extension.javaScript
 import com.gitlab.nitgc.kokasai.the23rd.extension.meta
@@ -12,7 +18,11 @@ import kotlinx.css.*
 import kotlinx.css.properties.*
 import kotlinx.html.*
 
-class WithHeaderTemplate(private val javaScripts: Iterable<String>?) : Template<HTML> {
+class WithHeaderTemplate(
+    private val h1: String?,
+    private val title_suffix: String? = h1,
+    private val javaScripts: Iterable<String>? = null
+) : Template<HTML> {
     val body = Placeholder<DIV>()
 
     override fun HTML.apply() {
@@ -20,10 +30,10 @@ class WithHeaderTemplate(private val javaScripts: Iterable<String>?) : Template<
         head {
             meta {
                 charset = Charset.defaultCharset().toString()
-                description = "第２３回群馬高専工華祭の公式ウェブサイトです。"
+                description = DESCRIPTION
                 viewport = "width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
             }
-            title("工華祭")
+            title("${TITLE_NAME}${if(title_suffix != null) " - $title_suffix" else ""}")
             css("/header.css")
             javaScript("https://code.jquery.com/jquery-3.5.1.min.js")
             javaScript("/header.js")
@@ -36,7 +46,7 @@ class WithHeaderTemplate(private val javaScripts: Iterable<String>?) : Template<
                     p {
                         id = "header_title"
                         a(href = Routes.HOME) {
-                            +"工華祭"
+                            +TITLE_NAME
                         }
                     }
                     // ハンバーガーメニューアイコン
@@ -50,18 +60,14 @@ class WithHeaderTemplate(private val javaScripts: Iterable<String>?) : Template<
                     ul {
                         id = "horizontal_menu"
                         onTouchStart = ""
-                        menu("#", "ページ")
-                        menu("#", "ページ")
-                        menu(Routes.ACCOUNT, "学内の方へ")
+                        addNavigationElement()
                     }
                 }
                 // ハンバーガーメニュー
                 div {
                     id = "hamburger_menu"
                     ul {
-                        menu("#", "ページ")
-                        menu("#", "ページ")
-                        menu(Routes.ACCOUNT, "学内の方へ")
+                        addNavigationElement()
                     }
                 }
                 div {
@@ -70,24 +76,28 @@ class WithHeaderTemplate(private val javaScripts: Iterable<String>?) : Template<
             }
             div {
                 id = "inner_body"
+                if(h1 != null) {
+                    h1 {
+                        +h1
+                    }
+                }
                 insert(body)
             }
         }
     }
 
-    private fun UL.menu(href: String, name: String) {
-        li("menu_element") {
-            a(href = href) {
-                +name
+    private fun UL.addNavigationElement() {
+        NavigationMenuElement.list.forEach { (href, name) ->
+            li("menu_element") {
+                a(href = href) {
+                    +name
+                }
             }
         }
     }
 
 
     companion object {
-        inline val Default
-            get() = WithHeaderTemplate(null)
-
         val headerCss: CSSBuilder.() -> Unit = {
             "*" {
                 margin(0.px)
