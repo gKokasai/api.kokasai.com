@@ -1,6 +1,6 @@
 package com.gitlab.nitgc.kokasai.the23rd.routes
 
-import com.gitlab.nitgc.kokasai.the23rd.constants.HtmlRoutes
+import com.gitlab.nitgc.kokasai.the23rd.constants.HtmlRoute
 import com.gitlab.nitgc.kokasai.the23rd.extension.*
 import io.ktor.application.ApplicationCall
 import io.ktor.application.call
@@ -10,14 +10,14 @@ import io.ktor.response.respond
 import io.ktor.routing.Routing
 
 fun Routing.apiRoute() {
-    route(HtmlRoutes.Api) {
-        route(HtmlRoutes.Api.Bus) {
-            get(HtmlRoutes.Api.Bus.Challenge) {
+    route(HtmlRoute.Api) {
+        route(HtmlRoute.Api.Bus) {
+            get(HtmlRoute.Api.Bus.Challenge) {
                 BusTokenManager.challenge(call) {
                     call.respond(HttpStatusCode.OK, it)
                 }
             }
-            get(HtmlRoutes.Api.Bus.Route) {
+            get(HtmlRoute.Api.Bus.Route) {
                 BusTokenManager.challenge(call) {
                     call.respond(BusRoute.route)
                 }

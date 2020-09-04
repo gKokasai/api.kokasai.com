@@ -2,7 +2,7 @@ package com.gitlab.nitgc.kokasai.the23rd.routes.template
 
 import com.gitlab.nitgc.kokasai.the23rd.constants.BASE_COLOR
 import com.gitlab.nitgc.kokasai.the23rd.constants.DESCRIPTION
-import com.gitlab.nitgc.kokasai.the23rd.constants.HtmlRoutes
+import com.gitlab.nitgc.kokasai.the23rd.constants.HtmlRoute
 import com.gitlab.nitgc.kokasai.the23rd.constants.NavigationMenuElement
 import com.gitlab.nitgc.kokasai.the23rd.constants.SHADOW_COLOR
 import com.gitlab.nitgc.kokasai.the23rd.constants.THEME_COLOR
@@ -20,7 +20,7 @@ import kotlinx.html.*
 class WithHeaderTemplate(
     private val h1: String?,
     private val title_suffix: String? = h1,
-    private val javaScripts: Iterable<HtmlRoutes.Js>? = null
+    private val javaScripts: Iterable<HtmlRoute.Js>? = null
 ) : Template<HTML> {
     val body = Placeholder<DIV>()
 
@@ -33,9 +33,9 @@ class WithHeaderTemplate(
                 viewport = "width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
             }
             title("${TITLE_NAME}${if(title_suffix != null) " - $title_suffix" else ""}")
-            css(HtmlRoutes.Css.Header)
+            css(HtmlRoute.Css.Header)
             javaScript("https://code.jquery.com/jquery-3.5.1.min.js")
-            javaScript(HtmlRoutes.Js.Header)
+            javaScript(HtmlRoute.Js.Header)
             javaScripts?.forEach { javaScript(it) }
         }
         body {
@@ -44,7 +44,7 @@ class WithHeaderTemplate(
                     id = "inner_header"
                     p {
                         id = "header_title"
-                        a(href = HtmlRoutes.Home) {
+                        a(href = HtmlRoute.Home) {
                             +TITLE_NAME
                         }
                     }

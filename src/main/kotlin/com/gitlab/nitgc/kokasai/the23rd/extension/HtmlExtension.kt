@@ -1,6 +1,6 @@
 package com.gitlab.nitgc.kokasai.the23rd.extension
 
-import com.gitlab.nitgc.kokasai.the23rd.constants.RoutePath
+import com.gitlab.nitgc.kokasai.the23rd.constants.HtmlRoute
 import io.ktor.application.ApplicationCall
 import io.ktor.response.respondRedirect
 import io.ktor.routing.Route
@@ -11,12 +11,12 @@ import io.ktor.util.pipeline.PipelineInterceptor
 import kotlinx.html.*
 
 @HtmlTagMarker
-inline fun FlowOrInteractiveOrPhrasingContent.a(href: RoutePath? = null, target: String? = null, classes: String? = null, crossinline block: A.() -> Unit = {}) = a(href?.fullpath, target, classes, block)
+inline fun FlowOrInteractiveOrPhrasingContent.a(href: HtmlRoute.Path? = null, target: String? = null, classes: String? = null, crossinline block: A.() -> Unit = {}) = a(href?.fullpath, target, classes, block)
 
 @ContextDsl
-fun Route.route(path: RoutePath, build: Route.() -> Unit): Route = route(path.path, build)
+fun Route.route(path: HtmlRoute.Path, build: Route.() -> Unit): Route = route(path.path, build)
 
 @ContextDsl
-fun Route.get(path: RoutePath, body: PipelineInterceptor<Unit, ApplicationCall>) = get(path.path, body)
+fun Route.get(path: HtmlRoute.Path, body: PipelineInterceptor<Unit, ApplicationCall>) = get(path.path, body)
 
-suspend inline fun ApplicationCall.respondRedirect(url: RoutePath, permanent: Boolean = false) = respondRedirect(url.fullpath, permanent)
+suspend inline fun ApplicationCall.respondRedirect(url: HtmlRoute.Path, permanent: Boolean = false) = respondRedirect(url.fullpath, permanent)
