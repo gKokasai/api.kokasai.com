@@ -1,10 +1,9 @@
 package com.gitlab.nitgc.kokasai.the23rd.routes
 
-import com.gitlab.nitgc.kokasai.the23rd.routes.template.WithHeaderTemplate
-import io.ktor.application.call
-import io.ktor.html.respondHtmlTemplate
-import io.ktor.routing.Routing
-import io.ktor.routing.get
+import com.gitlab.nitgc.kokasai.the23rd.routes.template.*
+import io.ktor.application.*
+import io.ktor.html.*
+import io.ktor.routing.*
 import kotlinx.html.*
 
 fun Routing.testRoute() {

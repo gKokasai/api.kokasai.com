@@ -1,18 +1,10 @@
 package com.gitlab.nitgc.kokasai.the23rd.routes.template
 
-import com.gitlab.nitgc.kokasai.the23rd.constants.BASE_COLOR
-import com.gitlab.nitgc.kokasai.the23rd.constants.DESCRIPTION
-import com.gitlab.nitgc.kokasai.the23rd.constants.HtmlRoute
-import com.gitlab.nitgc.kokasai.the23rd.constants.NavigationMenuElement
-import com.gitlab.nitgc.kokasai.the23rd.constants.SHADOW_COLOR
-import com.gitlab.nitgc.kokasai.the23rd.constants.THEME_COLOR
-import com.gitlab.nitgc.kokasai.the23rd.constants.TITLE_NAME
+import com.gitlab.nitgc.kokasai.the23rd.constants.*
 import com.gitlab.nitgc.kokasai.the23rd.extension.*
 import com.gitlab.nitgc.kokasai.the23rd.extension.meta
-import io.ktor.html.Placeholder
-import io.ktor.html.Template
-import io.ktor.html.insert
-import io.ktor.utils.io.charsets.Charset
+import io.ktor.html.*
+import io.ktor.utils.io.charsets.*
 import kotlinx.css.*
 import kotlinx.css.properties.*
 import kotlinx.html.*

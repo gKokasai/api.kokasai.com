@@ -1,13 +1,12 @@
 package com.gitlab.nitgc.kokasai.the23rd.routes
 
-import com.gitlab.nitgc.kokasai.the23rd.constants.HtmlRoute
+import com.gitlab.nitgc.kokasai.the23rd.constants.*
 import com.gitlab.nitgc.kokasai.the23rd.extension.*
-import io.ktor.application.ApplicationCall
-import io.ktor.application.call
-import io.ktor.http.HttpStatusCode
-import io.ktor.request.header
-import io.ktor.response.respond
-import io.ktor.routing.Routing
+import io.ktor.application.*
+import io.ktor.http.*
+import io.ktor.request.*
+import io.ktor.response.*
+import io.ktor.routing.*
 
 fun Routing.apiRoute() {
     route(HtmlRoute.Api) {

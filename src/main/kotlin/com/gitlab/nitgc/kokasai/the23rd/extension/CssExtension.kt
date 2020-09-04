@@ -1,8 +1,8 @@
 package com.gitlab.nitgc.kokasai.the23rd.extension
 
-import io.ktor.application.ApplicationCall
-import io.ktor.http.ContentType
-import io.ktor.response.respondText
+import io.ktor.application.*
+import io.ktor.http.*
+import io.ktor.response.*
 import kotlinx.css.*
 import kotlinx.html.*
 

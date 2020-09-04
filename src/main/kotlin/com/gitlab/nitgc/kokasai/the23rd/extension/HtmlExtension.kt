@@ -1,13 +1,10 @@
 package com.gitlab.nitgc.kokasai.the23rd.extension
 
-import com.gitlab.nitgc.kokasai.the23rd.constants.HtmlRoute
-import io.ktor.application.ApplicationCall
-import io.ktor.response.respondRedirect
-import io.ktor.routing.Route
-import io.ktor.routing.get
-import io.ktor.routing.route
-import io.ktor.util.pipeline.ContextDsl
-import io.ktor.util.pipeline.PipelineInterceptor
+import com.gitlab.nitgc.kokasai.the23rd.constants.*
+import io.ktor.application.*
+import io.ktor.response.*
+import io.ktor.routing.*
+import io.ktor.util.pipeline.*
 import kotlinx.html.*
 
 @HtmlTagMarker

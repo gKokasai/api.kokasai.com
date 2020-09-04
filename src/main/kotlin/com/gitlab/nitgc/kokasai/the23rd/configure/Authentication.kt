@@ -1,17 +1,10 @@
 package com.gitlab.nitgc.kokasai.the23rd.configure
 
-import com.gitlab.nitgc.kokasai.the23rd.constants.AuthFormFields
-import com.gitlab.nitgc.kokasai.the23rd.constants.AuthName
-import com.gitlab.nitgc.kokasai.the23rd.constants.AuthTestLogin
-import com.gitlab.nitgc.kokasai.the23rd.constants.HtmlRoute
-import com.gitlab.nitgc.kokasai.the23rd.user.UserPrincipal
-import io.ktor.application.call
-import io.ktor.auth.Authentication
-import io.ktor.auth.AuthenticationFailedCause
-import io.ktor.auth.authentication
-import io.ktor.auth.form
-import io.ktor.auth.session
-import io.ktor.response.respondRedirect
+import com.gitlab.nitgc.kokasai.the23rd.constants.*
+import com.gitlab.nitgc.kokasai.the23rd.user.*
+import io.ktor.application.*
+import io.ktor.auth.*
+import io.ktor.response.*
 
 fun Authentication.Configuration.configureFormAuth() {
     form(AuthName.FORM) {

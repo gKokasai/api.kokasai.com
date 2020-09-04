@@ -1,22 +1,16 @@
 package com.gitlab.nitgc.kokasai.the23rd.routes
 
-import com.gitlab.nitgc.kokasai.the23rd.constants.AuthFormFields
-import com.gitlab.nitgc.kokasai.the23rd.constants.AuthName
-import com.gitlab.nitgc.kokasai.the23rd.constants.AuthTestLogin
-import com.gitlab.nitgc.kokasai.the23rd.constants.HtmlRoute
-import com.gitlab.nitgc.kokasai.the23rd.constants.SessionConstants
+import com.gitlab.nitgc.kokasai.the23rd.constants.*
 import com.gitlab.nitgc.kokasai.the23rd.extension.*
-import com.gitlab.nitgc.kokasai.the23rd.routes.template.WithHeaderTemplate
-import com.gitlab.nitgc.kokasai.the23rd.user.UserPrincipal
-import io.ktor.application.call
-import io.ktor.auth.authenticate
-import io.ktor.auth.principal
-import io.ktor.html.respondHtmlTemplate
+import com.gitlab.nitgc.kokasai.the23rd.routes.template.*
+import com.gitlab.nitgc.kokasai.the23rd.user.*
+import io.ktor.application.*
+import io.ktor.auth.*
+import io.ktor.html.*
 import io.ktor.routing.Routing
 import io.ktor.routing.get
 import io.ktor.routing.post
-import io.ktor.sessions.get
-import io.ktor.sessions.sessions
+import io.ktor.sessions.*
 import kotlinx.html.*
 
 fun Routing.loginRoute() {

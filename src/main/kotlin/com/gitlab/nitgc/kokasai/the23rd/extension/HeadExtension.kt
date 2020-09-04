@@ -1,6 +1,6 @@
 package com.gitlab.nitgc.kokasai.the23rd.extension
 
-import com.gitlab.nitgc.kokasai.the23rd.constants.HtmlRoute
+import com.gitlab.nitgc.kokasai.the23rd.constants.*
 import kotlinx.html.*
 
 @HtmlTagMarker

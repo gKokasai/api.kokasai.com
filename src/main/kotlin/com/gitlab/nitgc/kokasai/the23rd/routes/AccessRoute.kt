@@ -1,11 +1,11 @@
 package com.gitlab.nitgc.kokasai.the23rd.routes
 
-import com.gitlab.nitgc.kokasai.the23rd.constants.HtmlRoute
+import com.gitlab.nitgc.kokasai.the23rd.constants.*
 import com.gitlab.nitgc.kokasai.the23rd.extension.*
-import com.gitlab.nitgc.kokasai.the23rd.routes.template.WithHeaderTemplate
-import io.ktor.application.call
-import io.ktor.html.respondHtmlTemplate
-import io.ktor.routing.Routing
+import com.gitlab.nitgc.kokasai.the23rd.routes.template.*
+import io.ktor.application.*
+import io.ktor.html.*
+import io.ktor.routing.*
 
 fun Routing.accessRoute() {
     route(HtmlRoute.Access) {
