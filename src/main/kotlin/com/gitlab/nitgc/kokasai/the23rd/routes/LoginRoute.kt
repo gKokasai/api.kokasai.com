@@ -3,29 +3,28 @@ package com.gitlab.nitgc.kokasai.the23rd.routes
 import com.gitlab.nitgc.kokasai.the23rd.constants.AuthFormFields
 import com.gitlab.nitgc.kokasai.the23rd.constants.AuthName
 import com.gitlab.nitgc.kokasai.the23rd.constants.AuthTestLogin
-import com.gitlab.nitgc.kokasai.the23rd.constants.Routes
+import com.gitlab.nitgc.kokasai.the23rd.constants.HtmlRoutes
 import com.gitlab.nitgc.kokasai.the23rd.constants.SessionConstants
+import com.gitlab.nitgc.kokasai.the23rd.extension.*
 import com.gitlab.nitgc.kokasai.the23rd.routes.template.WithHeaderTemplate
 import com.gitlab.nitgc.kokasai.the23rd.user.UserPrincipal
 import io.ktor.application.call
 import io.ktor.auth.authenticate
 import io.ktor.auth.principal
 import io.ktor.html.respondHtmlTemplate
-import io.ktor.response.respondRedirect
 import io.ktor.routing.Routing
 import io.ktor.routing.get
 import io.ktor.routing.post
-import io.ktor.routing.route
 import io.ktor.sessions.get
 import io.ktor.sessions.sessions
 import kotlinx.html.*
 
 fun Routing.loginRoute() {
-    route(Routes.LOGIN) {
+    route(HtmlRoutes.Login) {
         get {
             val principal = call.sessions.get<UserPrincipal>()
             if (principal != null) {
-                call.respondRedirect(Routes.ACCOUNT)
+                call.respondRedirect(HtmlRoutes.Account)
             } else {
                 call.respondHtmlTemplate(WithHeaderTemplate("ログイン")) {
                     body {
@@ -59,7 +58,7 @@ fun Routing.loginRoute() {
             post {
                 val principal = call.principal<UserPrincipal>()
                 call.sessions.set(SessionConstants.AUTH, principal)
-                call.respondRedirect(Routes.ACCOUNT)
+                call.respondRedirect(HtmlRoutes.Account)
             }
         }
     }

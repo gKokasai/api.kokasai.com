@@ -1,23 +1,23 @@
 package com.gitlab.nitgc.kokasai.the23rd.routes
 
+import com.gitlab.nitgc.kokasai.the23rd.constants.HtmlRoutes
+import com.gitlab.nitgc.kokasai.the23rd.extension.*
 import io.ktor.application.ApplicationCall
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
 import io.ktor.request.header
 import io.ktor.response.respond
 import io.ktor.routing.Routing
-import io.ktor.routing.get
-import io.ktor.routing.route
 
 fun Routing.apiRoute() {
-    route("/api") {
-        route("/bus") {
-            get("/challenge") {
+    route(HtmlRoutes.Api) {
+        route(HtmlRoutes.Api.Bus) {
+            get(HtmlRoutes.Api.Bus.Challenge) {
                 BusTokenManager.challenge(call) {
                     call.respond(HttpStatusCode.OK, it)
                 }
             }
-            get("/route") {
+            get(HtmlRoutes.Api.Bus.Route) {
                 BusTokenManager.challenge(call) {
                     call.respond(BusRoute.route)
                 }

@@ -2,13 +2,12 @@ package com.gitlab.nitgc.kokasai.the23rd.routes.template
 
 import com.gitlab.nitgc.kokasai.the23rd.constants.BASE_COLOR
 import com.gitlab.nitgc.kokasai.the23rd.constants.DESCRIPTION
+import com.gitlab.nitgc.kokasai.the23rd.constants.HtmlRoutes
 import com.gitlab.nitgc.kokasai.the23rd.constants.NavigationMenuElement
-import com.gitlab.nitgc.kokasai.the23rd.constants.Routes
 import com.gitlab.nitgc.kokasai.the23rd.constants.SHADOW_COLOR
 import com.gitlab.nitgc.kokasai.the23rd.constants.THEME_COLOR
 import com.gitlab.nitgc.kokasai.the23rd.constants.TITLE_NAME
-import com.gitlab.nitgc.kokasai.the23rd.extension.css
-import com.gitlab.nitgc.kokasai.the23rd.extension.javaScript
+import com.gitlab.nitgc.kokasai.the23rd.extension.*
 import com.gitlab.nitgc.kokasai.the23rd.extension.meta
 import io.ktor.html.Placeholder
 import io.ktor.html.Template
@@ -21,7 +20,7 @@ import kotlinx.html.*
 class WithHeaderTemplate(
     private val h1: String?,
     private val title_suffix: String? = h1,
-    private val javaScripts: Iterable<String>? = null
+    private val javaScripts: Iterable<HtmlRoutes.Js>? = null
 ) : Template<HTML> {
     val body = Placeholder<DIV>()
 
@@ -34,9 +33,9 @@ class WithHeaderTemplate(
                 viewport = "width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
             }
             title("${TITLE_NAME}${if(title_suffix != null) " - $title_suffix" else ""}")
-            css("/header.css")
+            css(HtmlRoutes.Css.Header)
             javaScript("https://code.jquery.com/jquery-3.5.1.min.js")
-            javaScript("/header.js")
+            javaScript(HtmlRoutes.Js.Header)
             javaScripts?.forEach { javaScript(it) }
         }
         body {
@@ -45,7 +44,7 @@ class WithHeaderTemplate(
                     id = "inner_header"
                     p {
                         id = "header_title"
-                        a(href = Routes.HOME) {
+                        a(href = HtmlRoutes.Home) {
                             +TITLE_NAME
                         }
                     }
