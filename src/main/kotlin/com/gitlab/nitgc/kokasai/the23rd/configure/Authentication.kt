@@ -15,10 +15,10 @@ fun Authentication.Configuration.configureFormAuth() {
             call.respondRedirect(
                 when (failures.singleOrNull()) {
                     AuthenticationFailedCause.InvalidCredentials -> {
-                        "${HtmlRoute.Login.fullpath}?invalid"
+                        "${HtmlRoute.Login.full_path}?invalid"
                     }
                     else -> {
-                        HtmlRoute.Login.fullpath
+                        HtmlRoute.Login.full_path
                     }
                 }
             )
@@ -36,7 +36,7 @@ fun Authentication.Configuration.configureFormAuth() {
 fun Authentication.Configuration.configureSessionAuth() {
     session<UserPrincipal>(AuthName.SESSION) {
         challenge {
-            call.respondRedirect(HtmlRoute.Login.fullpath)
+            call.respondRedirect(HtmlRoute.Login.full_path)
         }
         validate { session ->
             session

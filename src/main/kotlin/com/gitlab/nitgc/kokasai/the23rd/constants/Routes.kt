@@ -26,7 +26,7 @@ object HtmlRoute {
         object BusUpdater: Js("/bus_updater.js")
     }
 
-    open class Path(val path: String, val fullpath: String = path) {
+    open class Path(val path: String, val full_path: String = path) {
         constructor(parent: Path, path: String): this(path, parent.path + path)
     }
 }
@@ -34,7 +34,7 @@ object HtmlRoute {
 object WebSocketRoute {
     object Bus: Path("/bus")
 
-    open class Path(val path: String, val fullpath: String = path) {
+    open class Path(val path: String, val full_path: String = path) {
         constructor(parent: Path, path: String): this(path, parent.path + path)
     }
 }

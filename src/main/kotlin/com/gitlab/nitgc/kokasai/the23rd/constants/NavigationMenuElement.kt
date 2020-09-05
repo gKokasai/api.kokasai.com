@@ -1,7 +1,7 @@
 package com.gitlab.nitgc.kokasai.the23rd.constants
 
 data class NavigationMenuElement(val href: String, val name: String) {
-    constructor(route: HtmlRoute.Path, name: String): this(route.fullpath, name)
+    constructor(route: HtmlRoute.Path, name: String): this(route.full_path, name)
 
     companion object {
         val list = listOf(
