@@ -26,7 +26,7 @@ class WithHeaderTemplate(
             }
             title("${TITLE_NAME}${if(title_suffix != null) " - $title_suffix" else ""}")
             css(HtmlRoute.Css.Header)
-            javaScript("https://code.jquery.com/jquery-3.5.1.min.js")
+            javaScript(HtmlRoute.Js.JQuery)
             javaScript(HtmlRoute.Js.Header)
             javaScripts?.forEach { javaScript(it) }
         }
