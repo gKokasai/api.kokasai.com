@@ -17,7 +17,7 @@ object HtmlRoute {
             object Route: Path(this, "/route")
         }
     }
-    sealed class Css(path: String, val response: (CSSBuilder.() -> Unit)?): Path(path) {
+    sealed class Css(path: String, val response: RuleSet?): Path(path) {
         object Header: Css("/header.css", headerCss)
     }
     sealed class Js(path: String): Path(path) {

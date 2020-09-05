@@ -89,7 +89,7 @@ class WithHeaderTemplate(
 
 
     companion object {
-        val headerCss: CSSBuilder.() -> Unit = {
+        val headerCss = ruleSet {
             "*" {
                 margin(0.px)
                 padding(0.px)
