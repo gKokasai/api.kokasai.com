@@ -1,6 +1,7 @@
 package com.gitlab.nitgc.kokasai.the23rd.configure
 
 import com.gitlab.nitgc.kokasai.the23rd.constants.*
+import com.gitlab.nitgc.kokasai.the23rd.extension.*
 import com.gitlab.nitgc.kokasai.the23rd.user.*
 import io.ktor.application.*
 import io.ktor.auth.*
@@ -15,10 +16,10 @@ fun Authentication.Configuration.configureFormAuth() {
             call.respondRedirect(
                 when (failures.singleOrNull()) {
                     AuthenticationFailedCause.InvalidCredentials -> {
-                        "${HtmlRoute.Login.full_path}?invalid"
+                        HtmlRoute.Login to listOf("invalid", "test")
                     }
                     else -> {
-                        HtmlRoute.Login.full_path
+                        HtmlRoute.Login to listOf()
                     }
                 }
             )
