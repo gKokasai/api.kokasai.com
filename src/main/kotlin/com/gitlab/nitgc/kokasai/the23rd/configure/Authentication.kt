@@ -16,7 +16,7 @@ fun Authentication.Configuration.configureFormAuth() {
             call.respondRedirect(
                 when (failures.singleOrNull()) {
                     AuthenticationFailedCause.InvalidCredentials -> {
-                        HtmlRoute.Login to listOf("invalid", "test")
+                        HtmlRoute.Login to listOf("invalid")
                     }
                     else -> {
                         HtmlRoute.Login to listOf()
