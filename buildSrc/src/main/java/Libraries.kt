@@ -19,5 +19,11 @@ object Libraries {
         const val websockets = "io.ktor:ktor-websockets:${Versions.ktor}"
     }
 
+    object Exposed {
+        const val core = "org.jetbrains.exposed:exposed-core:${Versions.exposed}"
+        const val jdbc = "org.jetbrains.exposed:exposed-jdbc:${Versions.exposed}"
+    }
+
+    const val sqlite_driver = "org.xerial:sqlite-jdbc:${Versions.sqlite_driver}"
     const val logback = "ch.qos.logback:logback-classic:${Versions.logback}"
 }

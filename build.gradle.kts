@@ -21,6 +21,9 @@ dependencies {
     implementation(Libraries.Ktor.gson)
     implementation(Libraries.Ktor.websockets)
     implementation(Libraries.Kotlin.css_jvm)
+    implementation(Libraries.Exposed.core)
+    implementation(Libraries.Exposed.jdbc)
+    implementation(Libraries.sqlite_driver)
     implementation(Libraries.logback)
 }
 
