@@ -7,15 +7,19 @@ import kotlinx.coroutines.*
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.*
 import java.sql.*
+import java.time.*
 
-open class SessionTable(name: String) : Table(name) {
+open class SessionTable(name: String, val expireDuration: Duration) : Table(name) {
     val sessionId = text("sessionId").uniqueIndex()
     val value = text("value")
+    val expireTime = long("expireTime")
 
     override val primaryKey = PrimaryKey(sessionId)
 }
 
 class SessionStorageExposed(private val sessionTable: SessionTable): SessionStorage {
+    private fun expireTime() = Instant.now().toEpochMilli() + sessionTable.expireDuration.toMillis()
+
     override suspend fun write(id: String, provider: suspend (ByteWriteChannel) -> Unit) {
         coroutineScope {
             val channelToByteArray = writer(Dispatchers.Unconfined, autoFlush = true) {
@@ -26,6 +30,7 @@ class SessionStorageExposed(private val sessionTable: SessionTable): SessionStor
                 sessionTable.insertIgnore {
                     it[sessionId] = id
                     it[value] = channelToByteArray.toString(Charsets.UTF_8)
+                    it[expireTime] = expireTime()
                 }
             }
         }
@@ -35,7 +40,13 @@ class SessionStorageExposed(private val sessionTable: SessionTable): SessionStor
         return consumer(transaction(Connection.TRANSACTION_SERIALIZABLE, 3) {
             ByteReadChannel(sessionTable.select {
                 sessionTable.sessionId eq id
-            }.first()[sessionTable.value])
+            }.first().apply {
+                sessionTable.update(
+                    { sessionTable.sessionId eq id },
+                    null,
+                    { it[sessionTable.expireTime] = expireTime() }
+                )
+            }[sessionTable.value])
         })
     }
 
