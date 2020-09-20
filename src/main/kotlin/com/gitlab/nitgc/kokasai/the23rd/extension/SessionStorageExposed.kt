@@ -18,7 +18,7 @@ open class SessionTable(name: String, val expireDuration: Duration) : Table(name
 }
 
 class SessionStorageExposed(private val sessionTable: SessionTable): SessionStorage {
-    private fun expireTime() = Instant.now().toEpochMilli() + sessionTable.expireDuration.toMillis()
+    private fun expireTime(nowTime: Long = Instant.now().toEpochMilli()) = nowTime + sessionTable.expireDuration.toMillis()
 
     override suspend fun write(id: String, provider: suspend (ByteWriteChannel) -> Unit) {
         coroutineScope {
@@ -43,7 +43,7 @@ class SessionStorageExposed(private val sessionTable: SessionTable): SessionStor
             }.mapNotNull {
                 val lastExpireTime = it[sessionTable.expireTime]
                 val nowTime = Instant.now().toEpochMilli()
-                val expireTime = expireTime()
+                val expireTime = expireTime(nowTime)
                 when {
                     // セッションの期限切れ
                     lastExpireTime < nowTime -> {
