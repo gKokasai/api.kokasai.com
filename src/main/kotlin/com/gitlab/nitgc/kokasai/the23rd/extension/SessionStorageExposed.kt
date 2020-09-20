@@ -40,13 +40,30 @@ class SessionStorageExposed(private val sessionTable: SessionTable): SessionStor
         return consumer(transaction(Connection.TRANSACTION_SERIALIZABLE, 3) {
             ByteReadChannel(sessionTable.select {
                 sessionTable.sessionId eq id
-            }.first().apply {
-                sessionTable.update(
-                    { sessionTable.sessionId eq id },
-                    null,
-                    { it[sessionTable.expireTime] = expireTime() }
-                )
-            }[sessionTable.value])
+            }.mapNotNull {
+                val lastExpireTime = it[sessionTable.expireTime]
+                val nowTime = Instant.now().toEpochMilli()
+                val expireTime = expireTime()
+                when {
+                    // セッションの期限切れ
+                    lastExpireTime < nowTime -> {
+                        sessionTable.deleteWhere { sessionTable.sessionId eq id }
+                        null
+                    }
+                    // 現在時間 と expireTime の差が １日 以上
+                    Duration.ofDays(1).toMillis() < (expireTime - lastExpireTime) -> {
+                        sessionTable.update(
+                            { sessionTable.sessionId eq id },
+                            null,
+                            { it[sessionTable.expireTime] = expireTime }
+                        )
+                        it
+                    }
+                    else -> {
+                        it
+                    }
+                }
+            }.first()[sessionTable.value])
         })
     }
 
