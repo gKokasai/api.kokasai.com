@@ -14,7 +14,7 @@ class WithHeaderTemplate(
     private val h1: String?,
     private val title_suffix: String? = h1,
     private val javaScripts: Iterable<HtmlRoute.Js>? = null
-) : Template<HTML> {
+): Template<HTML> {
     val body = Placeholder<DIV>()
 
     override fun HTML.apply() {
@@ -25,7 +25,7 @@ class WithHeaderTemplate(
                 description = DESCRIPTION
                 viewport = "width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
             }
-            title("${TITLE_NAME}${if(title_suffix != null) " - $title_suffix" else ""}")
+            title("${TITLE_NAME}${if (title_suffix != null) " - $title_suffix" else ""}")
             css(HtmlRoute.Css.Header)
             javaScript(HtmlRoute.Js.JQuery)
             javaScript(HtmlRoute.Js.Header)
@@ -68,7 +68,7 @@ class WithHeaderTemplate(
             }
             div {
                 id = "inner_body"
-                if(h1 != null) {
+                if (h1 != null) {
                     h1 {
                         +h1
                     }

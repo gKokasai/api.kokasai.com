@@ -9,7 +9,7 @@ import org.jetbrains.exposed.sql.transactions.*
 import java.sql.*
 import java.time.*
 
-open class SessionTable(name: String, val expireDuration: Duration) : Table(name) {
+open class SessionTable(name: String, val expireDuration: Duration): Table(name) {
     val sessionId = text("sessionId").uniqueIndex()
     val value = text("value")
     val expireTime = long("expireTime")
@@ -18,7 +18,8 @@ open class SessionTable(name: String, val expireDuration: Duration) : Table(name
 }
 
 class SessionStorageExposed(private val sessionTable: SessionTable): SessionStorage {
-    private fun expireTime(nowTime: Long = Instant.now().toEpochMilli()) = nowTime + sessionTable.expireDuration.toMillis()
+    private fun expireTime(nowTime: Long = Instant.now().toEpochMilli()) =
+        nowTime + sessionTable.expireDuration.toMillis()
 
     override suspend fun write(id: String, provider: suspend (ByteWriteChannel) -> Unit) {
         coroutineScope {

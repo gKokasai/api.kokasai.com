@@ -11,15 +11,18 @@ object HtmlRoute {
     object Access: Path("/access") {
         object Bus: Path(this, "/bus")
     }
+
     object Api: Path("/api") {
         object Bus: Path(this, "/bus") {
             object Challenge: Path(this, "/challenge")
             object Route: Path(this, "/route")
         }
     }
+
     sealed class Css(path: String, val response: RuleSet?): Path(path) {
         object Header: Css("/header.css", headerCss)
     }
+
     sealed class Js(path: String): Path(path) {
         object JQuery: Js("https://code.jquery.com/jquery-3.5.1.min.js")
         object Header: Js("/header.js")

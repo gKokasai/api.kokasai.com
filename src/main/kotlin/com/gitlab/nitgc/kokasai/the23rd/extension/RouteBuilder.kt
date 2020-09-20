@@ -9,7 +9,7 @@ import io.ktor.util.pipeline.*
 interface RouteBuilder {
     fun build(route: io.ktor.routing.Route)
 
-    interface Container : RouteBuilder {
+    interface Container: RouteBuilder {
         val routes: Map<HtmlRoute.Path, RouteBuilder>
 
         override fun build(route: io.ktor.routing.Route) {
@@ -21,8 +21,7 @@ interface RouteBuilder {
         }
     }
 
-    class Route(val action: io.ktor.routing.Route.() -> Unit) :
-        RouteBuilder {
+    class Route(val action: io.ktor.routing.Route.() -> Unit): RouteBuilder {
         override fun build(route: io.ktor.routing.Route) = route.action()
     }
 }
