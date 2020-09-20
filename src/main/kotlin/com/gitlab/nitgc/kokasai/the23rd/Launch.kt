@@ -40,12 +40,9 @@ fun Application.launch() {
 
     routing {
         HtmlRouteBuilder.build(this)
-        loginRoute()
-        logoutRoute()
-        accountRoute()
+
         cssRoutes()
         staticRoute()
-        apiRoute()
         webSocketRoute()
 
         testRoute()

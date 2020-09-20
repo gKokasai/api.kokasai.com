@@ -8,10 +8,8 @@ fun Routing.cssRoutes() {
     HtmlRoute.Css::class.sealedSubclasses.forEach { kClass ->
         kClass.objectInstance?.let { objectInstance ->
             objectInstance.response?.let { response ->
-                route(objectInstance) {
-                    get {
-                        call.respondCss(response)
-                    }
+                get(objectInstance.path) {
+                    call.respondCss(response)
                 }
             }
         }
