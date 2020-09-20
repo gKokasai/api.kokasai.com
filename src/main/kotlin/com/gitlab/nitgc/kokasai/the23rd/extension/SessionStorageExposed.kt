@@ -9,8 +9,8 @@ import org.jetbrains.exposed.sql.transactions.*
 import java.sql.*
 
 open class SessionTable(name: String) : Table(name) {
-    var sessionId = text("sessionId").uniqueIndex()
-    var value = text("value")
+    val sessionId = text("sessionId").uniqueIndex()
+    val value = text("value")
 
     override val primaryKey = PrimaryKey(sessionId)
 }
