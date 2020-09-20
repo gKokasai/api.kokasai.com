@@ -7,8 +7,10 @@ import io.ktor.routing.*
 import io.ktor.sessions.*
 
 fun Routing.logoutRoute() {
-    get(HtmlRoute.Logout) {
-        call.sessions.clear(SessionConstants.AUTH)
-        call.respondRedirect(HtmlRoute.Login)
+    route(HtmlRoute.Logout) {
+        get {
+            call.sessions.clear(SessionConstants.AUTH)
+            call.respondRedirect(HtmlRoute.Login)
+        }
     }
 }

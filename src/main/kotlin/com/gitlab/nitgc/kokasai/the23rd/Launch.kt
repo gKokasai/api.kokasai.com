@@ -2,6 +2,7 @@ package com.gitlab.nitgc.kokasai.the23rd
 
 import com.gitlab.nitgc.kokasai.the23rd.configure.*
 import com.gitlab.nitgc.kokasai.the23rd.routes.*
+import com.gitlab.nitgc.kokasai.the23rd.routes.html.*
 import io.ktor.application.*
 import io.ktor.auth.*
 import io.ktor.features.*
@@ -38,11 +39,10 @@ fun Application.launch() {
     install(WebSockets)
 
     routing {
-        homeRoute()
+        HtmlRouteBuilder.build(this)
         loginRoute()
         logoutRoute()
         accountRoute()
-        accessRoute()
         cssRoutes()
         staticRoute()
         apiRoute()

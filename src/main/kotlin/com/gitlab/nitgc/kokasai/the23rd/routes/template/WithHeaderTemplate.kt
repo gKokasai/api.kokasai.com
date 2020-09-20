@@ -3,6 +3,7 @@ package com.gitlab.nitgc.kokasai.the23rd.routes.template
 import com.gitlab.nitgc.kokasai.the23rd.constants.*
 import com.gitlab.nitgc.kokasai.the23rd.extension.*
 import com.gitlab.nitgc.kokasai.the23rd.extension.meta
+import com.gitlab.nitgc.kokasai.the23rd.routes.*
 import io.ktor.html.*
 import io.ktor.utils.io.charsets.*
 import kotlinx.css.*
@@ -36,7 +37,7 @@ class WithHeaderTemplate(
                     id = "inner_header"
                     p {
                         id = "header_title"
-                        a(href = HtmlRoute.Home) {
+                        a(href = HtmlRoute.Index) {
                             +TITLE_NAME
                         }
                     }

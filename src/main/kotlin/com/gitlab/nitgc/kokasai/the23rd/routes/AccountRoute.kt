@@ -12,16 +12,18 @@ import kotlinx.html.*
 
 fun Routing.accountRoute() {
     authenticate(AuthName.SESSION) {
-        get(HtmlRoute.Account) {
-            val principal = call.principal<UserPrincipal>()!!
-            call.respondHtmlTemplate(WithHeaderTemplate("アカウント")) {
-                body {
-                    div {
-                        +"Hello, ${principal.name}"
-                    }
-                    div {
-                        a(href = HtmlRoute.Logout) {
-                            +"Logout"
+        route(HtmlRoute.Account) {
+            get {
+                val principal = call.principal<UserPrincipal>()!!
+                call.respondHtmlTemplate(WithHeaderTemplate("アカウント")) {
+                    body {
+                        div {
+                            +"Hello, ${principal.name}"
+                        }
+                        div {
+                            a(href = HtmlRoute.Logout) {
+                                +"Logout"
+                            }
                         }
                     }
                 }

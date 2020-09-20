@@ -1,10 +1,10 @@
-package com.gitlab.nitgc.kokasai.the23rd.constants
+package com.gitlab.nitgc.kokasai.the23rd.routes
 
 import com.gitlab.nitgc.kokasai.the23rd.routes.template.WithHeaderTemplate.Companion.headerCss
 import kotlinx.css.*
 
 object HtmlRoute {
-    object Home: Path("/")
+    object Index: Path("/")
     object Login: Path("/login")
     object Logout: Path("/logout")
     object Account: Path("/account")
