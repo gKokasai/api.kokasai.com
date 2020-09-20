@@ -1,5 +1,6 @@
 # Project exclude paths
 /.gradle/
 /build/
-/.idea
+/.idea/*
+!/.idea/codeStyles
 /.data.db
