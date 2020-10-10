@@ -2,7 +2,6 @@ object Libraries {
     object GradlePlugin {
         const val application = "org.gradle.application"
         const val kotlin_multiplatform = "org.jetbrains.kotlin.multiplatform"
-        const val kotlin_jvm = "org.jetbrains.kotlin.jvm"
         const val shadow = "com.github.johnrengelman.shadow"
     }
 
