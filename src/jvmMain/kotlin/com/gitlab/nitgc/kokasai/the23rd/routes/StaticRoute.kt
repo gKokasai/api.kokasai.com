@@ -7,4 +7,7 @@ fun Routing.staticRoute() {
     static {
         resources("static")
     }
+    static {
+        resource(HtmlRoute.Js.MainBundle.path)
+    }
 }

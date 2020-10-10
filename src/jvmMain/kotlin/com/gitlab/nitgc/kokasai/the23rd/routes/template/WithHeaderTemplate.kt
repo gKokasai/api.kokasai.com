@@ -28,6 +28,7 @@ class WithHeaderTemplate(
             title("${TITLE_NAME}${if (title_suffix != null) " - $title_suffix" else ""}")
             css(HtmlRoute.Css.Header)
             javaScript(HtmlRoute.Js.JQuery)
+            javaScript(HtmlRoute.Js.MainBundle)
             javaScript(HtmlRoute.Js.Header)
             javaScripts?.forEach { javaScript(it) }
         }
