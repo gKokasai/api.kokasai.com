@@ -19,7 +19,7 @@ kotlin {
         withJava()
     }
 
-    js {
+    js(IR) {
         useCommonJs()
         binaries.executable()
 
