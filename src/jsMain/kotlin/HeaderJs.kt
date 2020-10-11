@@ -13,6 +13,8 @@ object HeaderJs: Js {
         get() = document.getElementById(Header.Id.hamburger_menu) as? HTMLElement
     val hamburger_menu_element_a
         get() = document.querySelectorAll("#${Header.Id.hamburger_menu} .${Header.Class.menu_element} a").asList()
+    val hambruger_background
+        get() = document.getElementById(Header.Id.hamburger_background) as? HTMLElement
 
     override val onLoad: ((Event) -> dynamic)? = {
         hamburger_icon?.addEventListener("click", {
@@ -30,5 +32,8 @@ object HeaderJs: Js {
                 }, 250)
             })
         }
+        hambruger_background?.addEventListener("click", {
+            body?.removeClass(Header.Class.active_hamburger)
+        })
     }
 }
