@@ -5,9 +5,6 @@ import io.ktor.routing.*
 
 fun Routing.staticRoute() {
     static {
-        resources("static")
-    }
-    static {
         resource(HtmlRoute.Js.MainBundle.path)
     }
 }

@@ -13,8 +13,7 @@ import kotlinx.html.*
 
 class WithHeaderTemplate(
     private val h1: String?,
-    private val title_suffix: String? = h1,
-    private val javaScripts: Iterable<HtmlRoute.Js>? = null
+    private val title_suffix: String? = h1
 ): Template<HTML> {
     val body = Placeholder<DIV>()
 
@@ -28,10 +27,7 @@ class WithHeaderTemplate(
             }
             title("${TITLE_NAME}${if (title_suffix != null) " - $title_suffix" else ""}")
             css(HtmlRoute.Css.Header)
-            javaScript(HtmlRoute.Js.JQuery)
             javaScript(HtmlRoute.Js.MainBundle)
-            javaScript(HtmlRoute.Js.Header)
-            javaScripts?.forEach { javaScript(it) }
         }
         body {
             header {

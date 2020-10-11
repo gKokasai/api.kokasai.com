@@ -7,7 +7,7 @@ import io.ktor.application.*
 import io.ktor.html.*
 
 val bus = get {
-    call.respondHtmlTemplate(WithHeaderTemplate("アクセス バス", javaScripts = listOf(HtmlRoute.Js.BusUpdater))) {
+    call.respondHtmlTemplate(WithHeaderTemplate("アクセス バス")) {
 
     }
 }

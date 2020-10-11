@@ -24,10 +24,7 @@ object HtmlRoute {
     }
 
     sealed class Js(path: String): Path(path) {
-        object JQuery: Js("https://code.jquery.com/jquery-3.5.1.min.js")
         object MainBundle: Js("/main.bundle.js")
-        object Header: Js("/header.js")
-        object BusUpdater: Js("/bus_updater.js")
     }
 
     open class Path(val path: String, val full_path: String = path) {
