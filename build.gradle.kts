@@ -20,7 +20,6 @@ kotlin {
     }
 
     js(IR) {
-        useCommonJs()
         binaries.executable()
 
         browser {
