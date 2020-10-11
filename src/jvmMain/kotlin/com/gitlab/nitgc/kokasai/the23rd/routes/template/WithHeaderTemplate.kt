@@ -4,6 +4,7 @@ import com.gitlab.nitgc.kokasai.the23rd.constants.*
 import com.gitlab.nitgc.kokasai.the23rd.extension.*
 import com.gitlab.nitgc.kokasai.the23rd.extension.meta
 import com.gitlab.nitgc.kokasai.the23rd.routes.*
+import html.tagName.*
 import io.ktor.html.*
 import io.ktor.utils.io.charsets.*
 import kotlinx.css.*
@@ -35,40 +36,40 @@ class WithHeaderTemplate(
         body {
             header {
                 div {
-                    id = "inner_header"
+                    id = Header.Id.inner_header
                     p {
-                        id = "header_title"
+                        id = Header.Id.header_title
                         a(href = HtmlRoute.Index) {
                             +TITLE_NAME
                         }
                     }
                     // ハンバーガーメニューアイコン
                     div {
-                        id = "hamburger_icon"
+                        id = Header.Id.hamburger_icon
                         span()
                         span()
                         span()
                     }
                     // 横並びメニュー
                     ul {
-                        id = "horizontal_menu"
+                        id = Header.Id.horizontal_menu
                         onTouchStart = ""
                         addNavigationElement()
                     }
                 }
                 // ハンバーガーメニュー
                 div {
-                    id = "hamburger_menu"
+                    id = Header.Id.hamburger_menu
                     ul {
                         addNavigationElement()
                     }
                 }
                 div {
-                    id = "hamburger_background"
+                    id = Header.Id.hamburger_background
                 }
             }
             div {
-                id = "inner_body"
+                id = Header.Id.inner_body
                 if (h1 != null) {
                     h1 {
                         +h1
@@ -81,7 +82,7 @@ class WithHeaderTemplate(
 
     private fun UL.addNavigationElement() {
         NavigationMenuElement.list.forEach { (href, name) ->
-            li("menu_element") {
+            li(Header.Class.menu_element) {
                 a(href = href) {
                     +name
                 }
@@ -109,29 +110,29 @@ class WithHeaderTemplate(
                 backgroundColor = THEME_COLOR
                 boxShadow(SHADOW_COLOR.withAlpha(0.4), offsetY = 1.6.px, blurRadius = 3.2.px)
             }
-            "#inner_header" {
+            "#${Header.Id.inner_header}" {
                 display = Display.flex
                 height = 40.px
                 padding(vertical = 8.px)
             }
 
             // ヘッダータイトル
-            "#header_title" {
+            "#${Header.Id.header_title}" {
                 fontSize = 24.px
                 fontWeight = FontWeight.w600
                 margin(vertical = LinearDimension.auto)
                 padding(top = 4.px, left = 24.px)
             }
-            "#header_title a" {
+            "#${Header.Id.header_title} a" {
                 color = BASE_COLOR
                 textDecoration = TextDecoration.none
             }
 
             // ハンバーガーメニュー
-            "#horizontal_menu" {
+            "#${Header.Id.horizontal_menu}" {
                 display = Display.none
             }
-            "#hamburger_icon" {
+            "#${Header.Id.hamburger_icon}" {
                 position = Position.relative
                 margin(LinearDimension.auto)
                 marginRight = 24.px
@@ -139,7 +140,7 @@ class WithHeaderTemplate(
                 height = 22.px
                 cursor = Cursor.pointer
             }
-            "#hamburger_icon span" {
+            "#${Header.Id.hamburger_icon} span" {
                 position = Position.absolute
                 left = 0.px
                 width = 100.pct
@@ -147,39 +148,39 @@ class WithHeaderTemplate(
                 backgroundColor = BASE_COLOR
                 borderRadius = 2.px
             }
-            "#hamburger_icon, #hamburger_icon span" {
+            "#${Header.Id.hamburger_icon}, #${Header.Id.hamburger_icon} span" {
                 display = Display.inlineBlock
                 transition("all", 0.5.s)
                 boxSizing = BoxSizing.borderBox
             }
-            "#hamburger_icon span:nth-of-type(1)" {
+            "#${Header.Id.hamburger_icon} span:nth-of-type(1)" {
                 top = 0.px
             }
-            "#hamburger_icon span:nth-of-type(2)" {
+            "#${Header.Id.hamburger_icon} span:nth-of-type(2)" {
                 top = 10.px
             }
-            "#hamburger_icon span:nth-of-type(3)" {
+            "#${Header.Id.hamburger_icon} span:nth-of-type(3)" {
                 bottom = 0.px
             }
-            "#hamburger_menu" {
+            "#${Header.Id.hamburger_menu}" {
                 display = Display.none
             }
-            ".active_hamburger #hamburger_icon span:nth-of-type(1)" {
+            ".${Header.Class.active_hamburger} #${Header.Id.hamburger_icon} span:nth-of-type(1)" {
                 transform {
                     translateY(10.px)
                     rotate(45.deg)
                 }
             }
-            ".active_hamburger #hamburger_icon span:nth-of-type(2)" {
+            ".${Header.Class.active_hamburger} #${Header.Id.hamburger_icon} span:nth-of-type(2)" {
                 opacity = 0
             }
-            ".active_hamburger #hamburger_icon span:nth-of-type(3)" {
+            ".${Header.Class.active_hamburger} #${Header.Id.hamburger_icon} span:nth-of-type(3)" {
                 transform {
                     translateY((-10).px)
                     rotate((-45).deg)
                 }
             }
-            "#hamburger_background" {
+            "#${Header.Id.hamburger_background}" {
                 position = Position.fixed
                 left = 0.px
                 top = 0.px
@@ -192,27 +193,27 @@ class WithHeaderTemplate(
                 transition("all", .6.s)
                 cursor = Cursor.pointer
             }
-            ".active_hamburger #hamburger_background" {
+            ".${Header.Class.active_hamburger} #${Header.Id.hamburger_background}" {
                 opacity = 0.6
                 visibility = Visibility.visible
             }
-            ".active_hamburger #hamburger_menu" {
+            ".${Header.Class.active_hamburger} #${Header.Id.hamburger_menu}" {
                 display = Display.block
             }
-            "#hamburger_menu" {
+            "#${Header.Id.hamburger_menu}" {
                 backgroundColor = THEME_COLOR
                 width = 100.pct - 16.px
                 marginLeft = 8.px
                 padding(vertical = 8.px)
                 borderTop(2.4.px, BorderStyle.dotted, BASE_COLOR)
             }
-            "#hamburger_menu ul" {
+            "#${Header.Id.hamburger_menu} ul" {
                 padding(8.px, 24.px)
             }
-            "#hamburger_menu .menu_element+ .menu_element" {
+            "#${Header.Id.hamburger_menu} .${Header.Class.menu_element}+ .${Header.Class.menu_element}" {
                 padding(vertical = 4.px)
             }
-            "#hamburger_menu .menu_element a" {
+            "#${Header.Id.hamburger_menu} .${Header.Class.menu_element} a" {
                 display = Display.block
                 fontSize = 20.px
                 fontWeight = FontWeight.w500
@@ -221,42 +222,42 @@ class WithHeaderTemplate(
             }
 
             // インナーボディー
-            "#inner_body" {
+            "#${Header.Id.inner_body}" {
                 width = 100.pct - 16.px
                 margin(vertical = 8.px, horizontal = LinearDimension.auto)
             }
             media("screen and (min-width: 1040px)") {
-                "#inner_body" {
+                "#${Header.Id.inner_body}" {
                     width = 1024.px
                 }
             }
 
             media("screen and (min-width: 769px)") {
                 // 横並びメニュー
-                "#hamburger_icon" {
+                "#${Header.Id.hamburger_icon}" {
                     display = Display.none
                 }
-                "#horizontal_menu" {
+                "#${Header.Id.horizontal_menu}" {
                     display = Display.block
                     fontSize = 20.px
                     margin(LinearDimension.auto)
                     marginRight = 0.px
                     paddingTop = 2.4.px
                 }
-                "#horizontal_menu .menu_element" {
+                "#${Header.Id.horizontal_menu} .${Header.Class.menu_element}" {
                     padding(horizontal = 24.px)
                     display = Display.inline
                 }
-                "#horizontal_menu .menu_element+ .menu_element" {
+                "#${Header.Id.horizontal_menu} .${Header.Class.menu_element}+ .${Header.Class.menu_element}" {
                     borderLeft(2.4.px, BorderStyle.solid, BASE_COLOR)
                 }
-                "#horizontal_menu .menu_element a" {
+                "#${Header.Id.horizontal_menu} .${Header.Class.menu_element} a" {
                     fontWeight = FontWeight.w500
                     color = BASE_COLOR
                     textDecoration = TextDecoration.none
                     position = Position.relative
                 }
-                "#horizontal_menu .menu_element a::after" {
+                "#${Header.Id.horizontal_menu} .${Header.Class.menu_element} a::after" {
                     position = Position.absolute
                     bottom = (-1.6).px
                     left = 0.px
@@ -268,7 +269,7 @@ class WithHeaderTemplate(
                     }
                     transition("transform", .2.s)
                 }
-                "#horizontal_menu .menu_element a:hover::after" {
+                "#${Header.Id.horizontal_menu} .${Header.Class.menu_element} a:hover::after" {
                     transform {
                         scale(1, 1)
                     }
