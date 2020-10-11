@@ -1,14 +1,4 @@
 $(function () {
-    $('#hamburger_icon').on('click', function () {
-        let html = $('html');
-        if (html.hasClass('active_hamburger')) {
-            $('#hamburger_menu').slideUp(200);
-        } else {
-            $('#hamburger_menu').slideDown(500);
-        }
-        html.toggleClass('active_hamburger');
-        return false;
-    });
     $('#hamburger_menu .menu_element a').on('click', function (e) {
         $('html').removeClass('active_hamburger');
         $('#hamburger_menu').slideUp(200);
