@@ -32,7 +32,7 @@ interface FlowerKt {
     /**
      * データベースの初期化を行います
      */
-    open fun setupDatabase() {
+    fun setupDatabase() {
         Database.connect(databaseUrl)
         transaction {
             create(sessionTable)
@@ -48,7 +48,7 @@ interface FlowerKt {
     /**
      * Ktor の機能をインストールします
      */
-    open fun Application.installKtorFeauture() {
+    fun Application.installKtorFeauture() {
         install(Sessions) {
             configureAuthCookie()
         }
@@ -68,7 +68,7 @@ interface FlowerKt {
     /**
      * サーバーのルーティングの設定をします
      */
-    open fun Routing.setupRouting() {
+    fun Routing.setupRouting() {
         HtmlRouteBuilder.build(this)
 
         cssRoutes()
@@ -91,7 +91,7 @@ interface FlowerKt {
     /**
      * サーバーを起動します
      */
-    open fun startServer() {
+    fun startServer() {
         embeddedServer(Netty, port) {
             setupServerModule()
         }.start()
