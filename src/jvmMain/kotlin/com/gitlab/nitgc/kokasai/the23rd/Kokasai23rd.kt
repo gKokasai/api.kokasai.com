@@ -4,4 +4,5 @@ import com.gitlab.nitgc.kokasai.flowerkt.*
 
 object Kokasai23rd: FlowerKt {
     override val databaseUrl = "jdbc:sqlite:.data.db"
+    override val port = 8080
 }

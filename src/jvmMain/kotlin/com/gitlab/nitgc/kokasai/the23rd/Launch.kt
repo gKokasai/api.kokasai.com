@@ -14,30 +14,4 @@ import io.ktor.websocket.*
 
 fun main() {
     Kokasai23rd.launch()
-    embeddedServer(Netty, 8080) {
-        install(Sessions) {
-            configureAuthCookie()
-        }
-
-        install(Authentication) {
-            configureFormAuth()
-            configureSessionAuth()
-        }
-
-        install(ContentNegotiation) {
-            configureGson()
-        }
-
-        install(WebSockets)
-
-        routing {
-            HtmlRouteBuilder.build(this)
-
-            cssRoutes()
-            staticRoute()
-            webSocketRoute()
-
-            testRoute()
-        }
-    }.start()
 }
