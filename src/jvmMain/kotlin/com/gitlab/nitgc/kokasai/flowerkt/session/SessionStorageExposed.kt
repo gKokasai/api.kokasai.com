@@ -1,4 +1,4 @@
-package com.gitlab.nitgc.kokasai.the23rd.extension
+package com.gitlab.nitgc.kokasai.flowerkt.session
 
 import io.ktor.sessions.*
 import io.ktor.util.*
@@ -8,14 +8,6 @@ import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.*
 import java.sql.*
 import java.time.*
-
-open class SessionTable(name: String, val expireDuration: Duration): Table(name) {
-    val sessionId = text("sessionId").uniqueIndex()
-    val value = text("value")
-    val expireTime = long("expireTime")
-
-    override val primaryKey = PrimaryKey(sessionId)
-}
 
 class SessionStorageExposed(private val sessionTable: SessionTable): SessionStorage {
     private fun expireTime(nowTime: Long = Instant.now().toEpochMilli()) =
