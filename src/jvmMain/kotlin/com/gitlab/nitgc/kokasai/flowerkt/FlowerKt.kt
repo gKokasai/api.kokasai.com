@@ -48,7 +48,7 @@ interface FlowerKt {
     /**
      * Ktor の機能をインストールします
      */
-    fun Application.installKtorFeauture() {
+    fun Application.installKtorFeature() {
         install(Sessions) {
             configureAuthCookie()
         }
@@ -82,7 +82,7 @@ interface FlowerKt {
      * モジュールの設定をします
      */
     fun Application.setupServerModule() {
-        installKtorFeauture()
+        installKtorFeature()
         routing {
             setupRouting()
         }
