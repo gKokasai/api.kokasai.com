@@ -9,15 +9,9 @@ import io.ktor.features.*
 import io.ktor.routing.*
 import io.ktor.sessions.*
 import io.ktor.websocket.*
-import org.jetbrains.exposed.sql.*
-import org.jetbrains.exposed.sql.SchemaUtils.create
-import org.jetbrains.exposed.sql.transactions.*
 
 fun main(args: Array<String>) {
-    Database.connect("jdbc:sqlite:.data.db")
-    transaction {
-        create(sessionTable)
-    }
+    Kokasai23rd.launch()
     io.ktor.server.netty.EngineMain.main(args)
 }
 
