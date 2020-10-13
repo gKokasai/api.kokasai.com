@@ -7,38 +7,37 @@ import io.ktor.application.*
 import io.ktor.auth.*
 import io.ktor.features.*
 import io.ktor.routing.*
+import io.ktor.server.engine.*
+import io.ktor.server.netty.*
 import io.ktor.sessions.*
 import io.ktor.websocket.*
 
-fun main(args: Array<String>) {
+fun main() {
     Kokasai23rd.launch()
-    io.ktor.server.netty.EngineMain.main(args)
-}
+    embeddedServer(Netty, 8080) {
+        install(Sessions) {
+            configureAuthCookie()
+        }
 
-@Suppress("unused") // Referenced in application.conf
-fun Application.launch() {
-    install(Sessions) {
-        configureAuthCookie()
-    }
+        install(Authentication) {
+            configureFormAuth()
+            configureSessionAuth()
+        }
 
-    install(Authentication) {
-        configureFormAuth()
-        configureSessionAuth()
-    }
+        install(ContentNegotiation) {
+            configureGson()
+        }
 
-    install(ContentNegotiation) {
-        configureGson()
-    }
+        install(WebSockets)
 
-    install(WebSockets)
+        routing {
+            HtmlRouteBuilder.build(this)
 
-    routing {
-        HtmlRouteBuilder.build(this)
+            cssRoutes()
+            staticRoute()
+            webSocketRoute()
 
-        cssRoutes()
-        staticRoute()
-        webSocketRoute()
-
-        testRoute()
-    }
+            testRoute()
+        }
+    }.start()
 }
