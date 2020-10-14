@@ -3,7 +3,7 @@ package com.gitlab.nitgc.kokasai.the23rd.routes.template
 import com.gitlab.nitgc.kokasai.flowerkt.html.*
 import com.gitlab.nitgc.kokasai.flowerkt.html.meta
 import com.gitlab.nitgc.kokasai.the23rd.constants.*
-import com.gitlab.nitgc.kokasai.the23rd.routes.*
+import com.gitlab.nitgc.kokasai.the23rd.routes.html.*
 import html.tagName.*
 import io.ktor.html.*
 import io.ktor.utils.io.charsets.*

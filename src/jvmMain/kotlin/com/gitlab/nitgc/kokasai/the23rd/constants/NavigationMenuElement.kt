@@ -1,7 +1,7 @@
 package com.gitlab.nitgc.kokasai.the23rd.constants
 
 import com.gitlab.nitgc.kokasai.flowerkt.route.*
-import com.gitlab.nitgc.kokasai.the23rd.routes.*
+import com.gitlab.nitgc.kokasai.the23rd.routes.html.*
 
 data class NavigationMenuElement(val href: String, val name: String) {
     constructor(route: RoutePath, name: String): this(route.full_path, name)

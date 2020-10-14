@@ -1,6 +1,7 @@
 package com.gitlab.nitgc.kokasai.the23rd.routes
 
 import com.gitlab.nitgc.kokasai.flowerkt.css.*
+import com.gitlab.nitgc.kokasai.the23rd.routes.html.*
 import io.ktor.application.*
 import io.ktor.routing.*
 

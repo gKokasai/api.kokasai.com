@@ -1,7 +1,7 @@
 package com.gitlab.nitgc.kokasai.flowerkt.html
 
 import com.gitlab.nitgc.kokasai.flowerkt.route.*
-import com.gitlab.nitgc.kokasai.the23rd.routes.*
+import com.gitlab.nitgc.kokasai.the23rd.routes.html.*
 import kotlinx.html.*
 
 @HtmlTagMarker

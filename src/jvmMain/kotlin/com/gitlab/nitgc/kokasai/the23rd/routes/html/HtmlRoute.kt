@@ -1,4 +1,4 @@
-package com.gitlab.nitgc.kokasai.the23rd.routes
+package com.gitlab.nitgc.kokasai.the23rd.routes.html
 
 import com.gitlab.nitgc.kokasai.flowerkt.route.*
 import com.gitlab.nitgc.kokasai.the23rd.routes.template.WithHeaderTemplate.Companion.headerCss
@@ -27,8 +27,4 @@ object HtmlRoute {
     sealed class Js(path: String): RoutePath(path) {
         object MainBundle: Js("/main.bundle.js")
     }
-}
-
-object WebSocketRoute {
-    object Bus: RoutePath("/bus")
 }
