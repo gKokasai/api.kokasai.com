@@ -1,7 +1,7 @@
 package com.gitlab.nitgc.kokasai.the23rd.configure
 
+import com.gitlab.nitgc.kokasai.flowerkt.html.*
 import com.gitlab.nitgc.kokasai.the23rd.constants.*
-import com.gitlab.nitgc.kokasai.the23rd.extension.*
 import com.gitlab.nitgc.kokasai.the23rd.routes.*
 import com.gitlab.nitgc.kokasai.the23rd.user.*
 import io.ktor.application.*

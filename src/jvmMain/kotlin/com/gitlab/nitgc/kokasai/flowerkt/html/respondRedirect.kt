@@ -1,4 +1,4 @@
-package com.gitlab.nitgc.kokasai.the23rd.extension
+package com.gitlab.nitgc.kokasai.flowerkt.html
 
 import com.gitlab.nitgc.kokasai.flowerkt.route.*
 import io.ktor.application.*
