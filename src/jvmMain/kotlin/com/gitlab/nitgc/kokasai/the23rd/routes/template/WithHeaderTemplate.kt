@@ -1,5 +1,6 @@
 package com.gitlab.nitgc.kokasai.the23rd.routes.template
 
+import com.gitlab.nitgc.kokasai.flowerkt.html.*
 import com.gitlab.nitgc.kokasai.the23rd.constants.*
 import com.gitlab.nitgc.kokasai.the23rd.extension.*
 import com.gitlab.nitgc.kokasai.the23rd.extension.meta
