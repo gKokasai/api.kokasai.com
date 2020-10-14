@@ -1,6 +1,5 @@
-package com.gitlab.nitgc.kokasai.the23rd.extension
+package com.gitlab.nitgc.kokasai.flowerkt.route
 
-import com.gitlab.nitgc.kokasai.the23rd.routes.*
 import io.ktor.application.*
 import io.ktor.auth.*
 import io.ktor.routing.*
@@ -10,7 +9,7 @@ interface RouteBuilder {
     fun build(route: io.ktor.routing.Route)
 
     interface Container: RouteBuilder {
-        val routes: Map<HtmlRoute.Path, RouteBuilder>
+        val routes: Map<RoutePath, RouteBuilder>
 
         override fun build(route: io.ktor.routing.Route) {
             routes.forEach { (path, builder) ->

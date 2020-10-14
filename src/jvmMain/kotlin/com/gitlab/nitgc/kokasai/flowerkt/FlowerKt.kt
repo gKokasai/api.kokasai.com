@@ -1,9 +1,8 @@
 package com.gitlab.nitgc.kokasai.flowerkt
 
+import com.gitlab.nitgc.kokasai.flowerkt.route.*
 import com.gitlab.nitgc.kokasai.flowerkt.session.*
 import com.gitlab.nitgc.kokasai.the23rd.configure.*
-import com.gitlab.nitgc.kokasai.the23rd.routes.*
-import com.gitlab.nitgc.kokasai.the23rd.routes.html.*
 import io.ktor.application.*
 import io.ktor.auth.*
 import io.ktor.features.*
@@ -66,16 +65,22 @@ interface FlowerKt {
     }
 
     /**
+     * ルートビルダーでルートの登録をします
+     */
+    val routeBuilder: RouteBuilder.Container
+
+    /**
+     * ルートの登録処理をします
+     */
+    val routeBuildAction: Routing.() -> Unit
+        get() = {}
+
+    /**
      * サーバーのルーティングの設定をします
      */
     fun Routing.setupRouting() {
-        HtmlRouteBuilder.build(this)
-
-        cssRoutes()
-        staticRoute()
-        webSocketRoute()
-
-        testRoute()
+        routeBuilder.build(this)
+        routeBuildAction.invoke(this)
     }
 
     /**

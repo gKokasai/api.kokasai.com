@@ -1,6 +1,6 @@
 package com.gitlab.nitgc.kokasai.the23rd.routes.html.api.bus
 
-import com.gitlab.nitgc.kokasai.the23rd.extension.*
+import com.gitlab.nitgc.kokasai.flowerkt.route.*
 import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.response.*

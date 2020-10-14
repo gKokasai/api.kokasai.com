@@ -1,42 +1,34 @@
 package com.gitlab.nitgc.kokasai.the23rd.routes
 
+import com.gitlab.nitgc.kokasai.flowerkt.route.*
 import com.gitlab.nitgc.kokasai.the23rd.routes.template.WithHeaderTemplate.Companion.headerCss
 import kotlinx.css.*
 
 object HtmlRoute {
-    object Index: Path("/")
-    object Login: Path("/login")
-    object Logout: Path("/logout")
-    object Account: Path("/account")
-    object Access: Path("/access") {
-        object Bus: Path(this, "/bus")
+    object Index: RoutePath("/")
+    object Login: RoutePath("/login")
+    object Logout: RoutePath("/logout")
+    object Account: RoutePath("/account")
+    object Access: RoutePath("/access") {
+        object Bus: RoutePath(this, "/bus")
     }
 
-    object Api: Path("/api") {
-        object Bus: Path(this, "/bus") {
-            object Challenge: Path(this, "/challenge")
-            object Route: Path(this, "/route")
+    object Api: RoutePath("/api") {
+        object Bus: RoutePath(this, "/bus") {
+            object Challenge: RoutePath(this, "/challenge")
+            object Route: RoutePath(this, "/route")
         }
     }
 
-    sealed class Css(path: String, val response: RuleSet?): Path(path) {
+    sealed class Css(path: String, val response: RuleSet?): RoutePath(path) {
         object Header: Css("/header.css", headerCss)
     }
 
-    sealed class Js(path: String): Path(path) {
+    sealed class Js(path: String): RoutePath(path) {
         object MainBundle: Js("/main.bundle.js")
-    }
-
-    open class Path(val path: String, val full_path: String = path) {
-        constructor(parent: Path, path: String): this(path, parent.path + path)
     }
 }
 
 object WebSocketRoute {
-    object Bus: Path("/bus")
-
-    open class Path(val path: String, val full_path: String = path) {
-        constructor(parent: Path, path: String): this(path, parent.path + path)
-    }
+    object Bus: RoutePath("/bus")
 }
-
