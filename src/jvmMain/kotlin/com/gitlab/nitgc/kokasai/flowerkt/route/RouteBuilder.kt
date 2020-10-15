@@ -4,6 +4,7 @@ import io.ktor.application.*
 import io.ktor.auth.*
 import io.ktor.routing.*
 import io.ktor.util.pipeline.*
+import io.ktor.websocket.*
 
 interface RouteBuilder {
     fun build(route: io.ktor.routing.Route)
@@ -36,3 +37,6 @@ fun authenticate(
 
 @ContextDsl
 fun get(body: PipelineInterceptor<Unit, ApplicationCall>) = route { get(body) }
+
+@ContextDsl
+fun webSocket(handler: suspend DefaultWebSocketServerSession.() -> Unit) = route { webSocket(null, handler) }

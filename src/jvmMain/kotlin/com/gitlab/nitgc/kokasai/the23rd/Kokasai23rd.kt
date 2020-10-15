@@ -12,7 +12,6 @@ object Kokasai23rd: FlowerKt {
     override val routeBuildAction: Routing.() -> Unit = {
         cssRoutes()
         staticRoute()
-        webSocketRoute()
 
         testRoute()
     }
