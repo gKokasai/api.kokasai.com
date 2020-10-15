@@ -67,7 +67,7 @@ interface FlowerKt {
     /**
      * ルートビルダーでルートの登録をします
      */
-    val routeBuilder: RouteBuilder.Container
+    val routeBuilder: RouteBuilder
 
     /**
      * ルートの登録処理をします

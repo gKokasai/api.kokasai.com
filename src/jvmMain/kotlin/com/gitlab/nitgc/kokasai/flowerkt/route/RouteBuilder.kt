@@ -19,6 +19,13 @@ interface RouteBuilder {
                 }
             }
         }
+
+        operator fun plus(other: Container) = object: RouteBuilder {
+            override fun build(route: io.ktor.routing.Route) {
+                this@Container.build(route)
+                other.build(route)
+            }
+        }
     }
 
     class Route(val action: io.ktor.routing.Route.() -> Unit): RouteBuilder {
