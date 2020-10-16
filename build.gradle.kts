@@ -1,4 +1,4 @@
-import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
+import org.jetbrains.kotlin.gradle.targets.js.webpack.*
 
 plugins {
     id(Libraries.GradlePlugin.application)
@@ -32,7 +32,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(Libraries.Kotlin.stdlib_jdk8)
+                implementation(Libraries.Kotlin.stdlib)
             }
         }
 

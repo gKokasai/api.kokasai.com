@@ -6,7 +6,7 @@ object Libraries {
     }
 
     object Kotlin {
-        const val stdlib_jdk8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib"
         const val css_jvm = "org.jetbrains:kotlin-css-jvm:${Versions.kotlin_css_jvm}"
     }
 
