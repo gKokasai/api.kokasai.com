@@ -5,7 +5,7 @@ import com.gitlab.nitgc.kokasai.the23rd.routes.html.*
 import io.ktor.application.*
 import io.ktor.routing.*
 
-fun Routing.cssRoutes() {
+fun Route.cssRoutes() {
     HtmlRoute.Css::class.sealedSubclasses.forEach { kClass ->
         kClass.objectInstance?.let { objectInstance ->
             objectInstance.response?.let { response ->

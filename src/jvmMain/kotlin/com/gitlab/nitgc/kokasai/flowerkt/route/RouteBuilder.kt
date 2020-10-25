@@ -9,6 +9,13 @@ import io.ktor.websocket.*
 interface RouteBuilder {
     fun build(route: io.ktor.routing.Route)
 
+    operator fun plus(other: RouteBuilder) = object: RouteBuilder {
+        override fun build(route: io.ktor.routing.Route) {
+            this@RouteBuilder.build(route)
+            other.build(route)
+        }
+    }
+
     interface Container: RouteBuilder {
         val routes: Map<RoutePath, RouteBuilder>
 
@@ -17,13 +24,6 @@ interface RouteBuilder {
                 route.route(path.path) {
                     builder.build(this)
                 }
-            }
-        }
-
-        operator fun plus(other: Container) = object: RouteBuilder {
-            override fun build(route: io.ktor.routing.Route) {
-                this@Container.build(route)
-                other.build(route)
             }
         }
     }

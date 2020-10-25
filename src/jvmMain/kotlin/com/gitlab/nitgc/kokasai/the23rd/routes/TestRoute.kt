@@ -6,7 +6,7 @@ import io.ktor.html.*
 import io.ktor.routing.*
 import kotlinx.html.*
 
-fun Routing.testRoute() {
+fun Route.testRoute() {
     get("/test") {
         call.respondHtmlTemplate(WithHeaderTemplate("テスト")) {
             body {

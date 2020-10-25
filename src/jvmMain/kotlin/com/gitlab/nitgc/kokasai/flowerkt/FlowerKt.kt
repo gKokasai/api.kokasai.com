@@ -70,17 +70,10 @@ interface FlowerKt {
     val routeBuilder: RouteBuilder
 
     /**
-     * ルートの登録処理をします
-     */
-    val routeBuildAction: Routing.() -> Unit
-        get() = {}
-
-    /**
      * サーバーのルーティングの設定をします
      */
     fun Routing.setupRouting() {
         routeBuilder.build(this)
-        routeBuildAction.invoke(this)
     }
 
     /**
