@@ -1,5 +1,6 @@
 package com.kokasai.flowerkt
 
+import com.kokasai.flowerkt.file.*
 import com.kokasai.flowerkt.route.*
 import com.kokasai.flowerkt.session.*
 import com.kokasai.the23rd.configure.*
@@ -37,6 +38,11 @@ interface FlowerKt {
             create(sessionTable)
         }
     }
+
+    /**
+     * ファイルの保存先
+     */
+    val fileProvider: FileProvider
 
     /**
      * サーバーのポート番号です
