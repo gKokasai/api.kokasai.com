@@ -3,7 +3,7 @@ package com.kokasai.flowerkt.file
 import java.io.*
 
 interface FileProvider {
-    fun add(path: String, file: File)
-    fun remove(path: String)
-    fun get(path: String)
+    suspend fun add(path: String, file: File): Boolean
+    suspend fun remove(path: String): Boolean
+    suspend fun get(path: String): File?
 }

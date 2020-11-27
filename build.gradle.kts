@@ -38,6 +38,8 @@ kotlin {
 
         val jvmMain by getting {
             dependencies {
+                implementation(Libraries.Ktor.client_okhttp)
+                implementation(Libraries.Ktor.client_auth)
                 implementation(Libraries.Ktor.server_netty)
                 implementation(Libraries.Ktor.server_sessions)
                 implementation(Libraries.Ktor.auth)

@@ -11,6 +11,8 @@ object Libraries {
     }
 
     object Ktor {
+        const val client_okhttp = "io.ktor:ktor-client-okhttp:${Versions.ktor}"
+        const val client_auth = "io.ktor:ktor-client-auth:${Versions.ktor}"
         const val server_netty = "io.ktor:ktor-server-netty:${Versions.ktor}"
         const val server_sessions = "io.ktor:ktor-server-sessions:${Versions.ktor}"
         const val auth = "io.ktor:ktor-auth:${Versions.ktor}"
