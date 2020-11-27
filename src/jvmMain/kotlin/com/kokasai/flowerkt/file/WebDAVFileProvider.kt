@@ -8,7 +8,7 @@ import io.ktor.http.*
 import io.ktor.util.*
 import java.io.*
 
-class WebDAV(val client: HttpClient, val url: String): FileProvider {
+class WebDAVFileProvider(val client: HttpClient, val url: String): FileProvider {
     private val cacheFile = mutableMapOf<String, File?>()
 
     override suspend fun add(path: String, file: File): Boolean {
