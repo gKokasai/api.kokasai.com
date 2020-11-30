@@ -38,7 +38,7 @@ fun Authentication.Configuration.configureFormAuth() {
 fun Authentication.Configuration.configureSessionAuth() {
     session<UserPrincipal>(AuthName.SESSION) {
         challenge {
-            call.respondRedirect(HtmlRoute.Login.full_path)
+            call.respondRedirect(HtmlRoute.Login.fullPath)
         }
         validate { session ->
             session

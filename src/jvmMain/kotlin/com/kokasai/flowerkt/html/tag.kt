@@ -6,11 +6,11 @@ import kotlinx.html.*
 
 @HtmlTagMarker
 fun FlowOrPhrasingOrMetaDataContent.css(href: HtmlRoute.Css) =
-    link(rel = LinkRel.stylesheet, href = href.full_path, type = StyleType.textCss)
+    link(rel = LinkRel.stylesheet, href = href.fullPath, type = StyleType.textCss)
 
 @HtmlTagMarker
 fun FlowOrPhrasingOrMetaDataContent.javaScript(src: HtmlRoute.Js) =
-    script(src = src.full_path, type = ScriptType.textJavaScript) {}
+    script(src = src.fullPath, type = ScriptType.textJavaScript) {}
 
 @HtmlTagMarker
 inline fun FlowOrInteractiveOrPhrasingContent.a(
@@ -18,4 +18,4 @@ inline fun FlowOrInteractiveOrPhrasingContent.a(
     target: String? = null,
     classes: String? = null,
     crossinline block: A.() -> Unit = {}
-) = a(href?.full_path, target, classes, block)
+) = a(href?.fullPath, target, classes, block)

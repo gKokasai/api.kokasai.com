@@ -10,9 +10,9 @@ suspend inline fun ApplicationCall.respondRedirect(
     permanent: Boolean = false
 ) {
     if (queryParameters.isEmpty()) {
-        respondRedirect(url.full_path, permanent)
+        respondRedirect(url.fullPath, permanent)
     } else {
-        respondRedirect(url.full_path + queryParameters.joinToString("&", "?"), permanent)
+        respondRedirect(url.fullPath + queryParameters.joinToString("&", "?"), permanent)
     }
 }
 
