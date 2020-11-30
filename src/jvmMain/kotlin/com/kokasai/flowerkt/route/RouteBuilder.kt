@@ -7,10 +7,10 @@ import io.ktor.util.pipeline.*
 import io.ktor.websocket.*
 
 interface RouteBuilder {
-    fun build(route: io.ktor.routing.Route)
+    fun build(route: Route)
 
     operator fun plus(other: RouteBuilder) = object: RouteBuilder {
-        override fun build(route: io.ktor.routing.Route) {
+        override fun build(route: Route) {
             this@RouteBuilder.build(route)
             other.build(route)
         }
@@ -19,7 +19,7 @@ interface RouteBuilder {
     interface Container: RouteBuilder {
         val routes: Map<RoutePath, RouteBuilder>
 
-        override fun build(route: io.ktor.routing.Route) {
+        override fun build(route: Route) {
             routes.forEach { (path, builder) ->
                 route.route(path.path) {
                     builder.build(this)
@@ -28,13 +28,13 @@ interface RouteBuilder {
         }
     }
 
-    class Route(val action: io.ktor.routing.Route.() -> Unit): RouteBuilder {
-        override fun build(route: io.ktor.routing.Route) = route.action()
+    class Element(val action: Route.() -> Unit): RouteBuilder {
+        override fun build(route: Route) = route.action()
     }
 }
 
 @ContextDsl
-fun route(action: Route.() -> Unit) = RouteBuilder.Route(action)
+fun route(action: Route.() -> Unit) = RouteBuilder.Element(action)
 
 fun authenticate(
     vararg configurations: String? = arrayOf(null),
