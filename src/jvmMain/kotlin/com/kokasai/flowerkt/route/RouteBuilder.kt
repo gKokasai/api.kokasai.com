@@ -9,21 +9,21 @@ import io.ktor.websocket.*
 typealias RouteAction = Route.() -> Unit
 
 interface RouteBuilder {
-    fun build(route: Route)
+    fun build(parent: Route)
 
     operator fun plus(other: RouteBuilder) = object: RouteBuilder {
-        override fun build(route: Route) {
-            this@RouteBuilder.build(route)
-            other.build(route)
+        override fun build(parent: Route) {
+            this@RouteBuilder.build(parent)
+            other.build(parent)
         }
     }
 
     interface Container: RouteBuilder {
         val routes: Map<RoutePath, RouteBuilder>
 
-        override fun build(route: Route) {
+        override fun build(parent: Route) {
             routes.forEach { (path, builder) ->
-                route.route(path.path) {
+                parent.route(path.path) {
                     builder.build(this)
                 }
             }
@@ -31,7 +31,7 @@ interface RouteBuilder {
     }
 
     class Element(val action: RouteAction): RouteBuilder {
-        override fun build(route: Route) = route.action()
+        override fun build(parent: Route) = parent.action()
     }
 }
 
