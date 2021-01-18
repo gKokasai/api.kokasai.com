@@ -4,35 +4,29 @@ import com.kokasai.flowerkt.database.*
 import com.kokasai.flowerkt.file.*
 import com.kokasai.flowerkt.route.*
 import com.kokasai.flowerkt.session.*
-import com.kokasai.the23rd.configure.*
 import io.ktor.application.*
-import io.ktor.auth.*
-import io.ktor.features.*
 import io.ktor.routing.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
-import io.ktor.sessions.*
-import io.ktor.websocket.*
 import org.jetbrains.exposed.sql.SchemaUtils.create
 import org.jetbrains.exposed.sql.transactions.*
 import java.time.*
 
-interface FlowerKt {
+abstract class FlowerKt {
     /**
      * データベース
      */
-    val databaseProvider: DatabaseProvider
+    abstract val databaseProvider: DatabaseProvider
 
     /**
      * セッションを保存するデータベース
      */
-    val sessionTable: SessionTable
-        get() = SessionTable("session", Duration.ofDays(30))
+    open val sessionTable = SessionTable("session", Duration.ofDays(30))
 
     /**
      * データベースの初期化を行います
      */
-    fun setupDatabase() {
+    private fun setupDatabase() {
         databaseProvider.connect()
         transaction {
             create(sessionTable)
@@ -42,50 +36,35 @@ interface FlowerKt {
     /**
      * ファイルの保存先
      */
-    val fileProvider: FileProvider
+    abstract val fileProvider: FileProvider
 
     /**
      * サーバーのポート番号です
      */
-    val port: Int
+    open val port: Int
         get() = 80
 
     /**
      * Ktor の機能をインストールします
      */
-    fun Application.installKtorFeature() {
-        install(Sessions) {
-            configureAuthCookie()
-        }
-
-        install(Authentication) {
-            configureFormAuth()
-            configureSessionAuth()
-        }
-
-        install(ContentNegotiation) {
-            configureGson()
-        }
-
-        install(WebSockets)
-    }
+    abstract fun Application.installKtorFeature()
 
     /**
      * ルートビルダーでルートの登録をします
      */
-    val routeBuilder: RouteBuilder
+    abstract val routeBuilder: RouteBuilder
 
     /**
      * サーバーのルーティングの設定をします
      */
-    fun Routing.setupRouting() {
+    private fun Routing.setupRouting() {
         routeBuilder.build(this)
     }
 
     /**
      * モジュールの設定をします
      */
-    fun Application.setupServerModule() {
+    private fun Application.setupServerModule() {
         installKtorFeature()
         routing {
             setupRouting()
@@ -95,7 +74,7 @@ interface FlowerKt {
     /**
      * サーバーを起動します
      */
-    fun startServer() {
+    private fun startServer() {
         embeddedServer(Netty, port) {
             setupServerModule()
         }.start()
