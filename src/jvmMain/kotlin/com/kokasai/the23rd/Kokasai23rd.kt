@@ -1,6 +1,7 @@
 package com.kokasai.the23rd
 
 import com.kokasai.flowerkt.*
+import com.kokasai.flowerkt.database.*
 import com.kokasai.flowerkt.file.*
 import com.kokasai.flowerkt.route.*
 import com.kokasai.the23rd.routes.*
@@ -12,7 +13,7 @@ import io.ktor.client.features.auth.*
 import io.ktor.client.features.auth.providers.*
 
 object Kokasai23rd: FlowerKt {
-    override val databaseUrl = "jdbc:sqlite:.data.db"
+    override val databaseProvider = SQLiteDatabaseProvider(".data.db")
     override val port = 8080
     override val fileProvider = WebDAVFileProvider(HttpClient(OkHttp) {
         install(Auth) {

@@ -1,5 +1,6 @@
 package com.kokasai.flowerkt
 
+import com.kokasai.flowerkt.database.*
 import com.kokasai.flowerkt.file.*
 import com.kokasai.flowerkt.route.*
 import com.kokasai.flowerkt.session.*
@@ -12,16 +13,15 @@ import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import io.ktor.sessions.*
 import io.ktor.websocket.*
-import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SchemaUtils.create
 import org.jetbrains.exposed.sql.transactions.*
 import java.time.*
 
 interface FlowerKt {
     /**
-     * データベースのURL
+     * データベース
      */
-    val databaseUrl: String
+    val databaseProvider: DatabaseProvider
 
     /**
      * セッションを保存するデータベース
@@ -33,7 +33,7 @@ interface FlowerKt {
      * データベースの初期化を行います
      */
     fun setupDatabase() {
-        Database.connect(databaseUrl)
+        databaseProvider.connect()
         transaction {
             create(sessionTable)
         }
