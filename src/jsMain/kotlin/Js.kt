@@ -1,5 +1,5 @@
-import kotlinx.browser.*
-import org.w3c.dom.events.*
+import kotlinx.browser.window
+import org.w3c.dom.events.Event
 
 interface Js {
     val onLoad: ((Event) -> dynamic)?

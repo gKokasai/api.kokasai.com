@@ -1,24 +1,28 @@
 package com.kokasai.flowerkt.route
 
-import io.ktor.application.*
-import io.ktor.auth.*
-import io.ktor.routing.*
-import io.ktor.util.pipeline.*
-import io.ktor.websocket.*
+import io.ktor.application.ApplicationCall
+import io.ktor.auth.authenticate
+import io.ktor.routing.Route
+import io.ktor.routing.get
+import io.ktor.routing.route
+import io.ktor.util.pipeline.ContextDsl
+import io.ktor.util.pipeline.PipelineInterceptor
+import io.ktor.websocket.DefaultWebSocketServerSession
+import io.ktor.websocket.webSocket
 
 typealias RouteAction = Route.() -> Unit
 
 interface RouteBuilder {
     fun build(parent: Route)
 
-    operator fun plus(other: RouteBuilder) = object: RouteBuilder {
+    operator fun plus(other: RouteBuilder) = object : RouteBuilder {
         override fun build(parent: Route) {
             this@RouteBuilder.build(parent)
             other.build(parent)
         }
     }
 
-    interface Container: RouteBuilder {
+    interface Container : RouteBuilder {
         val routes: Map<RoutePath, RouteBuilder>
 
         override fun build(parent: Route) {
@@ -30,7 +34,7 @@ interface RouteBuilder {
         }
     }
 
-    class Element(val action: RouteAction): RouteBuilder {
+    class Element(val action: RouteAction) : RouteBuilder {
         override fun build(parent: Route) = parent.action()
     }
 }

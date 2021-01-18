@@ -1,8 +1,8 @@
 package com.kokasai.flowerkt.file
 
-import java.io.*
+import java.io.File
 
-class LocalFileProvider(val directory: File): FileProvider {
+class LocalFileProvider(val directory: File) : FileProvider {
     override suspend fun add(path: String, file: File): Boolean {
         return try {
             file.copyTo(File(directory, path))

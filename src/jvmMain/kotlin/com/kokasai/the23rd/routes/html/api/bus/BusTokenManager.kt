@@ -1,9 +1,9 @@
 package com.kokasai.the23rd.routes.html.api.bus
 
-import io.ktor.application.*
-import io.ktor.http.*
-import io.ktor.request.*
-import io.ktor.response.*
+import io.ktor.application.ApplicationCall
+import io.ktor.http.HttpStatusCode
+import io.ktor.request.header
+import io.ktor.response.respond
 
 object BusTokenManager {
     private val busList = mapOf(

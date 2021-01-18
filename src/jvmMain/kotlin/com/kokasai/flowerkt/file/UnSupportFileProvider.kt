@@ -1,8 +1,8 @@
 package com.kokasai.flowerkt.file
 
-import java.io.*
+import java.io.File
 
-object UnSupportFileProvider: FileProvider {
+object UnSupportFileProvider : FileProvider {
     override suspend fun add(path: String, file: File): Boolean {
         return false
     }

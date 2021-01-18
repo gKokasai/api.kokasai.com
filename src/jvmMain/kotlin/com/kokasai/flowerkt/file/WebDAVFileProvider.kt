@@ -1,14 +1,15 @@
 package com.kokasai.flowerkt.file
 
-import io.ktor.client.*
-import io.ktor.client.content.*
-import io.ktor.client.request.*
-import io.ktor.client.statement.*
-import io.ktor.http.*
-import io.ktor.util.*
-import java.io.*
+import io.ktor.client.HttpClient
+import io.ktor.client.content.LocalFileContent
+import io.ktor.client.request.request
+import io.ktor.client.statement.HttpResponse
+import io.ktor.http.HttpMethod
+import io.ktor.http.isSuccess
+import io.ktor.util.toByteArray
+import java.io.File
 
-class WebDAVFileProvider(val client: HttpClient, val url: String): FileProvider {
+class WebDAVFileProvider(val client: HttpClient, val url: String) : FileProvider {
     private val cacheFile = mutableMapOf<String, File?>()
 
     override suspend fun add(path: String, file: File): Boolean {

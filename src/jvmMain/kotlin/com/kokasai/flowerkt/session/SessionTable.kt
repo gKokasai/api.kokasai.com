@@ -1,9 +1,9 @@
 package com.kokasai.flowerkt.session
 
-import org.jetbrains.exposed.sql.*
-import java.time.*
+import org.jetbrains.exposed.sql.Table
+import java.time.Duration
 
-open class SessionTable(name: String, val expireDuration: Duration): Table(name) {
+open class SessionTable(name: String, val expireDuration: Duration) : Table(name) {
     val sessionId = text("sessionId").uniqueIndex()
     val value = text("value")
     val expireTime = long("expireTime")

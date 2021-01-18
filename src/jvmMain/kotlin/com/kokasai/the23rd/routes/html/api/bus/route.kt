@@ -1,9 +1,9 @@
 package com.kokasai.the23rd.routes.html.api.bus
 
-import com.kokasai.flowerkt.route.*
-import com.kokasai.the23rd.constants.bus.*
-import io.ktor.application.*
-import io.ktor.response.*
+import com.kokasai.flowerkt.route.get
+import com.kokasai.the23rd.constants.bus.BusRoute
+import io.ktor.application.call
+import io.ktor.response.respond
 
 val route = get {
     BusTokenManager.challenge(call) {

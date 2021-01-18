@@ -1,8 +1,11 @@
-import constants.*
-import org.w3c.dom.*
-import org.w3c.dom.events.*
+import constants.WEB_SOCKET_HOST
+import constants.WEB_SOCKET_PORT
+import org.w3c.dom.CloseEvent
+import org.w3c.dom.ErrorEvent
+import org.w3c.dom.WebSocket
+import org.w3c.dom.events.Event
 
-object BusUpdaterJs: Js {
+object BusUpdaterJs : Js {
     override val onLoad: ((Event) -> dynamic) = {
         WebSocket("$WEB_SOCKET_HOST:$WEB_SOCKET_PORT/bus").apply {
             onopen = {

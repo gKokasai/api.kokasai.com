@@ -1,6 +1,7 @@
 package com.kokasai.flowerkt.html
 
-import kotlinx.html.*
+import kotlinx.html.HEAD
+import kotlinx.html.meta
 
 inline fun HEAD.meta(run: Meta.() -> Unit) = run.invoke(Meta(this))
 

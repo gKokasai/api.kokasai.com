@@ -1,8 +1,8 @@
 package com.kokasai.flowerkt.html
 
-import com.kokasai.flowerkt.route.*
-import io.ktor.application.*
-import io.ktor.response.*
+import com.kokasai.flowerkt.route.RoutePath
+import io.ktor.application.ApplicationCall
+import io.ktor.response.respondRedirect
 
 suspend inline fun ApplicationCall.respondRedirect(
     url: RoutePath,

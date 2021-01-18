@@ -1,6 +1,6 @@
 package com.kokasai.the23rd.constants
 
-import kotlinx.css.*
+import kotlinx.css.Color
 
 val BASE_COLOR = Color.white
 val SHADOW_COLOR = Color.black

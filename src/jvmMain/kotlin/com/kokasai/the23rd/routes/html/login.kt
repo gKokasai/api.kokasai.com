@@ -1,16 +1,28 @@
 package com.kokasai.the23rd.routes.html
 
-import com.kokasai.flowerkt.html.*
-import com.kokasai.flowerkt.route.*
-import com.kokasai.the23rd.constants.*
-import com.kokasai.the23rd.routes.template.*
-import com.kokasai.the23rd.user.*
-import io.ktor.application.*
-import io.ktor.auth.*
-import io.ktor.html.*
-import io.ktor.routing.*
-import io.ktor.sessions.*
-import kotlinx.html.*
+import com.kokasai.flowerkt.html.respondRedirect
+import com.kokasai.flowerkt.route.authenticate
+import com.kokasai.flowerkt.route.get
+import com.kokasai.flowerkt.route.route
+import com.kokasai.the23rd.constants.AuthFormFields
+import com.kokasai.the23rd.constants.AuthName
+import com.kokasai.the23rd.constants.AuthTestLogin
+import com.kokasai.the23rd.constants.SessionConstants
+import com.kokasai.the23rd.routes.template.WithHeaderTemplate
+import com.kokasai.the23rd.user.UserPrincipal
+import io.ktor.application.call
+import io.ktor.auth.principal
+import io.ktor.html.respondHtmlTemplate
+import io.ktor.routing.post
+import io.ktor.sessions.get
+import io.ktor.sessions.sessions
+import kotlinx.html.FormMethod
+import kotlinx.html.div
+import kotlinx.html.form
+import kotlinx.html.passwordInput
+import kotlinx.html.style
+import kotlinx.html.submitInput
+import kotlinx.html.textInput
 
 val login = route {
     get {

@@ -1,10 +1,11 @@
 package com.kokasai.the23rd.configure
 
-import com.kokasai.flowerkt.session.*
-import com.kokasai.the23rd.*
-import com.kokasai.the23rd.constants.*
-import com.kokasai.the23rd.user.*
-import io.ktor.sessions.*
+import com.kokasai.flowerkt.session.SessionStorageExposed
+import com.kokasai.the23rd.Kokasai23rd
+import com.kokasai.the23rd.constants.CookiesConstants
+import com.kokasai.the23rd.user.UserPrincipal
+import io.ktor.sessions.Sessions
+import io.ktor.sessions.cookie
 
 fun Sessions.Configuration.configureAuthCookie() {
     cookie<UserPrincipal>(CookiesConstants.AUTH, storage = SessionStorageExposed(Kokasai23rd.sessionTable)) {

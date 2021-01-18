@@ -1,12 +1,18 @@
 package com.kokasai.the23rd.configure
 
-import com.kokasai.flowerkt.html.*
-import com.kokasai.the23rd.constants.*
-import com.kokasai.the23rd.routes.html.*
-import com.kokasai.the23rd.user.*
-import io.ktor.application.*
-import io.ktor.auth.*
-import io.ktor.response.*
+import com.kokasai.flowerkt.html.respondRedirect
+import com.kokasai.the23rd.constants.AuthFormFields
+import com.kokasai.the23rd.constants.AuthName
+import com.kokasai.the23rd.constants.AuthTestLogin
+import com.kokasai.the23rd.routes.html.HtmlRoute
+import com.kokasai.the23rd.user.UserPrincipal
+import io.ktor.application.call
+import io.ktor.auth.Authentication
+import io.ktor.auth.AuthenticationFailedCause
+import io.ktor.auth.authentication
+import io.ktor.auth.form
+import io.ktor.auth.session
+import io.ktor.response.respondRedirect
 
 fun Authentication.Configuration.configureFormAuth() {
     form(AuthName.FORM) {

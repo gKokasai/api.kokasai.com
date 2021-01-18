@@ -1,10 +1,10 @@
 package com.kokasai.the23rd.constants
 
-import com.kokasai.flowerkt.route.*
-import com.kokasai.the23rd.routes.html.*
+import com.kokasai.flowerkt.route.RoutePath
+import com.kokasai.the23rd.routes.html.HtmlRoute
 
 data class NavigationMenuElement(val href: String, val name: String) {
-    constructor(route: RoutePath, name: String): this(route.fullPath, name)
+    constructor(route: RoutePath, name: String) : this(route.fullPath, name)
 
     companion object {
         val list = listOf(

@@ -1,15 +1,15 @@
 package com.kokasai.the23rd.routes.html
 
-import com.kokasai.flowerkt.html.*
-import com.kokasai.flowerkt.route.*
-import com.kokasai.the23rd.constants.*
-import com.kokasai.the23rd.routes.template.*
-import com.kokasai.the23rd.user.*
-import io.ktor.application.*
-import io.ktor.auth.*
-import io.ktor.html.*
-import io.ktor.routing.*
-import kotlinx.html.*
+import com.kokasai.flowerkt.html.a
+import com.kokasai.flowerkt.route.authenticate
+import com.kokasai.flowerkt.route.get
+import com.kokasai.the23rd.constants.AuthName
+import com.kokasai.the23rd.routes.template.WithHeaderTemplate
+import com.kokasai.the23rd.user.UserPrincipal
+import io.ktor.application.call
+import io.ktor.auth.principal
+import io.ktor.html.respondHtmlTemplate
+import kotlinx.html.div
 
 val account = authenticate(AuthName.SESSION) {
     get {

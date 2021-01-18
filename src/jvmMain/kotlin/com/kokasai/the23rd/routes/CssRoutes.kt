@@ -1,9 +1,10 @@
 package com.kokasai.the23rd.routes
 
-import com.kokasai.flowerkt.css.*
-import com.kokasai.the23rd.routes.html.*
-import io.ktor.application.*
-import io.ktor.routing.*
+import com.kokasai.flowerkt.css.respondCss
+import com.kokasai.the23rd.routes.html.HtmlRoute
+import io.ktor.application.call
+import io.ktor.routing.Route
+import io.ktor.routing.get
 
 fun Route.cssRoutes() {
     HtmlRoute.Css::class.sealedSubclasses.forEach { kClass ->

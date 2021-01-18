@@ -1,10 +1,16 @@
 package com.kokasai.the23rd.routes
 
-import com.kokasai.the23rd.routes.template.*
-import io.ktor.application.*
-import io.ktor.html.*
-import io.ktor.routing.*
-import kotlinx.html.*
+import com.kokasai.the23rd.routes.template.WithHeaderTemplate
+import io.ktor.application.call
+import io.ktor.html.respondHtmlTemplate
+import io.ktor.routing.Route
+import io.ktor.routing.get
+import kotlinx.html.h2
+import kotlinx.html.h3
+import kotlinx.html.h4
+import kotlinx.html.h5
+import kotlinx.html.h6
+import kotlinx.html.p
 
 fun Route.testRoute() {
     get("/test") {
