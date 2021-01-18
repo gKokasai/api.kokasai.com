@@ -1,9 +1,9 @@
 package com.kokasai.the23rd.routes.html
 
-import com.kokasai.flowerkt.html.a
 import com.kokasai.flowerkt.route.authenticate
 import com.kokasai.flowerkt.route.get
 import com.kokasai.the23rd.constants.AuthName
+import com.kokasai.the23rd.extension.html.a
 import com.kokasai.the23rd.routes.template.WithHeaderTemplate
 import com.kokasai.the23rd.user.UserPrincipal
 import io.ktor.application.call
