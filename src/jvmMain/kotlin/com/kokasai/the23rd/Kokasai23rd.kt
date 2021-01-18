@@ -3,7 +3,7 @@ package com.kokasai.the23rd
 import com.kokasai.flowerkt.FlowerKt
 import com.kokasai.flowerkt.database.SQLiteDatabaseProvider
 import com.kokasai.flowerkt.file.WebDAVFileProvider
-import com.kokasai.flowerkt.route.route
+import com.kokasai.flowerkt.route.buildRoute
 import com.kokasai.the23rd.configure.configureAuthCookie
 import com.kokasai.the23rd.configure.configureFormAuth
 import com.kokasai.the23rd.configure.configureGson
@@ -39,7 +39,7 @@ object Kokasai23rd : FlowerKt() {
         },
         System.getenv(SystemEnv.WebDEV.Url)
     )
-    override val routeBuilder = HtmlRouteBuilder + WebSocketRouteBuilder + route {
+    override val routeBuilder = HtmlRouteBuilder + WebSocketRouteBuilder + buildRoute {
         fileRoutes()
         cssRoutes()
         staticRoute()

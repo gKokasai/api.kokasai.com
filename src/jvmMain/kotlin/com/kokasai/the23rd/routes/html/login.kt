@@ -1,9 +1,7 @@
 package com.kokasai.the23rd.routes.html
 
 import com.kokasai.flowerkt.html.respondRedirect
-import com.kokasai.flowerkt.route.authenticate
-import com.kokasai.flowerkt.route.get
-import com.kokasai.flowerkt.route.route
+import com.kokasai.flowerkt.route.buildRoute
 import com.kokasai.the23rd.constants.AuthFormFields
 import com.kokasai.the23rd.constants.AuthName
 import com.kokasai.the23rd.constants.AuthTestLogin
@@ -11,8 +9,10 @@ import com.kokasai.the23rd.constants.SessionConstants
 import com.kokasai.the23rd.routes.template.WithHeaderTemplate
 import com.kokasai.the23rd.user.UserPrincipal
 import io.ktor.application.call
+import io.ktor.auth.authenticate
 import io.ktor.auth.principal
 import io.ktor.html.respondHtmlTemplate
+import io.ktor.routing.get
 import io.ktor.routing.post
 import io.ktor.sessions.get
 import io.ktor.sessions.sessions
@@ -24,7 +24,7 @@ import kotlinx.html.style
 import kotlinx.html.submitInput
 import kotlinx.html.textInput
 
-val login = route {
+val login = buildRoute {
     get {
         val principal = call.sessions.get<UserPrincipal>()
         if (principal != null) {

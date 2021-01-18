@@ -40,16 +40,16 @@ interface RouteBuilder {
 }
 
 @ContextDsl
-fun route(action: RouteAction) = RouteBuilder.Element(action)
+fun buildRoute(action: RouteAction) = RouteBuilder.Element(action)
 
-fun authenticate(
+fun buildAuthenticateRoute(
     vararg configurations: String? = arrayOf(null),
     optional: Boolean = false,
     build: RouteAction
-) = route { authenticate(*configurations, optional = optional, build = build) }
+) = buildRoute { authenticate(*configurations, optional = optional, build = build) }
 
 @ContextDsl
-fun get(body: PipelineInterceptor<Unit, ApplicationCall>) = route { get(body) }
+fun buildGetRoute(body: PipelineInterceptor<Unit, ApplicationCall>) = buildRoute { get(body) }
 
 @ContextDsl
-fun webSocket(handler: suspend DefaultWebSocketServerSession.() -> Unit) = route { webSocket(null, handler) }
+fun buildWebSocketRoute(handler: suspend DefaultWebSocketServerSession.() -> Unit) = buildRoute { webSocket(null, handler) }
