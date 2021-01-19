@@ -4,6 +4,7 @@ object Versions {
     const val shadow = "6.1.0" // https://bintray.com/johnrengelman/gradle-plugins/gradle-shadow-plugin
     const val ktlint = "0.40.0" // https://search.maven.org/search?q=g:com.pinterest%20AND%20a:ktlint
     const val ktlint_gradle = "9.4.1" // https://plugins.gradle.org/plugin/org.jlleitschuh.gradle.ktlint
+    const val versions = "0.36.0" // https://plugins.gradle.org/plugin/com.github.ben-manes.versions
     const val kotlin_css_jvm = "1.0.0-pre.138-kotlin-1.4.10" // https://bintray.com/kotlin/kotlin-js-wrappers/kotlin-css
     const val exposed = "0.28.1" // https://bintray.com/kotlin/exposed/exposed-core
     const val sqlite_driver = "3.34.0" // https://search.maven.org/artifact/org.xerial/sqlite-jdbc

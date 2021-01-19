@@ -4,6 +4,7 @@ object Libraries {
         const val kotlin_multiplatform = "org.jetbrains.kotlin.multiplatform"
         const val shadow = "com.github.johnrengelman.shadow"
         const val ktlint = "org.jlleitschuh.gradle.ktlint"
+        const val versions = "com.github.ben-manes.versions"
     }
 
     object Kotlin {

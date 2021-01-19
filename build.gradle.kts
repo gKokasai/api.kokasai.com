@@ -6,6 +6,7 @@ plugins {
     id(Libraries.GradlePlugin.kotlin_multiplatform) version Versions.kotlin
     id(Libraries.GradlePlugin.shadow) version Versions.shadow
     id(Libraries.GradlePlugin.ktlint) version Versions.ktlint_gradle
+    id(Libraries.GradlePlugin.versions) version Versions.versions
 }
 
 group = Packages.group
