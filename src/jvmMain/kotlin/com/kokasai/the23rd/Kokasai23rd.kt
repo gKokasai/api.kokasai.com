@@ -26,7 +26,7 @@ import io.ktor.sessions.Sessions
 import io.ktor.websocket.WebSockets
 
 object Kokasai23rd : FlowerKt() {
-    override val port = 8080
+    override val port = System.getenv(SystemEnv.Server.Port)?.toIntOrNull() ?: 8080
     override val fileProvider = WebDAVFileProvider(
         HttpClient(OkHttp) {
             install(Auth) {
