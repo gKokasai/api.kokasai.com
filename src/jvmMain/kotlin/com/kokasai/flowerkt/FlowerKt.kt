@@ -48,8 +48,7 @@ abstract class FlowerKt {
     /**
      * サーバーのポート番号です
      */
-    open val port: Int
-        get() = 80
+    abstract val port: Int
 
     /**
      * Ktor の機能をインストールします
