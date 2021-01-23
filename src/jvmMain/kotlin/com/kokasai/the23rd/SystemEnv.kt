@@ -1,13 +1,15 @@
 package com.kokasai.the23rd
 
-object SystemEnv {
+import com.kokasai.flowerkt.env.SystemEnvContainer
+
+object SystemEnv : SystemEnvContainer {
     object Server {
-        const val Port = "PORT"
+        val Port by intOrNull("PORT")
     }
 
     object WebDEV {
-        const val UserName = "WEB_DEV_USERNAME"
-        const val Password = "WEB_DEV_PASSWORD"
-        const val Url = "WEB_DEV_URL"
+        val UserName by string("WEB_DEV_USERNAME")
+        val Password by string("WEB_DEV_PASSWORD")
+        val Url by string("WEB_DEV_URL")
     }
 }

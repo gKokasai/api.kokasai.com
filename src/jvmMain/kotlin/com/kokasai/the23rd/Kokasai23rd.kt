@@ -26,17 +26,17 @@ import io.ktor.sessions.Sessions
 import io.ktor.websocket.WebSockets
 
 object Kokasai23rd : FlowerKt() {
-    override val port = System.getenv(SystemEnv.Server.Port)?.toIntOrNull() ?: 8080
+    override val port = SystemEnv.Server.Port ?: 8080
     override val fileProvider = WebDAVFileProvider(
         HttpClient(OkHttp) {
             install(Auth) {
                 basic {
-                    username = System.getenv(SystemEnv.WebDEV.UserName)
-                    password = System.getenv(SystemEnv.WebDEV.Password)
+                    username = SystemEnv.WebDEV.UserName
+                    password = SystemEnv.WebDEV.Password
                 }
             }
         },
-        System.getenv(SystemEnv.WebDEV.Url)
+        SystemEnv.WebDEV.Url
     )
     override val databaseProvider = SQLiteWithWebDAVDatabaseProvider(".data.db", fileProvider, 5 * 60 * 1000)
     override val routeBuilder = HtmlRouteBuilder + WebSocketRouteBuilder + buildRoute {
