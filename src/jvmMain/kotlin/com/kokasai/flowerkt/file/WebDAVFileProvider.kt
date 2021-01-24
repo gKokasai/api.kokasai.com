@@ -2,6 +2,10 @@ package com.kokasai.flowerkt.file
 
 import io.ktor.client.HttpClient
 import io.ktor.client.content.LocalFileContent
+import io.ktor.client.engine.HttpClientEngineConfig
+import io.ktor.client.engine.HttpClientEngineFactory
+import io.ktor.client.features.auth.Auth
+import io.ktor.client.features.auth.providers.basic
 import io.ktor.client.request.request
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.HttpMethod
@@ -9,16 +13,27 @@ import io.ktor.http.isSuccess
 import io.ktor.util.toByteArray
 import java.io.File
 
-class WebDAVFileProvider(client: HttpClient, val url: String) : RemoteFileProvider {
+class WebDAVFileProvider<T : HttpClientEngineConfig>(
+    clientEngine: HttpClientEngineFactory<T>,
+    private val webdavUsername: String,
+    private val webdavPassword: String,
+    private val webdavUrl: String
+) : RemoteFileProvider {
     private val cacheFile = mutableMapOf<String, File?>()
 
-    val client = client.config {
+    private val client = HttpClient(clientEngine) {
+        install(Auth) {
+            basic {
+                username = webdavUsername
+                password = webdavPassword
+            }
+        }
         expectSuccess = false
     }
 
     override suspend fun add(path: String, file: File): Boolean {
         cacheFile[path] = file
-        return client.request<HttpResponse>("$url/$path") {
+        return client.request<HttpResponse>("$webdavUrl/$path") {
             method = HttpMethod.Put
             body = LocalFileContent(file)
         }.status.isSuccess()
@@ -26,7 +41,7 @@ class WebDAVFileProvider(client: HttpClient, val url: String) : RemoteFileProvid
 
     override suspend fun remove(path: String): Boolean {
         cacheFile.remove(path)
-        return client.request<HttpResponse>("$url/$path") {
+        return client.request<HttpResponse>("$webdavUrl/$path") {
             method = HttpMethod.Delete
         }.status.isSuccess()
     }
@@ -35,7 +50,7 @@ class WebDAVFileProvider(client: HttpClient, val url: String) : RemoteFileProvid
         val extension = path.substringAfterLast('.', "")
         if (extension.isBlank()) return null
         return cacheFile.getOrPut(path) {
-            val response = client.request<HttpResponse>("$url/$path") {
+            val response = client.request<HttpResponse>("$webdavUrl/$path") {
                 method = HttpMethod.Get
             }
             if (response.status.isSuccess()) {
