@@ -31,12 +31,12 @@ object Kokasai23rd : FlowerKt() {
         HttpClient(OkHttp) {
             install(Auth) {
                 basic {
-                    username = SystemEnv.WebDEV.UserName
-                    password = SystemEnv.WebDEV.Password
+                    username = SystemEnv.WebDAV.UserName
+                    password = SystemEnv.WebDAV.Password
                 }
             }
         },
-        SystemEnv.WebDEV.Url
+        SystemEnv.WebDAV.Url
     )
     override val databaseProvider = SQLiteWithWebDAVDatabaseProvider(".data.db", fileProvider, 5 * 60 * 1000)
     override val routeBuilder = HtmlRouteBuilder + WebSocketRouteBuilder + buildRoute {
