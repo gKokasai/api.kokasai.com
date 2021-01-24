@@ -21,7 +21,7 @@ class SQLiteWithWebDAVDatabaseProvider(fileName: String, val webdav: WebDAVFileP
                     }
                 }
             )
-            timer(period = uploadPeriod) {
+            timer(initialDelay = uploadPeriod, period = uploadPeriod) {
                 runBlocking {
                     upload()
                 }
