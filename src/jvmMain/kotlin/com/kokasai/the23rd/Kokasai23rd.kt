@@ -1,7 +1,7 @@
 package com.kokasai.the23rd
 
 import com.kokasai.flowerkt.FlowerKt
-import com.kokasai.flowerkt.database.SQLiteWithWebDAVDatabaseProvider
+import com.kokasai.flowerkt.database.RemoteSQLiteDatabaseProvider
 import com.kokasai.flowerkt.file.WebDAVFileProvider
 import com.kokasai.flowerkt.route.buildRoute
 import com.kokasai.the23rd.configure.configureAuthCookie
@@ -38,7 +38,7 @@ object Kokasai23rd : FlowerKt() {
         },
         SystemEnv.WebDAV.Url
     )
-    override val databaseProvider = SQLiteWithWebDAVDatabaseProvider(".data.db", fileProvider, 5 * 60 * 1000)
+    override val databaseProvider = RemoteSQLiteDatabaseProvider(".data.db", fileProvider, 5 * 60 * 1000)
     override val routeBuilder = HtmlRouteBuilder + WebSocketRouteBuilder + buildRoute {
         fileRoutes()
         cssRoutes()

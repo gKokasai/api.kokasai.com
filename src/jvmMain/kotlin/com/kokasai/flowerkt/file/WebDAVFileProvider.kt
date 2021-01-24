@@ -9,7 +9,7 @@ import io.ktor.http.isSuccess
 import io.ktor.util.toByteArray
 import java.io.File
 
-class WebDAVFileProvider(client: HttpClient, val url: String) : FileProvider {
+class WebDAVFileProvider(client: HttpClient, val url: String) : RemoteFileProvider {
     private val cacheFile = mutableMapOf<String, File?>()
 
     val client = client.config {

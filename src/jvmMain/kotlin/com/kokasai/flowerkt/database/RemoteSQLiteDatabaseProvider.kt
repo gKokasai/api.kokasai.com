@@ -1,17 +1,17 @@
 package com.kokasai.flowerkt.database
 
 import com.kokasai.flowerkt.FlowerKt.Companion.LOGGER
-import com.kokasai.flowerkt.file.WebDAVFileProvider
+import com.kokasai.flowerkt.file.RemoteFileProvider
 import kotlinx.coroutines.runBlocking
 import java.io.File
 import kotlin.concurrent.timer
 
-class SQLiteWithWebDAVDatabaseProvider(fileName: String, val webdav: WebDAVFileProvider, val uploadPeriod: Long) : SQLiteDatabaseProvider(fileName) {
+class RemoteSQLiteDatabaseProvider(fileName: String, val fileProvider: RemoteFileProvider, val uploadPeriod: Long) : SQLiteDatabaseProvider(fileName) {
     private val file = File(fileName)
 
     override fun connect() {
         runBlocking {
-            webdav.get(fileName)?.renameTo(file) ?: run {
+            fileProvider.get(fileName)?.renameTo(file) ?: run {
                 LOGGER.warn("Failure download database file from WebDAV.")
             }
             Runtime.getRuntime().addShutdownHook(
@@ -31,6 +31,6 @@ class SQLiteWithWebDAVDatabaseProvider(fileName: String, val webdav: WebDAVFileP
     }
 
     suspend fun upload() {
-        webdav.add(fileName, file)
+        fileProvider.add(fileName, file)
     }
 }
