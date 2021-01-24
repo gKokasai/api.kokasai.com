@@ -39,7 +39,7 @@ class WebDAVFileProvider(client: HttpClient, val url: String) : FileProvider {
                 method = HttpMethod.Get
             }
             if (response.status.isSuccess()) {
-                createTempFile(suffix = ".$extension").apply {
+                File.createTempFile("tmp", ".$extension").apply {
                     writeBytes(response.content.toByteArray())
                 }
             } else {
