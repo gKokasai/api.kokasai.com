@@ -1,6 +1,6 @@
 package com.kokasai.the23rd.configure
 
-import com.kokasai.flowerkt.html.respondRedirect
+import com.kokasai.flowerkt.route.respondRedirect
 import com.kokasai.the23rd.constants.AuthFormFields
 import com.kokasai.the23rd.constants.AuthName
 import com.kokasai.the23rd.constants.AuthTestLogin

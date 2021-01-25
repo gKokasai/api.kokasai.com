@@ -40,19 +40,23 @@ kotlin {
         }
 
         val jvmMain by getting {
+            repositories {
+                maven(url = Libraries.FlowerKt.repositoryUrl)
+            }
+
             dependencies {
                 implementation(Libraries.Ktor.client_okhttp)
-                implementation(Libraries.Ktor.client_auth)
                 implementation(Libraries.Ktor.server_netty)
                 implementation(Libraries.Ktor.server_sessions)
-                implementation(Libraries.Ktor.auth)
-                implementation(Libraries.Ktor.html_builder)
                 implementation(Libraries.Ktor.gson)
-                implementation(Libraries.Ktor.websockets)
-                implementation(Libraries.Kotlin.css_jvm)
-                implementation(Libraries.Exposed.core)
-                implementation(Libraries.Exposed.jdbc)
-                implementation(Libraries.sqlite_driver)
+                implementation(Libraries.FlowerKt.auth)
+                implementation(Libraries.FlowerKt.core)
+                implementation(Libraries.FlowerKt.css)
+                implementation(Libraries.FlowerKt.database_sqlite)
+                implementation(Libraries.FlowerKt.file_webdav)
+                implementation(Libraries.FlowerKt.html)
+                implementation(Libraries.FlowerKt.session_exposed)
+                implementation(Libraries.FlowerKt.websocket)
                 implementation(Libraries.logback)
             }
         }

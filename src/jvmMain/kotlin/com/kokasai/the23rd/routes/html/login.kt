@@ -1,7 +1,7 @@
 package com.kokasai.the23rd.routes.html
 
-import com.kokasai.flowerkt.html.respondRedirect
 import com.kokasai.flowerkt.route.buildRoute
+import com.kokasai.flowerkt.route.respondRedirect
 import com.kokasai.the23rd.constants.AuthFormFields
 import com.kokasai.the23rd.constants.AuthName
 import com.kokasai.the23rd.constants.AuthTestLogin
