@@ -28,7 +28,6 @@ import io.ktor.server.engine.ApplicationEngineFactory
 import io.ktor.server.netty.Netty
 import io.ktor.sessions.Sessions
 import io.ktor.websocket.WebSockets
-import java.time.Duration
 
 object Kokasai23rd : FlowerKt(), UseFile, UseSessionExposedDatabase, UseExposedDatabase {
     override val engine = Netty as ApplicationEngineFactory<ApplicationEngine, ApplicationEngine.Configuration>
@@ -42,7 +41,6 @@ object Kokasai23rd : FlowerKt(), UseFile, UseSessionExposedDatabase, UseExposedD
 
         testRoute()
     }
-    override val sessionTable = SessionTable("session", Duration.ofDays(30))
 
     override fun Application.installKtorFeature() {
         install(Sessions) {
