@@ -2,12 +2,13 @@ package com.kokasai.the23rd
 
 import com.kokasai.flowerkt.FlowerKt
 import com.kokasai.flowerkt.database.RemoteSQLiteDatabaseProvider
-import com.kokasai.flowerkt.database.UseExposedDatabase
-import com.kokasai.flowerkt.file.UseFile
 import com.kokasai.flowerkt.file.WebDAVFileProvider
+import com.kokasai.flowerkt.module.UseAuth
+import com.kokasai.flowerkt.module.UseExposedDatabaseSQLite
+import com.kokasai.flowerkt.module.UseFileWebDav
+import com.kokasai.flowerkt.module.UseSessionExposedDatabase
+import com.kokasai.flowerkt.module.UseWebsocket
 import com.kokasai.flowerkt.route.buildRoute
-import com.kokasai.flowerkt.session.SessionTable
-import com.kokasai.flowerkt.session.UseSessionExposedDatabase
 import com.kokasai.the23rd.configure.configureAuthCookie
 import com.kokasai.the23rd.configure.configureFormAuth
 import com.kokasai.the23rd.configure.configureGson
@@ -29,11 +30,12 @@ import io.ktor.server.netty.Netty
 import io.ktor.sessions.Sessions
 import io.ktor.websocket.WebSockets
 
-object Kokasai23rd : FlowerKt(), UseFile, UseSessionExposedDatabase, UseExposedDatabase {
+object Kokasai23rd : FlowerKt, UseAuth, UseFileWebDav, UseSessionExposedDatabase, UseExposedDatabaseSQLite, UseWebsocket {
     override val engine = Netty as ApplicationEngineFactory<ApplicationEngine, ApplicationEngine.Configuration>
     override val port = SystemEnv.Server.Port ?: 8080
     override val fileProvider = WebDAVFileProvider(OkHttp, SystemEnv.WebDAV.UserName, SystemEnv.WebDAV.Password, SystemEnv.WebDAV.Url)
     override val databaseProvider = RemoteSQLiteDatabaseProvider(".data.db", fileProvider, 5 * 60 * 1000)
+
     override val routeBuilder = HtmlRouteBuilder + WebSocketRouteBuilder + buildRoute {
         fileRoutes()
         cssRoutes()
@@ -42,21 +44,27 @@ object Kokasai23rd : FlowerKt(), UseFile, UseSessionExposedDatabase, UseExposedD
         testRoute()
     }
 
-    override fun Application.installKtorFeature() {
-        install(Sessions) {
-            configureAuthCookie()
-        }
+    override val authenticationConfiguration: Authentication.Configuration.() -> Unit = {
+        configureFormAuth()
+        configureSessionAuth()
+    }
 
-        install(Authentication) {
-            configureFormAuth()
-            configureSessionAuth()
-        }
+    override val sessionsConfiguration: Sessions.Configuration.() -> Unit = {
+        configureAuthCookie()
+    }
 
-        install(ContentNegotiation) {
-            configureGson()
-        }
+    override val webSocketsOptions: WebSockets.WebSocketOptions.() -> Unit = {
+    }
 
-        install(WebSockets)
+    override fun installKtor(application: Application) {
+        super<UseAuth>.installKtor(application)
+        super<UseSessionExposedDatabase>.installKtor(application)
+        super<UseWebsocket>.installKtor(application)
+        application.run {
+            install(ContentNegotiation) {
+                configureGson()
+            }
+        }
     }
 
     override fun launch() {
