@@ -61,7 +61,8 @@ object Kokasai23rd : FlowerKt(), UseFile, UseSessionExposedDatabase, UseExposedD
         install(WebSockets)
     }
 
-    override fun onLaunch() {
-        super<UseSessionExposedDatabase>.onLaunch()
+    override fun launch() {
+        super<UseSessionExposedDatabase>.launch()
+        super<FlowerKt>.launch()
     }
 }
