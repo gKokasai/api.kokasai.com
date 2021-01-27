@@ -24,14 +24,12 @@ import io.ktor.application.install
 import io.ktor.auth.Authentication
 import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.features.ContentNegotiation
-import io.ktor.server.engine.ApplicationEngine
-import io.ktor.server.engine.ApplicationEngineFactory
 import io.ktor.server.netty.Netty
 import io.ktor.sessions.Sessions
 import io.ktor.websocket.WebSockets
 
 object Kokasai23rd : FlowerKt, UseAuth, UseFileWebDav, UseSessionExposedDatabase, UseExposedDatabaseSQLite, UseWebsocket {
-    override val engine = Netty as ApplicationEngineFactory<ApplicationEngine, ApplicationEngine.Configuration>
+    override val engine = Netty
     override val port = SystemEnv.Server.Port ?: 8080
     override val fileProvider = WebDAVFileProvider(OkHttp, SystemEnv.WebDAV.UserName, SystemEnv.WebDAV.Password, SystemEnv.WebDAV.Url)
     override val databaseProvider = RemoteSQLiteDatabaseProvider(".data.db", fileProvider, 5 * 60 * 1000)
