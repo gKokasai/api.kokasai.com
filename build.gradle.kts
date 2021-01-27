@@ -108,7 +108,7 @@ tasks.getByName<JavaExec>("run") {
 
 // Heroku で実行されるタスク
 task("stage") {
-    dependsOn("run")
+    dependsOn("shadowJar")
 }
 
 configure<KtlintExtension> {
