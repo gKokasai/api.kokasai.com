@@ -1,1 +1,1 @@
-rootProject.name = "Kokasai23rd"
+rootProject.name = "kokasai-api"
