@@ -1,7 +1,7 @@
 object Libraries {
     object GradlePlugin {
         const val application = "org.gradle.application"
-        const val kotlin_multiplatform = "org.jetbrains.kotlin.multiplatform"
+        const val kotlin_jvm = "org.jetbrains.kotlin.jvm"
         const val shadow = "com.github.johnrengelman.shadow"
         const val ktlint = "org.jlleitschuh.gradle.ktlint"
         const val versions = "com.github.ben-manes.versions"
@@ -25,7 +25,6 @@ object Libraries {
         const val css = "com.kokasai.flowerkt:css:${Versions.flowerkt}"
         const val database_sqlite = "com.kokasai.flowerkt:database-exposed-sqlite:${Versions.flowerkt}"
         const val file_webdav = "com.kokasai.flowerkt:file-webdav:${Versions.flowerkt}"
-        const val html = "com.kokasai.flowerkt:html:${Versions.flowerkt}"
         const val session_exposed = "com.kokasai.flowerkt:session-exposed:${Versions.flowerkt}"
         const val websocket = "com.kokasai.flowerkt:websocket:${Versions.flowerkt}"
     }
