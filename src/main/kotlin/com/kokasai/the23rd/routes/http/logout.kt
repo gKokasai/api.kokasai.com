@@ -1,4 +1,4 @@
-package com.kokasai.the23rd.routes.html
+package com.kokasai.the23rd.routes.http
 
 import com.kokasai.flowerkt.route.buildGetRoute
 import com.kokasai.flowerkt.route.respondRedirect
@@ -8,5 +8,5 @@ import io.ktor.sessions.sessions
 
 val logout = buildGetRoute {
     call.sessions.clear(Auth.UserLogin.cookie)
-    call.respondRedirect(HtmlRoute.Login)
+    call.respondRedirect(HttpRoute.Login)
 }

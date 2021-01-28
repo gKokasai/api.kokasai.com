@@ -1,4 +1,4 @@
-package com.kokasai.the23rd.routes.html
+package com.kokasai.the23rd.routes.http
 
 import com.kokasai.flowerkt.route.buildRoute
 import com.kokasai.the23rd.constants.Auth

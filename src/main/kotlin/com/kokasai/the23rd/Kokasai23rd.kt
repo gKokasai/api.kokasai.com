@@ -14,7 +14,7 @@ import com.kokasai.the23rd.configure.configureFormAuth
 import com.kokasai.the23rd.configure.configureGson
 import com.kokasai.the23rd.configure.configureSessionAuth
 import com.kokasai.the23rd.routes.fileRoutes
-import com.kokasai.the23rd.routes.html.HtmlRouteBuilder
+import com.kokasai.the23rd.routes.http.HttpRouteBuilder
 import com.kokasai.the23rd.routes.websocket.WebSocketRouteBuilder
 import io.ktor.application.Application
 import io.ktor.application.install
@@ -31,7 +31,7 @@ object Kokasai23rd : FlowerKt, UseAuth, UseFileWebDav, UseSessionExposedDatabase
     override val fileProvider = WebDAVFileProvider(OkHttp, SystemEnv.WebDAV.UserName, SystemEnv.WebDAV.Password, SystemEnv.WebDAV.Url)
     override val databaseProvider = RemoteSQLiteDatabaseProvider(".data.db", fileProvider, 5 * 60 * 1000)
 
-    override val routeBuilder = HtmlRouteBuilder + WebSocketRouteBuilder + buildRoute {
+    override val routeBuilder = HttpRouteBuilder + WebSocketRouteBuilder + buildRoute {
         fileRoutes()
     }
 

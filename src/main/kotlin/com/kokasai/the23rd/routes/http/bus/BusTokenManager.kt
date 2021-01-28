@@ -1,4 +1,4 @@
-package com.kokasai.the23rd.routes.html.bus
+package com.kokasai.the23rd.routes.http.bus
 
 import io.ktor.application.ApplicationCall
 import io.ktor.http.HttpStatusCode

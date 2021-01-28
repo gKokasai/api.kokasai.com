@@ -1,8 +1,8 @@
-package com.kokasai.the23rd.routes.html
+package com.kokasai.the23rd.routes.http
 
 import com.kokasai.flowerkt.route.RoutePath
 
-object HtmlRoute {
+object HttpRoute {
     object Login : RoutePath("/login")
     object Logout : RoutePath("/login")
     object Bus : RoutePath("/bus") {

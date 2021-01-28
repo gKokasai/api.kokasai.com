@@ -1,12 +1,12 @@
-package com.kokasai.the23rd.routes.html.bus
+package com.kokasai.the23rd.routes.http.bus
 
 import com.kokasai.flowerkt.route.buildGetRoute
+import com.kokasai.the23rd.constants.bus.BusRoute
 import io.ktor.application.call
-import io.ktor.http.HttpStatusCode
 import io.ktor.response.respond
 
-val challenge = buildGetRoute {
+val route = buildGetRoute {
     BusTokenManager.challenge(call) {
-        call.respond(HttpStatusCode.OK, it)
+        call.respond(BusRoute.route)
     }
 }
