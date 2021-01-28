@@ -1,4 +1,4 @@
-package com.kokasai.the23rd.constants.bus
+package com.kokasai.the23rd.bus
 
 object BusRoute {
     data class RoutePoint(
