@@ -1,8 +1,11 @@
 package com.kokasai.the23rd.routes.websocket
 
-import com.kokasai.flowerkt.websocket.buildWebSocketRoute
+import com.kokasai.flowerkt.route.RouteAction
 import io.ktor.http.cio.websocket.Frame
+import io.ktor.websocket.webSocket
 
-val bus = buildWebSocketRoute {
-    outgoing.send(Frame.Text("Bus"))
+val bus: RouteAction = {
+    webSocket {
+        outgoing.send(Frame.Text("Bus"))
+    }
 }
