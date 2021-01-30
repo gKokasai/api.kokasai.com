@@ -1,6 +1,6 @@
 package com.kokasai.the23rd.routes.http
 
-import com.kokasai.flowerkt.route.buildRoute
+import com.kokasai.flowerkt.route.RouteAction
 import com.kokasai.the23rd.auth.UserLogin
 import io.ktor.application.call
 import io.ktor.auth.authenticate
@@ -12,7 +12,7 @@ import io.ktor.routing.post
 import io.ktor.sessions.get
 import io.ktor.sessions.sessions
 
-val login = buildRoute {
+val login: RouteAction = {
     get {
         val principal = call.sessions.get<UserLogin.Data>()
         if (principal != null) {

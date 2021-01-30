@@ -19,16 +19,16 @@ repositories {
 
 dependencies {
     implementation(Libraries.Ktor.client_okhttp)
+    implementation(Libraries.Ktor.server_auth)
     implementation(Libraries.Ktor.server_netty)
     implementation(Libraries.Ktor.server_sessions)
     implementation(Libraries.Ktor.gson)
-    implementation(Libraries.FlowerKt.auth)
+    implementation(Libraries.Ktor.websocket)
     implementation(Libraries.FlowerKt.core)
     implementation(Libraries.FlowerKt.css)
     implementation(Libraries.FlowerKt.database_sqlite)
     implementation(Libraries.FlowerKt.file_webdav)
     implementation(Libraries.FlowerKt.session_exposed)
-    implementation(Libraries.FlowerKt.websocket)
     implementation(Libraries.logback)
 }
 
