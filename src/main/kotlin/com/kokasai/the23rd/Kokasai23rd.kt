@@ -16,6 +16,7 @@ import io.ktor.application.Application
 import io.ktor.application.install
 import io.ktor.auth.Authentication
 import io.ktor.client.engine.okhttp.OkHttp
+import io.ktor.features.CORS
 import io.ktor.features.ContentNegotiation
 import io.ktor.server.netty.Netty
 import io.ktor.sessions.Sessions
@@ -39,6 +40,9 @@ object Kokasai23rd : FlowerKt, UseFileWebDav, UseSessionExposedDatabase, UseExpo
             install(Authentication) {
                 configureFormAuth()
                 configureSessionAuth()
+            }
+            install(CORS) {
+                anyHost()
             }
             install(ContentNegotiation) {
                 configureGson()
