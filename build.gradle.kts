@@ -1,47 +1,47 @@
 import org.jlleitschuh.gradle.ktlint.KtlintExtension
 
 plugins {
-    id(Libraries.GradlePlugin.application)
-    id(Libraries.GradlePlugin.kotlin_jvm) version Versions.kotlin
-    id(Libraries.GradlePlugin.shadow) version Versions.shadow
-    id(Libraries.GradlePlugin.ktlint) version Versions.ktlint_gradle
-    id(Libraries.GradlePlugin.versions) version Versions.versions
+    application
+    kotlin("jvm") version "1.4.21"
+    id("com.github.johnrengelman.shadow") version "6.1.0"
+    id("org.jlleitschuh.gradle.ktlint") version "9.4.1"
+    id("com.github.ben-manes.versions") version "0.36.0"
 }
 
-group = Packages.group
-version = Packages.version
+group = "com.kokasai.the23rd"
+version = "1.0"
 
 repositories {
     mavenCentral()
     jcenter()
-    maven(url = Libraries.FlowerKt.repositoryUrl)
+    maven(url = "https://dl.bintray.com/kokasai/maven")
 }
 
 dependencies {
-    implementation(Libraries.Ktor.client_okhttp)
-    implementation(Libraries.Ktor.server_auth)
-    implementation(Libraries.Ktor.server_netty)
-    implementation(Libraries.Ktor.server_sessions)
-    implementation(Libraries.Ktor.gson)
-    implementation(Libraries.Ktor.websocket)
-    implementation(Libraries.FlowerKt.core)
-    implementation(Libraries.FlowerKt.css)
-    implementation(Libraries.FlowerKt.database_sqlite)
-    implementation(Libraries.FlowerKt.file_webdav)
-    implementation(Libraries.FlowerKt.session_exposed)
-    implementation(Libraries.logback)
+    implementation("io.ktor:ktor-client-okhttp:1.5.0")
+    implementation("io.ktor:ktor-auth:1.5.0")
+    implementation("io.ktor:ktor-server-netty:1.5.0")
+    implementation("io.ktor:ktor-server-sessions:1.5.0")
+    implementation("io.ktor:ktor-gson:1.5.0")
+    implementation("io.ktor:ktor-websockets:1.5.0")
+    implementation("com.kokasai.flowerkt:core:0.1.6")
+    implementation("com.kokasai.flowerkt:css:0.1.6")
+    implementation("com.kokasai.flowerkt:database-exposed-sqlite:0.1.6")
+    implementation("com.kokasai.flowerkt:file-webdav:0.1.6")
+    implementation("com.kokasai.flowerkt:session-exposed:0.1.6")
+    implementation("ch.qos.logback:logback-classic:1.2.3")
 }
 
 tasks {
     withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
         kotlinOptions {
-            jvmTarget = Packages.jvm_target
+            jvmTarget = "1.8"
         }
     }
 }
 
 application {
-    mainClassName = Packages.main_class
+    mainClassName = "com.kokasai.the23rd.LaunchKt"
 }
 
 // Heroku で実行されるタスク
@@ -50,5 +50,5 @@ task("stage") {
 }
 
 configure<KtlintExtension> {
-    version.set(Versions.ktlint)
+    version.set("0.40.0")
 }
