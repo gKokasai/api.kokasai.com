@@ -2,9 +2,9 @@ import org.jlleitschuh.gradle.ktlint.KtlintExtension
 
 plugins {
     application
-    kotlin("jvm") version "1.4.21"
+    kotlin("jvm") version "1.4.30"
     id("com.github.johnrengelman.shadow") version "6.1.0"
-    id("org.jlleitschuh.gradle.ktlint") version "9.4.1"
+    id("org.jlleitschuh.gradle.ktlint") version "10.0.0"
     id("com.github.ben-manes.versions") version "0.36.0"
 }
 
@@ -18,12 +18,12 @@ repositories {
 }
 
 dependencies {
-    implementation("io.ktor:ktor-client-okhttp:1.5.0")
-    implementation("io.ktor:ktor-auth:1.5.0")
-    implementation("io.ktor:ktor-server-netty:1.5.0")
-    implementation("io.ktor:ktor-server-sessions:1.5.0")
-    implementation("io.ktor:ktor-gson:1.5.0")
-    implementation("io.ktor:ktor-websockets:1.5.0")
+    implementation("io.ktor:ktor-client-okhttp:1.5.1")
+    implementation("io.ktor:ktor-auth:1.5.1")
+    implementation("io.ktor:ktor-server-netty:1.5.1")
+    implementation("io.ktor:ktor-server-sessions:1.5.1")
+    implementation("io.ktor:ktor-gson:1.5.1")
+    implementation("io.ktor:ktor-websockets:1.5.1")
     implementation("com.kokasai.flowerkt:core:0.1.6")
     implementation("com.kokasai.flowerkt:css:0.1.6")
     implementation("com.kokasai.flowerkt:database-exposed-sqlite:0.1.6")
