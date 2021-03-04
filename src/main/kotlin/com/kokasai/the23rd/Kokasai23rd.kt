@@ -21,8 +21,12 @@ import io.ktor.features.ContentNegotiation
 import io.ktor.server.netty.Netty
 import io.ktor.sessions.Sessions
 import io.ktor.websocket.WebSockets
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 object Kokasai23rd : FlowerKt, UseFileWebDav, UseSessionExposedDatabase, UseExposedDatabaseSQLite {
+    val logger: Logger = LoggerFactory.getLogger("Kokasai23rd")
+
     override val engine = Netty
     override val port = SystemEnv.Server.Port ?: 8080
     override val fileProvider = WebDAVFileProvider(OkHttp, SystemEnv.WebDAV.UserName, SystemEnv.WebDAV.Password, SystemEnv.WebDAV.Url)
