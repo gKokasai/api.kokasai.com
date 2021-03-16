@@ -9,9 +9,4 @@ object UserLogin {
     const val sessionName = "user-session"
 
     data class Data(val name: String) : Principal
-
-    object Test {
-        const val Username = "TestUser"
-        const val Password = "test"
-    }
 }

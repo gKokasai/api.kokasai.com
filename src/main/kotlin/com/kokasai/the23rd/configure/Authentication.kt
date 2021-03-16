@@ -1,5 +1,6 @@
 package com.kokasai.the23rd.configure
 
+import com.kokasai.the23rd.auth.OnetimePasswordManager
 import com.kokasai.the23rd.auth.UserLogin
 import io.ktor.application.call
 import io.ktor.auth.Authentication
@@ -12,7 +13,7 @@ fun Authentication.Configuration.configureFormAuth() {
     basic(UserLogin.authName) {
         realm = UserLogin.realm
         validate {
-            if (it.name == UserLogin.Test.Username && it.password == UserLogin.Test.Password) {
+            if (OnetimePasswordManager.auth(it.name, it.password)) {
                 UserLogin.Data(it.name)
             } else {
                 null

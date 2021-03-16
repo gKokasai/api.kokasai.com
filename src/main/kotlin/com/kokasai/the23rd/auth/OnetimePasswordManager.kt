@@ -2,7 +2,6 @@ package com.kokasai.the23rd.auth
 
 import com.kokasai.the23rd.Kokasai23rd
 import com.kokasai.the23rd.mail.MailSender
-import com.kokasai.the23rd.routes.http.AuthRequest
 import com.kokasai.the23rd.routes.http.LoginRequest
 
 object OnetimePasswordManager {
@@ -29,24 +28,18 @@ object OnetimePasswordManager {
         }
     }
 
-    enum class AuthResult {
-        Success, TooManyRequest, Error
-    }
-
-    fun auth(authRequest: AuthRequest): AuthResult {
-        val password = passwords[authRequest.id] ?: return AuthResult.Error
-        return if (password.pass == authRequest.pass) {
-            passwords.remove(authRequest.id)
-            AuthResult.Success
+    fun auth(id: String, pass: String): Boolean {
+        val password = passwords[id] ?: return false
+        return if (password.pass == pass) {
+            passwords.remove(id)
+            true
         } else {
             password.failureCount ++
             if (Password.MaxFailureCount < password.failureCount) {
-                Kokasai23rd.logger.trace("Auth-TooManyRequest: ${authRequest.id}")
-                passwords.remove(authRequest.id)
-                AuthResult.TooManyRequest
-            } else {
-                AuthResult.Error
+                Kokasai23rd.logger.trace("Auth-TooManyRequest: $id")
+                passwords.remove(id)
             }
+            false
         }
     }
 }
