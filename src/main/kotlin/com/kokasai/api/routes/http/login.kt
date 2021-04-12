@@ -1,7 +1,7 @@
-package com.kokasai.the23rd.routes.http
+package com.kokasai.api.routes.http
 
 import com.kokasai.flowerkt.route.RouteAction
-import com.kokasai.the23rd.auth.OnetimePasswordManager
+import com.kokasai.api.auth.OnetimePasswordManager
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
 import io.ktor.request.ContentTransformationException

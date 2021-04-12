@@ -1,4 +1,4 @@
-package com.kokasai.the23rd.routes.http
+package com.kokasai.api.routes.http
 
 import com.kokasai.flowerkt.route.RouteAction
 import io.ktor.application.call

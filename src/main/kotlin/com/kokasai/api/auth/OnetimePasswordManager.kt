@@ -1,8 +1,8 @@
-package com.kokasai.the23rd.auth
+package com.kokasai.api.auth
 
-import com.kokasai.the23rd.Kokasai23rd
-import com.kokasai.the23rd.mail.MailSender
-import com.kokasai.the23rd.routes.http.LoginRequest
+import com.kokasai.api.KokasaiAPI
+import com.kokasai.api.mail.MailSender
+import com.kokasai.api.routes.http.LoginRequest
 
 object OnetimePasswordManager {
     data class Password(val pass: String = generatePassword()) {
@@ -36,7 +36,7 @@ object OnetimePasswordManager {
         } else {
             password.failureCount ++
             if (Password.MaxFailureCount < password.failureCount) {
-                Kokasai23rd.logger.trace("Auth-TooManyRequest: $id")
+                KokasaiAPI.logger.trace("Auth-TooManyRequest: $id")
                 passwords.remove(id)
             }
             false

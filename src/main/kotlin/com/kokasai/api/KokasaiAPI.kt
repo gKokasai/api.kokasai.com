@@ -1,4 +1,4 @@
-package com.kokasai.the23rd
+package com.kokasai.api
 
 import com.kokasai.flowerkt.FlowerKt
 import com.kokasai.flowerkt.database.RemoteSQLiteDatabaseProvider
@@ -6,12 +6,12 @@ import com.kokasai.flowerkt.file.WebDAVFileProvider
 import com.kokasai.flowerkt.module.UseExposedDatabaseSQLite
 import com.kokasai.flowerkt.module.UseFileWebDav
 import com.kokasai.flowerkt.module.UseSessionExposedDatabase
-import com.kokasai.the23rd.configure.configureAuthCookie
-import com.kokasai.the23rd.configure.configureFormAuth
-import com.kokasai.the23rd.configure.configureGson
-import com.kokasai.the23rd.configure.configureSessionAuth
-import com.kokasai.the23rd.routes.http.HttpRoute
-import com.kokasai.the23rd.routes.websocket.WebSocketRoute
+import com.kokasai.api.configure.configureAuthCookie
+import com.kokasai.api.configure.configureFormAuth
+import com.kokasai.api.configure.configureGson
+import com.kokasai.api.configure.configureSessionAuth
+import com.kokasai.api.routes.http.HttpRoute
+import com.kokasai.api.routes.websocket.WebSocketRoute
 import io.ktor.application.Application
 import io.ktor.application.install
 import io.ktor.auth.Authentication
@@ -24,8 +24,8 @@ import io.ktor.websocket.WebSockets
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
-object Kokasai23rd : FlowerKt, UseFileWebDav, UseSessionExposedDatabase, UseExposedDatabaseSQLite {
-    val logger: Logger = LoggerFactory.getLogger("Kokasai23rd")
+object KokasaiAPI : FlowerKt, UseFileWebDav, UseSessionExposedDatabase, UseExposedDatabaseSQLite {
+    val logger: Logger = LoggerFactory.getLogger("KokasaiAPI")
 
     override val engine = Netty
     override val port = SystemEnv.Server.Port ?: 8080

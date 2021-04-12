@@ -1,4 +1,4 @@
-package com.kokasai.the23rd
+package com.kokasai.api
 
 import com.kokasai.flowerkt.env.SystemEnvContainer
 

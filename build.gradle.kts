@@ -8,7 +8,7 @@ plugins {
     id("com.github.ben-manes.versions") version "0.36.0"
 }
 
-group = "com.kokasai.the23rd"
+group = "com.kokasai.api"
 version = "1.0"
 
 repositories {
@@ -41,7 +41,7 @@ tasks {
 }
 
 application {
-    mainClassName = "com.kokasai.the23rd.LaunchKt"
+    mainClassName = "com.kokasai.api.LaunchKt"
 }
 
 // Heroku で実行されるタスク

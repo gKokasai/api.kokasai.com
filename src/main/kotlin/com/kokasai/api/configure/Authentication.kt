@@ -1,7 +1,7 @@
-package com.kokasai.the23rd.configure
+package com.kokasai.api.configure
 
-import com.kokasai.the23rd.auth.OnetimePasswordManager
-import com.kokasai.the23rd.auth.UserLogin
+import com.kokasai.api.auth.OnetimePasswordManager
+import com.kokasai.api.auth.UserLogin
 import io.ktor.application.call
 import io.ktor.auth.Authentication
 import io.ktor.auth.basic

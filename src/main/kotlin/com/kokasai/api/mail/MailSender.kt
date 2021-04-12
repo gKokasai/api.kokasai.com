@@ -1,6 +1,6 @@
-package com.kokasai.the23rd.mail
+package com.kokasai.api.mail
 
-import com.kokasai.the23rd.routes.http.LoginRequest
+import com.kokasai.api.routes.http.LoginRequest
 import org.slf4j.LoggerFactory
 
 object MailSender {

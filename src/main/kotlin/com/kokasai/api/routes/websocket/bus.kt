@@ -1,4 +1,4 @@
-package com.kokasai.the23rd.routes.websocket
+package com.kokasai.api.routes.websocket
 
 import com.kokasai.flowerkt.route.RouteAction
 import io.ktor.http.cio.websocket.Frame

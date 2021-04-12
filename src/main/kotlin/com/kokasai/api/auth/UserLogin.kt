@@ -1,4 +1,4 @@
-package com.kokasai.the23rd.auth
+package com.kokasai.api.auth
 
 import io.ktor.auth.Principal
 

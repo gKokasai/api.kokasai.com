@@ -1,4 +1,4 @@
-package com.kokasai.the23rd.configure
+package com.kokasai.api.configure
 
 import io.ktor.features.ContentNegotiation
 import io.ktor.gson.gson
