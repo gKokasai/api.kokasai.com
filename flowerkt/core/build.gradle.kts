@@ -1,3 +1,3 @@
 dependencies {
-    api(Libraries.Ktor.server_host_common)
+    api("io.ktor:ktor-server-host-common:1.5.1")
 }
