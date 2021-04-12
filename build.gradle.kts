@@ -11,10 +11,17 @@ plugins {
 group = "com.kokasai.api"
 version = "1.0"
 
-repositories {
-    mavenCentral()
-    jcenter()
-    maven(url = "https://dl.bintray.com/kokasai/maven")
+allprojects {
+    apply(plugin = "kotlin")
+
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+
+    dependencies {
+        implementation(kotlin("stdlib"))
+    }
 }
 
 dependencies {
@@ -24,11 +31,11 @@ dependencies {
     implementation("io.ktor:ktor-server-sessions:1.5.1")
     implementation("io.ktor:ktor-gson:1.5.1")
     implementation("io.ktor:ktor-websockets:1.5.1")
-    implementation("com.kokasai.flowerkt:core:0.1.6")
-    implementation("com.kokasai.flowerkt:css:0.1.6")
-    implementation("com.kokasai.flowerkt:database-exposed-sqlite:0.1.6")
-    implementation("com.kokasai.flowerkt:file-webdav:0.1.6")
-    implementation("com.kokasai.flowerkt:session-exposed:0.1.6")
+    implementation(project(":flowerkt:core"))
+    implementation(project(":flowerkt:css"))
+    implementation(project(":flowerkt:database-exposed-sqlite"))
+    implementation(project(":flowerkt:file-webdav"))
+    implementation(project(":flowerkt:session-exposed"))
     implementation("ch.qos.logback:logback-classic:1.2.3")
 }
 
