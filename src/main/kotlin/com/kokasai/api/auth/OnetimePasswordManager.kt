@@ -3,6 +3,8 @@ package com.kokasai.api.auth
 import com.kokasai.api.KokasaiAPI
 import com.kokasai.api.mail.MailSender
 import com.kokasai.api.routes.http.LoginRequest
+import java.util.Timer
+import kotlin.concurrent.timerTask
 
 object OnetimePasswordManager {
     data class Password(val pass: String = generatePassword()) {
@@ -27,6 +29,12 @@ object OnetimePasswordManager {
             passwords[loginRequest.id] = Password().apply {
                 MailSender.sendPass(loginRequest, pass)
             }
+            Timer().schedule(
+                timerTask {
+                    passwords.remove(loginRequest.id)
+                },
+                5 * 60 * 1000
+            )
             true
         }
     }
