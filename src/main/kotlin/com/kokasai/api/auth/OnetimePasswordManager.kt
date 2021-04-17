@@ -3,8 +3,6 @@ package com.kokasai.api.auth
 import com.kokasai.api.KokasaiAPI
 import com.kokasai.api.mail.MailSender
 import com.kokasai.api.routes.http.LoginRequest
-import com.kokasai.api.routes.http.login
-import kotlin.math.log
 
 object OnetimePasswordManager {
     data class Password(val pass: String = generatePassword()) {

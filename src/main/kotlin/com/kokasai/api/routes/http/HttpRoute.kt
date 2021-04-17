@@ -1,8 +1,8 @@
 package com.kokasai.api.routes.http
 
-import com.kokasai.flowerkt.route.RoutePath
 import com.kokasai.api.routes.http.bus.challenge
 import com.kokasai.api.routes.http.bus.route
+import com.kokasai.flowerkt.route.RoutePath
 
 object HttpRoute : RoutePath("/") {
     override val child = setOf(Index, Auth, Login, Logout, File, Bus)
