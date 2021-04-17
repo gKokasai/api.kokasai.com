@@ -17,8 +17,11 @@ val login: RouteAction = {
     post {
         try {
             val loginRequest = call.receive<LoginRequest>()
-            OnetimePasswordManager.generate(loginRequest)
-            call.respond(HttpStatusCode.OK)
+            if (OnetimePasswordManager.generate(loginRequest)) {
+                call.respond(HttpStatusCode.OK)
+            } else {
+                call.respond(HttpStatusCode.TooManyRequests)
+            }
         } catch (ex: ContentTransformationException) {
             call.respond(HttpStatusCode.BadRequest)
         }
