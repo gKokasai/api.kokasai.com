@@ -30,7 +30,6 @@ dependencies {
     implementation("io.ktor:ktor-server-netty:1.5.1")
     implementation("io.ktor:ktor-server-sessions:1.5.1")
     implementation("io.ktor:ktor-gson:1.5.1")
-    implementation("io.ktor:ktor-websockets:1.5.1")
     implementation(project(":flowerkt:core"))
     implementation(project(":flowerkt:css"))
     implementation(project(":flowerkt:database-exposed-sqlite"))

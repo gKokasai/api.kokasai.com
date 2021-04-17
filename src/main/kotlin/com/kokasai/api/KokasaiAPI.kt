@@ -5,7 +5,6 @@ import com.kokasai.api.configure.configureFormAuth
 import com.kokasai.api.configure.configureGson
 import com.kokasai.api.configure.configureSessionAuth
 import com.kokasai.api.routes.http.HttpRoute
-import com.kokasai.api.routes.websocket.WebSocketRoute
 import com.kokasai.flowerkt.FlowerKt
 import com.kokasai.flowerkt.database.RemoteSQLiteDatabaseProvider
 import com.kokasai.flowerkt.file.WebDAVFileProvider
@@ -20,7 +19,6 @@ import io.ktor.features.CORS
 import io.ktor.features.ContentNegotiation
 import io.ktor.server.netty.Netty
 import io.ktor.sessions.Sessions
-import io.ktor.websocket.WebSockets
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
@@ -32,7 +30,7 @@ object KokasaiAPI : FlowerKt, UseFileWebDav, UseSessionExposedDatabase, UseExpos
     override val fileProvider = WebDAVFileProvider(OkHttp, SystemEnv.WebDAV.UserName, SystemEnv.WebDAV.Password, SystemEnv.WebDAV.Url)
     override val databaseProvider = RemoteSQLiteDatabaseProvider(".data.db", fileProvider, 5 * 60 * 1000)
 
-    override val routePath = setOf(HttpRoute, WebSocketRoute)
+    override val routePath = setOf(HttpRoute)
 
     override val sessionsConfiguration: Sessions.Configuration.() -> Unit = {
         configureAuthCookie()
@@ -51,7 +49,6 @@ object KokasaiAPI : FlowerKt, UseFileWebDav, UseSessionExposedDatabase, UseExpos
             install(ContentNegotiation) {
                 configureGson()
             }
-            install(WebSockets)
         }
     }
 
