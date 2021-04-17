@@ -12,7 +12,7 @@ val file: RouteAction = {
     get("{path...}") {
         val path = call.parameters.getAll("path")
         if (path != null && path.isNotEmpty()) {
-            val file = KokasaiAPI.fileProvider.get(path.joinToString("/"))
+            val file = KokasaiAPI.fileProvider.get("public/" + path.joinToString("/"))
             if (file != null) {
                 call.respondFile(file)
             } else {
