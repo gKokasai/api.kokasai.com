@@ -17,7 +17,7 @@ object OnetimePasswordManager {
 
     private fun generatePassword(): String {
         val chars = ('a'..'z') + ('A'..'Z') + ('0'..'9')
-        return List(32) { chars.random() }.joinToString("")
+        return List(8) { chars.random() }.joinToString("")
     }
 
     fun generate(loginRequest: LoginRequest): Boolean {
