@@ -5,13 +5,14 @@ import com.kokasai.api.routes.http.group.document.list as groupDocumentList
 import com.kokasai.api.routes.http.user.document.list as userDocumentList
 
 object HttpRoute : RoutePath("/") {
-    override val child = setOf(Index, Auth, Login, Logout, File, Group, User)
+    override val child = setOf(Index, Auth, Login, Logout, File, Document, Group, User)
 
     object Index : RoutePath("/", action = index)
     object Auth : RoutePath("/auth", action = auth)
     object Login : RoutePath("/login", action = login)
     object Logout : RoutePath("/login", action = logout)
     object File : RoutePath("/file", action = file)
+    object Document : RoutePath("/document", action = document)
     object Group : RoutePath("/group") {
         override val child = setOf(Document)
 

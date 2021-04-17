@@ -91,6 +91,30 @@
 
 ---
 
+## `GET` `/document/{name}`
+ドキュメントファイルを取得する。
+
+### Request
+
+#### - Parameter
+
+| Name | Description |
+|------|-------------|
+| name | ドキュメント名。 |
+
+### Response
+
+#### - StatusCode
+
+| Code | Description |
+|------|-------------|
+| 200 OK | ドキュメントの取得に成功。 |
+| 400 Bad Request | ドキュメント名が指定されていない。 |
+| 401 Unauthorized | ログインしていない。 |
+| 404 Not Found | 存在しないドキュメント。もしくはアクセスできないドキュメント。 |
+
+---
+
 ## `GET` `/group/document/list/{name}`
 指定グループのドキュメント一覧を取得する。
 
