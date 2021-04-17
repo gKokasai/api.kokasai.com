@@ -1,7 +1,6 @@
 package com.kokasai.api.routes.http.user.document
 
 import com.kokasai.api.auth.UserLogin
-import com.kokasai.api.group.Group
 import com.kokasai.api.user.User
 import com.kokasai.flowerkt.route.RouteAction
 import io.ktor.application.call
@@ -18,8 +17,7 @@ val list: RouteAction = {
         val principal = call.sessions.get<UserLogin.Data>()
         if (principal != null) {
             val user = User.get(principal.name)
-            val group = user.file?.group?.map { Group.get(it) }
-            val document = group?.mapNotNull { it.file?.document }?.flatten()
+            val document = user.file?.getDocument()
             call.respond(ListResponse(document.orEmpty()))
         } else {
             call.respond(HttpStatusCode.Unauthorized)
