@@ -4,7 +4,8 @@ import com.google.gson.Gson
 import java.io.File
 
 data class GroupFile(
-    val document: List<String>
+    val owner: List<String>,
+    var document: List<String>
 ) {
     override fun toString(): String = gson.toJson(this)
 
