@@ -21,7 +21,7 @@ object MailSender {
     fun sendPass(loginRequest: LoginRequest, pass: String) {
         val from = Email("noreply@kokasai.com")
         val subject = "【重要】工華祭ウェブサイトのパスワード"
-        val to = Email(loginRequest.mailAddress)
+        val to = Email(loginRequest.id + "@gunma.kosen-ac.jp")
         val currentDate = SimpleDateFormat("yyyy/MM/dd HH:mm").format(Date())
         val content = Content(
             "text/plain",
