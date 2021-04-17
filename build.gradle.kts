@@ -37,6 +37,7 @@ dependencies {
     implementation(project(":flowerkt:file-webdav"))
     implementation(project(":flowerkt:session-exposed"))
     implementation("ch.qos.logback:logback-classic:1.2.3")
+    implementation("com.sendgrid:sendgrid-java:4.7.2")
 }
 
 tasks {

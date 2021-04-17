@@ -9,7 +9,9 @@ import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.post
 
-data class LoginRequest(val id: String)
+data class LoginRequest(val id: String) {
+    val mailAddress = "$id@gunma.kosen-ac.jp"
+}
 
 val login: RouteAction = {
     post {

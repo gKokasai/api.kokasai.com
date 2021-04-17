@@ -12,4 +12,8 @@ object SystemEnv : SystemEnvContainer {
         val Password by string("WEB_DAV_PASSWORD")
         val Url by string("WEB_DAV_URL")
     }
+
+    object SendGrid {
+        val ApiKey by string("SENDGRID_API_KEY")
+    }
 }
