@@ -3,13 +3,23 @@ package com.kokasai.api.routes.http
 import com.kokasai.api.KokasaiAPI
 import com.kokasai.flowerkt.route.RouteAction
 import io.ktor.application.call
+import io.ktor.http.HttpStatusCode
+import io.ktor.response.respond
 import io.ktor.response.respondFile
 import io.ktor.routing.get
 
 val file: RouteAction = {
     get("{path...}") {
-        val path = call.parameters.getAll("path") ?: return@get
-        val file = KokasaiAPI.fileProvider.get(path.joinToString("/")) ?: return@get
-        call.respondFile(file)
+        val path = call.parameters.getAll("path")
+        if (path != null && path.isNotEmpty()) {
+            val file = KokasaiAPI.fileProvider.get(path.joinToString("/"))
+            if (file != null) {
+                call.respondFile(file)
+            } else {
+                call.respond(HttpStatusCode.NotFound)
+            }
+        } else {
+            call.respond(HttpStatusCode.BadRequest)
+        }
     }
 }
