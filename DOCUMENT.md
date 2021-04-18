@@ -280,3 +280,25 @@
   "document": string[] (ドキュメント一覧)
 }
 ```
+
+---
+
+## `GET` `/user/group/list`
+ユーザーが所属しているグループ一覧を取得する。
+
+### Response
+
+#### - StatusCode
+
+| Code | Description |
+|------|-------------|
+| 200 OK | グループ一覧の取得に成功。 |
+| 401 Unauthorized | ログインしていない。 |
+
+#### - Body `application/json`
+
+```
+{
+  "group": string[] (ドキュメント一覧)
+}
+```
