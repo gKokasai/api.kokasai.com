@@ -1,7 +1,6 @@
 import org.jlleitschuh.gradle.ktlint.KtlintExtension
 
 plugins {
-    application
     kotlin("jvm") version "1.4.32"
     id("com.github.johnrengelman.shadow") version "6.1.0"
     id("org.jlleitschuh.gradle.ktlint") version "10.0.0"
@@ -45,8 +44,12 @@ tasks {
     }
 }
 
-application {
-    mainClassName = "com.kokasai.api.LaunchKt"
+tasks.withType<Jar> {
+    manifest {
+        attributes(
+            "Main-Class" to "com.kokasai.api.LaunchKt"
+        )
+    }
 }
 
 // Heroku で実行されるタスク
