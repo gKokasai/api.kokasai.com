@@ -30,7 +30,6 @@ dependencies {
     implementation("io.ktor:ktor-server-sessions:1.5.3")
     implementation("io.ktor:ktor-gson:1.5.3")
     implementation(project(":flowerkt:core"))
-    implementation(project(":flowerkt:css"))
     implementation(project(":flowerkt:database-exposed-sqlite"))
     implementation(project(":flowerkt:file-webdav"))
     implementation(project(":flowerkt:session-exposed"))
