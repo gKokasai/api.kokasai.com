@@ -148,6 +148,10 @@
 ## `POST` `/group/document/list/{name}`
 指定グループのドキュメント一覧を変更する。
 
+### Permission
+
+- Admin
+
 ### Request
 
 #### - Parameter
@@ -174,6 +178,78 @@
 | 400 Bad Request | グループ名が指定されていない。 |
 | 401 Unauthorized | ログインしていない。 |
 | 403 Forbidden | 編集権限がない。|
+
+---
+
+## `GET` `/group/user/list/{name}`
+グループに属するユーザー一覧を取得する。
+
+### Permission
+
+- Admin
+- GroupOwner
+
+### Request
+
+#### - Parameter
+
+| Name | Description |
+|------|-------------|
+| name | グループ名。 |
+
+### Response
+
+#### - StatusCode
+
+| Code | Description |
+|------|-------------|
+| 200 OK | メンバー一覧の取得に成功。 |
+| 400 Bad Request | グループ名が指定されていない。 |
+| 401 Unauthorized | ログインしていない。 |
+| 403 Forbidden | 取得権限がない。 |
+
+#### - Body `application/json`
+
+```
+{
+  "member": string[] (ドキュメント一覧)
+}
+```
+
+## `POST` `/group/user/list/{name}`
+グループに属するユーザー一覧を変更する。
+
+### Permission
+
+- Admin
+- GroupOwner
+
+### Request
+
+#### - Parameter
+
+| Name | Description |
+|------|-------------|
+| name | グループ名。 |
+
+#### - Body `application/json`
+
+```
+{
+  "member": string[] (ドキュメント一覧)
+}
+```
+
+### Response
+
+#### - StatusCode
+
+| Code | Description |
+|------|-------------|
+| 200 OK | メンバー一覧の取得に成功。 |
+| 400 Bad Request | グループ名が指定されていない。 |
+| 401 Unauthorized | ログインしていない。 |
+| 403 Forbidden | 編集権限がない。 |
 
 ---
 

@@ -2,6 +2,7 @@ package com.kokasai.api.routes.http
 
 import com.kokasai.flowerkt.route.RoutePath
 import com.kokasai.api.routes.http.group.document.list as groupDocumentList
+import com.kokasai.api.routes.http.group.user.list as groupUserList
 import com.kokasai.api.routes.http.user.document.list as userDocumentList
 
 object HttpRoute : RoutePath("/") {
@@ -14,12 +15,17 @@ object HttpRoute : RoutePath("/") {
     object File : RoutePath("/file", action = file)
     object Document : RoutePath("/document", action = document)
     object Group : RoutePath("/group") {
-        override val child = setOf(Document)
+        override val child = setOf(Document, User)
 
         object Document : RoutePath(this, "/document") {
             override val child = setOf(List)
 
             object List : RoutePath(this, "/list", action = groupDocumentList)
+        }
+        object User : RoutePath(this, "/user") {
+            override val child = setOf(List)
+
+            object List : RoutePath(this, "/list", action = groupUserList)
         }
     }
     object User : RoutePath("/user") {

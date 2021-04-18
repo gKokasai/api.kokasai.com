@@ -5,7 +5,7 @@ import com.kokasai.api.group.Group
 import java.io.File
 
 data class UserFile(
-    val group: List<String>
+    val group: MutableList<String>
 ) {
     suspend fun getGroup() = group.map { Group.get(it) }
 

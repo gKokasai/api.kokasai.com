@@ -1,6 +1,7 @@
 package com.kokasai.api.user
 
 import com.kokasai.api.KokasaiAPI
+import com.kokasai.api.group.Group
 
 data class User(val name: String) {
     var file: UserFile? = null
@@ -22,6 +23,8 @@ data class User(val name: String) {
     }
 
     companion object {
+        suspend fun isAdmin(name: String) = get(name).file?.group.orEmpty().contains(Group.Name.admin)
+
         suspend fun get(name: String) = User(name).apply {
             load()
         }

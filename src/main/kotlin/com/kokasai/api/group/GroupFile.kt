@@ -5,6 +5,7 @@ import java.io.File
 
 data class GroupFile(
     val owner: List<String>,
+    var member: List<String>,
     var document: List<String>
 ) {
     override fun toString(): String = gson.toJson(this)
