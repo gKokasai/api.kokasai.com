@@ -28,7 +28,7 @@ object KokasaiAPI : FlowerKt, UseFileWebDav, UseSessionExposedDatabase, UseExpos
     override val engine = Netty
     override val port = SystemEnv.Server.Port ?: 8080
     override val fileProvider = WebDAVFileProvider(OkHttp, SystemEnv.WebDAV.UserName, SystemEnv.WebDAV.Password, SystemEnv.WebDAV.Url)
-    override val databaseProvider = RemoteSQLiteDatabaseProvider(".data.db", fileProvider, 5 * 60 * 1000)
+    override val databaseProvider = RemoteSQLiteDatabaseProvider(".data.db", fileProvider, 60 * 1000)
 
     override val routePath = setOf(HttpRoute)
 

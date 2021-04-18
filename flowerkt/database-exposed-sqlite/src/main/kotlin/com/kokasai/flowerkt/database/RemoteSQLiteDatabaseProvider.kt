@@ -11,9 +11,7 @@ class RemoteSQLiteDatabaseProvider(fileName: String, val fileProvider: RemoteFil
 
     override fun connect() {
         runBlocking {
-            fileProvider.get(fileName)?.renameTo(file) ?: run {
-                LOGGER.warn("Failure download database file from WebDAV.")
-            }
+            download()
             Runtime.getRuntime().addShutdownHook(
                 Thread {
                     runBlocking {
@@ -30,7 +28,18 @@ class RemoteSQLiteDatabaseProvider(fileName: String, val fileProvider: RemoteFil
         }
     }
 
+    suspend fun download() {
+        LOGGER.debug("Start download database file from WebDAV.")
+        fileProvider.get(fileName)?.renameTo(file) ?: run {
+            LOGGER.warn("Failure download database file from WebDAV.")
+        }
+    }
+
     suspend fun upload() {
-        fileProvider.add(fileName, file)
+        if (file.exists()) {
+            fileProvider.add(fileName, file)
+        } else {
+            download()
+        }
     }
 }
