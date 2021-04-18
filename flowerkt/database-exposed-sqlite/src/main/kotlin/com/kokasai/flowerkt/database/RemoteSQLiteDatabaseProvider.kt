@@ -31,8 +31,11 @@ class RemoteSQLiteDatabaseProvider(fileName: String, val fileProvider: RemoteFil
 
     suspend fun download() {
         LOGGER.debug("Start download database file from WebDAV.")
-        fileProvider.get(fileName)?.renameTo(file) ?: run {
+        val result = fileProvider.get(fileName)?.renameTo(file)
+        if (result == null) {
             LOGGER.warn("Failure download database file from WebDAV.")
+        } else if (result.not()) {
+            LOGGER.warn("Failure rename database file.")
         }
     }
 
