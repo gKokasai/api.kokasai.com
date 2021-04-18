@@ -2,10 +2,10 @@ import org.jlleitschuh.gradle.ktlint.KtlintExtension
 
 plugins {
     application
-    kotlin("jvm") version "1.4.30"
+    kotlin("jvm") version "1.4.32"
     id("com.github.johnrengelman.shadow") version "6.1.0"
     id("org.jlleitschuh.gradle.ktlint") version "10.0.0"
-    id("com.github.ben-manes.versions") version "0.36.0"
+    id("com.github.ben-manes.versions") version "0.38.0"
 }
 
 group = "com.kokasai.api"
@@ -16,7 +16,6 @@ allprojects {
 
     repositories {
         mavenCentral()
-        jcenter()
     }
 
     dependencies {
@@ -25,11 +24,11 @@ allprojects {
 }
 
 dependencies {
-    implementation("io.ktor:ktor-client-okhttp:1.5.1")
-    implementation("io.ktor:ktor-auth:1.5.1")
-    implementation("io.ktor:ktor-server-netty:1.5.1")
-    implementation("io.ktor:ktor-server-sessions:1.5.1")
-    implementation("io.ktor:ktor-gson:1.5.1")
+    implementation("io.ktor:ktor-client-okhttp:1.5.3")
+    implementation("io.ktor:ktor-auth:1.5.3")
+    implementation("io.ktor:ktor-server-netty:1.5.3")
+    implementation("io.ktor:ktor-server-sessions:1.5.3")
+    implementation("io.ktor:ktor-gson:1.5.3")
     implementation(project(":flowerkt:core"))
     implementation(project(":flowerkt:css"))
     implementation(project(":flowerkt:database-exposed-sqlite"))
@@ -57,5 +56,5 @@ task("stage") {
 }
 
 configure<KtlintExtension> {
-    version.set("0.40.0")
+    version.set("0.41.0")
 }
