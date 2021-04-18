@@ -8,6 +8,7 @@ import kotlin.concurrent.timer
 
 class RemoteSQLiteDatabaseProvider(fileName: String, val fileProvider: RemoteFileProvider, val uploadPeriod: Long) : SQLiteDatabaseProvider(fileName) {
     private val file = File(fileName)
+    private var lastModified = -1L
 
     override fun connect() {
         runBlocking {
@@ -37,9 +38,12 @@ class RemoteSQLiteDatabaseProvider(fileName: String, val fileProvider: RemoteFil
 
     suspend fun upload() {
         if (file.exists()) {
-            fileProvider.add(fileName, file)
+            if (lastModified != file.lastModified()) {
+                fileProvider.add(fileName, file)
+            }
         } else {
             download()
         }
+        lastModified = file.lastModified()
     }
 }
