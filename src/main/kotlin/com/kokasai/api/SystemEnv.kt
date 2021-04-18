@@ -5,6 +5,7 @@ import com.kokasai.flowerkt.env.SystemEnvContainer
 object SystemEnv : SystemEnvContainer {
     object Server {
         val Port by intOrNull("PORT")
+        val DatabaseFileName by stringOrNull("DATABASE_FILE_NAME")
     }
 
     object WebDAV {
