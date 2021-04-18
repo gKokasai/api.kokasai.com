@@ -18,7 +18,7 @@ val document: RouteAction = {
         if (principal != null) {
             val documentName = call.parameters["name"]
             val user = User.get(principal.name)
-            val accessibleDocument = user.file?.getDocument().orEmpty()
+            val accessibleDocument = user.file.getDocument()
             if (accessibleDocument.contains(documentName)) {
                 if (documentName != null) {
                     val file = KokasaiAPI.fileProvider.get("document/$documentName")

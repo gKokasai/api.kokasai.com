@@ -17,8 +17,8 @@ val list: RouteAction = {
         val principal = call.sessions.get<UserLogin.Data>()
         if (principal != null) {
             val user = User.get(principal.name)
-            val document = user.file?.getDocument()
-            call.respond(ListResponse(document.orEmpty()))
+            val document = user.file.getDocument()
+            call.respond(ListResponse(document))
         } else {
             call.respond(HttpStatusCode.Unauthorized)
         }

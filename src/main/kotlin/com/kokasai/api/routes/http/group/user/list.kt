@@ -24,9 +24,9 @@ val list: RouteAction = {
             if (groupName != null) {
                 val userName = principal.name
                 val group = Group.get(groupName)
-                val owners = group.file?.owner
-                if ((owners != null && owners.contains(userName)) || User.isAdmin(userName)) {
-                    call.respond(ListResponse(group.file?.member.orEmpty()))
+                val owners = group.file.owner
+                if (owners.contains(userName) || User.isAdmin(userName)) {
+                    call.respond(ListResponse(group.file.member))
                 } else {
                     call.respond(HttpStatusCode.Forbidden)
                 }
@@ -44,23 +44,23 @@ val list: RouteAction = {
             if (groupName != null) {
                 val userName = principal.name
                 val group = Group.get(groupName)
-                val owners = group.file?.owner
-                if ((owners != null && owners.contains(userName)) || User.isAdmin(userName)) {
+                val owners = group.file.owner
+                if (owners.contains(userName) || User.isAdmin(userName)) {
                     val request = call.receive<ListRequest>()
-                    val lastMember = group.file?.member.orEmpty()
+                    val lastMember = group.file.member
                     val addMember = request.member.filterNot { lastMember.contains(it) }
                     addMember.forEach {
                         val member = User.get(it)
-                        member.file?.group?.add(groupName)
+                        member.file.group.add(groupName)
                         member.save()
                     }
                     val removeMember = lastMember.filterNot { request.member.contains(it) }
                     removeMember.forEach {
                         val member = User.get(it)
-                        member.file?.group?.remove(groupName)
+                        member.file.group.remove(groupName)
                         member.save()
                     }
-                    group.file?.member = request.member
+                    group.file.member = request.member
                     group.save()
                     call.respond(HttpStatusCode.OK)
                 } else {

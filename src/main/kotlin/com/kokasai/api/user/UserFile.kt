@@ -5,11 +5,11 @@ import com.kokasai.api.group.Group
 import java.io.File
 
 data class UserFile(
-    val group: MutableList<String>
+    val group: MutableList<String> = mutableListOf()
 ) {
     suspend fun getGroup() = group.map { Group.get(it) }
 
-    suspend fun getDocument() = getGroup().mapNotNull { it.file?.document }.flatten()
+    suspend fun getDocument() = getGroup().map { it.file.document }.flatten()
 
     override fun toString(): String = gson.toJson(this)
 
