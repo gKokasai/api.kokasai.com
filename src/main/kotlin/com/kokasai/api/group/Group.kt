@@ -21,6 +21,10 @@ data class Group(val name: String) {
         }
     }
 
+    object Name {
+        const val admin = "admin"
+    }
+
     companion object {
         suspend fun get(name: String) = Group(name).apply {
             load()

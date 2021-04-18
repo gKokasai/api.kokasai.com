@@ -46,17 +46,12 @@ val list: RouteAction = {
                 val userName = principal.name
                 val user = User.get(userName)
                 val groups = user.file?.group
-                if (groups != null && groups.contains(groupName)) {
+                if (groups != null && groups.contains(Group.Name.admin)) {
                     val group = Group.get(groupName)
-                    val owners = group.file?.owner
-                    if (owners != null && owners.contains(userName)) {
-                        val request = call.receive<ListRequest>()
-                        group.file?.document = request.document
-                        group.save()
-                        call.respond(HttpStatusCode.OK)
-                    } else {
-                        call.respond(HttpStatusCode.Forbidden)
-                    }
+                    val request = call.receive<ListRequest>()
+                    group.file?.document = request.document
+                    group.save()
+                    call.respond(HttpStatusCode.OK)
                 } else {
                     call.respond(HttpStatusCode.Forbidden)
                 }
