@@ -94,6 +94,10 @@
 ## `GET` `/document/{name}`
 ドキュメントファイルを取得する。
 
+### Permission
+
+- GroupMember
+
 ### Request
 
 #### - Parameter
@@ -117,6 +121,10 @@
 
 ## `GET` `/group/document/list/{name}`
 指定グループのドキュメント一覧を取得する。
+
+### Permission
+
+- GroupMember
 
 ### Request
 
