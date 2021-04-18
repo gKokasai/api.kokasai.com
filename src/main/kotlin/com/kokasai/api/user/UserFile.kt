@@ -14,7 +14,7 @@ data class UserFile(
     override fun toString(): String = gson.toJson(this)
 
     fun toFile(): File = File.createTempFile("tmp", ".json").apply {
-        writeBytes(toString().toByteArray())
+        writeBytes(this@UserFile.toString().toByteArray())
     }
 
     companion object {
