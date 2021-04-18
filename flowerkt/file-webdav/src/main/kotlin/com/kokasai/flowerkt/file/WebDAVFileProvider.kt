@@ -49,17 +49,21 @@ class WebDAVFileProvider<T : HttpClientEngineConfig>(
     override suspend fun get(path: String): File? {
         val extension = path.substringAfterLast('.', "")
         if (extension.isBlank()) return null
-        return cacheFile.getOrPut(path) {
+        val cache = cacheFile[path]
+        return if (cache == null || cache.exists().not()) {
             val response = client.request<HttpResponse>("$webdavUrl/$path") {
                 method = HttpMethod.Get
             }
             if (response.status.isSuccess()) {
                 File.createTempFile("tmp", ".$extension").apply {
                     writeBytes(response.content.toByteArray())
+                    cacheFile[path] = this
                 }
             } else {
                 null
             }
+        } else {
+            cache
         }
     }
 }
