@@ -12,7 +12,7 @@ object HttpRoute : RoutePath("/") {
     object Index : RoutePath("/", action = index)
     object Auth : RoutePath("/auth", action = auth)
     object Login : RoutePath("/login", action = login)
-    object Logout : RoutePath("/login", action = logout)
+    object Logout : RoutePath("/logout", action = logout)
     object File : RoutePath("/file", action = file)
     object Document : RoutePath("/document", action = document)
     object Group : RoutePath("/group") {
