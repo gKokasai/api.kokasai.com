@@ -1,5 +1,21 @@
 # API Document
 
+- [/auth](#get-auth)
+- [/login](#post-login)
+- [/logout](#post-logout)
+- [/file](#get-filepath)
+- [/document](#get-documentname)
+- /group
+  - /document
+    - [/list](#get-groupdocumentlistname)
+  - /user
+    - [/list](#get-groupuserlistname)
+- /user
+  - /document
+    - [/list](#get-userdocumentlist)
+  - /group
+    - [/list](#get-usergrouplist)
+
 ## `GET` `/auth`
 ログインできているか確認する。
 
