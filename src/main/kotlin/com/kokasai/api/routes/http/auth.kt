@@ -10,7 +10,10 @@ import io.ktor.response.respond
 import io.ktor.routing.get
 import io.ktor.routing.post
 import io.ktor.sessions.get
+import io.ktor.sessions.sessionId
 import io.ktor.sessions.sessions
+
+data class AuthResponse(val auth: String?)
 
 val auth: RouteAction = {
     get {
@@ -25,7 +28,7 @@ val auth: RouteAction = {
         post {
             val principal = call.principal<UserLogin.Data>()
             call.sessions.set(UserLogin.cookie, principal)
-            call.respond(HttpStatusCode.OK)
+            call.respond(AuthResponse(call.sessionId))
         }
     }
 }

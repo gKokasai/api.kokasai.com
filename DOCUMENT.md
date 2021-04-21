@@ -44,6 +44,14 @@
 |------|-------------|
 | 200 OK | ログイン成功。 |
 
+#### - Body `application/json`
+
+```
+{
+  "auth": string
+}
+```
+
 ---
 
 ## `POST` `/login`
