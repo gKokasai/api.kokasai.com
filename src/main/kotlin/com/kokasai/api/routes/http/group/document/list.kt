@@ -38,7 +38,7 @@ val list: RouteAction = {
             call.respond(HttpStatusCode.Unauthorized)
         }
     }
-    post {
+    post("{name}") {
         val principal = call.sessions.get<UserLogin.Data>()
         if (principal != null) {
             val groupName = call.parameters["name"]
