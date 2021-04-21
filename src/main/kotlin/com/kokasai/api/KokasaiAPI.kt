@@ -47,6 +47,7 @@ object KokasaiAPI : FlowerKt, UseFileWebDav, UseSessionExposedDatabase, UseExpos
             install(CORS) {
                 anyHost()
                 header(HttpHeaders.Authorization)
+                header(HttpHeaders.ContentType)
                 host("kokasai.com", schemes = listOf("http", "https"), subDomains = listOf("23rd"))
             }
             install(ContentNegotiation) {
