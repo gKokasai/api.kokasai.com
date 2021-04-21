@@ -17,6 +17,7 @@ import io.ktor.auth.Authentication
 import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.features.CORS
 import io.ktor.features.ContentNegotiation
+import io.ktor.http.HttpHeaders
 import io.ktor.server.netty.Netty
 import io.ktor.sessions.Sessions
 import org.slf4j.Logger
@@ -45,6 +46,7 @@ object KokasaiAPI : FlowerKt, UseFileWebDav, UseSessionExposedDatabase, UseExpos
             }
             install(CORS) {
                 anyHost()
+                header(HttpHeaders.Authorization)
                 host("kokasai.com", schemes = listOf("http", "https"))
             }
             install(ContentNegotiation) {
