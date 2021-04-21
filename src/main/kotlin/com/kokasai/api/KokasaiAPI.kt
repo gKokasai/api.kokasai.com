@@ -45,6 +45,7 @@ object KokasaiAPI : FlowerKt, UseFileWebDav, UseSessionExposedDatabase, UseExpos
             }
             install(CORS) {
                 anyHost()
+                host("kokasai.com", schemes = listOf("http", "https"))
             }
             install(ContentNegotiation) {
                 configureGson()
