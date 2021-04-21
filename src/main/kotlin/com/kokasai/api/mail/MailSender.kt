@@ -11,7 +11,9 @@ import com.sendgrid.helpers.mail.objects.Email
 import org.slf4j.LoggerFactory
 import java.io.IOException
 import java.text.SimpleDateFormat
+import java.time.ZoneId
 import java.util.Date
+import java.util.TimeZone
 
 object MailSender {
     private val sendGrid = SendGrid(SystemEnv.SendGrid.ApiKey)
@@ -22,7 +24,9 @@ object MailSender {
         val from = Email("noreply@kokasai.com")
         val subject = "【重要】工華祭ウェブサイトのパスワード"
         val to = Email(loginRequest.id + "@gunma.kosen-ac.jp")
-        val currentDate = SimpleDateFormat("yyyy/MM/dd HH:mm").format(Date())
+        val currentDate = SimpleDateFormat("yyyy/MM/dd HH:mm").apply {
+            timeZone = TimeZone.getTimeZone(ZoneId.of("Asia/Tokyo"))
+        }.format(Date())
         val content = Content(
             "text/plain",
             """
