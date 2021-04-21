@@ -4,7 +4,7 @@ import com.google.gson.Gson
 import java.io.File
 
 data class GroupFile(
-    val owner: List<String> = listOf(),
+    var owner: List<String> = listOf(),
     var member: List<String> = listOf(),
     var document: List<String> = listOf()
 ) {

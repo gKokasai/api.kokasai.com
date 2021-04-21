@@ -236,7 +236,8 @@
 
 ```
 {
-  "member": string[] (ドキュメント一覧)
+  "owner": string[] (オーナー一覧)
+  "member": string[] (メンバー一覧)
 }
 ```
 
@@ -260,7 +261,8 @@
 
 ```
 {
-  "member": string[] (ドキュメント一覧)
+  "owner": string[] (オーナー一覧 / Admin でなければ無視される)
+  "member": string[] (メンバー一覧)
 }
 ```
 

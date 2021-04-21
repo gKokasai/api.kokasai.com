@@ -13,8 +13,8 @@ import io.ktor.routing.post
 import io.ktor.sessions.get
 import io.ktor.sessions.sessions
 
-data class ListRequest(val member: List<String>)
-data class ListResponse(val member: List<String>)
+data class ListRequest(val owner: List<String>, val member: List<String>)
+data class ListResponse(val owner: List<String>, val member: List<String>)
 
 val list: RouteAction = {
     get("{name}") {
@@ -26,7 +26,7 @@ val list: RouteAction = {
                 val group = Group.get(groupName)
                 val owners = group.file.owner
                 if (owners.contains(userName) || User.isAdmin(userName)) {
-                    call.respond(ListResponse(group.file.member))
+                    call.respond(ListResponse(group.file.owner, group.file.member))
                 } else {
                     call.respond(HttpStatusCode.Forbidden)
                 }
@@ -45,7 +45,8 @@ val list: RouteAction = {
                 val userName = principal.name
                 val group = Group.get(groupName)
                 val owners = group.file.owner
-                if (owners.contains(userName) || User.isAdmin(userName)) {
+                val isAdmin = User.isAdmin(userName)
+                if (owners.contains(userName) || isAdmin) {
                     val request = call.receive<ListRequest>()
                     val lastMember = group.file.member
                     val addMember = request.member.filterNot { lastMember.contains(it) }
@@ -61,6 +62,9 @@ val list: RouteAction = {
                         member.save()
                     }
                     group.file.member = request.member
+                    if (isAdmin) {
+                        group.file.owner = request.owner
+                    }
                     group.save()
                     call.respond(HttpStatusCode.OK)
                 } else {
