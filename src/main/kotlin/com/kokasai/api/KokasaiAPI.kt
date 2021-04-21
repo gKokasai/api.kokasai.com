@@ -48,6 +48,7 @@ object KokasaiAPI : FlowerKt, UseFileWebDav, UseSessionExposedDatabase, UseExpos
                 anyHost()
                 header(HttpHeaders.Authorization)
                 header(HttpHeaders.ContentType)
+                header("withCredentials")
                 host("kokasai.com", schemes = listOf("http", "https"), subDomains = listOf("panel"))
                 allowCredentials = true
             }
