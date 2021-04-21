@@ -49,6 +49,7 @@ object KokasaiAPI : FlowerKt, UseFileWebDav, UseSessionExposedDatabase, UseExpos
                 header(HttpHeaders.Authorization)
                 header(HttpHeaders.ContentType)
                 host("kokasai.com", schemes = listOf("http", "https"), subDomains = listOf("panel"))
+                allowCredentials = true
             }
             install(ContentNegotiation) {
                 configureGson()
