@@ -24,8 +24,8 @@ val list: RouteAction = {
             if (groupName != null) {
                 val userName = principal.name
                 val group = Group.get(groupName)
-                val owners = group.file.owner
-                if (owners.contains(userName) || User.isAdmin(userName)) {
+                val members = group.file.member
+                if (members.contains(userName) || User.isAdmin(userName)) {
                     call.respond(ListResponse(group.file.owner, group.file.member))
                 } else {
                     call.respond(HttpStatusCode.Forbidden)

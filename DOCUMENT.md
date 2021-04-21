@@ -211,7 +211,7 @@
 ### Permission
 
 - Admin
-- GroupOwner
+- GroupMember
 
 ### Request
 
