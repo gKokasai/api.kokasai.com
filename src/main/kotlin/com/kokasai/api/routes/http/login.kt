@@ -15,10 +15,16 @@ val login: RouteAction = {
     post {
         try {
             val loginRequest = call.receive<LoginRequest>()
-            if (OnetimePasswordManager.generate(loginRequest)) {
-                call.respond(HttpStatusCode.OK)
-            } else {
-                call.respond(HttpStatusCode.TooManyRequests)
+            when {
+                loginRequest.id.matches("^[A-Za-z][A-Za-z0-9.]*$".toRegex()).not() -> {
+                    call.respond(HttpStatusCode.BadRequest)
+                }
+                OnetimePasswordManager.generate(loginRequest) -> {
+                    call.respond(HttpStatusCode.OK)
+                }
+                else -> {
+                    call.respond(HttpStatusCode.TooManyRequests)
+                }
             }
         } catch (ex: ContentTransformationException) {
             call.respond(HttpStatusCode.BadRequest)
