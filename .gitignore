@@ -2,4 +2,4 @@
 /.gradle/
 build/
 /.idea/*
-/.data.db
+/data.db
