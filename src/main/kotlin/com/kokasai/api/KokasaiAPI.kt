@@ -15,6 +15,7 @@ import io.ktor.application.Application
 import io.ktor.application.install
 import io.ktor.auth.Authentication
 import io.ktor.client.engine.okhttp.OkHttp
+import io.ktor.features.AutoHeadResponse
 import io.ktor.features.CORS
 import io.ktor.features.ContentNegotiation
 import io.ktor.http.HttpHeaders
@@ -40,6 +41,7 @@ object KokasaiAPI : FlowerKt, UseFileWebDav, UseSessionExposedDatabase, UseExpos
     override fun installKtor(application: Application) {
         super<UseSessionExposedDatabase>.installKtor(application)
         application.run {
+            install(AutoHeadResponse)
             install(Authentication) {
                 configureFormAuth()
                 configureSessionAuth()
