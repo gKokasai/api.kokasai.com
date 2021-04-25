@@ -4,6 +4,7 @@ import com.kokasai.api.configure.configureAuthCookie
 import com.kokasai.api.configure.configureFormAuth
 import com.kokasai.api.configure.configureGson
 import com.kokasai.api.configure.configureSessionAuth
+import com.kokasai.api.configure.configureStatusPages
 import com.kokasai.api.routes.http.HttpRoute
 import com.kokasai.flowerkt.FlowerKt
 import com.kokasai.flowerkt.database.RemoteSQLiteDatabaseProvider
@@ -18,6 +19,7 @@ import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.features.AutoHeadResponse
 import io.ktor.features.CORS
 import io.ktor.features.ContentNegotiation
+import io.ktor.features.StatusPages
 import io.ktor.http.HttpHeaders
 import io.ktor.server.netty.Netty
 import io.ktor.sessions.Sessions
@@ -42,6 +44,9 @@ object KokasaiAPI : FlowerKt, UseFileWebDav, UseSessionExposedDatabase, UseExpos
         super<UseSessionExposedDatabase>.installKtor(application)
         application.run {
             install(AutoHeadResponse)
+            install(StatusPages) {
+                configureStatusPages()
+            }
             install(Authentication) {
                 configureFormAuth()
                 configureSessionAuth()
