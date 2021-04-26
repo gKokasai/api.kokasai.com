@@ -1,6 +1,7 @@
 package com.kokasai.api
 
 import com.kokasai.api.configure.configureAuthCookie
+import com.kokasai.api.configure.configureCallLogging
 import com.kokasai.api.configure.configureFormAuth
 import com.kokasai.api.configure.configureGson
 import com.kokasai.api.configure.configureSessionAuth
@@ -18,6 +19,7 @@ import io.ktor.auth.Authentication
 import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.features.AutoHeadResponse
 import io.ktor.features.CORS
+import io.ktor.features.CallLogging
 import io.ktor.features.ContentNegotiation
 import io.ktor.features.StatusPages
 import io.ktor.http.HttpHeaders
@@ -44,6 +46,9 @@ object KokasaiAPI : FlowerKt, UseFileWebDav, UseSessionExposedDatabase, UseExpos
         super<UseSessionExposedDatabase>.installKtor(application)
         application.run {
             install(AutoHeadResponse)
+            install(CallLogging) {
+                configureCallLogging()
+            }
             install(StatusPages) {
                 configureStatusPages()
             }
