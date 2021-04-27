@@ -10,7 +10,6 @@ import org.slf4j.event.Level
 fun CallLogging.Configuration.configureCallLogging() {
     level = Level.INFO
     logger = LoggerFactory.getLogger("Route")
-    filter { true }
     format { call ->
         val requestLog = call.request.toLogString()
         when (val status = call.response.status() ?: "Unhandled") {
