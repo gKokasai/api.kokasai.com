@@ -1,15 +1,12 @@
 package com.kokasai.api.http
 
-import com.kokasai.api.KokasaiApi
+import com.kokasai.api.KokasaiApi.Companion.api
 import com.kokasai.flowerkt.route.RouteAction
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
 import io.ktor.response.respond
 import io.ktor.response.respondFile
 import io.ktor.routing.get
-import org.koin.java.KoinJavaComponent.inject
-
-private val api by inject<KokasaiApi>(KokasaiApi::class.java)
 
 val file: RouteAction = {
     get("{path...}") {
