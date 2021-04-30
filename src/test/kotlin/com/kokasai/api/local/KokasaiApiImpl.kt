@@ -10,6 +10,7 @@ import com.kokasai.api.configure.configureStatusPages
 import com.kokasai.api.routes.http.HttpRoute
 import com.kokasai.flowerkt.database.SQLiteDatabaseProvider
 import com.kokasai.flowerkt.file.LocalFileProvider
+import com.kokasai.flowerkt.mail.ConsoleMailProvider
 import io.ktor.application.Application
 import io.ktor.application.install
 import io.ktor.auth.Authentication
@@ -32,6 +33,7 @@ class KokasaiApiImpl : KokasaiApi {
     private val parentDirectory = File("test/local").apply(File::mkdirs)
     override val fileProvider = LocalFileProvider(parentDirectory)
     override val databaseProvider = SQLiteDatabaseProvider(parentDirectory.resolve("data.db").toRelativeString(File(".")))
+    override val mailProvider = ConsoleMailProvider
     override val routePath = setOf(HttpRoute)
 
     override val sessionsConfiguration: Sessions.Configuration.() -> Unit = {

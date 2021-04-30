@@ -7,5 +7,7 @@ include(
     ":flowerkt:database-exposed-sqlite",
     ":flowerkt:file",
     ":flowerkt:file-webdav",
+    ":flowerkt:mail",
+    ":flowerkt:mail-sendgrid",
     ":flowerkt:session-exposed"
 )

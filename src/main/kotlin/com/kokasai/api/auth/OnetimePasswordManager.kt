@@ -1,9 +1,13 @@
 package com.kokasai.api.auth
 
 import com.kokasai.api.KokasaiApi
-import com.kokasai.api.mail.MailSender
 import com.kokasai.api.routes.http.LoginRequest
 import org.koin.java.KoinJavaComponent.inject
+import org.slf4j.LoggerFactory
+import java.text.SimpleDateFormat
+import java.time.ZoneId
+import java.util.Date
+import java.util.TimeZone
 import java.util.Timer
 import kotlin.concurrent.timerTask
 
@@ -30,7 +34,7 @@ object OnetimePasswordManager {
             false
         } else {
             passwords[loginRequest.id] = Password().apply {
-                MailSender.sendPass(loginRequest, pass)
+                sendPassword(loginRequest.id, pass)
             }
             Timer().schedule(
                 timerTask {
@@ -55,5 +59,22 @@ object OnetimePasswordManager {
             }
             false
         }
+    }
+
+    private val mailLogger = LoggerFactory.getLogger("Mail")
+
+    private fun sendPassword(id: String, password: String) {
+        val currentDate = SimpleDateFormat("yyyy/MM/dd HH:mm").apply {
+            timeZone = TimeZone.getTimeZone(ZoneId.of("Asia/Tokyo"))
+        }.format(Date())
+        val content = """
+            $currentDate にパスワードリクエストがありました。心当たりがない場合は無視してください。5回以上パスワードを間違えた場合、パスワード生成から5分経った場合は削除されます。その場合はもう一度パスワードリクエストを行ってください。
+            
+            パスワードは $password です。
+            
+            何かあれば 群馬高専工華祭実行委員会 広報課 までお知らせください。
+        """.trimIndent()
+        val response = api.mailProvider.sendMessage("$id@gunma.kosen-ac.jp", "【重要】工華祭ウェブサイトのパスワード", content)
+        mailLogger.debug(response)
     }
 }

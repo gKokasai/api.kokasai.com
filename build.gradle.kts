@@ -31,9 +31,9 @@ dependencies {
     implementation(project(":flowerkt:core"))
     implementation(project(":flowerkt:database-exposed-sqlite"))
     implementation(project(":flowerkt:file-webdav"))
+    implementation(project(":flowerkt:mail-sendgrid"))
     implementation(project(":flowerkt:session-exposed"))
     implementation("ch.qos.logback:logback-classic:1.2.3")
-    implementation("com.sendgrid:sendgrid-java:4.7.2")
     implementation("io.insert-koin:koin-core:3.0.1")
 }
 
