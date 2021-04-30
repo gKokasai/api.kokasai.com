@@ -12,8 +12,12 @@ import io.ktor.routing.get
 import io.ktor.routing.post
 import io.ktor.sessions.get
 import io.ktor.sessions.sessions
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class ListRequest(val document: List<String>)
+
+@Serializable
 data class ListResponse(val document: List<String>)
 
 val list: RouteAction = {

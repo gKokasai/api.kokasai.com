@@ -12,7 +12,9 @@ import io.ktor.routing.post
 import io.ktor.sessions.get
 import io.ktor.sessions.sessionId
 import io.ktor.sessions.sessions
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class AuthResponse(val auth: String?)
 
 val auth: RouteAction = {

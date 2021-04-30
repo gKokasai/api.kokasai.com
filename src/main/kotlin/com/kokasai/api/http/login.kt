@@ -8,7 +8,9 @@ import io.ktor.request.ContentTransformationException
 import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.post
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class LoginRequest(val id: String)
 
 val login: RouteAction = {
