@@ -41,6 +41,7 @@ class KokasaiApiImpl : KokasaiApi, UseFileWebDav, UseMailSendGrid {
     }
 
     override fun installKtor(application: Application) {
+        super.installKtor(application)
         application.run {
             install(AutoHeadResponse)
             install(CallLogging) {

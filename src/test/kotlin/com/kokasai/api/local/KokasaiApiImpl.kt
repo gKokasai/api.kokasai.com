@@ -41,6 +41,7 @@ class KokasaiApiImpl : KokasaiApi {
     }
 
     override fun installKtor(application: Application) {
+        super.installKtor(application)
         application.run {
             install(AutoHeadResponse)
             install(CallLogging) {
