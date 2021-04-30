@@ -1,4 +1,4 @@
-package com.kokasai.api.routes.http
+package com.kokasai.api.http
 
 import com.kokasai.api.auth.OnetimePasswordManager
 import com.kokasai.flowerkt.route.RouteAction

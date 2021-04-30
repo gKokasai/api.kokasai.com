@@ -1,4 +1,4 @@
-package com.kokasai.api.routes.http.group.document
+package com.kokasai.api.http.group.user
 
 import com.kokasai.api.auth.UserLogin
 import com.kokasai.api.group.Group
@@ -13,8 +13,8 @@ import io.ktor.routing.post
 import io.ktor.sessions.get
 import io.ktor.sessions.sessions
 
-data class ListRequest(val document: List<String>)
-data class ListResponse(val document: List<String>)
+data class ListRequest(val owner: List<String>, val member: List<String>)
+data class ListResponse(val owner: List<String>, val member: List<String>)
 
 val list: RouteAction = {
     get("{name}") {
@@ -23,11 +23,10 @@ val list: RouteAction = {
             val groupName = call.parameters["name"]
             if (groupName != null) {
                 val userName = principal.name
-                val user = User.get(userName)
-                val groups = user.file.group
-                if (groups.contains(groupName)) {
-                    val group = Group.get(groupName)
-                    call.respond(ListResponse(group.file.document))
+                val group = Group.get(groupName)
+                val members = group.file.member
+                if (members.contains(userName) || User.isAdmin(userName)) {
+                    call.respond(ListResponse(group.file.owner, group.file.member))
                 } else {
                     call.respond(HttpStatusCode.Forbidden)
                 }
@@ -44,12 +43,28 @@ val list: RouteAction = {
             val groupName = call.parameters["name"]
             if (groupName != null) {
                 val userName = principal.name
-                val user = User.get(userName)
-                val groups = user.file.group
-                if (groups.contains(Group.Name.admin)) {
-                    val group = Group.get(groupName)
+                val group = Group.get(groupName)
+                val owners = group.file.owner
+                val isAdmin = User.isAdmin(userName)
+                if (owners.contains(userName) || isAdmin) {
                     val request = call.receive<ListRequest>()
-                    group.file.document = request.document
+                    val lastMember = group.file.member
+                    val addMember = request.member.filterNot { lastMember.contains(it) }
+                    addMember.forEach {
+                        val member = User.get(it)
+                        member.file.group.add(groupName)
+                        member.save()
+                    }
+                    val removeMember = lastMember.filterNot { request.member.contains(it) }
+                    removeMember.forEach {
+                        val member = User.get(it)
+                        member.file.group.remove(groupName)
+                        member.save()
+                    }
+                    group.file.member = request.member
+                    if (isAdmin) {
+                        group.file.owner = request.owner
+                    }
                     group.save()
                     call.respond(HttpStatusCode.OK)
                 } else {

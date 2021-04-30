@@ -1,7 +1,7 @@
 package com.kokasai.api.auth
 
 import com.kokasai.api.KokasaiApi
-import com.kokasai.api.routes.http.LoginRequest
+import com.kokasai.api.http.LoginRequest
 import org.koin.java.KoinJavaComponent.inject
 import org.slf4j.LoggerFactory
 import java.text.SimpleDateFormat
