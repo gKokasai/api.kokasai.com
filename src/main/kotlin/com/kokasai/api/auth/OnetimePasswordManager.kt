@@ -1,8 +1,7 @@
 package com.kokasai.api.auth
 
-import com.kokasai.api.KokasaiApi
+import com.kokasai.api.KokasaiApi.Companion.api
 import com.kokasai.api.http.LoginRequest
-import org.koin.java.KoinJavaComponent.inject
 import org.slf4j.LoggerFactory
 import java.text.SimpleDateFormat
 import java.time.ZoneId
@@ -12,8 +11,6 @@ import java.util.Timer
 import kotlin.concurrent.timerTask
 
 object OnetimePasswordManager {
-    private val api by inject<KokasaiApi>(KokasaiApi::class.java)
-
     data class Password(val pass: String = generatePassword()) {
         var failureCount = 0
 

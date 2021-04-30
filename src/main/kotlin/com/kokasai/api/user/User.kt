@@ -1,10 +1,7 @@
 package com.kokasai.api.user
 
-import com.kokasai.api.KokasaiApi
+import com.kokasai.api.KokasaiApi.Companion.api
 import com.kokasai.api.group.Group
-import org.koin.java.KoinJavaComponent.inject
-
-private val api by inject<KokasaiApi>(KokasaiApi::class.java)
 
 data class User(val name: String) {
     lateinit var file: UserFile

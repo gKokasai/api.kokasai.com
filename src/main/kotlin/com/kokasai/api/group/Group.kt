@@ -1,9 +1,6 @@
 package com.kokasai.api.group
 
-import com.kokasai.api.KokasaiApi
-import org.koin.java.KoinJavaComponent.inject
-
-private val api by inject<KokasaiApi>(KokasaiApi::class.java)
+import com.kokasai.api.KokasaiApi.Companion.api
 
 data class Group(val name: String) {
     lateinit var file: GroupFile
