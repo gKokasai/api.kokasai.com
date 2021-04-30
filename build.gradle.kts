@@ -34,6 +34,7 @@ dependencies {
     implementation(project(":flowerkt:session-exposed"))
     implementation("ch.qos.logback:logback-classic:1.2.3")
     implementation("com.sendgrid:sendgrid-java:4.7.2")
+    implementation("io.insert-koin:koin-core:3.0.1")
 }
 
 tasks {

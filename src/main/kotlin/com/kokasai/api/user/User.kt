@@ -1,7 +1,10 @@
 package com.kokasai.api.user
 
-import com.kokasai.api.KokasaiAPI
+import com.kokasai.api.KokasaiApi
 import com.kokasai.api.group.Group
+import org.koin.java.KoinJavaComponent.inject
+
+private val api by inject<KokasaiApi>(KokasaiApi::class.java)
 
 data class User(val name: String) {
     lateinit var file: UserFile
@@ -10,12 +13,12 @@ data class User(val name: String) {
     private val filePath = "user/$name.json"
 
     suspend fun load() {
-        file = KokasaiAPI.fileProvider.get(filePath)?.let(UserFile::from) ?: UserFile()
+        file = api.fileProvider.get(filePath)?.let(UserFile::from) ?: UserFile()
     }
 
     suspend fun save() {
         val file = file.toFile()
-        KokasaiAPI.fileProvider.add(filePath, file)
+        api.fileProvider.add(filePath, file)
     }
 
     companion object {

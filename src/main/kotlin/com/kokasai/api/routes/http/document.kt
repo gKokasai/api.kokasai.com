@@ -1,6 +1,6 @@
 package com.kokasai.api.routes.http
 
-import com.kokasai.api.KokasaiAPI
+import com.kokasai.api.KokasaiApi
 import com.kokasai.api.auth.UserLogin
 import com.kokasai.api.user.User
 import com.kokasai.flowerkt.route.RouteAction
@@ -11,6 +11,9 @@ import io.ktor.response.respondFile
 import io.ktor.routing.get
 import io.ktor.sessions.get
 import io.ktor.sessions.sessions
+import org.koin.java.KoinJavaComponent.inject
+
+private val api by inject<KokasaiApi>(KokasaiApi::class.java)
 
 val document: RouteAction = {
     get("{name}") {
@@ -21,7 +24,7 @@ val document: RouteAction = {
             val accessibleDocument = user.file.getDocument()
             if (accessibleDocument.contains(documentName)) {
                 if (documentName != null) {
-                    val file = KokasaiAPI.fileProvider.get("document/$documentName")
+                    val file = api.fileProvider.get("document/$documentName")
                     if (file != null) {
                         call.respondFile(file)
                     } else {

@@ -1,12 +1,15 @@
 package com.kokasai.api.auth
 
-import com.kokasai.api.KokasaiAPI
+import com.kokasai.api.KokasaiApi
 import com.kokasai.api.mail.MailSender
 import com.kokasai.api.routes.http.LoginRequest
+import org.koin.java.KoinJavaComponent.inject
 import java.util.Timer
 import kotlin.concurrent.timerTask
 
 object OnetimePasswordManager {
+    private val api by inject<KokasaiApi>(KokasaiApi::class.java)
+
     data class Password(val pass: String = generatePassword()) {
         var failureCount = 0
 
@@ -47,7 +50,7 @@ object OnetimePasswordManager {
         } else {
             password.failureCount ++
             if (Password.MaxFailureCount < password.failureCount) {
-                KokasaiAPI.logger.trace("Auth-TooManyRequest: $id")
+                api.logger.trace("Auth-TooManyRequest: $id")
                 passwords.remove(id)
             }
             false

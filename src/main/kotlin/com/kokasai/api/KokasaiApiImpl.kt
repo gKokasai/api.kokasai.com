@@ -7,12 +7,9 @@ import com.kokasai.api.configure.configureGson
 import com.kokasai.api.configure.configureSessionAuth
 import com.kokasai.api.configure.configureStatusPages
 import com.kokasai.api.routes.http.HttpRoute
-import com.kokasai.flowerkt.FlowerKt
 import com.kokasai.flowerkt.database.RemoteSQLiteDatabaseProvider
 import com.kokasai.flowerkt.file.WebDAVFileProvider
-import com.kokasai.flowerkt.module.UseExposedDatabaseSQLite
 import com.kokasai.flowerkt.module.UseFileWebDav
-import com.kokasai.flowerkt.module.UseSessionExposedDatabase
 import io.ktor.application.Application
 import io.ktor.application.install
 import io.ktor.auth.Authentication
@@ -28,14 +25,12 @@ import io.ktor.sessions.Sessions
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
-object KokasaiAPI : FlowerKt, UseFileWebDav, UseSessionExposedDatabase, UseExposedDatabaseSQLite {
-    val logger: Logger = LoggerFactory.getLogger("KokasaiAPI")
-
+class KokasaiApiImpl : KokasaiApi, UseFileWebDav {
+    override val logger: Logger = LoggerFactory.getLogger("KokasaiAPI")
     override val engine = Netty
     override val port = SystemEnv.Server.Port ?: 8080
     override val fileProvider = WebDAVFileProvider(OkHttp, SystemEnv.WebDAV.UserName, SystemEnv.WebDAV.Password, SystemEnv.WebDAV.Url)
     override val databaseProvider = RemoteSQLiteDatabaseProvider(SystemEnv.Server.DatabaseFileName ?: "data.db", fileProvider, 60 * 1000)
-
     override val routePath = setOf(HttpRoute)
 
     override val sessionsConfiguration: Sessions.Configuration.() -> Unit = {
@@ -43,7 +38,6 @@ object KokasaiAPI : FlowerKt, UseFileWebDav, UseSessionExposedDatabase, UseExpos
     }
 
     override fun installKtor(application: Application) {
-        super<UseSessionExposedDatabase>.installKtor(application)
         application.run {
             install(AutoHeadResponse)
             install(CallLogging) {
@@ -69,10 +63,5 @@ object KokasaiAPI : FlowerKt, UseFileWebDav, UseSessionExposedDatabase, UseExpos
                 configureGson()
             }
         }
-    }
-
-    override fun launch() {
-        super<UseSessionExposedDatabase>.launch()
-        super<FlowerKt>.launch()
     }
 }

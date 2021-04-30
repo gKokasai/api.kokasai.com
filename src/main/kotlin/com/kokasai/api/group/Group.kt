@@ -1,6 +1,9 @@
 package com.kokasai.api.group
 
-import com.kokasai.api.KokasaiAPI
+import com.kokasai.api.KokasaiApi
+import org.koin.java.KoinJavaComponent.inject
+
+private val api by inject<KokasaiApi>(KokasaiApi::class.java)
 
 data class Group(val name: String) {
     lateinit var file: GroupFile
@@ -9,12 +12,12 @@ data class Group(val name: String) {
     private val filePath = "group/$name.json"
 
     suspend fun load() {
-        file = KokasaiAPI.fileProvider.get(filePath)?.let(GroupFile::from) ?: GroupFile()
+        file = api.fileProvider.get(filePath)?.let(GroupFile::from) ?: GroupFile()
     }
 
     suspend fun save() {
         val file = file.toFile()
-        KokasaiAPI.fileProvider.add(filePath, file)
+        api.fileProvider.add(filePath, file)
     }
 
     object Name {

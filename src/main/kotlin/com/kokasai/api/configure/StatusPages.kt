@@ -1,6 +1,6 @@
 package com.kokasai.api.configure
 
-import com.kokasai.api.KokasaiAPI
+import com.kokasai.api.KokasaiApi
 import io.ktor.application.call
 import io.ktor.features.StatusPages
 import io.ktor.http.HttpStatusCode
@@ -9,11 +9,14 @@ import io.ktor.request.contentType
 import io.ktor.request.httpMethod
 import io.ktor.request.uri
 import io.ktor.response.respond
+import org.koin.java.KoinJavaComponent.inject
+
+private val api by inject<KokasaiApi>(KokasaiApi::class.java)
 
 fun StatusPages.Configuration.configureStatusPages() {
     exception<Throwable> { ex ->
         val request = call.request
-        KokasaiAPI.logger.error(
+        api.logger.error(
             buildString {
                 appendLine("Unhandled Exception")
                 appendLine("URI: ${request.httpMethod.value} ${request.uri}")
