@@ -5,7 +5,7 @@ import com.kokasai.api.configure.configureAuthCookie
 import com.kokasai.api.configure.configureCORS
 import com.kokasai.api.configure.configureCallLogging
 import com.kokasai.api.configure.configureFormAuth
-import com.kokasai.api.configure.configureGson
+import com.kokasai.api.configure.configureSerialization
 import com.kokasai.api.configure.configureSessionAuth
 import com.kokasai.api.configure.configureStatusPages
 import com.kokasai.api.http.HttpRoute
@@ -58,7 +58,7 @@ class KokasaiApiImpl : KokasaiApi {
                 configureCORS()
             }
             install(ContentNegotiation) {
-                configureGson()
+                configureSerialization()
             }
         }
     }

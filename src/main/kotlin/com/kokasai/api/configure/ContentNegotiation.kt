@@ -1,8 +1,8 @@
 package com.kokasai.api.configure
 
 import io.ktor.features.ContentNegotiation
-import io.ktor.gson.gson
+import io.ktor.serialization.json
 
-fun ContentNegotiation.Configuration.configureGson() {
-    gson()
+fun ContentNegotiation.Configuration.configureSerialization() {
+    json()
 }

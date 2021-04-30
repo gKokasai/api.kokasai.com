@@ -2,6 +2,7 @@ import org.jlleitschuh.gradle.ktlint.KtlintExtension
 
 plugins {
     kotlin("jvm") version "1.5.0"
+    kotlin("plugin.serialization") version "1.5.0"
     id("com.github.johnrengelman.shadow") version "7.0.0"
     id("org.jlleitschuh.gradle.ktlint") version "10.0.0"
     id("com.github.ben-manes.versions") version "0.38.0"
@@ -27,7 +28,7 @@ dependencies {
     implementation("io.ktor:ktor-auth:1.5.3")
     implementation("io.ktor:ktor-server-netty:1.5.3")
     implementation("io.ktor:ktor-server-sessions:1.5.3")
-    implementation("io.ktor:ktor-gson:1.5.3")
+    implementation("io.ktor:ktor-serialization:1.5.3")
     implementation(project(":flowerkt:core"))
     implementation(project(":flowerkt:database-exposed-sqlite"))
     implementation(project(":flowerkt:file-webdav"))
