@@ -7,7 +7,7 @@ import com.kokasai.api.configure.configureFormAuth
 import com.kokasai.api.configure.configureGson
 import com.kokasai.api.configure.configureSessionAuth
 import com.kokasai.api.configure.configureStatusPages
-import com.kokasai.api.routes.http.HttpRoute
+import com.kokasai.api.http.HttpRoute
 import com.kokasai.flowerkt.database.RemoteSQLiteDatabaseProvider
 import com.kokasai.flowerkt.file.WebDAVFileProvider
 import com.kokasai.flowerkt.mail.SendGridMailProvider

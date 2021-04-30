@@ -1,4 +1,4 @@
-package com.kokasai.api.routes.http.user.group
+package com.kokasai.api.http.user.document
 
 import com.kokasai.api.auth.UserLogin
 import com.kokasai.api.user.User
@@ -10,15 +10,15 @@ import io.ktor.routing.get
 import io.ktor.sessions.get
 import io.ktor.sessions.sessions
 
-data class ListResponse(val group: List<String>)
+data class ListResponse(val document: List<String>)
 
 val list: RouteAction = {
     get {
         val principal = call.sessions.get<UserLogin.Data>()
         if (principal != null) {
             val user = User.get(principal.name)
-            val group = user.file.group
-            call.respond(ListResponse(group))
+            val document = user.file.getDocument()
+            call.respond(ListResponse(document))
         } else {
             call.respond(HttpStatusCode.Unauthorized)
         }

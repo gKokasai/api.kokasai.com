@@ -1,4 +1,4 @@
-package com.kokasai.api.routes.http
+package com.kokasai.api.http
 
 import com.kokasai.flowerkt.route.RouteAction
 import io.ktor.application.call
