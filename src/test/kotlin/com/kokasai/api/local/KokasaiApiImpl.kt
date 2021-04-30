@@ -2,6 +2,7 @@ package com.kokasai.api.local
 
 import com.kokasai.api.KokasaiApi
 import com.kokasai.api.configure.configureAuthCookie
+import com.kokasai.api.configure.configureCORS
 import com.kokasai.api.configure.configureCallLogging
 import com.kokasai.api.configure.configureFormAuth
 import com.kokasai.api.configure.configureGson
@@ -19,7 +20,6 @@ import io.ktor.features.CORS
 import io.ktor.features.CallLogging
 import io.ktor.features.ContentNegotiation
 import io.ktor.features.StatusPages
-import io.ktor.http.HttpHeaders
 import io.ktor.server.netty.Netty
 import io.ktor.sessions.Sessions
 import org.slf4j.Logger
@@ -54,13 +54,7 @@ class KokasaiApiImpl : KokasaiApi {
                 configureSessionAuth()
             }
             install(CORS) {
-                anyHost()
-                header(HttpHeaders.Authorization)
-                header(HttpHeaders.ContentType)
-                header("withCredentials")
-                exposeHeader(HttpHeaders.SetCookie)
-                host("kokasai.com", schemes = listOf("http", "https"), subDomains = listOf("panel"))
-                allowCredentials = true
+                configureCORS()
             }
             install(ContentNegotiation) {
                 configureGson()
