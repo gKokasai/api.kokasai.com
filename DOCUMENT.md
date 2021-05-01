@@ -16,6 +16,12 @@
   - /group
     - [/list](#get-usergrouplist)
 
+## データタイプ
+
+| 名前 | 内容 | 説明 |
+|-----|------|-----|
+| Date | `yyyy/MM/dd HH:mm:ss` | 日付 |
+
 ## `GET` `/auth`
 ログインできているか確認する。
 
