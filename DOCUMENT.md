@@ -7,6 +7,7 @@
 - [/document](#get-documentname)
 - /group
   - /form
+    - [/list](#get-groupformlistname)
     - [/get](#get-groupformgetgroupnameformname)
     - [/submit](#post-groupformsubmitgroupnameformname)
   - /document
@@ -212,8 +213,44 @@ yyyy/MM/dd HH:mm:ss
 
 ---
 
-## `GET` `/group/form/get/{groupName}/{formName}`
+## `GET` `/group/form/list/{name}`
+指定グループのフォームの一覧を取得する。
 
+### Permission
+
+- GroupMember
+
+### Request
+
+#### - Parameter
+
+| Name | Description |
+|------|-------------|
+| name | グループ名。 |
+
+### Response
+
+#### - StatusCode
+
+| Code | Description |
+|------|-------------|
+| 200 OK | フォーム一覧の取得に成功。 |
+| 400 Bad Request | グループ名が指定されていない。 |
+| 401 Unauthorized | ログインしていない。 |
+| 403 Forbidden | グループに属していない。 |
+
+#### - Body `application/json`
+
+```
+{
+  "form": string[] (フォーム一覧)
+}
+```
+
+---
+
+## `GET` `/group/form/get/{groupName}/{formName}`
+指定グループのフォームの内容を取得する。
 
 ### Permission
 
@@ -263,7 +300,7 @@ yyyy/MM/dd HH:mm:ss
 ---
 
 ## `POST` `/group/form/submit/{groupName}/{formName}`
-フォームの送信を行う。
+指定グループのフォームの送信を行う。
 
 ### Permission
 
