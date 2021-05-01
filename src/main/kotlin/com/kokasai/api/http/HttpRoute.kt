@@ -1,6 +1,7 @@
 package com.kokasai.api.http
 
 import com.kokasai.flowerkt.route.RoutePath
+import com.kokasai.api.http.form.get as formGet
 import com.kokasai.api.http.form.submit as formSubmit
 import com.kokasai.api.http.group.document.list as groupDocumentList
 import com.kokasai.api.http.group.user.list as groupUserList
@@ -17,8 +18,9 @@ object HttpRoute : RoutePath("/") {
     object File : RoutePath("/file", action = file)
     object Document : RoutePath("/document", action = document)
     object Form : RoutePath("/form") {
-        override val child = setOf(Submit)
+        override val child = setOf(Get, Submit)
 
+        object Get : RoutePath(this, "/get", action = formGet)
         object Submit : RoutePath(this, "/submit", action = formSubmit)
     }
     object Group : RoutePath("/group") {

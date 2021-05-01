@@ -17,10 +17,8 @@ import io.ktor.sessions.sessions
 import kotlinx.serialization.Serializable
 import java.util.Date
 
-typealias FormSubmitType = FormSaveType
-
 @Serializable
-data class SubmitRequest(val values: Map<Int, FormSubmitType>)
+data class SubmitRequest(val values: Map<Int, FormSaveType>)
 
 val submit: RouteAction = {
     post("{groupName}/{formName}") {
