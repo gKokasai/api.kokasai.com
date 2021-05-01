@@ -5,10 +5,10 @@
 - [/logout](#post-logout)
 - [/file](#get-filepath)
 - [/document](#get-documentname)
-- /form
-  - [/get](#get-formgetgroupnameformname)
-  - [/submit](#post-formsubmitgroupnameformname)
 - /group
+  - /form
+    - [/get](#get-groupformgetgroupnameformname)
+    - [/submit](#post-groupformsubmitgroupnameformname)
   - /document
     - [/list](#get-groupdocumentlistname)
   - /user
@@ -30,7 +30,7 @@ yyyy/MM/dd HH:mm:ss
 
 ### FormDefineType
 
-[フォームの取得](#get-formgetgroupnameformname) で使用する。
+[フォームの取得](#get-groupformgetgroupnameformname) で使用する。
 
 #### String
 
@@ -52,7 +52,7 @@ yyyy/MM/dd HH:mm:ss
 
 ### FormSaveType
 
-[データタイプ(FormSaveType)](#formsavevalue), [フォームの送信](#post-formsubmitgroupnameformname) で使用する。
+[データタイプ(FormSaveType)](#formsavevalue), [フォームの送信](#post-groupformsubmitgroupnameformname) で使用する。
 
 #### String
 
@@ -74,7 +74,7 @@ yyyy/MM/dd HH:mm:ss
 
 ### FormSaveValue
 
-[フォームの取得](#get-formgetgroupnameformname) で使用する。
+[フォームの取得](#get-groupformgetgroupnameformname) で使用する。
 
 ```
 {
@@ -212,7 +212,7 @@ yyyy/MM/dd HH:mm:ss
 
 ---
 
-## `GET` `/form/get/{groupName}/{formName}`
+## `GET` `/group/form/get/{groupName}/{formName}`
 
 
 ### Permission
@@ -262,7 +262,7 @@ yyyy/MM/dd HH:mm:ss
 
 ---
 
-## `POST` `/form/submit/{groupName}/{formName}`
+## `POST` `/group/form/submit/{groupName}/{formName}`
 フォームの送信を行う。
 
 ### Permission

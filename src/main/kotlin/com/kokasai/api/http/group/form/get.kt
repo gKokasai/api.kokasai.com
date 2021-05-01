@@ -1,4 +1,4 @@
-package com.kokasai.api.http.form
+package com.kokasai.api.http.group.form
 
 import com.kokasai.api.auth.UserLogin
 import com.kokasai.api.form.FormDefine
