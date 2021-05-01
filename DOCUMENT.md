@@ -18,9 +18,36 @@
 
 ## データタイプ
 
-| 名前 | 内容 | 説明 |
-|-----|------|-----|
-| Date | `yyyy/MM/dd HH:mm:ss` | 日付 |
+### Date
+日付。
+
+```
+yyyy/MM/dd HH:mm:ss
+```
+
+### FormSubmitType
+
+[フォームの送信](#post-formsubmitgroupnameformname) で使用する。
+
+#### String
+
+```
+{
+  "type": "string",
+  "content": string (内容)
+}
+```
+
+#### Check
+
+```
+{
+  "type": "check"
+  "select": int[] (選択している項目)
+}
+```
+
+### FormGet
 
 ## `GET` `/auth`
 ログインできているか確認する。
@@ -146,6 +173,43 @@
 | 400 Bad Request | ドキュメント名が指定されていない。 |
 | 401 Unauthorized | ログインしていない。 |
 | 404 Not Found | 存在しないドキュメント。もしくはアクセスできないドキュメント。 |
+
+---
+
+## `POST` `/form/submit/{groupName}/{formName}`
+フォームの送信を行う。
+
+### Permission
+
+- GroupMember
+
+### Request
+
+#### - Parameter
+
+| Name | Description |
+|------|-------------|
+| groupName | グループ名。 |
+| formName | フォーム名。 |
+
+#### - Body `application/json`
+
+```
+{
+  "values": Map<Int, FormSubmitType> (フォームの値一覧)
+}
+```
+
+### Response
+
+#### - StatusCode
+
+| Code | Description |
+|------|-------------|
+| 200 OK | フォームの送信に成功。 |
+| 400 Bad Request | グループ名やフォーム名が指定されていない。 |
+| 401 Unauthorized | ログインしていない。 |
+| 404 Not Found | 存在しないフォーム。 |
 
 ---
 
