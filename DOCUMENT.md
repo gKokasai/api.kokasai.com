@@ -5,6 +5,9 @@
 - [/logout](#post-logout)
 - [/file](#get-filepath)
 - [/document](#get-documentname)
+- /form
+  - [/get](#get-formgetgroupnameformname)
+  - [/submit](#post-formsubmitgroupnameformname)
 - /group
   - /document
     - [/list](#get-groupdocumentlistname)
@@ -25,9 +28,31 @@
 yyyy/MM/dd HH:mm:ss
 ```
 
-### FormSubmitType
+### FormDefineType
 
-[フォームの送信](#post-formsubmitgroupnameformname) で使用する。
+[フォームの取得](#get-formgetgroupnameformname) で使用する。
+
+#### String
+
+```
+{
+  "type": "string"
+}
+```
+
+#### Check
+
+```
+{
+  "type": "check"
+  "element": Map<int, string> (チェック項目)
+  "limit": int (チェック数の制限)
+}
+```
+
+### FormSaveType
+
+[データタイプ(FormSaveType)](#formsavevalue), [フォームの送信](#post-formsubmitgroupnameformname) で使用する。
 
 #### String
 
@@ -44,6 +69,17 @@ yyyy/MM/dd HH:mm:ss
 {
   "type": "check"
   "select": int[] (選択している項目)
+}
+```
+
+### FormSaveValue
+
+[フォームの取得](#get-formgetgroupnameformname) で使用する。
+
+```
+{
+  "value": FormSaveType (項目の値)
+  "comment": string (項目に対するコメント)
 }
 ```
 
@@ -176,6 +212,56 @@ yyyy/MM/dd HH:mm:ss
 
 ---
 
+## `GET` `/form/get/{groupName}/{formName}`
+
+
+### Permission
+
+- GroupMember
+
+### Request
+
+#### - Parameter
+
+| Name | Description |
+|------|-------------|
+| groupName | グループ名。 |
+| formName | フォーム名。 |
+
+### Response
+
+#### - StatusCode
+
+| Code | Description |
+|------|-------------|
+| 200 OK | フォームの取得に成功。 |
+| 400 Bad Request | グループ名やフォーム名が指定されていない。 |
+| 401 Unauthorized | ログインしていない。 |
+| 404 Not Found | 存在しないフォーム。 |
+
+#### - Body `application/json`
+
+```
+{
+  "name": string (フォームの名前)
+  "description": string (フォームの説明)
+  "receive": Date (フォームを割り当てられた日付)
+  "limit": Date (フォームの提出期限の日付)
+  "update": Date (フォームが更新された日付)
+  "values": Map<int, Value> (フォームの値一覧)
+}
+
+# Value
+{
+  "name": string (項目の名前)
+  "description": string (項目の説明)
+  "type": FormDefineType (項目のデータ型)
+  "value": FormSaveValue? (項目のデータ)
+}
+```
+
+---
+
 ## `POST` `/form/submit/{groupName}/{formName}`
 フォームの送信を行う。
 
@@ -196,7 +282,7 @@ yyyy/MM/dd HH:mm:ss
 
 ```
 {
-  "values": Map<Int, FormSubmitType> (フォームの値一覧)
+  "values": Map<int, FormSaveType> (フォームの値一覧)
 }
 ```
 
