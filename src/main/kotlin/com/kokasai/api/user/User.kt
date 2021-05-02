@@ -1,23 +1,14 @@
 package com.kokasai.api.user
 
-import com.kokasai.api.KokasaiApi.Companion.api
 import com.kokasai.api.group.Group
+import com.kokasai.api.util.json.WithJsonFile
 
-data class User(val name: String) {
-    lateinit var file: UserFile
-        private set
-
-    private val filePath = "user/$name.json"
-
-    suspend fun load() {
-        file = api.fileProvider.get(filePath)?.let(UserFile::from) ?: UserFile()
-    }
-
-    suspend fun save() {
-        val file = file.toFile()
-        api.fileProvider.add(filePath, file)
-    }
-
+data class User(
+    val name: String
+) : WithJsonFile<UserFile>(
+    "user/$name.json",
+    UserFile.Companion
+) {
     companion object {
         suspend fun isAdmin(name: String) = get(name).file.group.contains(Group.Name.admin)
 
