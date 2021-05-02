@@ -36,14 +36,16 @@ val submit: RouteAction = {
                         val request = call.receive<SubmitRequest>()
                         val formSave = FormSave.get(formName, groupName)
                         val lastValues = formSave.file.values
-                        formSave.file.run {
-                            update = Date()
-                            values = request.values.mapValues { (index, type) ->
-                                val comment = lastValues[index]?.comment.orEmpty()
-                                FormSaveValue(type, comment)
+                        if (lastValues != request.values) {
+                            formSave.file.run {
+                                update = Date()
+                                values = request.values.mapValues { (index, type) ->
+                                    val comment = lastValues[index]?.comment.orEmpty()
+                                    FormSaveValue(type, comment)
+                                }
                             }
+                            formSave.save()
                         }
-                        formSave.save()
                         call.respond(HttpStatusCode.OK)
                     } else {
                         call.respond(HttpStatusCode.NotFound)
