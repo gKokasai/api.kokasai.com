@@ -1,10 +1,9 @@
 package com.kokasai.api.group
 
+import com.kokasai.api.util.json.JsonFile
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import java.io.File
 
 @Serializable
 data class GroupFile(
@@ -12,16 +11,10 @@ data class GroupFile(
     var member: List<String> = listOf(),
     var document: List<String> = listOf(),
     var form: List<String> = listOf()
-) {
-    override fun toString(): String = Json.encodeToString(this)
+) : JsonFile() {
+    companion object : JsonFile.Companion<GroupFile> {
+        override fun from(json: String): GroupFile? = Json.decodeFromString(json)
 
-    fun toFile(): File = File.createTempFile("tmp", ".json").apply {
-        writeBytes(this@GroupFile.toString().toByteArray())
-    }
-
-    companion object {
-        private fun from(json: String): GroupFile? = Json.decodeFromString(json)
-
-        fun from(json: File) = from(json.readText())
+        override fun empty() = GroupFile()
     }
 }
