@@ -58,19 +58,23 @@ yyyy/MM/dd HH:mm:ss
 #### String
 
 ```
-{
-  "type": "string",
-  "content": string (内容)
-}
+[
+  "string",
+  {
+    "content": string (内容)
+  }
+]
 ```
 
 #### Check
 
 ```
-{
-  "type": "check"
-  "select": int[] (選択している項目)
-}
+[
+  "check"
+  {
+    "select": int[] (選択している項目)
+  }
+]
 ```
 
 ### FormSaveValue
@@ -286,6 +290,8 @@ yyyy/MM/dd HH:mm:ss
   "limit": Date (フォームの提出期限の日付)
   "update": Date (フォームが更新された日付)
   "values": Map<int, Value> (フォームの値一覧)
+  "status": int (フォームの状態)
+  "comment": string (フォームへの反応)
 }
 
 # Value
