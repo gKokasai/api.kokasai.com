@@ -5,6 +5,7 @@ import com.kokasai.api.util.serialize.DateSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import java.util.Date
 
@@ -17,6 +18,8 @@ data class FormDefineFile(
     val values: Map<Int, FormDefineValue> = mapOf(),
     val group: List<String> = listOf()
 ) : JsonFile() {
+    override fun toJson() = Json.encodeToString(this)
+
     companion object : JsonFile.Companion<FormDefineFile> {
         override fun from(json: String): FormDefineFile? = Json.decodeFromString(json)
 

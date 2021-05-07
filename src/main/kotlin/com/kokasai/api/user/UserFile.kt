@@ -4,12 +4,15 @@ import com.kokasai.api.group.Group
 import com.kokasai.api.util.json.JsonFile
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 @Serializable
 data class UserFile(
     val group: MutableList<String> = mutableListOf()
 ) : JsonFile() {
+    override fun toJson() = Json.encodeToString(this)
+
     suspend fun getGroup() = group.map { Group.get(it) }
 
     suspend fun getDocument() = getGroup().map { it.file.document }.flatten()
