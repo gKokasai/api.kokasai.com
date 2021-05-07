@@ -32,9 +32,9 @@ data class FormSaveValue(
 sealed class FormSaveType {
     @Serializable
     @SerialName("string")
-    data class String(val content: kotlin.String)
+    data class String(val content: kotlin.String) : FormSaveType()
 
     @Serializable
     @SerialName("check")
-    data class Check(val select: List<Int>)
+    data class Check(val select: List<Int>) : FormSaveType()
 }
