@@ -22,7 +22,7 @@ object HttpRoute : RoutePath("/") {
         override val child = setOf(Form, Document, User)
 
         object Form : RoutePath(this, "/form") {
-            override val child = setOf(Get, Submit)
+            override val child = setOf(List, Get, Submit)
 
             object List : RoutePath(this, "/list", action = groupFormList)
             object Get : RoutePath(this, "/get", action = groupFormGet)
