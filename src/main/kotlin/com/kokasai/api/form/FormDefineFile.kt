@@ -35,18 +35,12 @@ data class FormDefineValue(
 sealed class FormDefineType {
     @Serializable
     @SerialName("string")
-    object String : FormDefineType() {
-        const val name = "string"
-    }
+    object String : FormDefineType()
 
     @Serializable
     @SerialName("check")
     data class Check(
         val element: Map<Int, kotlin.String>,
         val limit: Int
-    ) : FormDefineType() {
-        companion object {
-            const val name = "check"
-        }
-    }
+    ) : FormDefineType()
 }
