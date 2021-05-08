@@ -24,7 +24,7 @@ allprojects {
 }
 
 dependencies {
-    implementation("io.ktor:ktor-client-okhttp:1.5.3")
+    implementation("io.ktor:ktor-client-cio:1.5.3")
     implementation("io.ktor:ktor-auth:1.5.3")
     implementation("io.ktor:ktor-server-netty:1.5.3")
     implementation("io.ktor:ktor-server-sessions:1.5.3")
