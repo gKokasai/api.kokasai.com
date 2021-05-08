@@ -1,12 +1,13 @@
 package com.kokasai.api.user
 
 import com.kokasai.api.group.Group
+import com.kokasai.api.util.Directory
 import com.kokasai.api.util.json.WithJsonFile
 
 data class User(
     val name: String
 ) : WithJsonFile<UserFile>(
-    "user/$name.json",
+    "${Directory.user}/$name.json",
     UserFile.Companion
 ) {
     companion object {

@@ -13,7 +13,7 @@ abstract class WithJsonFile<T : JsonFile>(
         file = api.fileProvider.get(filePath)?.let(companion::from) ?: companion.empty()
     }
 
-    suspend fun save() {
+    open suspend fun save() {
         val file = file.toFile()
         api.fileProvider.add(filePath, file)
     }

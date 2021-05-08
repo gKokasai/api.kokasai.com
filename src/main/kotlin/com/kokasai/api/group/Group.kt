@@ -1,11 +1,12 @@
 package com.kokasai.api.group
 
+import com.kokasai.api.util.Directory
 import com.kokasai.api.util.json.WithJsonFile
 
 data class Group(
     val name: String
 ) : WithJsonFile<GroupFile>(
-    "group/$name.json",
+    "${Directory.group}/$name.json",
     GroupFile.Companion
 ) {
     object Name {
