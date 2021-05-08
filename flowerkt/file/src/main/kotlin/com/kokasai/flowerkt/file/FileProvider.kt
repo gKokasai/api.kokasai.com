@@ -7,4 +7,5 @@ interface FileProvider {
     suspend fun remove(path: String): Boolean
     suspend fun get(path: String): File?
     suspend fun list(path: String): List<String>?
+    suspend fun mkdir(path: String): Boolean
 }

@@ -25,4 +25,13 @@ class LocalFileProvider(val directory: File) : FileProvider {
     override suspend fun list(path: String): List<String>? {
         return File(directory, path).list()?.toList()
     }
+
+    override suspend fun mkdir(path: String): Boolean {
+        return try {
+            File(directory, path).mkdir()
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+            false
+        }
+    }
 }
