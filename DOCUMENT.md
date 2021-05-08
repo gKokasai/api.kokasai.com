@@ -4,7 +4,7 @@
 - [/login](#post-login)
 - [/logout](#post-logout)
 - [/file](#get-filepath)
-- [/document](#get-documentname)
+- [/document](#get-document)
 - /group
   - /form
     - [/list](#get-groupformlistname)
@@ -189,6 +189,24 @@ yyyy/MM/dd HH:mm:ss
 
 ---
 
+## `GET` `/document`
+ドキュメントファイルの一覧を取得する。
+
+### Permission
+
+- Admin
+
+### Response
+
+#### - StatusCode
+
+| Code | Description |
+|------|-------------|
+| 200 OK | ドキュメント一覧の取得に成功。 |
+| 401 Unauthorized | ログインしていない。 |
+| 403 Forbidden | 一覧を取得する権限がない。 |
+
+
 ## `GET` `/document/{name}`
 ドキュメントファイルを取得する。
 
@@ -211,7 +229,6 @@ yyyy/MM/dd HH:mm:ss
 | Code | Description |
 |------|-------------|
 | 200 OK | ドキュメントの取得に成功。 |
-| 400 Bad Request | ドキュメント名が指定されていない。 |
 | 401 Unauthorized | ログインしていない。 |
 | 404 Not Found | 存在しないドキュメント。もしくはアクセスできないドキュメント。 |
 
