@@ -87,4 +87,10 @@ class WebDAVFileProvider<T : HttpClientEngineConfig>(
             null
         }
     }
+
+    override suspend fun mkdir(path: String): Boolean {
+        return client.request<HttpResponse>("$webdavUrl/$path") {
+            method = HttpMethod("MKCOL")
+        }.status.isSuccess()
+    }
 }
