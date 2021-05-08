@@ -24,11 +24,11 @@ allprojects {
 }
 
 dependencies {
-    implementation("io.ktor:ktor-client-cio:1.5.3")
-    implementation("io.ktor:ktor-auth:1.5.3")
-    implementation("io.ktor:ktor-server-netty:1.5.3")
-    implementation("io.ktor:ktor-server-sessions:1.5.3")
-    implementation("io.ktor:ktor-serialization:1.5.3")
+    implementation("io.ktor:ktor-client-cio:1.5.4")
+    implementation("io.ktor:ktor-auth:1.5.4")
+    implementation("io.ktor:ktor-server-netty:1.5.4")
+    implementation("io.ktor:ktor-server-sessions:1.5.4")
+    implementation("io.ktor:ktor-serialization:1.5.4")
     implementation(project(":flowerkt:core"))
     implementation(project(":flowerkt:database-exposed-sqlite"))
     implementation(project(":flowerkt:file-webdav"))
