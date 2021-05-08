@@ -8,10 +8,12 @@ import io.ktor.client.features.auth.Auth
 import io.ktor.client.features.auth.providers.basic
 import io.ktor.client.request.request
 import io.ktor.client.statement.HttpResponse
+import io.ktor.client.statement.readText
 import io.ktor.http.HttpMethod
 import io.ktor.http.isSuccess
 import io.ktor.util.toByteArray
 import java.io.File
+import javax.xml.parsers.DocumentBuilderFactory
 
 class WebDAVFileProvider<T : HttpClientEngineConfig>(
     clientEngine: HttpClientEngineFactory<T>,
@@ -64,6 +66,25 @@ class WebDAVFileProvider<T : HttpClientEngineConfig>(
             }
         } else {
             cache
+        }
+    }
+
+    override suspend fun list(path: String): List<String>? {
+        val xml = client.request<HttpResponse>("$webdavUrl/$path") {
+            method = HttpMethod("PROPFIND")
+        }.readText()
+        val document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(xml.byteInputStream())
+        val response = document.getElementsByTagName("d:response")
+        return if (0 < response.length) {
+            val list = mutableListOf<String>()
+            val parent = response.item(0).firstChild.textContent
+            for (i in 1 until response.length) {
+                val href = response.item(i).firstChild.textContent
+                list.add(href.substringAfter(parent))
+            }
+            list
+        } else {
+            null
         }
     }
 }

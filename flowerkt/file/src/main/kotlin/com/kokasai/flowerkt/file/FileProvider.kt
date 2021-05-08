@@ -6,4 +6,5 @@ interface FileProvider {
     suspend fun add(path: String, file: File): Boolean
     suspend fun remove(path: String): Boolean
     suspend fun get(path: String): File?
+    suspend fun list(path: String): List<String>?
 }
