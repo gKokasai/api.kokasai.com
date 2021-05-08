@@ -3,6 +3,7 @@ package com.kokasai.api.http
 import com.kokasai.api.KokasaiApi.Companion.api
 import com.kokasai.api.auth.UserLogin
 import com.kokasai.api.user.User
+import com.kokasai.api.util.Directory
 import com.kokasai.flowerkt.route.RouteAction
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
@@ -21,7 +22,7 @@ val document: RouteAction = {
             val accessibleDocument = user.file.getDocument()
             if (accessibleDocument.contains(documentName)) {
                 if (documentName != null) {
-                    val file = api.fileProvider.get("document/$documentName")
+                    val file = api.fileProvider.get("${Directory.document}/$documentName")
                     if (file != null) {
                         call.respondFile(file)
                     } else {
