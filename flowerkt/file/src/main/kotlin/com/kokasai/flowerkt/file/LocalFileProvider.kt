@@ -21,4 +21,8 @@ class LocalFileProvider(val directory: File) : FileProvider {
         val file = File(directory, path)
         return if (file.exists()) file else null
     }
+
+    override suspend fun list(path: String): List<String>? {
+        return File(directory, path).list()?.toList()
+    }
 }
