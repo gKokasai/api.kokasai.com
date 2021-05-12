@@ -13,7 +13,7 @@ import io.ktor.sessions.sessions
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ListResponse(val form: List<String>)
+data class GetListResponse(val form: List<String>)
 
 val list: RouteAction = {
     get("{groupName}") {
@@ -26,7 +26,7 @@ val list: RouteAction = {
                 val groups = user.file.group
                 if (groups.contains(groupName)) {
                     val group = Group.get(groupName)
-                    call.respond(ListResponse(group.file.form))
+                    call.respond(GetListResponse(group.file.form))
                 } else {
                     call.respond(HttpStatusCode.Forbidden)
                 }

@@ -18,7 +18,7 @@ import kotlinx.serialization.Serializable
 import java.util.Date
 
 @Serializable
-data class SubmitRequest(val values: Map<Int, FormSaveType>)
+data class PostSubmitRequest(val values: Map<Int, FormSaveType>)
 
 val submit: RouteAction = {
     post("{groupName}/{formName}") {
@@ -33,7 +33,7 @@ val submit: RouteAction = {
                     val user = User.get(userName)
                     val groups = user.file.group
                     if (groups.contains(groupName)) {
-                        val request = call.receive<SubmitRequest>()
+                        val request = call.receive<PostSubmitRequest>()
                         val formSave = FormSave.get(formName, groupName)
                         val lastValues = formSave.file.values
                         if (lastValues != request.values) {

@@ -12,7 +12,7 @@ import io.ktor.sessions.sessions
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ListResponse(val group: List<String>)
+data class GetListResponse(val group: List<String>)
 
 val list: RouteAction = {
     get {
@@ -20,7 +20,7 @@ val list: RouteAction = {
         if (principal != null) {
             val user = User.get(principal.name)
             val group = user.file.group
-            call.respond(ListResponse(group))
+            call.respond(GetListResponse(group))
         } else {
             call.respond(HttpStatusCode.Unauthorized)
         }

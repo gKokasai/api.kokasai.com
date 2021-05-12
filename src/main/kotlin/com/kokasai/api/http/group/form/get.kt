@@ -18,7 +18,7 @@ import kotlinx.serialization.Serializable
 import java.util.Date
 
 @Serializable
-data class GetResponse(
+data class GetGetResponse(
     val name: String,
     val description: String,
     @Serializable(with = DateSerializer::class) val receive: Date,
@@ -51,7 +51,7 @@ val get: RouteAction = {
                     val groups = user.file.group
                     if (groups.contains(groupName)) {
                         val formSave = FormSave.get(formName, groupName).file
-                        val response = GetResponse(
+                        val response = GetGetResponse(
                             formDefine.name,
                             formDefine.description,
                             formDefine.receive,

@@ -1,7 +1,6 @@
 package com.kokasai.api.auth
 
 import com.kokasai.api.KokasaiApi.Companion.api
-import com.kokasai.api.http.LoginRequest
 import org.slf4j.LoggerFactory
 import java.text.SimpleDateFormat
 import java.time.ZoneId
@@ -26,16 +25,16 @@ object OnetimePasswordManager {
         return List(8) { chars.random() }.joinToString("")
     }
 
-    fun generate(loginRequest: LoginRequest): Boolean {
-        return if (passwords.contains(loginRequest.id)) {
+    fun generate(id: String): Boolean {
+        return if (passwords.contains(id)) {
             false
         } else {
-            passwords[loginRequest.id] = Password().apply {
-                sendPassword(loginRequest.id, pass)
+            passwords[id] = Password().apply {
+                sendPassword(id, pass)
             }
             Timer().schedule(
                 timerTask {
-                    passwords.remove(loginRequest.id)
+                    passwords.remove(id)
                 },
                 5 * 60 * 1000
             )
