@@ -15,14 +15,14 @@ import io.ktor.sessions.sessions
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ListResponse(val document: List<String>)
+data class GetDocumentListResponse(val document: List<String>)
 
 val document: RouteAction = {
     get {
         val principal = call.sessions.get<UserLogin.Data>()
         if (principal != null) {
             if (User.isAdmin(principal.name)) {
-                call.respond(ListResponse(api.fileProvider.list(Directory.document).orEmpty()))
+                call.respond(GetDocumentListResponse(api.fileProvider.list(Directory.document).orEmpty()))
             } else {
                 call.respond(HttpStatusCode.Forbidden)
             }

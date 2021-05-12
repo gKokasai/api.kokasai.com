@@ -11,17 +11,17 @@ import io.ktor.routing.post
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class LoginRequest(val id: String)
+data class PostLoginRequest(val id: String)
 
 val login: RouteAction = {
     post {
         try {
-            val loginRequest = call.receive<LoginRequest>()
+            val request = call.receive<PostLoginRequest>()
             when {
-                loginRequest.id.matches("^[A-Za-z][A-Za-z0-9.]*$".toRegex()).not() -> {
+                request.id.matches("^[A-Za-z][A-Za-z0-9.]*$".toRegex()).not() -> {
                     call.respond(HttpStatusCode.BadRequest)
                 }
-                OnetimePasswordManager.generate(loginRequest) -> {
+                OnetimePasswordManager.generate(request.id) -> {
                     call.respond(HttpStatusCode.OK)
                 }
                 else -> {

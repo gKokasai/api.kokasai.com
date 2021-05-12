@@ -15,10 +15,10 @@ import io.ktor.sessions.sessions
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ListRequest(val document: List<String>)
+data class GetListResponse(val document: List<String>)
 
 @Serializable
-data class ListResponse(val document: List<String>)
+data class PostListRequest(val document: List<String>)
 
 val list: RouteAction = {
     get("{name}") {
@@ -31,7 +31,7 @@ val list: RouteAction = {
                 val groups = user.file.group
                 if (groups.contains(groupName)) {
                     val group = Group.get(groupName)
-                    call.respond(ListResponse(group.file.document))
+                    call.respond(GetListResponse(group.file.document))
                 } else {
                     call.respond(HttpStatusCode.Forbidden)
                 }
@@ -52,7 +52,7 @@ val list: RouteAction = {
                 val groups = user.file.group
                 if (groups.contains(Group.Name.admin)) {
                     val group = Group.get(groupName)
-                    val request = call.receive<ListRequest>()
+                    val request = call.receive<PostListRequest>()
                     group.file.document = request.document
                     group.save()
                     call.respond(HttpStatusCode.OK)

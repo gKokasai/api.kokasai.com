@@ -15,10 +15,10 @@ import io.ktor.sessions.sessions
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ListRequest(val owner: List<String>, val member: List<String>)
+data class GetListResponse(val owner: List<String>, val member: List<String>)
 
 @Serializable
-data class ListResponse(val owner: List<String>, val member: List<String>)
+data class PostListRequest(val owner: List<String>, val member: List<String>)
 
 val list: RouteAction = {
     get("{name}") {
@@ -30,7 +30,7 @@ val list: RouteAction = {
                 val group = Group.get(groupName)
                 val members = group.file.member
                 if (members.contains(userName) || User.isAdmin(userName)) {
-                    call.respond(ListResponse(group.file.owner, group.file.member))
+                    call.respond(GetListResponse(group.file.owner, group.file.member))
                 } else {
                     call.respond(HttpStatusCode.Forbidden)
                 }
@@ -51,7 +51,7 @@ val list: RouteAction = {
                 val owners = group.file.owner
                 val isAdmin = User.isAdmin(userName)
                 if (owners.contains(userName) || isAdmin) {
-                    val request = call.receive<ListRequest>()
+                    val request = call.receive<PostListRequest>()
                     val lastMember = group.file.member
                     val addMember = request.member.filterNot { lastMember.contains(it) }
                     addMember.forEach {
