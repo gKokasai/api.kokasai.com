@@ -11,7 +11,8 @@ data class User(
     UserFile.Companion
 ) {
     companion object {
-        suspend fun isAdmin(name: String) = get(name).file.group.contains(Group.Name.admin)
+        inline val User.isAdmin
+            get() = file.group.contains(Group.Name.admin)
 
         suspend fun get(name: String) = User(name).apply {
             load()
