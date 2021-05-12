@@ -7,6 +7,7 @@ import java.time.ZoneId
 import java.util.Date
 import java.util.TimeZone
 import java.util.Timer
+import java.util.concurrent.ConcurrentHashMap
 import kotlin.concurrent.timerTask
 
 object OnetimePasswordManager {
@@ -18,7 +19,7 @@ object OnetimePasswordManager {
         }
     }
 
-    private val passwords = mutableMapOf<String, Password>()
+    private val passwords = ConcurrentHashMap<String, Password>()
 
     private fun generatePassword(): String {
         val chars = ('a'..'z') + ('A'..'Z') + ('0'..'9')
