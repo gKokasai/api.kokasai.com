@@ -1,8 +1,9 @@
 package com.kokasai.api.http.group.document
 
-import com.kokasai.api.auth.UserLogin
 import com.kokasai.api.group.Group
-import com.kokasai.api.user.User
+import com.kokasai.api.http._dsl.inGroupFromParameter
+import com.kokasai.api.http._dsl.onlyAdmin
+import com.kokasai.api.http._dsl.parameter
 import com.kokasai.flowerkt.route.RouteAction
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
@@ -10,8 +11,6 @@ import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.get
 import io.ktor.routing.post
-import io.ktor.sessions.get
-import io.ktor.sessions.sessions
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -21,49 +20,21 @@ data class GetListResponse(val document: List<String>)
 data class PostListRequest(val document: List<String>)
 
 val list: RouteAction = {
-    get("{name}") {
-        val principal = call.sessions.get<UserLogin.Data>()
-        if (principal != null) {
-            val groupName = call.parameters["name"]
-            if (groupName != null) {
-                val userName = principal.name
-                val user = User.get(userName)
-                val groups = user.file.group
-                if (groups.contains(groupName)) {
-                    val group = Group.get(groupName)
-                    call.respond(GetListResponse(group.file.document))
-                } else {
-                    call.respond(HttpStatusCode.Forbidden)
-                }
-            } else {
-                call.respond(HttpStatusCode.BadRequest, "name is not set.")
-            }
-        } else {
-            call.respond(HttpStatusCode.Unauthorized)
+    get("{groupName}") {
+        inGroupFromParameter("groupName") { _, groupName ->
+            val group = Group.get(groupName)
+            call.respond(GetListResponse(group.file.document))
         }
     }
-    post("{name}") {
-        val principal = call.sessions.get<UserLogin.Data>()
-        if (principal != null) {
-            val groupName = call.parameters["name"]
-            if (groupName != null) {
-                val userName = principal.name
-                val user = User.get(userName)
-                val groups = user.file.group
-                if (groups.contains(Group.Name.admin)) {
-                    val group = Group.get(groupName)
-                    val request = call.receive<PostListRequest>()
-                    group.file.document = request.document
-                    group.save()
-                    call.respond(HttpStatusCode.OK)
-                } else {
-                    call.respond(HttpStatusCode.Forbidden)
-                }
-            } else {
-                call.respond(HttpStatusCode.BadRequest, "name is not set.")
+    post("{groupName}") {
+        parameter("groupName") { groupName ->
+            onlyAdmin {
+                val group = Group.get(groupName)
+                val request = call.receive<PostListRequest>()
+                group.file.document = request.document
+                group.save()
+                call.respond(HttpStatusCode.OK)
             }
-        } else {
-            call.respond(HttpStatusCode.Unauthorized)
         }
     }
 }
