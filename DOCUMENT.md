@@ -46,7 +46,9 @@ yyyy/MM/dd HH:mm:ss
 ```
 {
   "type": "check"
-  "element": Map<int, string> (チェック項目)
+  "element": {
+    [id: int (項目の識別子)]: string (項目の内容)
+  } (チェック項目一覧)
   "limit": int (チェック数の制限)
 }
 ```
@@ -281,19 +283,21 @@ yyyy/MM/dd HH:mm:ss
 
 ```
 {
-  "name": string (フォームの名前)
+  "name": string (フォームの表示名)
   "description": string (フォームの説明)
   "receive": Date (フォームを割り当てられた日付)
   "limit": Date (フォームの提出期限の日付)
   "update": Date (フォームが更新された日付)
-  "values": Map<int, Value> (フォームの値一覧)
+  "values": {
+    [id: int (項目の識別子)]: Value (フォームの値)
+  } (フォームの値一覧)
   "status": int (フォームの状態)
   "comment": string (フォームへの反応)
 }
 
 # Value
 {
-  "name": string (項目の名前)
+  "name": string (項目の表示名)
   "description": string (項目の説明)
   "type": FormDefineType (項目のデータ型)
   "value": FormSaveValue? (項目のデータ)
@@ -322,7 +326,9 @@ yyyy/MM/dd HH:mm:ss
 
 ```
 {
-  "values": Map<int, FormSaveType> (フォームの値一覧)
+  "values": {
+    [id: int (項目の識別子)]: FormSaveType (フォームの値)
+  } (フォームの値一覧)
 }
 ```
 
