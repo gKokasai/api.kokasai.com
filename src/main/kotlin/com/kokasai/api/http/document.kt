@@ -3,6 +3,7 @@ package com.kokasai.api.http
 import com.kokasai.api.KokasaiApi.Companion.api
 import com.kokasai.api.http._dsl.onlyUser
 import com.kokasai.api.http._dsl.parameter
+import com.kokasai.api.user.User.Companion.isAdmin
 import com.kokasai.api.util.Directory
 import com.kokasai.flowerkt.route.RouteAction
 import io.ktor.application.call
@@ -15,8 +16,7 @@ val document: RouteAction = {
     get("{documentName}") {
         onlyUser { user ->
             parameter("documentName") { documentName ->
-                val accessibleDocument = user.file.getDocument()
-                if (accessibleDocument.contains(documentName)) {
+                if (user.isAdmin || user.file.getDocument().contains(documentName)) {
                     val file = api.fileProvider.get("${Directory.document}/$documentName")
                     if (file != null) {
                         call.respondFile(file)
