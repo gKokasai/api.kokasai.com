@@ -208,6 +208,34 @@ yyyy/MM/dd HH:mm:ss
 | 401 Unauthorized | ログインしていない。 |
 | 404 Not Found | 存在しないドキュメント。もしくはアクセスできないドキュメント。 |
 
+## `POST` `/document/{name}`
+ドキュメントファイルを変更する。
+
+### Permission
+
+- Admin
+
+### Request
+
+#### - Parameter
+
+| Name | Description |
+|------|-------------|
+| name | ドキュメント名。 |
+
+#### - Body `multipart/form-data`
+ファイル
+
+### Response
+
+#### - StatusCode
+
+| Code | Description |
+|------|-------------|
+| 200 OK | ドキュメントの取得に成功。 |
+| 401 Unauthorized | ログインしていない。 |
+| 404 Not Found | 存在しないドキュメント。もしくはアクセスできないドキュメント。 |
+
 ---
 
 ## `GET` `/group/form/list/{name}`
