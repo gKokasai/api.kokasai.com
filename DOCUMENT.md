@@ -15,6 +15,8 @@
   - /user
     - [/list](#get-groupuserlistname)
 - /user
+  - /form
+    - [/list](#get-userformlist)
   - /document
     - [/list](#get-userdocumentlist)
   - /group
@@ -520,6 +522,34 @@ yyyy/MM/dd HH:mm:ss
 | 400 Bad Request | グループ名が指定されていない。 |
 | 401 Unauthorized | ログインしていない。 |
 | 403 Forbidden | 編集権限がない。 |
+
+---
+
+## `GET` `/user/form/list`
+ユーザーがアクセス可能なフォーム一覧を取得する。
+
+### Response
+
+#### - StatusCode
+
+| Code | Description |
+|------|-------------|
+| 200 OK | ドキュメント一覧の取得に成功。 |
+| 401 Unauthorized | ログインしていない。 |
+
+#### - Body `application/json`
+
+```
+{
+  "group": {
+    [id: string (フォームの名前)]: {
+      "name": string (フォームの表示名)
+      "update": Date (フォームが更新された日時)
+      "status": int (フォームの状態)
+    }
+  }
+}
+```
 
 ---
 
