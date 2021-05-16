@@ -120,6 +120,12 @@ yyyy/MM/dd HH:mm:ss
 |------|-------------|
 | 200 OK | ログイン成功。 |
 
+#### - Header
+
+| Name | Description |
+|------|-------------|
+| Session | セッションID |
+
 ---
 
 ## `POST` `/login`

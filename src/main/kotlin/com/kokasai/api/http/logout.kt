@@ -10,7 +10,7 @@ import io.ktor.sessions.sessions
 
 val logout: RouteAction = {
     post {
-        call.sessions.clear(UserLogin.cookie)
+        call.sessions.clear(UserLogin.sessionHeader)
         call.respond(HttpStatusCode.OK)
     }
 }
