@@ -25,20 +25,21 @@ data class SimpleGroupFormData(
 val list: RouteAction = {
     get("{groupName}") {
         inGroupFromParameter("groupName") { _, groupName ->
-            val group = Group.get(groupName)
-            call.respond(
-                GetListResponse(
-                    group.file.form.associateWith { formName ->
-                        val formDefine = FormDefine.get(formName).file
-                        val formSave = FormSave.get(formName, groupName).file
-                        SimpleGroupFormData(
-                            formDefine.name,
-                            formSave.update,
-                            formSave.status
-                        )
-                    }
-                )
-            )
+            call.respond(getGroupFormListResponse(groupName))
         }
     }
+}
+
+suspend fun getGroupFormListResponse(groupName: String) = Group.get(groupName).run {
+    GetListResponse(
+        file.form.associateWith { formName ->
+            val formDefine = FormDefine.get(formName).file
+            val formSave = FormSave.get(formName, groupName).file
+            SimpleGroupFormData(
+                formDefine.name,
+                formSave.update,
+                formSave.status
+            )
+        }
+    )
 }
