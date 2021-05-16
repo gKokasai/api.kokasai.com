@@ -24,7 +24,7 @@ val auth: RouteAction = {
     authenticate(UserLogin.authName) {
         post {
             val principal = call.principal<UserLogin.Data>()
-            call.sessions.set(UserLogin.cookie, principal)
+            call.sessions.set(UserLogin.sessionHeader, principal)
             call.respond(HttpStatusCode.OK)
         }
     }

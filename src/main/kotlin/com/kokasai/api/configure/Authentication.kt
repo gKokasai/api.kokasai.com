@@ -23,7 +23,7 @@ fun Authentication.Configuration.configureFormAuth() {
 }
 
 fun Authentication.Configuration.configureSessionAuth() {
-    session<UserLogin.Data>(UserLogin.sessionName) {
+    session<UserLogin.Data> {
         challenge {
             call.respond(HttpStatusCode.Unauthorized)
         }
