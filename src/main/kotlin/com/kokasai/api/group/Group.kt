@@ -1,5 +1,6 @@
 package com.kokasai.api.group
 
+import com.kokasai.api.KokasaiApi.Companion.api
 import com.kokasai.api.util.Directory
 import com.kokasai.api.util.json.WithJsonFile
 
@@ -17,5 +18,7 @@ data class Group(
         suspend fun get(name: String) = Group(name).apply {
             load()
         }
+
+        suspend fun list() = api.fileProvider.list(Directory.group).orEmpty().map { it.substringBeforeLast('.') }
     }
 }
