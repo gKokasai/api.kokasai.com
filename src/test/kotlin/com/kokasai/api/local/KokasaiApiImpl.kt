@@ -1,13 +1,13 @@
 package com.kokasai.api.local
 
 import com.kokasai.api.KokasaiApi
-import com.kokasai.api.configure.configureAuthCookie
-import com.kokasai.api.configure.configureCORS
-import com.kokasai.api.configure.configureCallLogging
-import com.kokasai.api.configure.configureFormAuth
-import com.kokasai.api.configure.configureSerialization
-import com.kokasai.api.configure.configureSessionAuth
-import com.kokasai.api.configure.configureStatusPages
+import com.kokasai.api.auth.configureBasicAuth
+import com.kokasai.api.auth.configureSessionAuth
+import com.kokasai.api.auth.configureSessionHeader
+import com.kokasai.api.configureCORS
+import com.kokasai.api.configureCallLogging
+import com.kokasai.api.configureSerialization
+import com.kokasai.api.configureStatusPages
 import com.kokasai.api.http.HttpRoute
 import com.kokasai.flowerkt.database.SQLiteDatabaseProvider
 import com.kokasai.flowerkt.file.LocalFileProvider
@@ -37,7 +37,7 @@ class KokasaiApiImpl : KokasaiApi {
     override val routePath = setOf(HttpRoute)
 
     override val sessionsConfiguration: Sessions.Configuration.() -> Unit = {
-        configureAuthCookie()
+        configureSessionHeader()
     }
 
     override fun installKtor(application: Application) {
@@ -51,7 +51,7 @@ class KokasaiApiImpl : KokasaiApi {
                 configureStatusPages()
             }
             install(Authentication) {
-                configureFormAuth()
+                configureBasicAuth()
                 configureSessionAuth()
             }
             install(CORS) {
