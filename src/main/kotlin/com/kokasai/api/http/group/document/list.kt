@@ -1,11 +1,10 @@
 package com.kokasai.api.http.group.document
 
-import com.kokasai.api.KokasaiApi.Companion.api
+import com.kokasai.api.document.Document
 import com.kokasai.api.group.Group
 import com.kokasai.api.http._dsl.inGroupFromParameter
 import com.kokasai.api.http._dsl.onlyAdmin
 import com.kokasai.api.http._dsl.parameter
-import com.kokasai.api.util.Directory
 import com.kokasai.flowerkt.route.RouteAction
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
@@ -27,7 +26,7 @@ val list: RouteAction = {
             val document = if (groupName != Group.Name.admin) {
                 Group.get(groupName).file.document
             } else {
-                api.fileProvider.list(Directory.document).orEmpty()
+                Document.list()
             }
             call.respond(GetListResponse(document))
         }
