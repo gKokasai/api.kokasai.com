@@ -6,6 +6,8 @@ import com.kokasai.api.http.group.form.get as groupFormGet
 import com.kokasai.api.http.group.form.list as groupFormList
 import com.kokasai.api.http.group.form.submit as groupFormSubmit
 import com.kokasai.api.http.group.user.list as groupUserList
+import com.kokasai.api.http.logout.all as logoutAll
+import com.kokasai.api.http.logout.index as logoutIndex
 import com.kokasai.api.http.user.document.list as userDocumentList
 import com.kokasai.api.http.user.form.list as userFormList
 import com.kokasai.api.http.user.group.list as userGroupList
@@ -16,7 +18,12 @@ object HttpRoute : RoutePath("/") {
     object Index : RoutePath("/", action = index)
     object Auth : RoutePath("/auth", action = auth)
     object Login : RoutePath("/login", action = login)
-    object Logout : RoutePath("/logout", action = logout)
+    object Logout : RoutePath("/logout") {
+        override val child = setOf(Index, All)
+
+        object Index : RoutePath(this, "/", action = logoutIndex)
+        object All : RoutePath(this, "/all", action = logoutAll)
+    }
     object Session : RoutePath("/session", action = session)
     object Document : RoutePath("/document", action = document)
     object Group : RoutePath("/group") {
