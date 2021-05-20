@@ -27,7 +27,7 @@ object OnetimePasswordManager {
     }
 
     fun generate(id: String): Boolean {
-        return if (passwords.contains(id)) {
+        return if (passwords.containsKey(id)) {
             false
         } else {
             passwords[id] = Password().apply {
