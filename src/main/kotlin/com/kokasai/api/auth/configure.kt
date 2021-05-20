@@ -1,15 +1,17 @@
-package com.kokasai.api.configure
+package com.kokasai.api.auth
 
-import com.kokasai.api.auth.OnetimePasswordManager
-import com.kokasai.api.auth.UserLogin
+import com.kokasai.api.KokasaiApi
+import com.kokasai.flowerkt.session.SessionStorageExposed
 import io.ktor.application.call
 import io.ktor.auth.Authentication
 import io.ktor.auth.basic
 import io.ktor.auth.session
 import io.ktor.http.HttpStatusCode
 import io.ktor.response.respond
+import io.ktor.sessions.Sessions
+import io.ktor.sessions.header
 
-fun Authentication.Configuration.configureFormAuth() {
+fun Authentication.Configuration.configureBasicAuth() {
     basic(UserLogin.authName) {
         realm = UserLogin.realm
         validate {
@@ -31,4 +33,8 @@ fun Authentication.Configuration.configureSessionAuth() {
             session
         }
     }
+}
+
+fun Sessions.Configuration.configureSessionHeader() {
+    header<UserLogin.Data>(UserLogin.sessionHeader, storage = SessionStorageExposed(KokasaiApi.api.sessionTable))
 }
