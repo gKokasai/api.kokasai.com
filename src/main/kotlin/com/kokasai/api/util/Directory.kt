@@ -7,10 +7,9 @@ object Directory {
     const val form = "form"
     const val user = "user"
     const val document = "document"
-    const val public = "public"
 
     suspend fun create() {
-        listOf(group, form, user, document, public).forEach {
+        listOf(group, form, user, document).forEach {
             api.fileProvider.mkdir(it)
         }
     }
