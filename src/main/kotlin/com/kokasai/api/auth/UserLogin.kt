@@ -2,6 +2,7 @@ package com.kokasai.api.auth
 
 import com.kokasai.api.KokasaiApi.Companion.api
 import io.ktor.auth.Principal
+import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.sql.Connection
@@ -21,5 +22,13 @@ object UserLogin {
             }.count()
         }
         return count
+    }
+
+    fun logoutAll(name: String) {
+        transaction(Connection.TRANSACTION_SERIALIZABLE, 3) {
+            api.sessionTable.deleteWhere {
+                api.sessionTable.value eq "name=%23s$name"
+            }
+        }
     }
 }

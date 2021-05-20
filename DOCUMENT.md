@@ -3,6 +3,7 @@
 - [/auth](#get-auth)
 - [/login](#post-login)
 - [/logout](#post-logout)
+  - [/all](#post-logoutall)
 - [/session](#get-session)
 - [/document](#get-documentname)
 - /group
@@ -166,6 +167,20 @@ yyyy/MM/dd HH:mm:ss
 | Code | Description |
 |------|-------------|
 | 200 OK | ログアウト成功。 |
+
+---
+
+## `POST` `/logout/all`
+全てのセッションでログアウトする。
+
+### Response
+
+#### - StatusCode
+
+| Code | Description |
+|------|-------------|
+| 200 OK | ログアウト成功。 |
+| 401 Unauthorized | ログインしていない。 |
 
 ---
 
