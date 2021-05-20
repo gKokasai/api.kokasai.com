@@ -3,6 +3,7 @@
 - [/auth](#get-auth)
 - [/login](#post-login)
 - [/logout](#post-logout)
+- [/session](#get-session)
 - [/document](#get-documentname)
 - /group
   - [/list](#get-grouplist)
@@ -165,6 +166,28 @@ yyyy/MM/dd HH:mm:ss
 | Code | Description |
 |------|-------------|
 | 200 OK | ログアウト成功。 |
+
+---
+
+## `GET` `/session`
+自分のセッション状態を取得する。
+
+### Response
+
+#### - StatusCode
+
+| Code | Description |
+|------|-------------|
+| 200 OK | ログインしている。 |
+| 401 Unauthorized | ログインしていない。 |
+
+#### - Body `application/json`
+
+```
+{
+  "count": number (全セッション数)
+}
+```
 
 ---
 

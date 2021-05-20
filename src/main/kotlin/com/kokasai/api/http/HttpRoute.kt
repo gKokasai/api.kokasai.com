@@ -11,12 +11,13 @@ import com.kokasai.api.http.user.form.list as userFormList
 import com.kokasai.api.http.user.group.list as userGroupList
 
 object HttpRoute : RoutePath("/") {
-    override val child = setOf(Index, Auth, Login, Logout, Document, Group, User)
+    override val child = setOf(Index, Auth, Login, Logout, Session, Document, Group, User)
 
     object Index : RoutePath("/", action = index)
     object Auth : RoutePath("/auth", action = auth)
     object Login : RoutePath("/login", action = login)
     object Logout : RoutePath("/logout", action = logout)
+    object Session : RoutePath("/session", action = session)
     object Document : RoutePath("/document", action = document)
     object Group : RoutePath("/group") {
         override val child = setOf(Form, Document, User)
