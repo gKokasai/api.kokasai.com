@@ -3,7 +3,6 @@
 - [/auth](#get-auth)
 - [/login](#post-login)
 - [/logout](#post-logout)
-- [/file](#get-filepath)
 - [/document](#get-documentname)
 - /group
   - [/list](#get-grouplist)
@@ -166,29 +165,6 @@ yyyy/MM/dd HH:mm:ss
 | Code | Description |
 |------|-------------|
 | 200 OK | ログアウト成功。 |
-
----
-
-## `GET` `/file/{path...}`
-指定パスのファイルを取得する。
-
-### Request
-
-#### - Parameter
-
-| Name | Description |
-|------|-------------|
-| path | ファイルのパス。 |
-
-### Response
-
-#### - StatusCode
-
-| Code | Description |
-|------|-------------|
-| 200 OK | ファイルの取得に成功。 |
-| 400 Bad Request | パスが不正。 |
-| 404 Not Found | ファイルが見つからなかった。 |
 
 ---
 
