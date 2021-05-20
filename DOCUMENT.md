@@ -6,6 +6,7 @@
 - [/file](#get-filepath)
 - [/document](#get-documentname)
 - /group
+  - [/list](#get-grouplist)
   - /form
     - [/list](#get-groupformlistname)
     - [/get](#get-groupformgetgroupnameformname)
@@ -243,6 +244,35 @@ yyyy/MM/dd HH:mm:ss
 | 200 OK | ドキュメントの取得に成功。 |
 | 401 Unauthorized | ログインしていない。 |
 | 404 Not Found | 存在しないドキュメント。もしくはアクセスできないドキュメント。 |
+
+---
+
+## `GET` `/group/list`
+全グループ一覧を取得する。
+
+### Permission
+
+- Admin
+
+### Request
+
+#### - Body `application/json`
+
+```
+{
+  "group": string[] (グループ一覧)
+}
+```
+
+### Response
+
+#### - StatusCode
+
+| Code | Description |
+|------|-------------|
+| 200 OK | グループ一覧の変更に成功。 |
+| 401 Unauthorized | ログインしていない。 |
+| 403 Forbidden | 権限がない。|
 
 ---
 
