@@ -6,6 +6,7 @@ import com.kokasai.api.http.group.document.list as groupDocumentList
 import com.kokasai.api.http.group.form.get as groupFormGet
 import com.kokasai.api.http.group.form.list as groupFormList
 import com.kokasai.api.http.group.form.submit as groupFormSubmit
+import com.kokasai.api.http.group.list as groupList
 import com.kokasai.api.http.group.user.list as groupUserList
 import com.kokasai.api.http.logout.all as logoutAll
 import com.kokasai.api.http.logout.index as logoutIndex
@@ -33,8 +34,9 @@ object HttpRoute : RoutePath("/") {
         object Assign : RoutePath(this, "/assign", action = formAssign)
     }
     object Group : RoutePath("/group") {
-        override val child = setOf(Form, Document, User)
+        override val child = setOf(List, Form, Document, User)
 
+        object List : RoutePath(this, "/list", action = groupList)
         object Form : RoutePath(this, "/form") {
             override val child = setOf(List, Get, Submit)
 
