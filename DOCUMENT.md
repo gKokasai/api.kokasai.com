@@ -6,6 +6,8 @@
   - [/all](#post-logoutall)
 - [/session](#get-session)
 - [/document](#get-documentname)
+- /form
+  - [/assign](#get-formassignname)
 - /group
   - [/list](#get-grouplist)
   - /form
@@ -258,6 +260,74 @@ yyyy/MM/dd HH:mm:ss
 | 200 OK | ドキュメントの取得に成功。 |
 | 401 Unauthorized | ログインしていない。 |
 | 404 Not Found | 存在しないドキュメント。もしくはアクセスできないドキュメント。 |
+
+---
+
+## `GET` `/form/assign/{name}`
+フォームが割り当てられたグループ一覧を取得する。
+
+### Permission
+
+- Admin
+
+### Request
+
+#### - Parameter
+
+| Name | Description |
+|------|-------------|
+| name | フォーム名。 |
+
+### Response
+
+#### - StatusCode
+
+| Code | Description |
+|------|-------------|
+| 200 OK | グループ一覧の変更に成功。 |
+| 401 Unauthorized | ログインしていない。 |
+| 403 Forbidden | 権限がない。|
+
+#### - Body `application/json`
+
+```
+{
+  "group": string[] (グループ一覧)
+}
+```
+
+## `POST` `/form/assign/{name}`
+フォームが割り当てられたグループ一覧を変更する。
+
+### Permission
+
+- Admin
+
+### Request
+
+#### - Parameter
+
+| Name | Description |
+|------|-------------|
+| name | フォーム名。 |
+
+#### - Body `application/json`
+
+```
+{
+  "group": string[] (グループ一覧)
+}
+```
+
+### Response
+
+#### - StatusCode
+
+| Code | Description |
+|------|-------------|
+| 200 OK | グループ一覧の変更に成功。 |
+| 401 Unauthorized | ログインしていない。 |
+| 403 Forbidden | 権限がない。|
 
 ---
 
