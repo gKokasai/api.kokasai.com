@@ -19,7 +19,7 @@ data class GetAssignResponse(val group: List<String>)
 data class PostAssignRequest(val group: List<String>)
 
 val assign: RouteAction = {
-    get("formName") {
+    get("{formName}") {
         parameter("formName") { formName ->
             onlyAdmin {
                 val group = FormDefine.get(formName).file.group
@@ -27,7 +27,7 @@ val assign: RouteAction = {
             }
         }
     }
-    post("formName") {
+    post("{formName}") {
         parameter("formName") { formName ->
             onlyAdmin {
                 val request = call.receive<PostAssignRequest>()
