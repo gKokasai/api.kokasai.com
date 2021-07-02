@@ -37,25 +37,25 @@ val list: RouteAction = {
         parameter("groupName") { groupName ->
             onlyAdminOrOwner(groupName) { user, group ->
                 val request = call.receive<PostListRequest>()
-                val member = request.member
-                val lastMember = group.file.member
-                member.forEach {
-                    if (lastMember.contains(it).not()) {
+                val lastAllUser = group.file.allUser
+                group.file.member = request.member
+                if (user.isAdmin) {
+                    group.file.owner = request.owner
+                }
+                val allUser = group.file.allUser
+                allUser.forEach {
+                    if (lastAllUser.contains(it).not()) {
                         User.get(it).apply {
                             file.group.add(groupName)
                         }.save()
                     }
                 }
-                lastMember.forEach {
-                    if (member.contains(it).not()) {
+                lastAllUser.forEach {
+                    if (allUser.contains(it).not()) {
                         User.get(it).apply {
                             file.group.remove(groupName)
                         }.save()
                     }
-                }
-                group.file.member = member
-                if (user.isAdmin) {
-                    group.file.owner = request.owner
                 }
                 group.save()
                 call.respond(HttpStatusCode.OK)

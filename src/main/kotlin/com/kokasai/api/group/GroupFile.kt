@@ -13,6 +13,9 @@ data class GroupFile(
     var document: List<String> = listOf(),
     val form: MutableList<String> = mutableListOf()
 ) : JsonFile() {
+    val allUser
+        get() = owner + member
+
     override fun toJson() = Json.encodeToString(this)
 
     companion object : JsonFile.Companion<GroupFile> {
