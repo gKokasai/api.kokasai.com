@@ -38,10 +38,11 @@ val list: RouteAction = {
             onlyAdminOrOwner(groupName) { user, group ->
                 val request = call.receive<PostListRequest>()
                 val lastAllUser = group.file.allUser
-                group.file.member = request.member
                 if (user.isAdmin) {
                     group.file.owner = request.owner
                 }
+                val owners = group.file.owner
+                group.file.member = request.member.filterNot(owners::contains)
                 val allUser = group.file.allUser
                 allUser.forEach {
                     if (lastAllUser.contains(it).not()) {
