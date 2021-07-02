@@ -11,6 +11,7 @@ import io.ktor.response.respond
 import io.ktor.routing.get
 import io.ktor.routing.post
 import kotlinx.serialization.Serializable
+import io.ktor.http.*
 
 @Serializable
 data class GetAssignResponse(val group: List<String>)
@@ -31,7 +32,8 @@ val assign: RouteAction = {
         parameter("formName") { formName ->
             onlyAdmin {
                 val request = call.receive<PostAssignRequest>()
-                val formDefineFile = FormDefine.get(formName).file
+                val formDefine = FormDefine.get(formName)
+                val formDefineFile = formDefine.file
                 val lastGroup = formDefineFile.group
                 val group = request.group
                 group.forEach {
@@ -49,6 +51,8 @@ val assign: RouteAction = {
                     }
                 }
                 formDefineFile.group = group
+                formDefine.save()
+                call.respond(HttpStatusCode.OK)
             }
         }
     }
