@@ -655,7 +655,7 @@ yyyy/MM/dd HH:mm:ss
 
 ```
 {
-  "group": {
+  [groupName: string] {
     [id: string (フォームの名前)]: {
       "name": string (フォームの表示名)
       "update": Date (フォームが更新された日時)
