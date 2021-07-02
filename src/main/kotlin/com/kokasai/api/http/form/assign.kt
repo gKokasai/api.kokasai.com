@@ -6,6 +6,7 @@ import com.kokasai.api.http._dsl.onlyAdmin
 import com.kokasai.api.http._dsl.parameter
 import com.kokasai.flowerkt.route.RouteAction
 import io.ktor.application.call
+import io.ktor.http.HttpStatusCode
 import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.get
@@ -31,7 +32,8 @@ val assign: RouteAction = {
         parameter("formName") { formName ->
             onlyAdmin {
                 val request = call.receive<PostAssignRequest>()
-                val formDefineFile = FormDefine.get(formName).file
+                val formDefine = FormDefine.get(formName)
+                val formDefineFile = formDefine.file
                 val lastGroup = formDefineFile.group
                 val group = request.group
                 group.forEach {
@@ -49,6 +51,8 @@ val assign: RouteAction = {
                     }
                 }
                 formDefineFile.group = group
+                formDefine.save()
+                call.respond(HttpStatusCode.OK)
             }
         }
     }
