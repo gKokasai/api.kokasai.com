@@ -4,7 +4,7 @@ import com.kokasai.api.form.FormDefine
 import com.kokasai.api.form.FormSave
 import com.kokasai.api.form.FormSaveType
 import com.kokasai.api.form.FormSaveValue
-import com.kokasai.api.http._dsl.inGroup
+import com.kokasai.api.http._dsl.onlyAdminOrGroupUser
 import com.kokasai.api.http._dsl.parameter
 import com.kokasai.flowerkt.route.RouteAction
 import io.ktor.application.call
@@ -21,7 +21,7 @@ data class PostSubmitRequest(val values: Map<Int, FormSaveType>)
 val submit: RouteAction = {
     post("{groupName}/{formName}") {
         parameter("groupName", "formName") { groupName, formName ->
-            inGroup(groupName) {
+            onlyAdminOrGroupUser(groupName) {
                 val formDefine = FormDefine.get(formName)
                 if (formDefine.file.group.contains(groupName)) {
                     val request = call.receive<PostSubmitRequest>()

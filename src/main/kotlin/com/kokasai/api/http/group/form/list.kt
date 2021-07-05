@@ -3,7 +3,8 @@ package com.kokasai.api.http.group.form
 import com.kokasai.api.form.FormDefine
 import com.kokasai.api.form.FormSave
 import com.kokasai.api.group.Group
-import com.kokasai.api.http._dsl.inGroupFromParameter
+import com.kokasai.api.http._dsl.onlyAdminOrGroupUser
+import com.kokasai.api.http._dsl.parameter
 import com.kokasai.api.util.serialize.DateSerializer
 import com.kokasai.flowerkt.route.RouteAction
 import io.ktor.application.call
@@ -24,8 +25,10 @@ data class SimpleGroupFormData(
 
 val list: RouteAction = {
     get("{groupName}") {
-        inGroupFromParameter("groupName") { _, groupName ->
-            call.respond(getGroupFormListResponse(groupName))
+        parameter("groupName") { groupName ->
+            onlyAdminOrGroupUser(groupName) {
+                call.respond(getGroupFormListResponse(groupName))
+            }
         }
     }
 }

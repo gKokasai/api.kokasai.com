@@ -2,8 +2,8 @@ package com.kokasai.api.http.group.document
 
 import com.kokasai.api.document.Document
 import com.kokasai.api.group.Group
-import com.kokasai.api.http._dsl.inGroupFromParameter
 import com.kokasai.api.http._dsl.onlyAdmin
+import com.kokasai.api.http._dsl.onlyAdminOrGroupUser
 import com.kokasai.api.http._dsl.parameter
 import com.kokasai.flowerkt.route.RouteAction
 import io.ktor.application.call
@@ -22,13 +22,15 @@ data class PostListRequest(val document: List<String>)
 
 val list: RouteAction = {
     get("{groupName}") {
-        inGroupFromParameter("groupName") { _, groupName ->
-            val document = if (groupName != Group.Name.admin) {
-                Group.get(groupName).file.document
-            } else {
-                Document.list()
+        parameter("groupName") { groupName ->
+            onlyAdminOrGroupUser(groupName) {
+                val document = if (groupName != Group.Name.admin) {
+                    Group.get(groupName).file.document
+                } else {
+                    Document.list()
+                }
+                call.respond(GetListResponse(document))
             }
-            call.respond(GetListResponse(document))
         }
     }
     post("{groupName}") {

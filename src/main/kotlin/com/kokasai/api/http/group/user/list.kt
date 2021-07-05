@@ -1,8 +1,8 @@
 package com.kokasai.api.http.group.user
 
 import com.kokasai.api.group.Group
-import com.kokasai.api.http._dsl.inGroupFromParameter
-import com.kokasai.api.http._dsl.onlyAdminOrOwner
+import com.kokasai.api.http._dsl.onlyAdminOrGroupOwner
+import com.kokasai.api.http._dsl.onlyAdminOrGroupUser
 import com.kokasai.api.http._dsl.parameter
 import com.kokasai.api.user.User
 import com.kokasai.api.user.User.Companion.isAdmin
@@ -23,19 +23,21 @@ data class PostListRequest(val owner: List<String>, val member: List<String>)
 
 val list: RouteAction = {
     get("{groupName}") {
-        inGroupFromParameter("groupName") { user, groupName ->
-            val group = Group.get(groupName)
-            val members = group.file.member
-            if (members.contains(user.name) || user.isAdmin) {
-                call.respond(GetListResponse(group.file.owner, group.file.member))
-            } else {
-                call.respond(HttpStatusCode.Forbidden)
+        parameter("groupName") { groupName ->
+            onlyAdminOrGroupUser(groupName) { user ->
+                val group = Group.get(groupName)
+                val members = group.file.member
+                if (members.contains(user.name) || user.isAdmin) {
+                    call.respond(GetListResponse(group.file.owner, group.file.member))
+                } else {
+                    call.respond(HttpStatusCode.Forbidden)
+                }
             }
         }
     }
     post("{groupName}") {
         parameter("groupName") { groupName ->
-            onlyAdminOrOwner(groupName) { user, group ->
+            onlyAdminOrGroupOwner(groupName) { user, group ->
                 val request = call.receive<PostListRequest>()
                 val lastAllUser = group.file.allUser
                 if (user.isAdmin) {

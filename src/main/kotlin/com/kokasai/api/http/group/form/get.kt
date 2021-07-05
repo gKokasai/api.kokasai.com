@@ -4,7 +4,7 @@ import com.kokasai.api.form.FormDefine
 import com.kokasai.api.form.FormDefineType
 import com.kokasai.api.form.FormSave
 import com.kokasai.api.form.FormSaveValue
-import com.kokasai.api.http._dsl.inGroup
+import com.kokasai.api.http._dsl.onlyAdminOrGroupUser
 import com.kokasai.api.http._dsl.parameter
 import com.kokasai.api.util.serialize.DateSerializer
 import com.kokasai.flowerkt.route.RouteAction
@@ -38,7 +38,7 @@ data class Value(
 val get: RouteAction = {
     get("{groupName}/{formName}") {
         parameter("groupName", "formName") { groupName, formName ->
-            inGroup(groupName) {
+            onlyAdminOrGroupUser(groupName) {
                 val formDefine = FormDefine.get(formName).file
                 if (formDefine.group.contains(groupName)) {
                     val formSave = FormSave.get(formName, groupName).file
