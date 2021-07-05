@@ -1,8 +1,8 @@
 package com.kokasai.api.http
 
 import com.kokasai.api.document.Document
+import com.kokasai.api.http._dsl.nowLogin
 import com.kokasai.api.http._dsl.onlyAdmin
-import com.kokasai.api.http._dsl.onlyUser
 import com.kokasai.api.http._dsl.parameter
 import com.kokasai.api.user.User.Companion.isAdmin
 import com.kokasai.api.util.call.receiveFile
@@ -16,7 +16,7 @@ import io.ktor.routing.post
 
 val document: RouteAction = {
     get("{documentName}") {
-        onlyUser { user ->
+        nowLogin { user ->
             parameter("documentName") { documentName ->
                 if (user.isAdmin || user.file.getDocument().contains(documentName)) {
                     val file = Document.get(documentName)

@@ -21,7 +21,7 @@ suspend inline fun PipelineContext<Unit, ApplicationCall>.onlyAdminOrGroupOwner(
         group: Group
     ) -> Unit
 ) {
-    onlyUser { user ->
+    nowLogin { user ->
         val group = Group.get(groupName)
         if (group.file.owner.contains(user.name) || user.isAdmin) {
             onSuccess(user, group)

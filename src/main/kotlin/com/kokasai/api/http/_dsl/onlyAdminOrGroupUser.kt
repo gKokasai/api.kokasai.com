@@ -19,7 +19,7 @@ suspend inline fun PipelineContext<Unit, ApplicationCall>.onlyAdminOrGroupUser(
         user: User
     ) -> Unit
 ) {
-    onlyUser { user ->
+    nowLogin { user ->
         if (user.file.group.contains(groupName) || user.isAdmin) {
             onSuccess(user)
         } else {

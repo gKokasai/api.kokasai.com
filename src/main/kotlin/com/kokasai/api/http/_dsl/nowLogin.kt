@@ -10,7 +10,11 @@ import io.ktor.sessions.get
 import io.ktor.sessions.sessions
 import io.ktor.util.pipeline.PipelineContext
 
-suspend inline fun PipelineContext<Unit, ApplicationCall>.onlyUser(
+/**
+ * ログイン中のみ実行する処理
+ * @param onSuccess 実行する処理
+ */
+suspend inline fun PipelineContext<Unit, ApplicationCall>.nowLogin(
     onSuccess: (
         user: User
     ) -> Unit

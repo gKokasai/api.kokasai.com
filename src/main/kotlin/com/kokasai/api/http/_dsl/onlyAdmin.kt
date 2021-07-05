@@ -13,7 +13,7 @@ suspend inline fun PipelineContext<Unit, ApplicationCall>.onlyAdmin(
         user: User
     ) -> Unit
 ) {
-    onlyUser { user ->
+    nowLogin { user ->
         if (user.isAdmin) {
             onSuccess(user)
         } else {

@@ -1,6 +1,6 @@
 package com.kokasai.api.http.user.form
 
-import com.kokasai.api.http._dsl.onlyUser
+import com.kokasai.api.http._dsl.nowLogin
 import com.kokasai.api.http.group.form.SimpleGroupFormData
 import com.kokasai.api.http.group.form.getGroupFormListResponse
 import com.kokasai.flowerkt.route.RouteAction
@@ -14,7 +14,7 @@ data class GetListResponse(val group: Map<String, Map<String, SimpleGroupFormDat
 
 val list: RouteAction = {
     get {
-        onlyUser { user ->
+        nowLogin { user ->
             call.respond(GetListResponse(user.file.group.associateWith { getGroupFormListResponse(it).form }))
         }
     }

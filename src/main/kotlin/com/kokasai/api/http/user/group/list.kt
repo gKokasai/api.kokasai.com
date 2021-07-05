@@ -1,6 +1,6 @@
 package com.kokasai.api.http.user.group
 
-import com.kokasai.api.http._dsl.onlyUser
+import com.kokasai.api.http._dsl.nowLogin
 import com.kokasai.flowerkt.route.RouteAction
 import io.ktor.application.call
 import io.ktor.response.respond
@@ -12,7 +12,7 @@ data class GetListResponse(val group: List<String>)
 
 val list: RouteAction = {
     get {
-        onlyUser { user ->
+        nowLogin { user ->
             val group = user.file.group
             call.respond(GetListResponse(group))
         }
