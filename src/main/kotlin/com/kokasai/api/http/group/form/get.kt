@@ -5,6 +5,7 @@ import com.kokasai.api.form.FormDefineType
 import com.kokasai.api.form.FormSave
 import com.kokasai.api.form.FormSaveValue
 import com.kokasai.api.http._dsl.inGroup
+import com.kokasai.api.http._dsl.parameter
 import com.kokasai.api.util.serialize.DateSerializer
 import com.kokasai.flowerkt.route.RouteAction
 import io.ktor.application.call
@@ -36,9 +37,7 @@ data class Value(
 
 val get: RouteAction = {
     get("{groupName}/{formName}") {
-        val groupName = call.parameters["groupName"]
-        val formName = call.parameters["formName"]
-        if (groupName != null && formName != null) {
+        parameter("groupName", "formName") { groupName, formName ->
             inGroup(groupName) {
                 val formDefine = FormDefine.get(formName).file
                 if (formDefine.group.contains(groupName)) {
@@ -65,8 +64,6 @@ val get: RouteAction = {
                     call.respond(HttpStatusCode.NotFound)
                 }
             }
-        } else {
-            call.respond(HttpStatusCode.BadRequest)
         }
     }
 }
