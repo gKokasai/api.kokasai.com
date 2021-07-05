@@ -8,6 +8,10 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.response.respond
 import io.ktor.util.pipeline.PipelineContext
 
+/**
+ * Admin であれば処理を実行する
+ * @param onSuccess 実行する処理
+ */
 suspend inline fun PipelineContext<Unit, ApplicationCall>.onlyAdmin(
     onSuccess: (
         user: User
