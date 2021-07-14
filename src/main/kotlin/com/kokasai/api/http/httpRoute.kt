@@ -2,7 +2,6 @@ package com.kokasai.api.http
 
 import com.kokasai.api.auth.UserLogin
 import io.ktor.auth.authenticate
-import io.ktor.routing.Route
 import io.ktor.routing.Routing
 import io.ktor.routing.get
 import io.ktor.routing.post
@@ -27,96 +26,94 @@ import com.kokasai.api.http.user.group.listGet as userGroupListGet
  * HTTP のルート設定をする
  */
 fun Routing.httpRoute() {
-    operator fun String.invoke(build: Route.() -> Unit) = route(this, build)
-
-    "/" {
+    route("/") {
         get(indexGet)
     }
-    "/auth" {
+    route("/auth") {
         get(authGet)
         authenticate(UserLogin.authName) {
             post(authPost)
         }
     }
-    "/login" {
+    route("/login") {
         post(loginPost)
     }
-    "/logout" {
-        "/" {
+    route("/logout") {
+        route("/") {
             post(logoutIndexPost)
         }
-        "/all" {
+        route("/all") {
             post(logoutAllPost)
         }
     }
-    "/session" {
+    route("/session") {
         get(sessionGet)
     }
-    "/document" {
-        "/{documentName}" {
+    route("/document") {
+        route("/{documentName}") {
             get(documentGet)
             post(documentPost)
         }
     }
-    "/form" {
-        "/assign" {
-            "/{formName}" {
+    route("/form") {
+        route("/assign") {
+            route("/{formName}") {
                 get(formAssignGet)
                 post(formAssignPost)
             }
         }
     }
-    "/group" {
-        "/list" {
+    route("/group") {
+        route("/list") {
             get(groupListGet)
         }
-        "/form" {
-            "/list" {
-                "/{groupName}" {
+        route("/form") {
+            route("/list") {
+                route("/{groupName}") {
                     get(groupFormListGet)
                 }
             }
-            "/get" {
-                "/{groupName}/{formName}" {
+            route("/get") {
+                route("/{groupName}/{formName}") {
                     get(groupFormGetGet)
                 }
             }
-            "/submit" {
-                "/{groupName}/{formName}" {
+            route("/submit") {
+                route("/{groupName}/{formName}") {
                     post(groupFormSubmitPost)
                 }
             }
         }
-        "/document" {
-            "/list" {
-                "/{groupName}" {
+        route("/document") {
+            route("/list") {
+                route("/{groupName}") {
                     get(groupDocumentListGet)
                     post(groupDocumentListPost)
                 }
             }
         }
-        "/user" {
-            "/list" {
-                "/{groupName}" {
+        route("/user") {
+            route("/list") {
+                route("/{groupName}") {
                     get(groupUserListGet)
                     post(groupUserListPost)
                 }
             }
         }
     }
-    "/user" {
-        "/form" {
-            "/list" {
+    route("/user") {
+        route("/form") {
+            route("/list") {
                 get(userFormListGet)
             }
         }
-        "/document" {
-            "/list" {
+        route("/document") {
+            route("/list") {
                 get(userDocumentListGet)
             }
         }
-        "/group" {
-            "/list" {
+        route("/group") {
+            route("/list") {
                 get(userGroupListGet)
             }
         }
