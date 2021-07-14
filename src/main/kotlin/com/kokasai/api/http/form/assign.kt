@@ -21,7 +21,7 @@ data class PostAssignRequest(val group: List<String>)
 val assignGet: PipelineInterceptor<Unit, ApplicationCall> = {
     parameter("formName") { formName ->
         onlyAdminOrFormOwner(formName) { _, _ ->
-            val group = FormDefine.get(formName).file.group
+            val group = FormDefine.get(formName).group
             call.respond(GetAssignResponse(group))
         }
     }
@@ -32,25 +32,25 @@ val assignPost: PipelineInterceptor<Unit, ApplicationCall> = {
         onlyAdminOrFormOwner(formName) { _, _ ->
             val request = call.receive<PostAssignRequest>()
             val formDefine = FormDefine.get(formName)
-            val formDefineFile = formDefine.file
-            val lastGroup = formDefineFile.group
+            val lastGroup = formDefine.group
             val group = request.group
             group.forEach {
                 if (lastGroup.contains(it).not()) {
-                    Group.get(it).apply {
-                        file.form.add(formName)
-                    }.save()
+                    Group.get(it).edit {
+                        form.add(formName)
+                    }
                 }
             }
             lastGroup.forEach {
                 if (group.contains(it).not()) {
-                    Group.get(it).apply {
-                        file.form.remove(formName)
-                    }.save()
+                    Group.get(it).edit {
+                        form.remove(formName)
+                    }
                 }
             }
-            formDefineFile.group = group
-            formDefine.save()
+            formDefine.edit {
+                this.group = group
+            }
             call.respond(HttpStatusCode.OK)
         }
     }

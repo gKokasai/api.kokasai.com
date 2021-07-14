@@ -10,6 +10,14 @@ data class Group(
     "${Directory.group}/$name.json",
     GroupFile.Companion
 ) {
+    val owner by file::owner
+    val member by file::member
+    val document by file::document
+    val form by file::form
+
+    val allUser
+        get() = owner + member
+
     object Name {
         const val admin = "admin"
     }

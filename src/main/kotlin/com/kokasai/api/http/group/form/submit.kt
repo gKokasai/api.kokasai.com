@@ -22,19 +22,18 @@ val submitPost: PipelineInterceptor<Unit, ApplicationCall> = {
     parameter("groupName", "formName") { groupName, formName ->
         onlyAdminOrGroupUser(groupName) {
             val formDefine = FormDefine.get(formName)
-            if (formDefine.file.group.contains(groupName)) {
+            if (formDefine.group.contains(groupName)) {
                 val request = call.receive<PostSubmitRequest>()
                 val formSave = FormSave.get(formName, groupName)
-                val lastValues = formSave.file.values
+                val lastValues = formSave.values
                 if (lastValues != request.values) {
-                    formSave.file.run {
+                    formSave.edit {
                         update = Date()
                         values = request.values.mapValues { (index, type) ->
                             val comment = lastValues[index]?.comment.orEmpty()
                             FormSaveValue(type, comment)
                         }
                     }
-                    formSave.save()
                 }
                 call.respond(HttpStatusCode.OK)
             } else {

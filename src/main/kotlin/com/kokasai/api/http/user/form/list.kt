@@ -15,6 +15,6 @@ data class GetListResponse(val group: Map<String, Map<String, SimpleGroupFormDat
 
 val listGet: PipelineInterceptor<Unit, ApplicationCall> = {
     nowLogin { user ->
-        call.respond(GetListResponse(user.file.group.associateWith { getGroupFormListResponse(it).form }))
+        call.respond(GetListResponse(user.group.associateWith { getGroupFormListResponse(it).form }))
     }
 }

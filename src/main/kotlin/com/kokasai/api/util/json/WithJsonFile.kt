@@ -6,15 +6,20 @@ abstract class WithJsonFile<T : JsonFile>(
     private val filePath: String,
     private val companion: JsonFile.Companion<T>
 ) {
-    lateinit var file: T
+    protected lateinit var file: T
         private set
 
     suspend fun load() {
         file = api.fileProvider.get(filePath)?.let(companion::from) ?: companion.empty()
     }
 
-    open suspend fun save() {
+    protected open suspend fun save() {
         val file = file.toFile()
         api.fileProvider.add(filePath, file)
+    }
+
+    suspend fun edit(action: T.() -> Unit) {
+        file.action()
+        save()
     }
 }

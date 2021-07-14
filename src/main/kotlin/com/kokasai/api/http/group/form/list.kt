@@ -34,9 +34,9 @@ val listGet: PipelineInterceptor<Unit, ApplicationCall> = {
 
 suspend fun getGroupFormListResponse(groupName: String) = Group.get(groupName).run {
     GetListResponse(
-        file.form.associateWith { formName ->
-            val formDefine = FormDefine.get(formName).file
-            val formSave = FormSave.get(formName, groupName).file
+        form.associateWith { formName ->
+            val formDefine = FormDefine.get(formName)
+            val formSave = FormSave.get(formName, groupName)
             SimpleGroupFormData(
                 formDefine.name,
                 formSave.update,

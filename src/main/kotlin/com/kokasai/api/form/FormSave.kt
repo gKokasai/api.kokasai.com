@@ -11,6 +11,11 @@ data class FormSave(
     "${Directory.form}/$formName/$groupName.json",
     FormSaveFile.Companion
 ) {
+    val update by file::update
+    val values by file::values
+    val comment by file::comment
+    val status by file::status
+
     override suspend fun save() {
         api.fileProvider.mkdir("${Directory.form}/$formName")
         super.save()

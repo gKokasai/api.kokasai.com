@@ -23,7 +23,7 @@ suspend inline fun PipelineContext<Unit, ApplicationCall>.onlyAdminOrGroupOwner(
 ) {
     nowLogin { user ->
         val group = Group.get(groupName)
-        if (group.file.owner.contains(user.name) || user.isAdmin) {
+        if (group.owner.contains(user.name) || user.isAdmin) {
             onSuccess(user, group)
         } else {
             call.respond(HttpStatusCode.Forbidden)

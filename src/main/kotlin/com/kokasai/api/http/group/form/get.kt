@@ -39,9 +39,9 @@ data class Value(
 val getGet: PipelineInterceptor<Unit, ApplicationCall> = {
     parameter("groupName", "formName") { groupName, formName ->
         onlyAdminOrGroupUser(groupName) {
-            val formDefine = FormDefine.get(formName).file
+            val formDefine = FormDefine.get(formName)
             if (formDefine.group.contains(groupName)) {
-                val formSave = FormSave.get(formName, groupName).file
+                val formSave = FormSave.get(formName, groupName)
                 val response = GetGetResponse(
                     formDefine.name,
                     formDefine.description,

@@ -1,6 +1,5 @@
 package com.kokasai.api.user
 
-import com.kokasai.api.group.Group
 import com.kokasai.api.util.json.JsonFile
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
@@ -12,10 +11,6 @@ data class UserFile(
     val group: MutableList<String> = mutableListOf()
 ) : JsonFile() {
     override fun toJson() = Json.encodeToString(this)
-
-    suspend fun getGroup() = group.map { Group.get(it) }
-
-    suspend fun getDocument() = getGroup().map { it.file.document }.flatten()
 
     companion object : JsonFile.Companion<UserFile> {
         override fun from(json: String): UserFile? = Json.decodeFromString(json)

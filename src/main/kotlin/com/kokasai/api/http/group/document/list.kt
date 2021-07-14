@@ -24,7 +24,7 @@ val listGet: PipelineInterceptor<Unit, ApplicationCall> = {
     parameter("groupName") { groupName ->
         onlyAdminOrGroupUser(groupName) {
             val document = if (groupName != Group.Name.admin) {
-                Group.get(groupName).file.document
+                Group.get(groupName).document
             } else {
                 Document.list()
             }
@@ -38,9 +38,9 @@ val listPost: PipelineInterceptor<Unit, ApplicationCall> = {
         onlyAdmin {
             if (groupName != Group.Name.admin) {
                 val request = call.receive<PostListRequest>()
-                Group.get(groupName).apply {
-                    file.document = request.document
-                }.save()
+                Group.get(groupName).edit {
+                    document = request.document
+                }
                 call.respond(HttpStatusCode.OK)
             } else {
                 call.respond(HttpStatusCode.Forbidden)

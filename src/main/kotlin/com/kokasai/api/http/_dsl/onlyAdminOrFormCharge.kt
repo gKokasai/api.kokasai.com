@@ -23,7 +23,7 @@ suspend inline fun PipelineContext<Unit, ApplicationCall>.onlyAdminOrFormOwner(
 ) {
     nowLogin { user ->
         val form = FormDefine.get(formName)
-        if (form.file.owner.contains(user.name) || user.isAdmin) {
+        if (form.owner.contains(user.name) || user.isAdmin) {
             onSuccess(user, form)
         } else {
             call.respond(HttpStatusCode.Forbidden)

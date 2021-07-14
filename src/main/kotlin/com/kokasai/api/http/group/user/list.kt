@@ -25,9 +25,9 @@ val listGet: PipelineInterceptor<Unit, ApplicationCall> = {
     parameter("groupName") { groupName ->
         onlyAdminOrGroupUser(groupName) { user ->
             val group = Group.get(groupName)
-            val members = group.file.member
+            val members = group.member
             if (members.contains(user.name) || user.isAdmin) {
-                call.respond(GetListResponse(group.file.owner, group.file.member))
+                call.respond(GetListResponse(group.owner, group.member))
             } else {
                 call.respond(HttpStatusCode.Forbidden)
             }
@@ -39,28 +39,28 @@ val listPost: PipelineInterceptor<Unit, ApplicationCall> = {
     parameter("groupName") { groupName ->
         onlyAdminOrGroupOwner(groupName) { user, group ->
             val request = call.receive<PostListRequest>()
-            val lastAllUser = group.file.allUser
-            if (user.isAdmin) {
-                group.file.owner = request.owner
+            val lastAllUser = group.allUser
+            group.edit {
+                if (user.isAdmin) {
+                    owner = request.owner
+                }
+                member = request.member.filterNot(owner::contains)
             }
-            val owners = group.file.owner
-            group.file.member = request.member.filterNot(owners::contains)
-            val allUser = group.file.allUser
+            val allUser = group.allUser
             allUser.forEach {
                 if (lastAllUser.contains(it).not()) {
-                    User.get(it).apply {
-                        file.group.add(groupName)
-                    }.save()
+                    User.get(it).edit {
+                        this.group.add(groupName)
+                    }
                 }
             }
             lastAllUser.forEach {
                 if (allUser.contains(it).not()) {
-                    User.get(it).apply {
-                        file.group.remove(groupName)
-                    }.save()
+                    User.get(it).edit {
+                        this.group.remove(groupName)
+                    }
                 }
             }
-            group.save()
             call.respond(HttpStatusCode.OK)
         }
     }

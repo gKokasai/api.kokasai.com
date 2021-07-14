@@ -4,13 +4,21 @@ import com.kokasai.api.util.Directory
 import com.kokasai.api.util.json.WithJsonFile
 
 data class FormDefine(
-    val name: String
+    val fileName: String
 ) : WithJsonFile<FormDefineFile>(
-    "${Directory.form}/$name.json",
+    "${Directory.form}/$fileName.json",
     FormDefineFile.Companion
 ) {
+    val name by file::name
+    val description by file::description
+    val receive by file::receive
+    val limit by file::limit
+    val values by file::values
+    val group by file::group
+    val owner by file::owner
+
     companion object {
-        suspend fun get(name: String) = FormDefine(name).apply {
+        suspend fun get(fileName: String) = FormDefine(fileName).apply {
             load()
         }
     }
