@@ -6,7 +6,7 @@ abstract class WithJsonFile<T : JsonFile>(
     private val filePath: String,
     private val companion: JsonFile.Companion<T>
 ) {
-    protected lateinit var file: T
+    protected var file: T = companion.empty()
         private set
 
     suspend fun load() {
