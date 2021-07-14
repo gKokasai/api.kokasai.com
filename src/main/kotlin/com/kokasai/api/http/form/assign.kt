@@ -2,7 +2,7 @@ package com.kokasai.api.http.form
 
 import com.kokasai.api.form.FormDefine
 import com.kokasai.api.group.Group
-import com.kokasai.api.http._dsl.onlyAdmin
+import com.kokasai.api.http._dsl.onlyAdminOrFormOwner
 import com.kokasai.api.http._dsl.parameter
 import com.kokasai.flowerkt.route.RouteAction
 import io.ktor.application.call
@@ -22,7 +22,7 @@ data class PostAssignRequest(val group: List<String>)
 val assign: RouteAction = {
     get("{formName}") {
         parameter("formName") { formName ->
-            onlyAdmin {
+            onlyAdminOrFormOwner(formName) { _, _ ->
                 val group = FormDefine.get(formName).file.group
                 call.respond(GetAssignResponse(group))
             }
@@ -30,7 +30,7 @@ val assign: RouteAction = {
     }
     post("{formName}") {
         parameter("formName") { formName ->
-            onlyAdmin {
+            onlyAdminOrFormOwner(formName) { _, _ ->
                 val request = call.receive<PostAssignRequest>()
                 val formDefine = FormDefine.get(formName)
                 val formDefineFile = formDefine.file

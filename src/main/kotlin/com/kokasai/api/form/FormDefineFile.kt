@@ -16,7 +16,8 @@ data class FormDefineFile(
     @Serializable(with = DateSerializer::class) val receive: Date = Date(),
     @Serializable(with = DateSerializer::class) val limit: Date = Date(),
     val values: Map<Int, FormDefineValue> = mapOf(),
-    var group: List<String> = listOf()
+    var group: List<String> = listOf(),
+    var owner: List<String> = listOf()
 ) : JsonFile() {
     override fun toJson() = Json.encodeToString(this)
 
