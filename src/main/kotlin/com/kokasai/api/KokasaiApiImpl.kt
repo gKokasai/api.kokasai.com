@@ -3,7 +3,7 @@ package com.kokasai.api
 import com.kokasai.api.auth.configureBasicAuth
 import com.kokasai.api.auth.configureSessionAuth
 import com.kokasai.api.auth.configureSessionHeader
-import com.kokasai.api.http.HttpRoute
+import com.kokasai.api.http.httpRoute
 import com.kokasai.flowerkt.database.RemoteSQLiteDatabaseProvider
 import com.kokasai.flowerkt.file.WebDAVFileProvider
 import com.kokasai.flowerkt.mail.SendGridMailProvider
@@ -18,6 +18,7 @@ import io.ktor.features.CORS
 import io.ktor.features.CallLogging
 import io.ktor.features.ContentNegotiation
 import io.ktor.features.StatusPages
+import io.ktor.routing.routing
 import io.ktor.server.netty.Netty
 import io.ktor.sessions.Sessions
 import org.slf4j.Logger
@@ -30,7 +31,6 @@ class KokasaiApiImpl : KokasaiApi, UseFileWebDav, UseMailSendGrid {
     override val fileProvider = WebDAVFileProvider(CIO, SystemEnv.WebDAV.UserName, SystemEnv.WebDAV.Password, SystemEnv.WebDAV.Url)
     override val databaseProvider = RemoteSQLiteDatabaseProvider(SystemEnv.Server.DatabaseFileName ?: "data.db", fileProvider, 60 * 1000)
     override val mailProvider = SendGridMailProvider(SystemEnv.SendGrid.ApiKey, "noreply@kokasai.com")
-    override val routePath = setOf(HttpRoute)
 
     override val sessionsConfiguration: Sessions.Configuration.() -> Unit = {
         configureSessionHeader()
@@ -55,6 +55,9 @@ class KokasaiApiImpl : KokasaiApi, UseFileWebDav, UseMailSendGrid {
             }
             install(ContentNegotiation) {
                 configureSerialization()
+            }
+            routing {
+                httpRoute()
             }
         }
     }

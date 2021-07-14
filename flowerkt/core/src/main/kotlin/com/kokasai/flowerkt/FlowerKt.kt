@@ -2,9 +2,7 @@ package com.kokasai.flowerkt
 
 import com.kokasai.flowerkt.module.InstallKtorProcess
 import com.kokasai.flowerkt.module.LaunchProcess
-import com.kokasai.flowerkt.route.RoutePath
 import io.ktor.application.Application
-import io.ktor.routing.routing
 import io.ktor.server.engine.ApplicationEngineFactory
 import io.ktor.server.engine.embeddedServer
 import org.slf4j.Logger
@@ -19,11 +17,6 @@ interface FlowerKt : LaunchProcess, InstallKtorProcess {
      * サーバーのポート番号です
      */
     val port: Int
-
-    /**
-     * ルートの登録
-     */
-    val routePath: Set<RoutePath>
 
     /**
      * サーバーのエンジン
@@ -60,11 +53,6 @@ interface FlowerKt : LaunchProcess, InstallKtorProcess {
     override fun launch() {
         embeddedServer(engine, port) {
             installKtor(this)
-            routing {
-                routePath.forEach {
-                    it.build(this)
-                }
-            }
         }.start()
     }
 }

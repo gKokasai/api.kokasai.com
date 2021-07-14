@@ -8,7 +8,7 @@ import com.kokasai.api.configureCORS
 import com.kokasai.api.configureCallLogging
 import com.kokasai.api.configureSerialization
 import com.kokasai.api.configureStatusPages
-import com.kokasai.api.http.HttpRoute
+import com.kokasai.api.http.httpRoute
 import com.kokasai.flowerkt.database.SQLiteDatabaseProvider
 import com.kokasai.flowerkt.file.LocalFileProvider
 import com.kokasai.flowerkt.mail.ConsoleMailProvider
@@ -20,6 +20,7 @@ import io.ktor.features.CORS
 import io.ktor.features.CallLogging
 import io.ktor.features.ContentNegotiation
 import io.ktor.features.StatusPages
+import io.ktor.routing.routing
 import io.ktor.server.netty.Netty
 import io.ktor.sessions.Sessions
 import org.slf4j.Logger
@@ -34,7 +35,6 @@ class KokasaiApiImpl : KokasaiApi {
     override val fileProvider = LocalFileProvider(parentDirectory)
     override val databaseProvider = SQLiteDatabaseProvider(parentDirectory.resolve("data.db").toRelativeString(File(".")))
     override val mailProvider = ConsoleMailProvider
-    override val routePath = setOf(HttpRoute)
 
     override val sessionsConfiguration: Sessions.Configuration.() -> Unit = {
         configureSessionHeader()
@@ -59,6 +59,9 @@ class KokasaiApiImpl : KokasaiApi {
             }
             install(ContentNegotiation) {
                 configureSerialization()
+            }
+            routing {
+                httpRoute()
             }
         }
     }

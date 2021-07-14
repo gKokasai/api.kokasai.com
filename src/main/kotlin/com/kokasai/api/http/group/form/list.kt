@@ -6,10 +6,11 @@ import com.kokasai.api.group.Group
 import com.kokasai.api.http._dsl.onlyAdminOrGroupUser
 import com.kokasai.api.http._dsl.parameter
 import com.kokasai.api.util.serialize.DateSerializer
-import com.kokasai.flowerkt.route.RouteAction
+import io.ktor.application.ApplicationCall
 import io.ktor.application.call
 import io.ktor.response.respond
 import io.ktor.routing.get
+import io.ktor.util.pipeline.PipelineInterceptor
 import kotlinx.serialization.Serializable
 import java.util.Date
 
@@ -23,12 +24,10 @@ data class SimpleGroupFormData(
     val status: Int
 )
 
-val list: RouteAction = {
-    get("{groupName}") {
-        parameter("groupName") { groupName ->
-            onlyAdminOrGroupUser(groupName) {
-                call.respond(getGroupFormListResponse(groupName))
-            }
+val listGet: PipelineInterceptor<Unit, ApplicationCall> = {
+    parameter("groupName") { groupName ->
+        onlyAdminOrGroupUser(groupName) {
+            call.respond(getGroupFormListResponse(groupName))
         }
     }
 }
