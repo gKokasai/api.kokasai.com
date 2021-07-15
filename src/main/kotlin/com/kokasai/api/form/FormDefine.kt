@@ -18,8 +18,6 @@ data class FormDefine(
     val owner by file::owner
 
     companion object {
-        suspend fun get(fileName: String) = FormDefine(fileName).apply {
-            load()
-        }
+        fun get(fileName: String) = FormDefine(fileName)
     }
 }

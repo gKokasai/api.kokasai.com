@@ -16,7 +16,7 @@ import io.ktor.util.pipeline.PipelineInterceptor
 val documentGet: PipelineInterceptor<Unit, ApplicationCall> = {
     nowLogin { user ->
         parameter("documentName") { documentName ->
-            if (user.isAdmin || user.getDocument().contains(documentName)) {
+            if (user.isAdmin || user.document.contains(documentName)) {
                 val file = Document.get(documentName)
                 if (file != null) {
                     call.respondFile(file)

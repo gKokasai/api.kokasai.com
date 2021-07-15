@@ -23,9 +23,7 @@ data class Group(
     }
 
     companion object {
-        suspend fun get(name: String) = Group(name).apply {
-            load()
-        }
+        fun get(name: String) = Group(name)
 
         suspend fun list() = api.fileProvider.list(Directory.group).orEmpty().map { it.substringBeforeLast('.') }
     }

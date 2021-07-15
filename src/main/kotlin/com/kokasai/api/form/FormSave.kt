@@ -22,8 +22,6 @@ data class FormSave(
     }
 
     companion object {
-        suspend fun get(formName: String, groupName: String) = FormSave(formName, groupName).apply {
-            load()
-        }
+        fun get(formName: String, groupName: String) = FormSave(formName, groupName)
     }
 }

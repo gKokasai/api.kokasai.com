@@ -13,7 +13,7 @@ data class GetListResponse(val document: List<String>)
 
 val listGet: PipelineInterceptor<Unit, ApplicationCall> = {
     nowLogin { user ->
-        val document = user.getDocument()
+        val document = user.document
         call.respond(GetListResponse(document))
     }
 }

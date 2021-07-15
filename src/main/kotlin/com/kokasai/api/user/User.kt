@@ -12,16 +12,13 @@ data class User(
 ) {
     val group by file::group
 
-    suspend fun getGroup() = group.map { Group.get(it) }
-
-    suspend fun getDocument() = getGroup().map { it.document }.flatten()
+    val document
+        get() = group.flatMap { Group.get(it).document }
 
     companion object {
         inline val User.isAdmin
             get() = group.contains(Group.Name.admin)
 
-        suspend fun get(name: String) = User(name).apply {
-            load()
-        }
+        fun get(name: String) = User(name)
     }
 }
