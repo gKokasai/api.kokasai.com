@@ -15,10 +15,10 @@ data class User(
     val document
         get() = group.flatMap { Group.get(it).document }
 
-    companion object {
+    companion object : WithJsonFile.Companion<String, User>() {
         inline val User.isAdmin
             get() = group.contains(Group.Name.admin)
 
-        fun get(name: String) = User(name)
+        override fun create(key: String) = User(key)
     }
 }

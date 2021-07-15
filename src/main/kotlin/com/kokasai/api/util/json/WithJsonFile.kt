@@ -2,6 +2,7 @@ package com.kokasai.api.util.json
 
 import com.kokasai.api.KokasaiApi.Companion.api
 import kotlinx.coroutines.runBlocking
+import java.util.concurrent.ConcurrentHashMap
 
 abstract class WithJsonFile<T : JsonFile>(
     private val filePath: String,
@@ -28,5 +29,13 @@ abstract class WithJsonFile<T : JsonFile>(
     suspend fun edit(action: T.() -> Unit) {
         file.action()
         save()
+    }
+
+    abstract class Companion<K, V : WithJsonFile<*>> {
+        private val cache = ConcurrentHashMap<K, V>()
+
+        fun get(key: K): V = cache.getOrPut(key) { create(key) }
+
+        abstract fun create(key: K): V
     }
 }

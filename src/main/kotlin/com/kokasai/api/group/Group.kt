@@ -22,8 +22,8 @@ data class Group(
         const val admin = "admin"
     }
 
-    companion object {
-        fun get(name: String) = Group(name)
+    companion object : WithJsonFile.Companion<String, Group>() {
+        override fun create(key: String) = Group(key)
 
         suspend fun list() = api.fileProvider.list(Directory.group).orEmpty().map { it.substringBeforeLast('.') }
     }

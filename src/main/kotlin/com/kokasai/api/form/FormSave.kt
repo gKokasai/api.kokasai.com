@@ -21,7 +21,13 @@ data class FormSave(
         super.save()
     }
 
-    companion object {
-        fun get(formName: String, groupName: String) = FormSave(formName, groupName)
+    companion object : WithJsonFile.Companion<Companion.FormSaveKey, FormSave>() {
+        data class FormSaveKey(val formName: String, val groupName: String)
+
+        fun get(formName: String, groupName: String) = get(FormSaveKey(formName, groupName))
+
+        override fun create(key: FormSaveKey): FormSave {
+            return FormSave(key.formName, key.groupName)
+        }
     }
 }

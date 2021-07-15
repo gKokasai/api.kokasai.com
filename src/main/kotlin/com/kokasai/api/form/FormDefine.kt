@@ -17,7 +17,7 @@ data class FormDefine(
     val group by file::group
     val owner by file::owner
 
-    companion object {
-        fun get(fileName: String) = FormDefine(fileName)
+    companion object : WithJsonFile.Companion<String, FormDefine>() {
+        override fun create(key: String) = FormDefine(key)
     }
 }
