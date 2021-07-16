@@ -35,6 +35,16 @@
 yyyy/MM/dd HH:mm:ss
 ```
 
+### SimpleFormData
+
+```
+{
+  "name": string (フォームの表示名)
+  "update": Date (フォームが更新された日時)
+  "status": int (フォームの状態)
+}
+```
+
 ### FormDefineType
 
 [フォームの取得](#get-groupformgetgroupnameformname) で使用する。
@@ -392,11 +402,7 @@ yyyy/MM/dd HH:mm:ss
 ```
 {
   "form": {
-    [id: string (フォームの名前)]: {
-      "name": string (フォームの表示名)
-      "update": Date (フォームが更新された日時)
-      "status": int (フォームの状態)
-    }
+    [id: string (フォームの名前)]: SimpleFormData (フォームのデータ)
   }
 }
 ```
