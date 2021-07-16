@@ -8,6 +8,7 @@
 - [/document](#get-documentname)
 - /form
   - [/assign](#get-formassignname)
+  - [/list](#get-formlistname)
 - /group
   - [/list](#get-grouplist)
   - /form
@@ -313,6 +314,7 @@ yyyy/MM/dd HH:mm:ss
 ### Permission
 
 - Admin
+- FormOwner
 
 ### Request
 
@@ -340,6 +342,43 @@ yyyy/MM/dd HH:mm:ss
 | 401 Unauthorized | ログインしていない。 |
 | 403 Forbidden | 権限がない。|
 
+---
+
+## `GET` `/form/list/{name}`
+フォームが割り当てられたグループのデータ一覧を取得する。
+
+### Permission
+
+- Admin
+- FormOwner
+
+### Request
+
+#### - Parameter
+
+| Name | Description |
+|------|-------------|
+| name | フォーム名。 |
+
+### Response
+
+#### - StatusCode
+
+| Code | Description |
+|------|-------------|
+| 200 OK | グループ一覧の変更に成功。 |
+| 401 Unauthorized | ログインしていない。 |
+| 403 Forbidden | 権限がない。|
+
+#### - Body `application/json`
+
+```
+{
+  "group": {
+    [id: string グループの名前)]: SimpleFormData (フォームのデータ)
+  }
+}
+```
 ---
 
 ## `GET` `/group/list`
