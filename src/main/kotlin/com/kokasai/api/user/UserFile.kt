@@ -8,7 +8,7 @@ import kotlinx.serialization.json.Json
 
 @Serializable
 data class UserFile(
-    val group: MutableList<String> = mutableListOf()
+    var group: List<String> = listOf()
 ) : JsonFile() {
     override fun toJson() = Json.encodeToString(this)
 

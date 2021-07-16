@@ -37,14 +37,14 @@ val assignPost: PipelineInterceptor<Unit, ApplicationCall> = {
             group.forEach {
                 if (lastGroup.contains(it).not()) {
                     Group.get(it).edit {
-                        form.add(formName)
+                        form += formName
                     }
                 }
             }
             lastGroup.forEach {
                 if (group.contains(it).not()) {
                     Group.get(it).edit {
-                        form.remove(formName)
+                        form -= formName
                     }
                 }
             }

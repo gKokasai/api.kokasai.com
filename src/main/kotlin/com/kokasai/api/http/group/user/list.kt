@@ -50,14 +50,14 @@ val listPost: PipelineInterceptor<Unit, ApplicationCall> = {
             allUser.forEach {
                 if (lastAllUser.contains(it).not()) {
                     User.get(it).edit {
-                        this.group.add(groupName)
+                        this.group += groupName
                     }
                 }
             }
             lastAllUser.forEach {
                 if (allUser.contains(it).not()) {
                     User.get(it).edit {
-                        this.group.remove(groupName)
+                        this.group -= groupName
                     }
                 }
             }
