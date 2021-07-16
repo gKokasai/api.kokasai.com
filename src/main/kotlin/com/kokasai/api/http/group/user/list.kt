@@ -4,12 +4,12 @@ import com.kokasai.api.group.Group
 import com.kokasai.api.http._dsl.onlyAdminOrGroupOwner
 import com.kokasai.api.http._dsl.onlyAdminOrGroupUser
 import com.kokasai.api.http._dsl.parameter
+import com.kokasai.api.http._dsl.requestBody
 import com.kokasai.api.user.User
 import com.kokasai.api.user.User.Companion.isAdmin
 import io.ktor.application.ApplicationCall
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
-import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.get
 import io.ktor.util.pipeline.PipelineInterceptor
@@ -38,30 +38,31 @@ val listGet: PipelineInterceptor<Unit, ApplicationCall> = {
 val listPost: PipelineInterceptor<Unit, ApplicationCall> = {
     parameter("groupName") { groupName ->
         onlyAdminOrGroupOwner(groupName) { user, group ->
-            val request = call.receive<PostListRequest>()
-            val lastAllUser = group.allUser
-            group.edit {
-                if (user.isAdmin) {
-                    owner = request.owner
+            requestBody<PostListRequest> { (owner, member) ->
+                val lastAllUser = group.allUser
+                group.edit {
+                    if (user.isAdmin) {
+                        this.owner = owner
+                    }
+                    this.member = member.filterNot(owner::contains)
                 }
-                member = request.member.filterNot(owner::contains)
-            }
-            val allUser = group.allUser
-            allUser.forEach {
-                if (lastAllUser.contains(it).not()) {
-                    User.get(it).edit {
-                        this.group += groupName
+                val allUser = group.allUser
+                allUser.forEach {
+                    if (lastAllUser.contains(it).not()) {
+                        User.get(it).edit {
+                            this.group += groupName
+                        }
                     }
                 }
-            }
-            lastAllUser.forEach {
-                if (allUser.contains(it).not()) {
-                    User.get(it).edit {
-                        this.group -= groupName
+                lastAllUser.forEach {
+                    if (allUser.contains(it).not()) {
+                        User.get(it).edit {
+                            this.group -= groupName
+                        }
                     }
                 }
+                call.respond(HttpStatusCode.OK)
             }
-            call.respond(HttpStatusCode.OK)
         }
     }
 }

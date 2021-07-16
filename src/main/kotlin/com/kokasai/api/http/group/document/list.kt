@@ -5,10 +5,10 @@ import com.kokasai.api.group.Group
 import com.kokasai.api.http._dsl.onlyAdmin
 import com.kokasai.api.http._dsl.onlyAdminOrGroupUser
 import com.kokasai.api.http._dsl.parameter
+import com.kokasai.api.http._dsl.requestBody
 import io.ktor.application.ApplicationCall
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
-import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.get
 import io.ktor.util.pipeline.PipelineInterceptor
@@ -37,11 +37,12 @@ val listPost: PipelineInterceptor<Unit, ApplicationCall> = {
     parameter("groupName") { groupName ->
         onlyAdmin {
             if (groupName != Group.Name.admin) {
-                val request = call.receive<PostListRequest>()
-                Group.get(groupName).edit {
-                    document = request.document
+                requestBody<PostListRequest> { (document) ->
+                    Group.get(groupName).edit {
+                        this.document = document
+                    }
+                    call.respond(HttpStatusCode.OK)
                 }
-                call.respond(HttpStatusCode.OK)
             } else {
                 call.respond(HttpStatusCode.Forbidden)
             }
