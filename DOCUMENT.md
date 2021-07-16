@@ -454,6 +454,8 @@ yyyy/MM/dd HH:mm:ss
 ### Permission
 
 - GroupMember
+- FormOwner
+- Admin
 
 ### Request
 
