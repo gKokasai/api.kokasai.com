@@ -9,6 +9,7 @@ import io.ktor.routing.route
 import com.kokasai.api.http.form.assignGet as formAssignGet
 import com.kokasai.api.http.form.assignPost as formAssignPost
 import com.kokasai.api.http.form.listGet as formListGet
+import com.kokasai.api.http.form.ownerGet as formOwnerGet
 import com.kokasai.api.http.group.document.listGet as groupDocumentListGet
 import com.kokasai.api.http.group.document.listPost as groupDocumentListPost
 import com.kokasai.api.http.group.form.getGet as groupFormGetGet
@@ -67,6 +68,9 @@ fun Routing.httpRoute() {
             route("/{formName}") {
                 get(formListGet)
             }
+        }
+        route("/owner") {
+            get(formOwnerGet)
         }
     }
     route("/group") {

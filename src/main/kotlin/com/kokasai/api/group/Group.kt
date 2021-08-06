@@ -14,6 +14,7 @@ data class Group(
     val member by file::member
     val document by file::document
     val form by file::form
+    val ownerForm by file::ownerForm
 
     val allUser
         get() = owner + member

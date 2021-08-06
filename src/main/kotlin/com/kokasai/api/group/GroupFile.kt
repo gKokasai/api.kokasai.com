@@ -11,7 +11,8 @@ data class GroupFile(
     var owner: List<String> = listOf(),
     var member: List<String> = listOf(),
     var document: List<String> = listOf(),
-    var form: List<String> = listOf()
+    var form: List<String> = listOf(),
+    var ownerForm: List<String> = listOf()
 ) : JsonFile() {
     override fun toJson() = Json.encodeToString(this)
 
