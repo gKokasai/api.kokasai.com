@@ -6,6 +6,7 @@
   - [/all](#post-logoutall)
 - [/session](#get-session)
 - [/document](#get-documentname)
+- [/webdav](#get-webdavpath)
 - /form
   - [/assign](#get-formassignname)
   - [/list](#get-formlistname)
@@ -272,6 +273,111 @@ yyyy/MM/dd HH:mm:ss
 | 200 OK | ドキュメントの取得に成功。 |
 | 401 Unauthorized | ログインしていない。 |
 | 404 Not Found | 存在しないドキュメント。もしくはアクセスできないドキュメント。 |
+
+---
+
+## `GET` `/webdav/{...path}`
+該当パスのファイルを変更する。
+
+### Permission
+
+- Admin
+
+### Request
+
+#### - Parameter
+
+| Name | Description |
+|------|-------------|
+| path | ファイルパス。 |
+
+### Response
+
+#### - StatusCode
+
+| Code | Description |
+|------|-------------|
+| 200 OK | ファイルの取得に成功。 |
+| 401 Unauthorized | ログインしていない。 |
+| 404 Not Found | 存在しないファイル。 |
+
+#### - Body
+ファイル
+
+## `POST` `/webdav/{...path}`
+該当パスのファイルを変更する。
+
+### Permission
+
+- Admin
+
+### Request
+
+#### - Parameter
+
+| Name | Description |
+|------|-------------|
+| path | ファイルパス。 |
+
+#### - Body `multipart/form-data`
+ファイル
+
+### Response
+
+#### - StatusCode
+
+| Code | Description |
+|------|-------------|
+| 200 OK | ファイルの変更に成功。 |
+| 401 Unauthorized | ログインしていない。 |
+
+## `DELETE` `/webdav/{...path}`
+該当パスのファイルを削除する。
+
+### Permission
+
+- Admin
+
+### Request
+
+#### - Parameter
+
+| Name | Description |
+|------|-------------|
+| path | ファイルパス。 |
+
+### Response
+
+#### - StatusCode
+
+| Code | Description |
+|------|-------------|
+| 200 OK | ファイルの削除に成功。 |
+| 401 Unauthorized | ログインしていない。 |
+
+## `MKCOL` `/webdav/{...path}`
+該当パスにフォルダを作成する。
+
+### Permission
+
+- Admin
+
+### Request
+
+#### - Parameter
+
+| Name | Description |
+|------|-------------|
+| path | ファイルパス。 |
+
+### Response
+
+#### - StatusCode
+
+| Code | Description |
+|------|-------------|
+| 200 OK | フォルダの削除に成功。 |
+| 401 Unauthorized | ログインしていない。 |
 
 ---
 

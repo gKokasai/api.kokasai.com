@@ -11,6 +11,25 @@ import io.ktor.util.pipeline.PipelineContext
  * @param name パラメータ名
  * @param onSuccess パラメータが設定されていた時の処理
  */
+suspend inline fun PipelineContext<Unit, ApplicationCall>.parameters(
+    name: String,
+    onSuccess: (
+        params: List<String>
+    ) -> Unit
+) {
+    val params = call.parameters.getAll(name)
+    if (params != null) {
+        onSuccess(params)
+    } else {
+        call.respond(HttpStatusCode.BadRequest)
+    }
+}
+
+/**
+ * パラメータが設定されていれば処理を実行する
+ * @param name パラメータ名
+ * @param onSuccess パラメータが設定されていた時の処理
+ */
 suspend inline fun PipelineContext<Unit, ApplicationCall>.parameter(
     name: String,
     onSuccess: (

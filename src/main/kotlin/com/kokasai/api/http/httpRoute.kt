@@ -2,8 +2,11 @@ package com.kokasai.api.http
 
 import com.kokasai.api.auth.UserLogin
 import io.ktor.auth.authenticate
+import io.ktor.http.HttpMethod
 import io.ktor.routing.Routing
+import io.ktor.routing.delete
 import io.ktor.routing.get
+import io.ktor.routing.method
 import io.ktor.routing.post
 import io.ktor.routing.route
 import com.kokasai.api.http.form.assignGet as formAssignGet
@@ -55,6 +58,16 @@ fun Routing.httpRoute() {
         route("/{documentName}") {
             get(documentGet)
             post(documentPost)
+        }
+    }
+    route("/webdav") {
+        route("/{path...}") {
+            get(webdavGet)
+            post(webdavPost)
+            delete(webdavDelete)
+            method(HttpMethod("MKCOL")) {
+                handle(webdavMkcol)
+            }
         }
     }
     route("/form") {
